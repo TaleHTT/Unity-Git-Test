@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Archer : EnemyBase
@@ -40,5 +41,9 @@ public class Enemy_Archer : EnemyBase
     {
         base.AnimationArcherAttack();
         GameObject arrow = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
+    }
+    public void FirstTargetLogic()
+    {
+        
     }
 }

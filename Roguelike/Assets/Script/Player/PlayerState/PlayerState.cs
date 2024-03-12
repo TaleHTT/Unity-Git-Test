@@ -7,7 +7,9 @@ public class PlayerState
     public PlayerBase player { get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }
     public bool triggerCalled;
-    string animBoolName;
+    public string animBoolName;
+    public float stateTimer;
+
 
     public PlayerState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName)
     {
@@ -17,7 +19,8 @@ public class PlayerState
     }
     public virtual void Update()
     {
-
+        stateTimer -= Time.deltaTime;
+        player.EnemyDetect();
     }
     public virtual void Enter()
     {
@@ -33,20 +36,5 @@ public class PlayerState
     public void AnimationFinishTrigger()
     {
         triggerCalled = true;
-    }
-    public void EnemyDetect()
-    {
-        player.detectTimer -= Time.deltaTime;
-        if (player.detectTimer > 0)
-        {
-            player.detectTimer = 1;
-            return;
-        }
-        player.enemyDetects = new List<GameObject>();
-        var colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue(), player.whatIsEnemy);
-        foreach (var enemy in colliders)
-        {
-            player.enemyDetects.Add(enemy.gameObject);
-        }
     }
 }

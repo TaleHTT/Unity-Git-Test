@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_Arrow_Controller : MonoBehaviour
 {
+    public Transform firstTarget;
+    public List<Transform> firstTargetDetects;
     public List<Transform> attackDetects;
     public Transform attackTarget;
     public Vector3 arrowDir;
@@ -27,7 +29,8 @@ public class Enemy_Arrow_Controller : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.GetComponent<CharacterStats>()?.TakeDamage(damage);
+            collision.GetComponent<CharacterStats>()?.remoteTakeDamage(damage);
+            Destroy(gameObject);
         }
     }
     public void AttackTarget()

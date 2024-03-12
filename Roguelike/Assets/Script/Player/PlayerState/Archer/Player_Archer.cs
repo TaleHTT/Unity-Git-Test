@@ -27,7 +27,7 @@ public class Player_Archer : PlayerBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth < 0)
+        if (stats.currentHealth <= 0)
             stateMachine.ChangeState(archerDeadState);
     }
     public override void AnimationArcherAttack()

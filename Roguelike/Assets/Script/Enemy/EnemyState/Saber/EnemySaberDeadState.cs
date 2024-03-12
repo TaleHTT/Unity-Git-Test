@@ -14,6 +14,7 @@ public class EnemySaberDeadState : EnemyState
         enemy.chaseRadius = 0;
         enemy.attackDetects.Clear();
         enemy.playerDetects.Clear();
+        enemy.isDead = true;
     }
 
     public override void Exit()

@@ -13,6 +13,7 @@ public class PlayerSaberDeadState : PlayerState
         player.cd.enabled = false;
         player.enemyDetects.Clear();
         player.anim.SetBool("Attack", false);
+        player.isDead = true;
     }
 
     public override void Exit()

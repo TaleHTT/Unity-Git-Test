@@ -24,7 +24,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
                 }
                 else
                 {
-                    AttackLogic();
+                    player.AttackLogic();
                 }
             }
         }
@@ -32,33 +32,5 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void ArcherAttackTrigger()
     {
         player.AnimationArcherAttack();
-    }
-    public void AttackLogic()
-    {
-        if (player.enemyDetects.Count >= 3)
-        {
-            for (int i = 1; i < player.enemyDetects.Count - 1; i++)
-            {
-                player.stats.DoDamage((Vector2.Distance(player.transform.position, player.enemyDetects[i].transform.position) > Vector2.Distance(player.transform.position, player.enemyDetects[i + 1].transform.position)) ? ((Vector2.Distance(player.transform.position, player.enemyDetects[i].transform.position) > Vector2.Distance(player.transform.position, player.enemyDetects[i - 1].transform.position)) ? player.enemyDetects[i].GetComponent<EnemyStats>() : player.enemyDetects[i - 1].GetComponent<EnemyStats>()) : ((Vector2.Distance(player.transform.position, player.enemyDetects[i + 1].transform.position) > Vector2.Distance(player.transform.position, player.enemyDetects[i - 1].transform.position)) ? player.enemyDetects[i + 1].GetComponent<EnemyStats>() : player.enemyDetects[i - 1].GetComponent<EnemyStats>()));
-            }
-        }
-        else if(player.enemyDetects.Count == 2)
-        {
-            for (int i = 0; i < player.enemyDetects.Count - 1; i++)
-            {
-                if (Vector2.Distance(player.transform.position, player.enemyDetects[i].transform.position) >
-                    Vector2.Distance(player.transform.position, player.enemyDetects[i + 1].transform.position))
-                {
-                    player.enemyDetects[i].GetComponent<EnemyStats>();
-                    player.stats.DoDamage(player.enemyDetects[i].GetComponent<EnemyStats>());
-
-                }
-                else
-                {
-                    player.enemyDetects[i + 1].GetComponent<EnemyStats>();
-                    player.stats.DoDamage(player.enemyDetects[i].GetComponent<EnemyStats>());
-                }
-            }
-        }
     }
 }

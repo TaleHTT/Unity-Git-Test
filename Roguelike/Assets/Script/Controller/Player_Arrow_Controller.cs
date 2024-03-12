@@ -27,7 +27,8 @@ public class Player_Arrow_Controller : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.GetComponent<CharacterStats>()?.TakeDamage(damage);
+            collision.GetComponent<CharacterStats>()?.remoteTakeDamage(damage);
+            Destroy(gameObject);
         }
     }
     public void AttackTarget()

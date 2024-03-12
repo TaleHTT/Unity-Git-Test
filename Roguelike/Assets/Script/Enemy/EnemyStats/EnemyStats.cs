@@ -10,9 +10,9 @@ public class EnemyStats : CharacterStats
         base.Start();
         enemy = GetComponent<EnemyBase>();
     }
-    public override void TakeDamage(float damage)
+    public override void meleeTakeDamage(float damage)
     {
-        base.TakeDamage(damage);
+        base.meleeTakeDamage(damage);
         enemy.DamageEffect();
     }
 }

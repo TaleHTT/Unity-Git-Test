@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerArcherGroundState : PlayerState
 {
     public Vector3 target;
-    public Vector3 direction;
-    public Quaternion targetRotation;
     public Player_Archer player_Archer;
     public PlayerArcherGroundState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Archer player_Archer) : base(player, stateMachine, animboolName)
     {
@@ -17,8 +15,6 @@ public class PlayerArcherGroundState : PlayerState
     {
         base.Enter();
         target = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        direction = target - player.transform.position;
-        targetRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg);
     }
 
     public override void Exit()
@@ -29,20 +25,14 @@ public class PlayerArcherGroundState : PlayerState
     public override void Update()
     {
         base.Update();
-        EnemyDetect();
-        Move();
-    }
-    public void Move()
-    {
-        if (player.transform.position != target)
+        player.AutoPath();
+        if (player.pathPointList == null)
+            return;
+        target = player.pathPointList[player.currentIndex];
+        if (player.transform.position != player.playerAutoPathTarget)
         {
             player.transform.position = Vector3.MoveTowards(player.transform.position, target, player.stats.moveSpeed.GetValue() * Time.deltaTime);
-            if (Input.GetMouseButtonDown(0))
-            {
-                target = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-                direction = target - player.transform.position;
-                player.transform.position = Vector3.MoveTowards(player.transform.position, target, player.stats.moveSpeed.GetValue() * Time.deltaTime);
-            }
+
         }
         else
         {

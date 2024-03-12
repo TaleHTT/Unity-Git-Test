@@ -26,10 +26,14 @@ public class CharacterStats : MonoBehaviour
     public virtual void DoDamage(CharacterStats targetstats)
     {
         float totaldamage = damage.GetValue() + level - armor.GetValue() * damageMultiplier.GetValue();
-        targetstats.TakeDamage(totaldamage);
+        targetstats.meleeTakeDamage(totaldamage);
     }
-    public virtual void TakeDamage(float damage)
+    public virtual void meleeTakeDamage(float damage)
     {
         currentHealth -= damage;
+    }
+    public virtual void remoteTakeDamage(float damage)
+    {
+        currentHealth -= (damage + level - armor.GetValue() * damageMultiplier.GetValue());
     }
 }

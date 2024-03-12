@@ -1,4 +1,5 @@
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,13 @@ public class EnemyBase : Entity
     [Header("Chase info")]
     public float chaseRadius;
 
+    public float timer;
+    public bool isDead;
     public int targetPointIndex = 0;
     public List<GameObject> playerDetects;
     public List<GameObject> attackDetects;
     public Transform[] patrolPoints;
     public Transform target;
-    public Seeker seeker;
     public EnemyStateMachine stateMachine { get; private set; }
 
 
@@ -26,20 +28,24 @@ public class EnemyBase : Entity
     protected override void Start()
     {
         base.Start();
-        seeker = GetComponent<Seeker>();
+        isDead = false;
     }
 
     protected override void Update()
     {
         base.Update();
         stateMachine.currentState.Update();
+        if (isDead)
+        {
+            StartCoroutine(DeadDestroy(timer));
+        }
         if(playerDetects.Count == 1)
         {
             target = playerDetects[0].transform;
         }
         else
         {
-            AttackLogic();
+            ChaseLogic();
         }
     }
     public void DamageEffect()
@@ -71,7 +77,7 @@ public class EnemyBase : Entity
     {
         
     }
-    private void AttackLogic()
+    private void ChaseLogic()
     {
         if (playerDetects.Count >= 3)
         {
@@ -92,6 +98,39 @@ public class EnemyBase : Entity
                 else
                 {
                     target = playerDetects[i + 1].transform;
+                }
+            }
+        }
+    }
+    IEnumerator DeadDestroy(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        Destroy(this.gameObject);
+    }
+    public void AttackLogic()
+    {
+        if (playerDetects.Count >= 3)
+        {
+            for (int i = 1; i < playerDetects.Count - 1; i++)
+            {
+                stats.DoDamage((Vector2.Distance(transform.position, playerDetects[i].transform.position) > Vector2.Distance(transform.position, playerDetects[i + 1].transform.position)) ? ((Vector2.Distance(transform.position, playerDetects[i].transform.position) > Vector2.Distance(transform.position, playerDetects[i - 1].transform.position)) ? playerDetects[i].GetComponent<EnemyStats>() : playerDetects[i - 1].GetComponent<EnemyStats>()) : ((Vector2.Distance(transform.position, playerDetects[i + 1].transform.position) > Vector2.Distance(transform.position, playerDetects[i - 1].transform.position)) ? playerDetects[i + 1].GetComponent<EnemyStats>() : playerDetects[i - 1].GetComponent<EnemyStats>()));
+            }
+        }
+        else if (playerDetects.Count == 2)
+        {
+            for (int i = 0; i < playerDetects.Count - 1; i++)
+            {
+                if (Vector2.Distance(transform.position, playerDetects[i].transform.position) >
+                    Vector2.Distance(transform.position, playerDetects[i + 1].transform.position))
+                {
+                    playerDetects[i].GetComponent<EnemyStats>();
+                    stats.DoDamage(playerDetects[i].GetComponent<EnemyStats>());
+
+                }
+                else
+                {
+                    playerDetects[i + 1].GetComponent<EnemyStats>();
+                    stats.DoDamage(playerDetects[i].GetComponent<EnemyStats>());
                 }
             }
         }

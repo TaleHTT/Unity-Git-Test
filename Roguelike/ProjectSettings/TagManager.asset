@@ -16,8 +16,8 @@ TagManager:
   - Wall
   - Sea
   - Arrow
-  - 
-  - 
+  - TargetCheck
+  - TargetPosition
   - 
   - 
   - 

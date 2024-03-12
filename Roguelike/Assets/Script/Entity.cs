@@ -1,3 +1,4 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Entity : MonoBehaviour
     public LayerMask whatIsEnemy;
 
     public float detectTimer;
+    public Seeker seeker;
     public Rigidbody2D rb;
     public Animator anim;
     public CharacterStats stats;
@@ -21,6 +23,7 @@ public class Entity : MonoBehaviour
     }
     protected virtual void Start()
     {
+        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<CharacterStats>();
         anim = GetComponentInChildren<Animator>();
