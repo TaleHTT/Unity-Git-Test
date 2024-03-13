@@ -7,17 +7,14 @@ using UnityEngine;
 
 public class PlayerBase : Entity
 {
-    //public Vector3 playerAutoPathTarget;
-    //public int currentIndex;
-    //public int targetPointIndex = 0;
-    //public List<Vector3> pathPointList;
-    //public GameObject arrowhead;
+
     [Tooltip("死亡后，经过timer秒后销毁")]
     public float timer;
     [Tooltip("是否死亡")]
     public bool isDead;
     [Tooltip("是否显示攻击范围")]
     public bool drawTheBorderOrNot;
+    public Transform closetEnemy;
     public List<GameObject> enemyDetects;
     public PlayerStateMachine stateMachine { get; private set; }
     protected override void Awake()
@@ -34,12 +31,11 @@ public class PlayerBase : Entity
     protected override void Update()
     {
         base.Update();
+        AttackLogic();
         if(isDead)
-        {
             StartCoroutine(DeadDestroy(timer));
-        }
+
         stateMachine.currentState.Update();
-        //MoveDir();
     }
     public void OnDrawGizmos()
     {
@@ -63,29 +59,13 @@ public class PlayerBase : Entity
     }
     public void AttackLogic()
     {
-        if (enemyDetects.Count >= 3)
+        float distance = Mathf.Infinity;
+        for (int i = 0; i < enemyDetects.Count; i++)
         {
-            for (int i = 1; i < enemyDetects.Count - 1; i++)
+            if(distance > Vector3.Distance(enemyDetects[i].transform.position, transform.position))
             {
-                stats.DoDamage((Vector2.Distance(transform.position, enemyDetects[i].transform.position) > Vector2.Distance(transform.position, enemyDetects[i + 1].transform.position)) ? ((Vector2.Distance(transform.position, enemyDetects[i].transform.position) > Vector2.Distance(transform.position, enemyDetects[i - 1].transform.position)) ? enemyDetects[i].GetComponent<EnemyStats>() : enemyDetects[i - 1].GetComponent<EnemyStats>()) : ((Vector2.Distance(transform.position, enemyDetects[i + 1].transform.position) > Vector2.Distance(transform.position, enemyDetects[i - 1].transform.position)) ? enemyDetects[i + 1].GetComponent<EnemyStats>() : enemyDetects[i - 1].GetComponent<EnemyStats>()));
-            }
-        }
-        else if (enemyDetects.Count == 2)
-        {
-            for (int i = 0; i < enemyDetects.Count - 1; i++)
-            {
-                if (Vector2.Distance(transform.position, enemyDetects[i].transform.position) >
-                    Vector2.Distance(transform.position, enemyDetects[i + 1].transform.position))
-                {
-                    enemyDetects[i].GetComponent<EnemyStats>();
-                    stats.DoDamage(enemyDetects[i].GetComponent<EnemyStats>());
-
-                }
-                else
-                {
-                    enemyDetects[i + 1].GetComponent<EnemyStats>();
-                    stats.DoDamage(enemyDetects[i].GetComponent<EnemyStats>());
-                }
+                distance = Vector3.Distance(enemyDetects[i].transform.position, transform.position);
+                closetEnemy = enemyDetects[i].transform;
             }
         }
     }
@@ -104,42 +84,6 @@ public class PlayerBase : Entity
             enemyDetects.Add(enemy.gameObject);
         }
     }
-    //public void AutoPath()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        playerAutoPathTarget = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-    //        GeneratePath(playerAutoPathTarget);
-    //    }
-    //    if (pathPointList == null || pathPointList.Count == 0)
-    //    {
-    //        GeneratePath(playerAutoPathTarget);
-    //    }
-    //    else if (Vector2.Distance(transform.position, pathPointList[currentIndex]) <= .1f)
-    //    {
-    //        currentIndex++;
-    //        if (currentIndex >= pathPointList.Count)
-    //            GeneratePath(playerAutoPathTarget);
-    //    }
-    //}
-    //public void GeneratePath(Vector3 target)
-    //{
-    //    currentIndex = 0;
-    //    seeker.StartPath(transform.position, target, Path =>
-    //    {
-    //        pathPointList = Path.vectorPath;
-    //    });
-    //}
-    //public virtual void MoveDir()
-    //{
-    //    Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //    Vector2 arrowheadposition = new Vector2(arrowhead.transform.position.x, arrowhead.transform.position.y);
-    //    float angle = WhatAngle(mouseposition, arrowheadposition);
-    //    arrowhead.transform.rotation = Quaternion.Euler(0, 0, angle);
-    //}
-    //public float WhatAngle(Vector2 a, Vector2 b)
-    //{
-    //    return Mathf.Atan2(a.y - b.y, a.x - b.x)*Mathf.Rad2Deg;
-    //}
+
 }
 

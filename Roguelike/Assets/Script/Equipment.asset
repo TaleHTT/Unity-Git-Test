@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Equipment
   m_EditorClassIdentifier: 
   equipmentType: 0
-  itemName: 
-  item: {fileID: 21300000, guid: 2eabbe8d1141fa243b80798705173fa2, type: 3}
+  itemName: Equipment
+  icon: {fileID: -279436404, guid: 2eabbe8d1141fa243b80798705173fa2, type: 3}

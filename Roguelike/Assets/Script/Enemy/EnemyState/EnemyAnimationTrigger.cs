@@ -14,15 +14,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<PlayerBase>() != null)
             {
-                if (enemy.playerDetects.Count == 1)
-                {
-                    PlayerStats target = hit.GetComponent<PlayerStats>();
-                    enemy.stats.DoDamage(target);
-                }
-                else
-                {
-                    enemy.AttackLogic();
-                }
+                enemy.stats.DoDamage(enemy.cloestPlayer.GetComponent<PlayerStats>());
             }
         }
     }

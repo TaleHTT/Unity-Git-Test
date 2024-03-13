@@ -21,6 +21,7 @@ public class EnemyBase : Entity
     [Tooltip("Ñ²Âßµã")]
     public Transform[] patrolPoints;
     public Transform target {  get; private set; }
+    public Transform cloestPlayer;
     public EnemyStateMachine stateMachine { get; private set; }
     protected override void Awake()
     {
@@ -38,6 +39,7 @@ public class EnemyBase : Entity
     {
         base.Update();
         stateMachine.currentState.Update();
+        AttackLogic();
         if (isDead)
         {
             StartCoroutine(DeadDestroy(timer));
@@ -114,29 +116,13 @@ public class EnemyBase : Entity
     }
     public void AttackLogic()
     {
-        if (playerDetects.Count >= 3)
+        float distance = Mathf.Infinity;
+        for (int i = 0; i < playerDetects.Count; i++)
         {
-            for (int i = 1; i < playerDetects.Count - 1; i++)
+            if (distance > Vector3.Distance(playerDetects[i].transform.position, transform.position))
             {
-                stats.DoDamage((Vector2.Distance(transform.position, playerDetects[i].transform.position) > Vector2.Distance(transform.position, playerDetects[i + 1].transform.position)) ? ((Vector2.Distance(transform.position, playerDetects[i].transform.position) > Vector2.Distance(transform.position, playerDetects[i - 1].transform.position)) ? playerDetects[i].GetComponent<EnemyStats>() : playerDetects[i - 1].GetComponent<EnemyStats>()) : ((Vector2.Distance(transform.position, playerDetects[i + 1].transform.position) > Vector2.Distance(transform.position, playerDetects[i - 1].transform.position)) ? playerDetects[i + 1].GetComponent<EnemyStats>() : playerDetects[i - 1].GetComponent<EnemyStats>()));
-            }
-        }
-        else if (playerDetects.Count == 2)
-        {
-            for (int i = 0; i < playerDetects.Count - 1; i++)
-            {
-                if (Vector2.Distance(transform.position, playerDetects[i].transform.position) >
-                    Vector2.Distance(transform.position, playerDetects[i + 1].transform.position))
-                {
-                    playerDetects[i].GetComponent<EnemyStats>();
-                    stats.DoDamage(playerDetects[i].GetComponent<EnemyStats>());
-
-                }
-                else
-                {
-                    playerDetects[i + 1].GetComponent<EnemyStats>();
-                    stats.DoDamage(playerDetects[i].GetComponent<EnemyStats>());
-                }
+                distance = Vector3.Distance(playerDetects[i].transform.position, transform.position);
+                cloestPlayer = playerDetects[i].transform;
             }
         }
     }

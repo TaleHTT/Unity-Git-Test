@@ -7,14 +7,12 @@ public class Player_Archer : PlayerBase
     [Tooltip("¼ýÊ¸Ô¤ÖÆÌå")]
     public GameObject arrowPerfab;
     public PlayerArcherIdleState archerIdleState {  get; private set; }
-    //public PlayerArcherMoveState archerMoveState { get; private set; }
     public PlayerArcherDeadState archerDeadState { get; private set; }
     public PlayerArcherAttackState archerAttackState { get; private set; }
     protected override void Awake()
     {
         base.Awake();
         archerIdleState = new PlayerArcherIdleState(this, stateMachine, "Idle", this);
-        //archerMoveState = new PlayerArcherMoveState(this, stateMachine, "Move", this);
         archerDeadState = new PlayerArcherDeadState(this, stateMachine, "Dead", this);
         archerAttackState = new PlayerArcherAttackState(this, stateMachine, "Attack", this);
     }

@@ -1,7 +1,7 @@
-public class PlayerSaberAttackState : PlayerSaberGroundState
+public class PlayerSaberAttackState : PlayerState
 {
     private Player_Saber player_Saber;
-    public PlayerSaberAttackState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Saber player_Saber) : base(player, stateMachine, animboolName, player_Saber)
+    public PlayerSaberAttackState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Saber player_Saber) : base(player, stateMachine, animboolName)
     {
         this.player_Saber = player_Saber;
     }
@@ -21,8 +21,6 @@ public class PlayerSaberAttackState : PlayerSaberGroundState
         base.Update();
         player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
         if (player.enemyDetects.Count <= 0)
-        {
             stateMachine.ChangeState(player_Saber.saberIdleState);
-        }
     }
 }

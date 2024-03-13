@@ -6,10 +6,6 @@ using UnityEngine.TextCore.Text;
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private PlayerBase player => GetComponentInParent<PlayerBase>();
-    private void AnimationTrigger()
-    {
-        player.AnimationTrigger();
-    }
     private void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
@@ -17,17 +13,13 @@ public class PlayerAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<EnemyBase>() != null)
             {
-                if (player.enemyDetects.Count == 1)
-                {
-                    EnemyStats target = hit.GetComponent<EnemyStats>();
-                    player.stats.DoDamage(target);
-                }
-                else
-                {
-                    player.AttackLogic();
-                }
+                player.stats.DoDamage(player.closetEnemy.GetComponent<EnemyStats>());
             }
         }
+    }
+    private void AnimationTrigger()
+    {
+        player.AnimationTrigger();
     }
     private void ArcherAttackTrigger()
     {

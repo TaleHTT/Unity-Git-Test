@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyList:
-  - {fileID: 8392512471484959356, guid: e152ae39a50cebe4ab94d3269b7b4b3d, type: 3}
-  - {fileID: 5546486665929341758, guid: c88d9d766bc9a354fa13b33cce1e3c6e, type: 3}
-  radius: 1
+  - {fileID: 0}
+  - {fileID: 0}
+  radius: 3
+  enemyCollector: {fileID: 0}
   drawTheBorderOrNot: 1

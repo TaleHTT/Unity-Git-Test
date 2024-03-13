@@ -8,9 +8,6 @@ public class PlayerState
     public float defaultAttackSpeed {  get; private set; }
     public bool triggerCalled;
     private string animBoolName;
-    //private float stateTimer;
-
-
     public PlayerState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName)
     {
         this.player = player;
@@ -19,7 +16,6 @@ public class PlayerState
     }
     public virtual void Update()
     {
-        //stateTimer -= Time.deltaTime;
         player.EnemyDetect();
     }
     public virtual void Enter()

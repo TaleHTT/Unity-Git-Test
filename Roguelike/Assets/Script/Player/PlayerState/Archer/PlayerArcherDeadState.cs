@@ -26,6 +26,5 @@ public class PlayerArcherDeadState : PlayerState
     public override void Update()
     {
         base.Update();
-        //player.SetVelocity(0, 0);
     }
 }

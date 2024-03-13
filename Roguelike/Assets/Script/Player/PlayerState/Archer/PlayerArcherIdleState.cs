@@ -13,7 +13,6 @@ public class PlayerArcherIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        //player.SetVelocity(0, 0);
     }
 
     public override void Exit()
@@ -38,15 +37,11 @@ public class PlayerArcherIdleState : PlayerState
         }
         if (player.enemyDetects.Count > 0)
         {
-            //player.anim.SetBool("Attack", true);
             stateMachine.ChangeState(player_Archer.archerAttackState);
         }
         else
         {
-            //player.anim.SetBool("Attack", false);
             stateMachine.ChangeState(player_Archer.archerIdleState);
         }
-        //if (Input.GetMouseButtonDown(0))
-        //    stateMachine.ChangeState(player_Archer.archerMoveState);
     }
 }

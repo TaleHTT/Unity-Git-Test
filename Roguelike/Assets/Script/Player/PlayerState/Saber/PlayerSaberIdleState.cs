@@ -12,7 +12,6 @@ public class PlayerSaberIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        //player.SetVelocity(0, 0);
     }
 
     public override void Exit()
@@ -36,16 +35,6 @@ public class PlayerSaberIdleState : PlayerState
             player.enemyDetects.Add(enemy.gameObject);
         }
         if (player.enemyDetects.Count > 0)
-        {
-            //player.anim.SetBool("Attack", true);
             player.stateMachine.ChangeState(player_Saber.saberAttackState);
-        }
-        else
-        {
-            //player.anim.SetBool("Attack", false);
-            stateMachine.ChangeState(player_Saber.saberIdleState);
-        }
-        //if (Input.GetMouseButtonDown(0))
-        //    stateMachine.ChangeState(player_Saber.saberMoveState);
     }
 }
