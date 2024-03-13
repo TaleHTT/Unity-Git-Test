@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySaberChaseState : EnemySaberGroundState
 {
-    public Vector3 target;
+    private Vector3 target;
     public EnemySaberChaseState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animboolName, enemy_Saber)
     {
 

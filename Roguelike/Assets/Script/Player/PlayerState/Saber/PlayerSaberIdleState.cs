@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerSaberIdleState : PlayerState
 {
-    public Player_Saber player_Saber;
+    private Player_Saber player_Saber;
     public PlayerSaberIdleState(PlayerBase player, PlayerStateMachine stateMachine, string animBoolName, Player_Saber player_Saber) : base(player, stateMachine, animBoolName)
     {
         this.player_Saber = player_Saber;
@@ -12,7 +12,7 @@ public class PlayerSaberIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0, 0);
+        //player.SetVelocity(0, 0);
     }
 
     public override void Exit()
@@ -37,14 +37,15 @@ public class PlayerSaberIdleState : PlayerState
         }
         if (player.enemyDetects.Count > 0)
         {
-            player.anim.SetBool("Attack", true);
+            //player.anim.SetBool("Attack", true);
+            player.stateMachine.ChangeState(player_Saber.saberAttackState);
         }
         else
         {
-            player.anim.SetBool("Attack", false);
+            //player.anim.SetBool("Attack", false);
             stateMachine.ChangeState(player_Saber.saberIdleState);
         }
-        if (Input.GetMouseButtonDown(0))
-            stateMachine.ChangeState(player_Saber.saberMoveState);
+        //if (Input.GetMouseButtonDown(0))
+        //    stateMachine.ChangeState(player_Saber.saberMoveState);
     }
 }

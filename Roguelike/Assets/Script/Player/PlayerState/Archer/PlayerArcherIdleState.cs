@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerArcherIdleState : PlayerState
 {
-    public Player_Archer player_Archer;
+    private Player_Archer player_Archer;
     public PlayerArcherIdleState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Archer player_Archer) : base(player, stateMachine, animboolName)
     {
         this.player_Archer = player_Archer;
@@ -13,7 +13,7 @@ public class PlayerArcherIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0, 0);
+        //player.SetVelocity(0, 0);
     }
 
     public override void Exit()
@@ -38,14 +38,15 @@ public class PlayerArcherIdleState : PlayerState
         }
         if (player.enemyDetects.Count > 0)
         {
-            player.anim.SetBool("Attack", true);
+            //player.anim.SetBool("Attack", true);
+            stateMachine.ChangeState(player_Archer.archerAttackState);
         }
         else
         {
-            player.anim.SetBool("Attack", false);
+            //player.anim.SetBool("Attack", false);
             stateMachine.ChangeState(player_Archer.archerIdleState);
         }
-        if (Input.GetMouseButtonDown(0))
-            stateMachine.ChangeState(player_Archer.archerMoveState);
+        //if (Input.GetMouseButtonDown(0))
+        //    stateMachine.ChangeState(player_Archer.archerMoveState);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy_Archer : EnemyBase
 {
+    [Tooltip("¼ıÊ¸Ô¤ÉèÌå")]
     public GameObject arrowPerfab;
     public EnemyArcherIdleState archerIdleState { get; private set; }
     public EnemyArcherPatrolState archerMoveState { get; private set; }

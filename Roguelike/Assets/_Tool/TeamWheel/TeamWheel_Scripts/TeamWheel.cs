@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class TeamWheel : MonoBehaviour
 {
-    [Tooltip("角色列表")]
+    [Tooltip("角色列表(现阶段建议只加一个，多的话会有bug)")]
     public List<GameObject> charactersInTeam;
     private List<GameObject> charactersInTeamInScene;
     public GameObject TeamCharaters;

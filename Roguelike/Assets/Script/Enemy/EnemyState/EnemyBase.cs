@@ -6,19 +6,22 @@ using UnityEngine;
 public class EnemyBase : Entity
 {
     [Header("Chase info")]
+    [Tooltip("索敌范围")]
     public float chaseRadius;
 
+    [Tooltip("死亡后，经过timer秒后销毁物体")]
     public float timer;
+    [Tooltip("判断是否死亡")]
     public bool isDead;
-    public int targetPointIndex = 0;
+    [Tooltip("是否显示攻击和寻敌范围")]
+    public bool drawTheBorderOrNot;
+    public int targetPointIndex { get; private set; } = 0;
     public List<GameObject> playerDetects;
     public List<GameObject> attackDetects;
+    [Tooltip("巡逻点")]
     public Transform[] patrolPoints;
-    public Transform target;
+    public Transform target {  get; private set; }
     public EnemyStateMachine stateMachine { get; private set; }
-
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -48,16 +51,18 @@ public class EnemyBase : Entity
             ChaseLogic();
         }
     }
+    public void OnDrawGizmos()
+    {
+        if (!drawTheBorderOrNot)
+            return;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRadius.GetValue());
+        Gizmos.DrawWireSphere(transform.position, chaseRadius);
+    }
     public void DamageEffect()
     {
         Debug.Log("I am damage");
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, stats.attackRadius.GetValue());
-        Gizmos.DrawWireSphere(transform.position, chaseRadius);
-    }
     public virtual void playerDetect()
     {
         detectTimer -= Time.deltaTime;

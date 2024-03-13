@@ -17,9 +17,9 @@ public class PlayerSaberMoveState : PlayerSaberGroundState
     public override void Update()
     {
         base.Update();
-        if (player.enemyDetects.Count > 0)
-        {
-            stateMachine.ChangeState(player_Saber.saberAttackState);
-        }
+        //if (player.enemyDetects.Count > 0)
+        //{
+        //    stateMachine.ChangeState(player_Saber.saberAttackState);
+        //}
     }
 }

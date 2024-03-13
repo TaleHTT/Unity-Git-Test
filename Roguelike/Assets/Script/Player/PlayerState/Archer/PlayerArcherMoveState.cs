@@ -21,9 +21,9 @@ public class PlayerArcherMoveState : PlayerArcherGroundState
     public override void Update()
     {
         base.Update();
-        if (player.enemyDetects.Count > 0)
-        {
-            stateMachine.ChangeState(player_Archer.archerAttackState);
-        }
+        //if (player.enemyDetects.Count > 0)
+        //{
+        //    stateMachine.ChangeState(player_Archer.archerAttackState);
+        //}
     }
 }

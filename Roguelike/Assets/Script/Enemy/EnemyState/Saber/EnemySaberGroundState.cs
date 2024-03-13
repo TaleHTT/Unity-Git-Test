@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySaberGroundState : EnemyState
 {
-    public Enemy_Saber enemy_Saber;
+    public Enemy_Saber enemy_Saber {  get; private set; }
     public EnemySaberGroundState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animboolName)
     {
         this.enemy_Saber = enemy_Saber;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAnimationTrigger : MonoBehaviour
 {
-    EnemyBase enemy => GetComponentInParent<EnemyBase>();
+    private EnemyBase enemy => GetComponentInParent<EnemyBase>();
     private void AnimationTrigger()
     {
         enemy.AnimationTrigger();
