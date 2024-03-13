@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerArcherDeadState : PlayerState
 {
-    public Player_Archer player_Archer;
     public PlayerArcherDeadState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Archer player_Archer) : base(player, stateMachine, animboolName)
     {
-        this.player_Archer = player_Archer;
     }
 
     public override void Enter()
@@ -28,6 +26,6 @@ public class PlayerArcherDeadState : PlayerState
     public override void Update()
     {
         base.Update();
-        player.SetVelocity(0, 0);
+        //player.SetVelocity(0, 0);
     }
 }

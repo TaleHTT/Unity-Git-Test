@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class Enemy_Arrow_Controller : MonoBehaviour
 {
-    public Transform firstTarget;
-    public List<Transform> firstTargetDetects;
-    public List<Transform> attackDetects;
-    public Transform attackTarget;
-    public Vector3 arrowDir;
-    public float attackRadius;
+    [Tooltip("移动速度")]
     public float moveSpeed;
+    [Tooltip("伤害")]
     public float damage;
-    private void Awake()
+    [Tooltip("经过timer秒后箭矢自动销毁")]
+    public float timer;
+    public List<Transform> attackDetects;
+    private float attackRadius = 10000000000;
+    private Transform attackTarget;
+    private Vector3 arrowDir;
+    protected void Awake()
     {
         AttackTarget();
         arrowDir = (attackTarget.position - transform.position).normalized;
     }
-    private void Start()
-    {
-
-    }
-    public void Update()
+    protected void Update()
     {
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
+        timer -= Time.deltaTime;
+        if (timer < 0)
+            Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             collision.GetComponent<CharacterStats>()?.remoteTakeDamage(damage);
             Destroy(gameObject);
@@ -36,12 +37,12 @@ public class Enemy_Arrow_Controller : MonoBehaviour
     public void AttackTarget()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
-        foreach(var target in colliders)
+        foreach (var target in colliders)
         {
-            if(target.GetComponent<PlayerBase>() != null)
+            if (target.GetComponent<PlayerBase>() != null)
             {
                 attackDetects.Add(target.transform);
-                if(attackDetects.Count == 1)
+                if (attackDetects.Count == 1)
                 {
                     attackTarget = attackDetects[0];
                 }
@@ -52,7 +53,7 @@ public class Enemy_Arrow_Controller : MonoBehaviour
             }
         }
     }
-    private void AttackLogic()
+    public void AttackLogic()
     {
         if (attackDetects.Count >= 3)
         {

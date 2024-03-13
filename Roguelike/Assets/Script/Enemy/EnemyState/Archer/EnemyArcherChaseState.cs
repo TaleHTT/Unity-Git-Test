@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyArcherChaseState : EnemyArcherGroundState
 {
-    public Vector3 target;
+    private Vector3 target;
     public EnemyArcherChaseState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Archer enemy_Archer) : base(enemy, stateMachine, animboolName, enemy_Archer)
     {
     }

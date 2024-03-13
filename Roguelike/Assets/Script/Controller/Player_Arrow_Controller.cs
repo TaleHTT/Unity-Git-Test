@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class Player_Arrow_Controller : MonoBehaviour
 {
-    public List<Transform> attackDetects;
-    public Transform attackTarget;
-    public Vector3 arrowDir;
-    public float attackRadius;
+    [Tooltip("移动速度")]
     public float moveSpeed;
+    [Tooltip("伤害")]
     public float damage;
-    private void Awake()
+    [Tooltip("经过timer秒后箭矢自动销毁")]
+    public float timer;
+    public List<Transform> attackDetects;
+    private float attackRadius = 10000000000;
+    private Transform attackTarget;
+    private Vector3 arrowDir;
+    protected void Awake()
     {
         AttackTarget();
         arrowDir = (attackTarget.position - transform.position).normalized;
     }
-    private void Start()
-    {
-
-    }
-    public void Update()
+    protected void Update()
     {
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
+        timer -= Time.deltaTime;
+        if (timer < 0)
+            Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,7 +53,7 @@ public class Player_Arrow_Controller : MonoBehaviour
             }
         }
     }
-    private void AttackLogic()
+    public void AttackLogic()
     {
         if (attackDetects.Count >= 3)
         {

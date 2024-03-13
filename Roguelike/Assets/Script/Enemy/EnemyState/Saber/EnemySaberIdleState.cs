@@ -1,6 +1,6 @@
 public class EnemySaberIdleState : EnemyState
 {
-    public Enemy_Saber enemy_Saber;
+    public Enemy_Saber enemy_Saber {  get; set; }
     public EnemySaberIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animBoolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animBoolName)
     {
         this.enemy_Saber = enemy_Saber;

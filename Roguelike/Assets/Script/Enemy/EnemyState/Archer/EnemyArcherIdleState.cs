@@ -1,6 +1,6 @@
 public class EnemyArcherIdleState : EnemyState
 {
-    public Enemy_Archer enemy_Archer;
+    private Enemy_Archer enemy_Archer;
     public EnemyArcherIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Archer enemy_Archer) : base(enemy, stateMachine, animboolName)
     {
         this.enemy_Archer = enemy_Archer;

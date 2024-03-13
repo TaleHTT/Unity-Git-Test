@@ -8,9 +8,7 @@ public class TargetPosition : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
             StartCoroutine(FinishTarget(timer));
-        }
     }
     IEnumerator FinishTarget(float timer)
     {

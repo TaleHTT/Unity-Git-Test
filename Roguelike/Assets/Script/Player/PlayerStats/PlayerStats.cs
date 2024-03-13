@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    PlayerBase player;
+    private PlayerBase player;
     public override void Start()
     {
         base.Start();

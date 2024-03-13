@@ -12,11 +12,11 @@ public class Entity : MonoBehaviour
     public LayerMask whatIsEnemy;
 
     public float detectTimer;
-    public Seeker seeker;
-    public Rigidbody2D rb;
-    public Animator anim;
     public CharacterStats stats;
-    public CapsuleCollider2D cd;
+    public Seeker seeker {  get; private set; }
+    public Animator anim {  get; private set; }
+    public CapsuleCollider2D cd {  get; private set; }
+    public Rigidbody2D rb {  get; private set; }
     protected virtual void Awake()
     {
 

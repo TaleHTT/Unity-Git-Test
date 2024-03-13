@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerAnimationTrigger : MonoBehaviour
 {
-    PlayerBase player => GetComponentInParent<PlayerBase>();
+    private PlayerBase player => GetComponentInParent<PlayerBase>();
     private void AnimationTrigger()
     {
         player.AnimationTrigger();

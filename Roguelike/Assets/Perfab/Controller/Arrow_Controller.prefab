@@ -99,12 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0717a013c2ad24ca07a18c4bc19dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDetects: []
-  attackTarget: {fileID: 0}
-  arrowDir: {x: 0, y: 0, z: 0}
-  attackRadius: 1000
   moveSpeed: 4
   damage: 10
+  timer: 10
+  attackDetects: []
 --- !u!58 &6704295671975317360
 CircleCollider2D:
   m_ObjectHideFlags: 0

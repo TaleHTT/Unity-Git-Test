@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Roguelike/Assets/_Tool/EnemyGenerator/EnemyGenerator_Sceipts/EnemyRandomGenerator.cs.meta
+guid: e3fd1f7c400dcf54582e53a62e675fde
+========
+guid: dd17954a9395f5245b7f6fbf549cb595
+>>>>>>>> 6aa365874ac2e7ea484f9ccf22259a6f40f55567:Roguelike/Assets/Script/CenterPoint/CenterPointMoveLogic.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
