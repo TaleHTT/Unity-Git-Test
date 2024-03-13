@@ -74,11 +74,11 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.FindGameObjectWithTag("Player") == null)
+        if(GameObject.Find("TeamWheel") == null)
         {
-            Debug.Log("is null");
+            Debug.Log("TeamWheel is null");
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.Find("TeamWheel").transform;
         CalculateWaveQuota();
     }
 
@@ -113,6 +113,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 根据当前波次下的敌人组列表中每种类型的敌人的数量，计算总体的该波次的敌人的总数量，赋值给该波次的waveQuota，作为限额，
+    /// </summary>
     public void CalculateWaveQuota()
     {
         int currentWaveQuota = 0;
@@ -121,7 +124,6 @@ public class EnemySpawner : MonoBehaviour
             currentWaveQuota += enemyGroup.enemyCount;
         }
         waves[currentWaveCount].waveQuota = currentWaveQuota;
-        //Debug.Log(currentWaveQuota);
     }
 
     public void SpawnEnemies()
@@ -145,5 +147,4 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-    
 }

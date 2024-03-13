@@ -157,17 +157,26 @@ MonoBehaviour:
     enemyGroups:
     - enemyName: 
       enemyCount: 3
-      spawnCount: 1
-      enemyPrefab: {fileID: 1510955712014828793, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
+      spawnCount: 0
+      enemyPrefab: {fileID: 26353780416342655, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
     - enemyName: 
-      enemyCount: 1
-      spawnCount: 1
-      enemyPrefab: {fileID: 9179674004434177558, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
+      enemyCount: 2
+      spawnCount: 0
+      enemyPrefab: {fileID: 2624519106273425876, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
     waveQuota: 0
     spawnCount: 0
-    spawnInterval: 0
+    spawnInterval: 1
+  - waveName: 
+    enemyGroups:
+    - enemyName: 
+      enemyCount: 5
+      spawnCount: 0
+      enemyPrefab: {fileID: 26353780416342655, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
+    waveQuota: 0
+    spawnCount: 0
+    spawnInterval: 3
   currentWaveCount: 0
-  waveInterval: 0
+  waveInterval: 10
 --- !u!4 &382631853
 Transform:
   m_ObjectHideFlags: 0

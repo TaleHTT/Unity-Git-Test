@@ -18211,7 +18211,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.572813, y: -0.94558764, z: -10}
+  m_LocalPosition: {x: 2.168477, y: -0.9489498, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19588,6 +19588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySaber
       objectReference: {fileID: 0}
+    - target: {fileID: 26353780416342655, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4128873774917793638, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: timer
       value: 2
@@ -19610,11 +19614,11 @@ PrefabInstance:
       objectReference: {fileID: 132929882}
     - target: {fileID: 5858139090039256376, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5858139090039256376, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8830177486202968706, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19770,13 +19774,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyArcher
       objectReference: {fileID: 0}
-    - target: {fileID: 3914688404613185240, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2624519106273425876, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3914688404613185240, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914688404613185240, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6812236879935567436, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
       propertyPath: timer
