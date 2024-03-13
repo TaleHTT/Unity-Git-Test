@@ -92361,11 +92361,11 @@ PrefabInstance:
       objectReference: {fileID: 132929882}
     - target: {fileID: 5858139090039256376, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5858139090039256376, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8830177486202968706, guid: 43a07729b57516b41b87761867ea41c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -92530,8 +92530,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3914688404613185240, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914688404613185240, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6812236879935567436, guid: 68775d3015427bf4aadabcab68927e54, type: 3}
       propertyPath: patrolPoints.Array.data[0]
