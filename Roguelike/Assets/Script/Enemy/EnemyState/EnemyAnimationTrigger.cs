@@ -22,4 +22,8 @@ public class EnemyAnimationTrigger : MonoBehaviour
     {
         enemy.AnimationArcherAttack();
     }
+    private void CasterAttackTrigger()
+    {
+        enemy.AnimationCasterAttack();
+    }
 }

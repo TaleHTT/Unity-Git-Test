@@ -117,7 +117,8 @@ MonoBehaviour:
     m_Bits: 8
   detectTimer: 0
   stats: {fileID: 4197466263694692084}
-  chaseRadius: 10
+  occupation: 0
+  chaseRadius: 5
   timer: 2
   isDead: 0
   drawTheBorderOrNot: 0
@@ -128,6 +129,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  cloestPlayer: {fileID: 0}
 --- !u!114 &4197466263694692084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +146,7 @@ MonoBehaviour:
   level: 0
   currentHealth: 0
   maxHp:
-    baseValue: 1000
+    baseValue: 100
     modfiers: []
   damage:
     baseValue: 10

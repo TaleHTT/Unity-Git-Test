@@ -2,9 +2,15 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum EnemyOccupation
+{
+    Saber,
+    Archer,
+    Caaster
+}
 public class EnemyBase : Entity
 {
+    public EnemyOccupation occupation;
     [Header("Chase info")]
     [Tooltip("Ë÷µÐ·¶Î§")]
     public float chaseRadius;
@@ -79,10 +85,6 @@ public class EnemyBase : Entity
         {
             playerDetects.Add(player.gameObject);
         }
-    }
-    public virtual void AnimationArcherAttack()
-    {
-        
     }
     private void ChaseLogic()
     {

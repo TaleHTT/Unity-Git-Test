@@ -6,7 +6,7 @@ using UnityEngine.TextCore.Text;
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private PlayerBase player => GetComponentInParent<PlayerBase>();
-    private void AttackTrigger()
+    private void SaberAttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
         foreach (var hit in colliders)
@@ -24,5 +24,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void ArcherAttackTrigger()
     {
         player.AnimationArcherAttack();
+    }
+    private void CasterAttackTrigger()
+    {
+        player.AnimationCasterAttack();
     }
 }

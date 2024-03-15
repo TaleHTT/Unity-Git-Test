@@ -22,8 +22,6 @@ public class EnemyArcherIdleState : EnemyState
     {
         base.Update();
         if (stateTimer < 0)
-        {
-            stateMachine.ChangeState(enemy_Archer.archerMoveState);
-        }
+            stateMachine.ChangeState(enemy_Archer.archerPatrolState);
     }
 }

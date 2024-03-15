@@ -588,9 +588,11 @@ MonoBehaviour:
     m_Bits: 64
   detectTimer: 0
   stats: {fileID: 2546544219925617084}
+  occupation: 1
   timer: 2
   isDead: 0
   drawTheBorderOrNot: 0
+  closetEnemy: {fileID: 0}
   enemyDetects: []
   arrowPerfab: {fileID: 5067555322004596321, guid: ae2c9ad2db3541c4e9c5b4e7b3e982de, type: 3}
 --- !u!114 &1082153698685705515

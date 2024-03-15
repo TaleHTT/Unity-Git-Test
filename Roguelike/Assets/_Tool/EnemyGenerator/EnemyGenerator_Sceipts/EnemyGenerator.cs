@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyGenerator : MonoBehaviour
 {
+    public Transform[] patrolPoint;
     public List<GameObject> EnemyList;
     private List<GameObject> EnemyListInScene;
     private Vector3 centerPoint;
@@ -41,7 +42,13 @@ public class EnemyGenerator : MonoBehaviour
             float y = centerPoint.y + randomRadius * Mathf.Sin(randomAngle);
             float z = centerPoint.z;
             Vector3 randomPosition = new Vector3(x, y, z);
-
+            if(patrolPoint != null)
+            {
+                foreach(GameObject enemy in EnemyList)
+                {
+                    enemy.GetComponent<EnemyBase>().patrolPoints = patrolPoint;
+                }
+            }
             EnemyListInScene.Add(Instantiate(EnemyList[i], randomPosition, Quaternion.identity, enemyCollectorInScene.transform));
         }
     }

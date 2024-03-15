@@ -4,10 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+public enum PlayerOccupation
+{
+    Saber,
+    Archer,
+    Caster
+}
 public class PlayerBase : Entity
 {
-
+    public PlayerOccupation occupation;
     [Tooltip("死亡后，经过timer秒后销毁")]
     public float timer;
     [Tooltip("是否死亡")]
