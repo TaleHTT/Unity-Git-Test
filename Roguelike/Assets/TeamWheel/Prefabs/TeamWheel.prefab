@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4861370834848177472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4861370834848177474}
+  - component: {fileID: 4861370834848177475}
+  m_Layer: 0
+  m_Name: TeamWheel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4861370834848177474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861370834848177472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4861370834848177475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861370834848177472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a76c2dba8b88614aabeba43a782be45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawTheBorder: 1
+  charactersInTeamPrefabs:
+  - {fileID: 7843070167187471687, guid: f9a21331f88a15a488a9a47270134bd6, type: 3}
+  - {fileID: 7843070167187471687, guid: f9a21331f88a15a488a9a47270134bd6, type: 3}
+  - {fileID: 7258814614616270133, guid: bfbff0b4d95a02d4ca0c21aca13ade39, type: 3}
+  centerPointPrefab: {fileID: 9181942636850224577, guid: 153280da50404cf4fa21c79606500590, type: 3}
+  TeamCharactersCollectorPrefab: {fileID: 7728169060277978237, guid: 98d39f64d3fb90d45895e4cdfcc2f014, type: 3}
+  characterPlacePointPrefab: {fileID: 9050837064803926585, guid: e5000b3de589ac045b9c3b1700e80aa8, type: 3}
+  radius: 5
+  speed: 1
