@@ -1,3 +1,4 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,9 +49,6 @@ public class TeamWheel : MonoBehaviour
     private void Update()
     {
 
-
-
-        MoveDir();
     }
 
     private void FixedUpdate()
@@ -86,17 +84,17 @@ public class TeamWheel : MonoBehaviour
         }
     }
 
-    public void MoveDir()
-    {
-        Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 arrowheadposition = new Vector2(centerPoint.transform.position.x, centerPoint.transform.position.y);
-        float angle = WhatAngle(mouseposition, arrowheadposition);
-        centerPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-    public float WhatAngle(Vector2 a, Vector2 b)
-    {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    }
+    //public void MoveDir()
+    //{
+    //    Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    Vector2 arrowheadposition = new Vector2(centerPoint.transform.position.x, centerPoint.transform.position.y);
+    //    float angle = WhatAngle(mouseposition, arrowheadposition);
+    //    centerPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
+    //}
+    //public float WhatAngle(Vector2 a, Vector2 b)
+    //{
+    //    return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    //}
 
     /// <summary>
     /// 角色位置点初始化，6个点位置设置
@@ -151,5 +149,4 @@ public class TeamWheel : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
-
 }

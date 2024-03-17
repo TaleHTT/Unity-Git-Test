@@ -53,7 +53,7 @@ public class PlayerBase : Entity
         Debug.Log("I am damage");
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-    public virtual void AnimationArcherAttack()
+    public override void AnimationArcherAttack()
     {
 
     }
