@@ -21,6 +21,8 @@ public class EnemyBase : Entity
     public bool isDead;
     [Tooltip("是否显示攻击和寻敌范围")]
     public bool drawTheBorderOrNot;
+    [Tooltip("是否正在攻击")]
+    public bool isAttacking;
     public int targetPointIndex { get; private set; } = 0;
     public List<GameObject> playerDetects;
     public List<GameObject> attackDetects;

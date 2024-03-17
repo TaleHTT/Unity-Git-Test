@@ -16,6 +16,7 @@ public class Arrow_Controller : MonoBehaviour
     public Vector3 arrowDir { get; private set; }
     protected virtual void Start()
     {
+        List<Transform> attackDetects = new List<Transform>();
         arrowDir = (attackTarget.position - transform.position).normalized;
     }
     protected virtual void Update()

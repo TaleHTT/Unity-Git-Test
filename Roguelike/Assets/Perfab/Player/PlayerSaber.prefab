@@ -551,13 +551,13 @@ MonoBehaviour:
   level: 0
   currentHealth: 0
   maxHp:
-    baseValue: 1000
+    baseValue: 50
     modfiers: []
   damage:
-    baseValue: 20
+    baseValue: 7
     modfiers: []
   armor:
-    baseValue: 8
+    baseValue: 2
     modfiers: []
   woundedMultiplier:
     baseValue: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
     baseValue: 0
     modfiers: []
   attackRadius:
-    baseValue: 10
+    baseValue: 1
     modfiers: []
   attackSpeed:
     baseValue: 0

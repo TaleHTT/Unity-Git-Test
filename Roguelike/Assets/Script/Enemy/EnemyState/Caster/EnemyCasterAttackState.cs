@@ -7,11 +7,14 @@ public class EnemyCasterAttackState : EnemyCasterChaseState
     public override void Enter()
     {
         base.Enter();
+        enemy.isAttacking = true;
+        enemy.SetVelocity(0, 0);
     }
 
     public override void Exit()
     {
         base.Exit();
+        enemy.isAttacking = false;
     }
 
     public override void Update()

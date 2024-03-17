@@ -22,6 +22,8 @@ public class EnemyArcherChaseState : EnemyArcherGroundState
         base.Update();
         if (enemy.playerDetects.Count <= 0)
             stateMachine.ChangeState(enemy_Archer.archerIdleState);
+        if (enemy.isAttacking == true)
+            return;
         AutoPath();
         if (pathPointList == null)
             return;

@@ -22,7 +22,9 @@ public class EnemyCasterChaseState : EnemyCasterGroundState
         base.Update();
         if (enemy.playerDetects.Count <= 0)
             stateMachine.ChangeState(enemy_Caster.casterIdleState);
-        AutoPath();
+        if (enemy.isAttacking == true)
+            return;
+            AutoPath();
         if (pathPointList == null)
             return;
         target = pathPointList[currentIndex];

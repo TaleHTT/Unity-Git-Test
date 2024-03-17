@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6704295671975317360}
   - component: {fileID: 5356531030672501538}
   m_Layer: 10
-  m_Name: Arrow_Controller
+  m_Name: Enemy_Arrow_Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -22,6 +22,7 @@ public class Orb_Controller : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     protected virtual void Awake()
     {
+        List<Transform> attackDetects = new List<Transform>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
