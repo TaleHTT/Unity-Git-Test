@@ -4,14 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManger : MonoBehaviour
-{
-    public PlayerBase player;
-    public Transform[] target;
-    public float treat;
-    public float damage;
-    public float coolDownTimer;
-    public float coolDown;
-    public SkillManger instance;
+{ 
+    private SkillManger instance;
+    private Saber_Skill_Controller saber_Skill;
+    private Archer_Skill_Controller archer_Skill;
     private void Awake()
     {
         if (instance != null)
@@ -21,24 +17,7 @@ public class SkillManger : MonoBehaviour
     }
     protected virtual void Start()
     {
-        player = GetComponent<PlayerBase>();
-    }
-    protected virtual void Update()
-    {
-        coolDownTimer -= Time.deltaTime;
-    }
-    public virtual bool CanUseSkill()
-    {
-        if(coolDown <= 0)
-        {
-            UseSkill();
-            coolDownTimer = coolDown;
-            return true;
-        }
-        return false;
-    }
-    public virtual void UseSkill()
-    {
-
+        saber_Skill = GetComponent<Saber_Skill_Controller>();
+        archer_Skill = GetComponent<Archer_Skill_Controller>();
     }
 }
