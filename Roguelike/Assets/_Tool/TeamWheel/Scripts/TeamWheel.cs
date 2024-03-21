@@ -1,17 +1,19 @@
 using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class TeamWheel : MonoBehaviour
 {
+    public bool edit;
     public bool drawTheBorder;
-    public List<GameObject> charactersInTeamPrefabs;
+    public GameObject[] charactersInTeamPrefabs;
     /// <summary>
     /// 存储charactersInTeamPrefabs生成的对应的游戏物体
     /// </summary>
-    private List<GameObject> charactersInTeam;
+    private GameObject[] charactersInTeam;
 
     public GameObject centerPointPrefab;
     private GameObject centerPoint;
@@ -72,11 +74,12 @@ public class TeamWheel : MonoBehaviour
     public void CharactersMoveToCharactersPoint()
     {
         float step = speed * Time.deltaTime;
-        for (int i = 0; i < charactersInTeam.Count; i++)
+        for (int i = 0; i < globalMaxCharacterNum; i++)
         {
             if (charactersInTeam[i] == null)
             {
-                charactersInTeam.RemoveAt(i);
+                continue;
+                //charactersInTeam.RemoveAt(i);
             }
             Vector3 newPos = Vector3.Lerp(charactersInTeam[i].transform.position,
                 characterPlacePoints[i].transform.position, step);
@@ -135,12 +138,26 @@ public class TeamWheel : MonoBehaviour
     /// </summary>
     public void CharactersInTeamInit()
     {
-        charactersInTeam = new List<GameObject>();
-        for (int i = 0; i < charactersInTeamPrefabs.Count; i++)
+        charactersInTeam = new GameObject[globalMaxCharacterNum];
+        if (edit)
         {
-            charactersInTeam.Add(Instantiate(charactersInTeamPrefabs[i], characterPlacePoints[i].transform.position,
-                Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform));
+            for (int i = 0; i < globalMaxCharacterNum; i++)
+            {
+                if (charactersInTeamPrefabs[i] == null) continue;
+                charactersInTeam[i] = Instantiate(charactersInTeamPrefabs[i], characterPlacePoints[i].transform.position,
+                    Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
+            }
         }
+        else
+        {
+            for (int i = 0; i < globalMaxCharacterNum; i++)
+            {
+                if (PlayerTeamManager.Instance.playerPrefabInTeam[i] == null) continue;
+                charactersInTeam[i] = Instantiate(PlayerTeamManager.Instance.playerPrefabInTeam[i], characterPlacePoints[i].transform.position,
+                    Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
+            }
+        }
+        
     }
 
     private void OnDrawGizmos()
