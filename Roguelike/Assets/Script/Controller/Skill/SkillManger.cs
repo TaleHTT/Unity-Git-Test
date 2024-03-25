@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkillManger : MonoBehaviour
 { 
-    private SkillManger instance;
+    public static SkillManger instance;
     private Saber_Skill_Controller saber_Skill;
     private Archer_Skill_Controller archer_Skill;
     private void Awake()

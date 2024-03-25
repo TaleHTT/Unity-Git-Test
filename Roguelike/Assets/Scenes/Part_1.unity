@@ -90400,6 +90400,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 378727003}
+  - component: {fileID: 378727006}
+  - component: {fileID: 378727005}
+  - component: {fileID: 378727004}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -90422,6 +90425,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1942877835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378727004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378727002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb542749fa70204691da5ef91f13573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: []
+  damage: 0
+  coolDown: 0
+--- !u!114 &378727005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378727002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0743f5914efff246b5d7ea67cb02c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: []
+  damage: 0
+  coolDown: 0
+--- !u!114 &378727006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378727002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cb8a9f117a8ae4dbac93ff6de95b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &512009784
 GameObject:
   m_ObjectHideFlags: 0
