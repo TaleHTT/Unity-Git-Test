@@ -6,13 +6,19 @@ public class TargetCheck : MonoBehaviour
 {
     public List<GameObject> playerCheck;
     public List<GameObject> enemyCheck;
-    public float timer;
+    public GameObject bossCheck;
+    public bool isCheckBoss;
     private void Update()
     {
-        if(playerCheck.Count == 0 || enemyCheck.Count == 0 || timer < 0)
-            GameObject.Find("Canvas").GetComponentInChildren<UI_Fade_Screen>().FadeOut();
-
-        timer -= Time.deltaTime;
+        if(playerCheck.Count == 0 || isCheckBoss == false)
+        {
+            //结束游戏的代码
+            return;
+        }
+        if (enemyCheck.Count == 0)
+        {
+            //结束游戏代码
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +26,8 @@ public class TargetCheck : MonoBehaviour
             playerCheck.Add(collision.gameObject);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             enemyCheck.Add(collision.gameObject);
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+            isCheckBoss = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -27,5 +35,7 @@ public class TargetCheck : MonoBehaviour
             playerCheck.Remove(collision.gameObject);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             enemyCheck.Remove(collision.gameObject);
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+            isCheckBoss = false;
     }
 }

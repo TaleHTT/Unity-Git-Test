@@ -18,7 +18,7 @@ public class Player_Arrow_Controller : Arrow_Controller
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             collision.GetComponent<CharacterStats>()?.remoteTakeDamage(damage);
             Destroy(gameObject);

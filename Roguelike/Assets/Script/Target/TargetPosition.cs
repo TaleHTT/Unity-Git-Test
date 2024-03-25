@@ -13,6 +13,7 @@ public class TargetPosition : MonoBehaviour
     IEnumerator FinishTarget(float timer)
     {
         yield return new WaitForSeconds(timer);
-        GameObject.Find("Canvas").GetComponentInChildren<UI_Fade_Screen>().FadeOut();
+        Debug.Log("Game Over");
+        //游戏结束的代码
     }
 }
