@@ -14,7 +14,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<PlayerBase>() != null)
             {
-                enemy.stats.DoDamage(enemy.cloestPlayer.GetComponent<PlayerStats>());
+                enemy.stats.meleeDoDamage(enemy.cloestPlayer.GetComponent<PlayerStats>());
             }
         }
     }

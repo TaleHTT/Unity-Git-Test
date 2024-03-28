@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Player_Archer : PlayerBase
 {
+    private ObjectPool<GameObject> pool;
     [Tooltip("¼ýÊ¸Ô¤ÖÆÌå")]
     public GameObject arrowPerfab;
     public PlayerArcherIdleState archerIdleState {  get; private set; }
@@ -12,6 +14,7 @@ public class Player_Archer : PlayerBase
     protected override void Awake()
     {
         base.Awake();
+        pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestory, true, 10, 1000);
         archerIdleState = new PlayerArcherIdleState(this, stateMachine, "Idle", this);
         archerDeadState = new PlayerArcherDeadState(this, stateMachine, "Dead", this);
         archerAttackState = new PlayerArcherAttackState(this, stateMachine, "Attack", this);
@@ -32,6 +35,25 @@ public class Player_Archer : PlayerBase
     public override void AnimationArcherAttack()
     {
         base.AnimationArcherAttack();
-        GameObject arrow = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
+        pool.Get();
+    }
+    private GameObject createFunc()
+    {
+        var orb = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
+        orb.GetComponent<Orb_Controller>().pool = pool;
+        return orb;
+    }
+    private void actionOnGet(GameObject orb)
+    {
+        orb.transform.position = transform.position;
+        orb.SetActive(true);
+    }
+    private void actionOnRelease(GameObject orb)
+    {
+        orb.SetActive(false);
+    }
+    private void actionOnDestory(GameObject orb)
+    {
+        Destroy(orb);
     }
 }

@@ -6,6 +6,10 @@ using UnityEngine.TextCore.Text;
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private PlayerBase player => GetComponentInParent<PlayerBase>();
+    private void AnimationTrigger()
+    {
+        player.AnimationTrigger();
+    }
     private void SaberAttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
@@ -13,13 +17,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
         {
             if (hit.GetComponent<EnemyBase>() != null)
             {
-                player.stats.DoDamage(player.closetEnemy.GetComponent<EnemyStats>());
+                player.stats.meleeDoDamage(player.closetEnemy.GetComponent<EnemyStats>());
             }
         }
-    }
-    private void AnimationTrigger()
-    {
-        player.AnimationTrigger();
     }
     private void ArcherAttackTrigger()
     {
@@ -28,5 +28,16 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void CasterAttackTrigger()
     {
         player.AnimationCasterAttack();
+    }
+    private void PriestAttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
+        foreach (var hit in colliders)
+        {
+            if(hit.GetComponent<PlayerBase>() != null)
+            {
+                player.stats.treatDoDamage(hit.GetComponent<PlayerStats>());
+            }
+        }
     }
 }

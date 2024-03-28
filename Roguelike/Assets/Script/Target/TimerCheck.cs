@@ -1,17 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerCheck : MonoBehaviour
 {
+    public static TimerCheck instance;
     public float timer;
     public int targetHp;
+    public bool isPass;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     private void Update()
     {
         timer -= Time.deltaTime;
-        if(timer < 0 || targetHp <= 0)
+        if(timer < 0)
         {
-            //结束游戏的代码
+            isPass = true;
+        }
+        if(targetHp <= 0)
+        {
+            isPass = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

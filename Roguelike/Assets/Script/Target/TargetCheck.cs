@@ -4,38 +4,44 @@ using UnityEngine;
 
 public class TargetCheck : MonoBehaviour
 {
+    public static TargetCheck instance;
     public List<GameObject> playerCheck;
-    public List<GameObject> enemyCheck;
-    public GameObject bossCheck;
-    public bool isCheckBoss;
+    public List<GameObject> bossCheck;
+    public bool isPass;
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     private void Update()
     {
-        if(playerCheck.Count == 0 || isCheckBoss == false)
+        if(playerCheck.Count <= 0)
         {
-            //结束游戏的代码
-            return;
+            isPass = false;
         }
-        if (enemyCheck.Count == 0)
+        if(bossCheck.Count <= 0)
         {
-            //结束游戏代码
+            isPass = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             playerCheck.Add(collision.gameObject);
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            enemyCheck.Add(collision.gameObject);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
-            isCheckBoss = true;
+            bossCheck.Add(collision.gameObject);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             playerCheck.Remove(collision.gameObject);
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            enemyCheck.Remove(collision.gameObject);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
-            isCheckBoss = false;
+            bossCheck.Remove(collision.gameObject);
     }
 }

@@ -130,4 +130,12 @@ public class EnemyBase : Entity
             }
         }
     }
+    public virtual void AnimationArcherAttack()
+    {
+
+    }
+    public virtual void AnimationCasterAttack()
+    {
+
+    }
 }

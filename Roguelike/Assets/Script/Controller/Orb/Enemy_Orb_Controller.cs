@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Enemy_Orb_Controller : Orb_Controller
 {
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         AttackTarget();
     }
     protected override void Start()
@@ -25,7 +26,7 @@ public class Enemy_Orb_Controller : Orb_Controller
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Destroy(gameObject);
+            pool.Release(gameObject);
         }
     }
     public void AttackTarget()

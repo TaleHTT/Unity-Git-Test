@@ -4413,6 +4413,8 @@ MonoBehaviour:
   overlapItem: {fileID: 0}
   items:
   - {fileID: 11400000, guid: 74ce2fcb48f739044900419425f0f6da, type: 2}
+  - {fileID: 11400000, guid: 7f87c04c7c587f44caf04be79536ac94, type: 2}
+  - {fileID: 11400000, guid: a63453c840c5f414d9480771fe449055, type: 2}
   itemPrefab: {fileID: 906305090484390904, guid: 2573deb1c0eeb97469d0d58347635198, type: 3}
   canvasTransform: {fileID: 1984296143}
 --- !u!1 &1734724973

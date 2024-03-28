@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Orb_Controller : MonoBehaviour
 {
+    public ObjectPool<GameObject> pool;
     [Tooltip("ÒÆ¶¯ËÙ¶È")]
     public float moveSpeed;
     [Tooltip("ÉËº¦")]
@@ -35,7 +37,7 @@ public class Orb_Controller : MonoBehaviour
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
         timer -= Time.deltaTime;
         if (timer < 0)
-            Destroy(gameObject);
+            pool.Release(gameObject);
     }
     protected virtual void OnDestroy()
     {

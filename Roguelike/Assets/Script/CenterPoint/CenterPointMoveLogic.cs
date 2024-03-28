@@ -27,7 +27,6 @@ public class CenterPointMoveLogic : MonoBehaviour
         if (transform.position != CenterPointAutoPathTarget)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-
         }
     }
     public void AutoPath()

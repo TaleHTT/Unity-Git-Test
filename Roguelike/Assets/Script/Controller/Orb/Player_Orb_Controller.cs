@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Orb_Controller : Orb_Controller
 {
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         AttackTarget();
     }
     protected override void Start()
@@ -24,7 +23,7 @@ public class Player_Orb_Controller : Orb_Controller
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Destroy(gameObject);
+            pool.Release(gameObject);
         }
     }
     public void AttackTarget()

@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Arrow_Controller : MonoBehaviour
 {
+    public ObjectPool<GameObject> pool;
     [Tooltip("ÒÆ¶¯ËÙ¶È")]
     public float moveSpeed;
     [Tooltip("ÉËº¦")]
@@ -12,7 +13,7 @@ public class Arrow_Controller : MonoBehaviour
     public float timer;
     public List<Transform> attackDetects;
     public float attackRadius { get; private set; } = Mathf.Infinity;
-    public Transform attackTarget {  get; private set; }
+    public Transform attackTarget { get; private set; }
     public Vector3 arrowDir { get; private set; }
     protected virtual void Start()
     {
@@ -24,7 +25,7 @@ public class Arrow_Controller : MonoBehaviour
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
         timer -= Time.deltaTime;
         if (timer < 0)
-            Destroy(gameObject);
+            pool.Release(gameObject);
     }
     public void AttackLogic()
     {

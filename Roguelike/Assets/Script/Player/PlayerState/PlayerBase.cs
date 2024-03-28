@@ -1,5 +1,6 @@
 using Cinemachine.Utility;
 using Pathfinding;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,7 +9,8 @@ public enum PlayerOccupation
 {
     Saber,
     Archer,
-    Caster
+    Caster,
+    Priest
 }
 public class PlayerBase : Entity
 {
@@ -53,10 +55,6 @@ public class PlayerBase : Entity
         Debug.Log("I am damage");
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-    public override void AnimationArcherAttack()
-    {
-
-    }
     IEnumerator DeadDestroy(float timer)
     {
         yield return new WaitForSeconds(timer);
@@ -89,6 +87,13 @@ public class PlayerBase : Entity
             enemyDetects.Add(enemy.gameObject);
         }
     }
+    public virtual void AnimationArcherAttack()
+    {
 
+    }
+    public virtual void AnimationCasterAttack()
+    {
+
+    }
 }
 

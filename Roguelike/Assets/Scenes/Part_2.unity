@@ -268,7 +268,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 92305643
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -17268,7 +17268,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 199353729
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -25197,9 +25197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCheck: []
-  enemyCheck: []
-  bossCheck: {fileID: 0}
-  isCheckBoss: 0
+  bossCheck:
+  - {fileID: 0}
+  isPass: 0
 --- !u!58 &1107167000
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25824,7 +25824,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 92305643
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -26970,7 +26970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8bf289cdf77da4ba5e3d7d647fb4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 3
+  timer: 180
+  isPass: 0
 --- !u!50 &1808170972
 Rigidbody2D:
   serializedVersion: 4

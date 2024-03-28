@@ -37,12 +37,4 @@ public class Entity : MonoBehaviour
     {
         rb.velocity = new Vector2(x, y);
     }
-    public virtual void AnimationArcherAttack()
-    {
-
-    }
-    public virtual void AnimationCasterAttack()
-    {
-
-    }
 }
