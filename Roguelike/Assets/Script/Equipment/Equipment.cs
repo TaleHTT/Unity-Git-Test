@@ -1,15 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
+    PlayerStats stats;
     public List<EquipmentSavaObject> equipmentSaveObejects;
     public Dictionary<ItemData, EquipmentSavaObject> equipmentDictionary;
     private void Start()
     {
         equipmentSaveObejects = new List<EquipmentSavaObject>();
         equipmentDictionary = new Dictionary<ItemData, EquipmentSavaObject>();
+        stats = GetComponentInChildren<PlayerStats>();
     }
     public void AddItem(ItemData item)
     {
@@ -23,7 +24,7 @@ public class Equipment : MonoBehaviour
             equipmentSaveObejects.Add(newItem);
             equipmentDictionary.Add(item, newItem);
         }
-        item.AddModfiers();
+        item.AddModfiers(stats);
     }
     public void RemoveItem(ItemData item)
     {
@@ -39,6 +40,6 @@ public class Equipment : MonoBehaviour
                 value.RemoveStack();
             }
         }
-        item.RemoveModfiers();
+        item.RemoveModfiers(stats);
     }
 }

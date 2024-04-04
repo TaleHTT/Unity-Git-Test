@@ -23,7 +23,7 @@ public class Enemy_Saber : EnemyBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth < 0)
+        if (stats.currentHealth < 0 && isDead == false)
             stateMachine.ChangeState(saberDeadState);
     }
     public override void playerDetect()

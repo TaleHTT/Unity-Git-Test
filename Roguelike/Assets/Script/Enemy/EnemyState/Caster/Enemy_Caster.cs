@@ -29,7 +29,7 @@ public class Enemy_Caster : EnemyBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth <= 0)
+        if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(casterDeadState);
     }
     public override void playerDetect()
@@ -47,7 +47,7 @@ public class Enemy_Caster : EnemyBase
     }
     private GameObject createFunc()
     {
-        var orb = Instantiate(OrbPerfab, transform.position, Quaternion.identity);
+        var orb = Instantiate(OrbPerfab, transform.position,Quaternion.identity);
         orb.GetComponent<Orb_Controller>().pool = pool;
         return orb;
     }

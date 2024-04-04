@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerPriestAttackState : PlayerState
 {
     Player_Priest player_Priest;
+    private int howPlayerMaxHp;
     public PlayerPriestAttackState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Priest player_Priest) : base(player, stateMachine, animboolName)
     {
         this.player_Priest = player_Priest;
@@ -24,7 +21,12 @@ public class PlayerPriestAttackState : PlayerState
     {
         base.Update();
         player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
-        if (player.enemyDetects.Count <= 0)
+        for (int i = 0; i < player_Priest.playerDetects.Count; i++)
+        {
+            if (player_Priest.playerDetects[i].GetComponent<CharacterStats>().currentHealth == player_Priest.playerDetects[i].GetComponent<CharacterStats>().maxHp.GetValue())
+                howPlayerMaxHp++;
+        }
+        if (howPlayerMaxHp == PlayerManager.instance.playerCount)
             stateMachine.ChangeState(player_Priest.priestIdleState);
     }
 }

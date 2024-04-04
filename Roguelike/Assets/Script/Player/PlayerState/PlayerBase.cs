@@ -1,9 +1,5 @@
-using Cinemachine.Utility;
-using Pathfinding;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 public enum PlayerOccupation
 {
@@ -21,6 +17,7 @@ public class PlayerBase : Entity
     public bool isDead;
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     public bool drawTheBorderOrNot;
+    public Transform treatTarget;
     public Transform closetEnemy;
     public List<GameObject> enemyDetects;
     public PlayerStateMachine stateMachine { get; private set; }
@@ -39,7 +36,7 @@ public class PlayerBase : Entity
     {
         base.Update();
         AttackLogic();
-        if(isDead)
+        if (isDead)
             StartCoroutine(DeadDestroy(timer));
 
         stateMachine.currentState.Update();
@@ -50,11 +47,10 @@ public class PlayerBase : Entity
             return;
         Gizmos.DrawWireSphere(transform.position, stats.attackRadius.GetValue());
     }
-    public void DamageEffect()
+    public override void DamageEffect()
     {
-        Debug.Log("I am damage");
+        base.DamageEffect();
     }
-    public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
     IEnumerator DeadDestroy(float timer)
     {
         yield return new WaitForSeconds(timer);
@@ -65,7 +61,7 @@ public class PlayerBase : Entity
         float distance = Mathf.Infinity;
         for (int i = 0; i < enemyDetects.Count; i++)
         {
-            if(distance > Vector3.Distance(enemyDetects[i].transform.position, transform.position))
+            if (distance > Vector3.Distance(enemyDetects[i].transform.position, transform.position))
             {
                 distance = Vector3.Distance(enemyDetects[i].transform.position, transform.position);
                 closetEnemy = enemyDetects[i].transform;

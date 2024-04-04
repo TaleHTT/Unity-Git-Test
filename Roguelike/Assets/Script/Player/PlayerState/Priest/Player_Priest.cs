@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Player_Priest : PlayerBase
 {
+    public List<GameObject> playerDetects;
+
     public PlayerPriestIdleState priestIdleState { get; private set; }
     public PlayerPriestDeadState priestDeadState { get; private set; }
     public PlayerPriestAttackState priestAttackState { get; private set; }
@@ -23,7 +23,20 @@ public class Player_Priest : PlayerBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth <= 0)
+        if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(priestDeadState);
+        PriestTreatLogci();
+    }
+    public void PriestTreatLogci()
+    {
+        float leasthp = Mathf.Infinity;
+        for(int i = 0; i < playerDetects.Count; i++)
+        {
+            if (leasthp > playerDetects[i].GetComponent<CharacterStats>().currentHealth)
+            {
+                leasthp = playerDetects[i].GetComponent<CharacterStats>().currentHealth;
+                treatTarget = playerDetects[i].transform;
+            }
+        }
     }
 }

@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerState
+public class PlayerState : IDeadLogciable
 {
-    public PlayerBase player {  get; private set; }
+    public PlayerBase player { get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }
-    public float defaultAttackSpeed {  get; private set; }
+    public float defaultAttackSpeed { get; private set; }
     public bool triggerCalled;
     private string animBoolName;
     public PlayerState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName)
@@ -32,5 +29,14 @@ public class PlayerState
     public void AnimationFinishTrigger()
     {
         triggerCalled = true;
+    }
+    public void DeadLogci()
+    {
+        player.stats.attackRadius.baseValue = 0;
+        player.cd.enabled = false;
+        player.enemyDetects.Clear();
+        player.anim.SetBool("Attack", false);
+        player.isDead = true;
+        PlayerManager.instance.playerCount--;
     }
 }

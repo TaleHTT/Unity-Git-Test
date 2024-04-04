@@ -18,7 +18,7 @@ public class Player_Saber : PlayerBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth <= 0)
+        if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(saberDeadState);
     }
 }

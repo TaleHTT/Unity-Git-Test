@@ -1,32 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Orb_Controller : Orb_Controller
 {
-    protected override void Awake()
+    protected override void OnEnable()
     {
-        base.Awake();
+        base.OnEnable();
         AttackTarget();
-    }
-    protected override void Start()
-    {
-        base.Start();
+        AttackDir();
     }
     protected override void Update()
     {
         base.Update();
     }
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
+            AttackTakeDamage();
             pool.Release(gameObject);
+            attackDetects.Clear();
         }
     }
     public void AttackTarget()
@@ -38,6 +30,17 @@ public class Enemy_Orb_Controller : Orb_Controller
             {
                 attackDetects.Add(target.transform);
                 AttackLogic();
+            }
+        }
+    }
+    public void AttackTakeDamage()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (Collider2D hit in colliders)
+        {
+            if (hit.GetComponent<PlayerStats>() != null)
+            {
+                hit.GetComponent<PlayerStats>().remoteTakeDamage(damage);
             }
         }
     }

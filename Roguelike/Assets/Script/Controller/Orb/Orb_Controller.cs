@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,6 +11,7 @@ public class Orb_Controller : MonoBehaviour
     public float damage;
     [Tooltip("经过timer秒后箭矢自动销毁")]
     public float timer;
+    private float coolDownTimer;
     [Tooltip("爆炸范围")]
     public float explosionRadius;
     [Tooltip("是否现实爆炸范围")]
@@ -20,36 +20,22 @@ public class Orb_Controller : MonoBehaviour
     public float attackRadius { get; private set; } = Mathf.Infinity;
     public Transform attackTarget { get; private set; }
     public Vector3 arrowDir { get; private set; }
-    public SpriteRenderer sr { get; private set; }
-    public Rigidbody2D rb { get; private set; }
-    protected virtual void Awake()
+    protected virtual void OnEnable()
     {
         List<Transform> attackDetects = new List<Transform>();
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-    }
-    protected virtual void Start()
-    {
-        arrowDir = (attackTarget.position - transform.position).normalized;
     }
     protected virtual void Update()
     {
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
-        timer -= Time.deltaTime;
-        if (timer < 0)
-            pool.Release(gameObject);
-    }
-    protected virtual void OnDestroy()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        foreach (Collider2D hit in colliders)
+        coolDownTimer -= Time.deltaTime;
+        if (coolDownTimer < 0)
         {
-            if (hit.GetComponent<CharacterStats>() != null)
-            {
-                hit.GetComponent<CharacterStats>().remoteTakeDamage(damage);
-            }
+            coolDownTimer = timer;
+            pool.Release(gameObject);
+            attackDetects.Clear();
         }
     }
+    public void AttackDir() => arrowDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
     {
         float distance = Mathf.Infinity;
@@ -64,7 +50,7 @@ public class Orb_Controller : MonoBehaviour
     }
     public void OnDrawGizmos()
     {
-        if(!drawTheBorderOrNot)
+        if (!drawTheBorderOrNot)
             Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

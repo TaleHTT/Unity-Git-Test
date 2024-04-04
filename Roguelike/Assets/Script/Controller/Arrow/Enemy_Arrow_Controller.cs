@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Arrow_Controller : Arrow_Controller
 {
-    protected void Awake()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         AttackTarget();
-    }
-    protected override void Start()
-    {
-        base.Start();
+        AttackDir();
     }
     protected override void Update()
     {

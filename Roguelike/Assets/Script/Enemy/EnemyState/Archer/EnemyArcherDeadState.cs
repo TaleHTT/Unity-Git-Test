@@ -9,14 +9,8 @@ public class EnemyArcherDeadState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.cd.enabled = false;
-        enemy.stats.attackRadius.baseValue = 0;
-        enemy.chaseRadius = 0;
-        enemy.attackDetects.Clear();
-        enemy.playerDetects.Clear();
-        enemy.isDead = true;
+        DeadLogci();
     }
-
     public override void Exit()
     {
         base.Exit();

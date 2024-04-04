@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Trigger_PassPartCheck : MonoBehaviour
+{
+    [Tooltip("¹Ø¿¨Ê±¼ä")]
+    public float timer;
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer < 0 || PlayerManager.instance.playerCount <= 0)
+            EventSystem.instance.Trigger_FailPassPart();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+            EventSystem.instance.Trigger_SuccessPassPart();
+    }
+}

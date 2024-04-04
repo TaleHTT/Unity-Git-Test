@@ -23,19 +23,10 @@ public class PlayerPriestIdleState : PlayerState
     public override void Update()
     {
         base.Update();
-        player.detectTimer -= Time.deltaTime;
-        if (player.detectTimer > 0)
+        for(int i = 0; i < player_Priest.playerDetects.Count; i++)
         {
-            player.detectTimer = 1;
-            return;
+            if (player_Priest.playerDetects[i].GetComponent<CharacterStats>().currentHealth < player_Priest.playerDetects[i].GetComponent<CharacterStats>().maxHp.GetValue())
+                stateMachine.ChangeState(player_Priest.priestAttackState);
         }
-        player.enemyDetects = new List<GameObject>();
-        var colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue(), player.whatIsEnemy);
-        foreach (var enemy in colliders)
-        {
-            player.enemyDetects.Add(enemy.gameObject);
-        }
-        if (player.enemyDetects.Count > 0)
-            player.stateMachine.ChangeState(player_Priest.priestIdleState);
     }
 }

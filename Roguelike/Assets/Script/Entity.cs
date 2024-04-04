@@ -1,22 +1,20 @@
 using Pathfinding;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 总体基类
 /// </summary>
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IDamageEffectable
 {
     [Header("Attack info")]
     public LayerMask whatIsEnemy;
 
     public float detectTimer;
     public CharacterStats stats;
-    public Seeker seeker {  get; private set; }
-    public Animator anim {  get; private set; }
-    public CapsuleCollider2D cd {  get; private set; }
-    public Rigidbody2D rb {  get; private set; }
+    public Seeker seeker { get; private set; }
+    public Animator anim { get; private set; }
+    public CapsuleCollider2D cd { get; private set; }
+    public Rigidbody2D rb { get; private set; }
     protected virtual void Awake()
     {
 
@@ -31,10 +29,15 @@ public class Entity : MonoBehaviour
     }
     protected virtual void Update()
     {
-        
+
     }
     public void SetVelocity(float x, float y)
     {
         rb.velocity = new Vector2(x, y);
+    }
+
+    public virtual void DamageEffect()
+    {
+        
     }
 }

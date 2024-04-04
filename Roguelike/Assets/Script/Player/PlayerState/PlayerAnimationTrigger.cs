@@ -1,25 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private PlayerBase player => GetComponentInParent<PlayerBase>();
-    private void AnimationTrigger()
-    {
-        player.AnimationTrigger();
-    }
     private void SaberAttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
-        foreach (var hit in colliders)
-        {
-            if (hit.GetComponent<EnemyBase>() != null)
-            {
-                player.stats.meleeDoDamage(player.closetEnemy.GetComponent<EnemyStats>());
-            }
-        }
+        if(player.closetEnemy != null)
+            player.closetEnemy.GetComponent<CharacterStats>().meleeTakeDamage(player.stats.damage.GetValue());
     }
     private void ArcherAttackTrigger()
     {
@@ -31,13 +17,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
     }
     private void PriestAttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue());
-        foreach (var hit in colliders)
-        {
-            if(hit.GetComponent<PlayerBase>() != null)
-            {
-                player.stats.treatDoDamage(hit.GetComponent<PlayerStats>());
-            }
-        }
+        if(player.treatTarget != null)
+            player.treatTarget.GetComponent<CharacterStats>().treatTakeDamage(player.stats.damage.GetValue());
     }
 }

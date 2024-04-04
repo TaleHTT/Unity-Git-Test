@@ -29,7 +29,7 @@ public class Enemy_Archer : EnemyBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth <= 0)
+        if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(archerDeadState);
     }
     public override void playerDetect()

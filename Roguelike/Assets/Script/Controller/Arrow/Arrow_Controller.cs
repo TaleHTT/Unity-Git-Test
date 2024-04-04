@@ -11,22 +11,27 @@ public class Arrow_Controller : MonoBehaviour
     public float damage;
     [Tooltip("经过timer秒后箭矢自动销毁")]
     public float timer;
+    private float coolDownTimer;
     public List<Transform> attackDetects;
     public float attackRadius { get; private set; } = Mathf.Infinity;
     public Transform attackTarget { get; private set; }
     public Vector3 arrowDir { get; private set; }
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         List<Transform> attackDetects = new List<Transform>();
-        arrowDir = (attackTarget.position - transform.position).normalized;
     }
+
     protected virtual void Update()
     {
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
-        timer -= Time.deltaTime;
-        if (timer < 0)
+        coolDownTimer -= Time.deltaTime;
+        if (coolDownTimer < 0)
+        {
+            coolDownTimer = timer;
             pool.Release(gameObject);
+        }
     }
+    public void AttackDir() => arrowDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
     {
         float distance = Mathf.Infinity;

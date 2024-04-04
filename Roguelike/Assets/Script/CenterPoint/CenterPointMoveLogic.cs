@@ -1,8 +1,6 @@
 using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CenterPointMoveLogic : MonoBehaviour
 {
     [Tooltip("中心点移动速度")]

@@ -390,7 +390,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558998421
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -571,6 +571,9 @@ MonoBehaviour:
   attackSpeed:
     baseValue: 0
     modfiers: []
+  treatRadius:
+    baseValue: 0
+    modfiers: []
 --- !u!114 &6040865542924541734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,6 +595,7 @@ MonoBehaviour:
   timer: 2
   isDead: 0
   drawTheBorderOrNot: 0
+  treatTarget: {fileID: 0}
   closetEnemy: {fileID: 0}
   enemyDetects: []
   arrowPerfab: {fileID: 5067555322004596321, guid: ae2c9ad2db3541c4e9c5b4e7b3e982de, type: 3}

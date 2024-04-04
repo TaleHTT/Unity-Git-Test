@@ -83,19 +83,6 @@ public class TeamWheel : MonoBehaviour
             charactersInTeam[i].transform.position = newPos;
         }
     }
-
-    //public void MoveDir()
-    //{
-    //    Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //    Vector2 arrowheadposition = new Vector2(centerPoint.transform.position.x, centerPoint.transform.position.y);
-    //    float angle = WhatAngle(mouseposition, arrowheadposition);
-    //    centerPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
-    //}
-    //public float WhatAngle(Vector2 a, Vector2 b)
-    //{
-    //    return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    //}
-
     /// <summary>
     /// 角色位置点初始化，6个点位置设置
     /// </summary>
@@ -105,7 +92,6 @@ public class TeamWheel : MonoBehaviour
         for (int i = 0; i < globalMaxCharacterNum; i++)
         {
             characterPlacePoints[i] = Instantiate(characterPlacePointPrefab, centerPoint.transform);
-            //characterPlacePoints[i].SetActive(false);
         }
         angleInDegrees = 360 / globalMaxCharacterNum;
         angleInRadians = angleInDegrees * Mathf.Deg2Rad;
@@ -118,7 +104,6 @@ public class TeamWheel : MonoBehaviour
             float z = centerPoint.transform.position.z;
             characterPlacePoints[i].transform.position = new Vector3(x, y, z);
             characterPlacePoints[i].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            //characterPlacePoints[i].SetActive(true);
         }
     }
 

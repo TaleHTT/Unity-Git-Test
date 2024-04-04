@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
+    public bool isRandom;
     int unlockTarget;
     int whichSlot = 0;
     [SerializeField] int gridSizeWidth;
@@ -29,7 +30,9 @@ public class ItemGrid : MonoBehaviour
                 isCanUseSlot.Add(canUseGrid[i, j]);
             }
         }
-        if(gridSizeWidth == 3 &&  gridSizeHeight == 3)
+        if (isRandom == false)
+            return;
+        if (gridSizeWidth == 3 && gridSizeHeight == 3)
         {
             int unlockSlot = Random.Range(1, 6);
             for (int i = 0; i < unlockSlot; i++)
@@ -42,11 +45,11 @@ public class ItemGrid : MonoBehaviour
                 isCanUseSlot[x] = true;
             }
         }
-        else if(gridSizeWidth >= 3 && gridSizeHeight >= 3)
+        else if (gridSizeWidth >= 3 && gridSizeHeight >= 3)
         {
-            for(int i = 0;i < gridSizeWidth; i++)
+            for (int i = 0; i < gridSizeWidth; i++)
             {
-                for(int j = 0;j < gridSizeHeight; j++)
+                for (int j = 0; j < gridSizeHeight; j++)
                 {
                     isCanUseSlot[whichSlot] = true;
                     whichSlot++;
@@ -59,6 +62,9 @@ public class ItemGrid : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         Init(gridSizeWidth, gridSizeHeight);
+    }
+    private void Update()
+    {
         for (int i = 0; i < gridSizeWidth; i++)
         {
             for (int j = 0; j < gridSizeHeight; j++)

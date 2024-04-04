@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 public enum Shape
 {
@@ -34,26 +33,24 @@ public class ItemData : ScriptableObject
     public int attackRadius;
     [Tooltip("¹¥»÷ËÙ¶È")]
     public int attackSpeed;
-    public void AddModfiers()
+    public void AddModfiers(PlayerStats stats)
     {
-        PlayerStats playerStats = FindObjectOfType(typeof(PlayerStats)) as PlayerStats;
-        playerStats.maxHp.AddModfiers(maxHp);
-        playerStats.damage.AddModfiers(damage);
-        playerStats.armor.AddModfiers(armor);
-        playerStats.woundedMultiplier.AddModfiers(woundedMultiplier);
-        playerStats.moveSpeed.AddModfiers(moveSpeed);
-        playerStats.attackRadius.AddModfiers(attackRadius);
-        playerStats.attackSpeed.AddModfiers(attackSpeed);
+        stats.maxHp.AddModfiers(maxHp);
+        stats.damage.AddModfiers(damage);
+        stats.armor.AddModfiers(armor);
+        stats.woundedMultiplier.AddModfiers(woundedMultiplier);
+        stats.moveSpeed.AddModfiers(moveSpeed);
+        stats.attackRadius.AddModfiers(attackRadius);
+        stats.attackSpeed.AddModfiers(attackSpeed);
     }
-    public void RemoveModfiers()
+    public void RemoveModfiers(PlayerStats stats)
     {
-        PlayerStats playerStats = FindObjectOfType(typeof(PlayerStats)) as PlayerStats;
-        playerStats.maxHp.RemoveModfiers(maxHp);
-        playerStats.damage.RemoveModfiers(damage);
-        playerStats.armor.RemoveModfiers(armor);
-        playerStats.woundedMultiplier.RemoveModfiers(woundedMultiplier);
-        playerStats.moveSpeed.RemoveModfiers(moveSpeed);
-        playerStats.attackRadius.RemoveModfiers(attackRadius);
-        playerStats.attackSpeed.RemoveModfiers(attackSpeed);
+        stats.maxHp.RemoveModfiers(maxHp);
+        stats.damage.RemoveModfiers(damage);
+        stats.armor.RemoveModfiers(armor);
+        stats.woundedMultiplier.RemoveModfiers(woundedMultiplier);
+        stats.moveSpeed.RemoveModfiers(moveSpeed);
+        stats.attackRadius.RemoveModfiers(attackRadius);
+        stats.attackSpeed.RemoveModfiers(attackSpeed);
     }
 }

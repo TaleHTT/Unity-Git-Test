@@ -2,7 +2,7 @@ using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState
+public class EnemyState : IDeadLogciable
 {
     private float pathGenerateInterval;//º‰∏Ù ±º‰
     private float pathGenerateTimer;
@@ -13,7 +13,6 @@ public class EnemyState
     public EnemyStateMachine stateMachine { get; private set; }
     public float distance;
     public float stateTimer;
-    public bool triggerCalled;
     string animBoolName;
 
     public EnemyState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName)
@@ -30,15 +29,10 @@ public class EnemyState
     public virtual void Enter()
     {
         enemy.anim.SetBool(animBoolName, true);
-        triggerCalled = false;
     }
     public virtual void Exit()
     {
         enemy.anim.SetBool(animBoolName, false);
-    }
-    public void AnimationFinishTrigger()
-    {
-        triggerCalled = true;
     }
     public void AutoPath()
     {
@@ -66,5 +60,15 @@ public class EnemyState
         {
             pathPointList = Path.vectorPath;
         });
+    }
+    public void DeadLogci()
+    {
+        enemy.cd.enabled = false;
+        enemy.stats.attackRadius.baseValue = 0;
+        enemy.chaseRadius = 0;
+        enemy.attackDetects.Clear();
+        enemy.playerDetects.Clear();
+        enemy.isDead = true;
+        EnemyManager.instance.enemyCount--;
     }
 }

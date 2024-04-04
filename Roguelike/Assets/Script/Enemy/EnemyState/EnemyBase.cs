@@ -1,4 +1,3 @@
-using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +27,7 @@ public class EnemyBase : Entity
     public List<GameObject> attackDetects;
     [Tooltip("Ñ²Âßµã")]
     public Transform[] patrolPoints;
-    public Transform target {  get; private set; }
+    public Transform target { get; private set; }
     public Transform cloestPlayer;
     public EnemyStateMachine stateMachine { get; private set; }
     protected override void Awake()
@@ -51,8 +50,9 @@ public class EnemyBase : Entity
         if (isDead)
         {
             StartCoroutine(DeadDestroy(timer));
+            return;
         }
-        if(playerDetects.Count == 1)
+        if (playerDetects.Count == 1)
         {
             target = playerDetects[0].transform;
         }
@@ -68,11 +68,10 @@ public class EnemyBase : Entity
         Gizmos.DrawWireSphere(transform.position, stats.attackRadius.GetValue());
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
     }
-    public void DamageEffect()
+    public override void DamageEffect()
     {
-        Debug.Log("I am damage");
+        base.DamageEffect();
     }
-    public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
     public virtual void playerDetect()
     {
         detectTimer -= Time.deltaTime;
