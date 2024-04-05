@@ -10,11 +10,11 @@ public class Trigger_PassPartCheck : MonoBehaviour
     {
         timer -= Time.deltaTime;
         if (timer < 0 || PlayerManager.instance.playerCount <= 0)
-            EventSystem.instance.Trigger_FailPassPart();
+            EntityEventSystem.instance.Trigger_FailPassPart();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-            EventSystem.instance.Trigger_SuccessPassPart();
+            EntityEventSystem.instance.Trigger_SuccessPassPart();
     }
 }

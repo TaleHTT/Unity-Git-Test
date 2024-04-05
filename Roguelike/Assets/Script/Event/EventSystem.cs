@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-public class EventSystem : MonoBehaviour
+public class EntityEventSystem : MonoBehaviour
 {
-    public static EventSystem instance;
+    public static EntityEventSystem instance;
     public event Action OnTarget_SuccessPassPart;
     public event Action OnTarget_FailPassPart;
     public event Action OnTimer_SuccessPassPart;
