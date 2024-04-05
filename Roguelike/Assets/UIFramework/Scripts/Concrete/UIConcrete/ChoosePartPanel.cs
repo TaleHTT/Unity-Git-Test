@@ -19,4 +19,19 @@ public class ChoosePartPanel : BasePanel
             GameRoot.Instance.SceneSystem.SetScene(new Part_1());
         });
     }
+
+    public override void OnExit() 
+    {
+        base.OnExit();
+    }
+
+    public override void OnPause() 
+    {
+        base.OnPause();
+    }
+
+    public override void OnResume() 
+    {
+        base.OnResume();
+    }
 }

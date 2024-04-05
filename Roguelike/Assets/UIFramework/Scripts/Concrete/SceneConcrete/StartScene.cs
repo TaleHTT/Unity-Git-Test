@@ -14,6 +14,9 @@ public class StartScene : SceneState
     readonly string sceneName = "StartScene";
     PanelManager panelManager;
 
+    /// <summary>
+    /// 进入场景执行方法，具体内容在SceneLoaded中实现
+    /// </summary>
     public override void OnEnter()
     {
         panelManager = new PanelManager();

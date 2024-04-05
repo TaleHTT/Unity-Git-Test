@@ -23,4 +23,18 @@ public class StorePanel : BasePanel
             GameRoot.Instance.SceneSystem.SetScene(new StartScene());
         });
     }
-}
+
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+
+    public override void OnPause()
+    {
+        base.OnPause();
+    }
+
+    public override void OnResume()
+    {
+
+    }
