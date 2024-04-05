@@ -1,14 +1,19 @@
+using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TeamWheel : MonoBehaviour
 {
+    public bool edit;
     public bool drawTheBorder;
-    public List<GameObject> charactersInTeamPrefabs;
+    public GameObject[] charactersInTeamPrefabs;
     /// <summary>
     /// 存储charactersInTeamPrefabs生成的对应的游戏物体
     /// </summary>
-    private List<GameObject> charactersInTeam;
+    private GameObject[] charactersInTeam;
 
     public GameObject centerPointPrefab;
     private GameObject centerPoint;
@@ -69,17 +74,31 @@ public class TeamWheel : MonoBehaviour
     public void CharactersMoveToCharactersPoint()
     {
         float step = speed * Time.deltaTime;
-        for (int i = 0; i < charactersInTeam.Count; i++)
+        for (int i = 0; i < globalMaxCharacterNum; i++)
         {
             if (charactersInTeam[i] == null)
             {
-                charactersInTeam.RemoveAt(i);
+                continue;
+                //charactersInTeam.RemoveAt(i);
             }
             Vector3 newPos = Vector3.Lerp(charactersInTeam[i].transform.position,
                 characterPlacePoints[i].transform.position, step);
             charactersInTeam[i].transform.position = newPos;
         }
     }
+
+    //public void MoveDir()
+    //{
+    //    Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    Vector2 arrowheadposition = new Vector2(centerPoint.transform.position.x, centerPoint.transform.position.y);
+    //    float angle = WhatAngle(mouseposition, arrowheadposition);
+    //    centerPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
+    //}
+    //public float WhatAngle(Vector2 a, Vector2 b)
+    //{
+    //    return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    //}
+
     /// <summary>
     /// 角色位置点初始化，6个点位置设置
     /// </summary>
@@ -89,6 +108,7 @@ public class TeamWheel : MonoBehaviour
         for (int i = 0; i < globalMaxCharacterNum; i++)
         {
             characterPlacePoints[i] = Instantiate(characterPlacePointPrefab, centerPoint.transform);
+            //characterPlacePoints[i].SetActive(false);
         }
         angleInDegrees = 360 / globalMaxCharacterNum;
         angleInRadians = angleInDegrees * Mathf.Deg2Rad;
@@ -101,6 +121,7 @@ public class TeamWheel : MonoBehaviour
             float z = centerPoint.transform.position.z;
             characterPlacePoints[i].transform.position = new Vector3(x, y, z);
             characterPlacePoints[i].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            //characterPlacePoints[i].SetActive(true);
         }
     }
 
@@ -117,12 +138,26 @@ public class TeamWheel : MonoBehaviour
     /// </summary>
     public void CharactersInTeamInit()
     {
-        charactersInTeam = new List<GameObject>();
-        for (int i = 0; i < charactersInTeamPrefabs.Count; i++)
+        charactersInTeam = new GameObject[globalMaxCharacterNum];
+        if (edit)
         {
-            charactersInTeam.Add(Instantiate(charactersInTeamPrefabs[i], characterPlacePoints[i].transform.position,
-                Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform));
+            for (int i = 0; i < globalMaxCharacterNum; i++)
+            {
+                if (charactersInTeamPrefabs[i] == null) continue;
+                charactersInTeam[i] = Instantiate(charactersInTeamPrefabs[i], characterPlacePoints[i].transform.position,
+                    Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
+            }
         }
+        else
+        {
+            for (int i = 0; i < globalMaxCharacterNum; i++)
+            {
+                if (PlayerTeamManager.Instance.playerPrefabInTeam[i] == null) continue;
+                charactersInTeam[i] = Instantiate(PlayerTeamManager.Instance.playerPrefabInTeam[i], characterPlacePoints[i].transform.position,
+                    Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
+            }
+        }
+
     }
 
     private void OnDrawGizmos()

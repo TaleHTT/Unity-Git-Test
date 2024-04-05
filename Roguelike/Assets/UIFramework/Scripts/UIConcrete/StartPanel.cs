@@ -16,7 +16,7 @@ public class StartPanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("StartButton").onClick.AddListener(() =>
         {
-            GameRoot.Instance.SceneSystem.SetScene(new ChoosePart());
+            GameRoot.Instance.SceneSystem.SetScene(new StoreScene());
         });
     }
 }
