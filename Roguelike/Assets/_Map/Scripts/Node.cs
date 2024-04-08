@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum E_LevelType
+{
+    None = 0,
+    Part_1 = 1,
+    Part_2 = 2,
+    Num = 3, //枚举的数量，类似Count+1的存在
+    Shop = 4,
+}
+
 public enum E_NodeType
 {
     Battle = 0, // 战斗
@@ -23,6 +32,7 @@ public class Node : MonoBehaviour
     public E_NodeType type = E_NodeType.Battle;
     public Image uiImage;
     public Sprite icon;
+    public GameObject nodeUI = null;
     public List<Node> upperNodes;
     public List<Node> lowerNodes;
     public List<GameObject> lineUIs;
@@ -31,6 +41,10 @@ public class Node : MonoBehaviour
     /// </summary>
     public bool IsSeleced = false;
     public bool IsActive = false;
+    /// <summary>
+    /// 该节点点击后前往的场景
+    /// </summary>
+    public E_LevelType level;
 
     public Node(Vector2 position, E_NodeType type = E_NodeType.Battle)
     {

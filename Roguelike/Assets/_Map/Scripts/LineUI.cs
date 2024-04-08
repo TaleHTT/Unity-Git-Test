@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UILine : MonoBehaviour
+public class LineUI : MonoBehaviour
 {
     public Image imagePrefab;
     List<Vector3> positions;

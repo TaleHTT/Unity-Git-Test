@@ -12,7 +12,7 @@ public class GameRoot : MonoBehaviour
     /// ≥°æ∞π‹¿Ì∆˜
     /// </summary>
     public SceneSystem SceneSystem { get; private set; }
-
+    public GameObject mapGenerator;
 
     private void Awake()
     {
@@ -25,13 +25,26 @@ public class GameRoot : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         SceneSystem = new SceneSystem();
         DontDestroyOnLoad(this.gameObject);
+        StartCoroutine(InitMap());
     }
 
     private void Start()
     {
         SceneSystem.SetScene(new StartScene());
+    }
+
+    IEnumerator InitMap()
+    {
+        mapGenerator = GameObject.Find("mapGenerator");
+        mapGenerator.GetComponent<Canvas>().sortingOrder = -2;
+        yield return new WaitUntil(() => MapGenerator.Instance.currentMap != null);
+        MapGenerator.Instance.currentMap.GetComponent<Canvas>().sortingOrder = -1;
+        //yield return new WaitForSeconds(2f);
+        mapGenerator.gameObject.SetActive(false);
+        mapGenerator.GetComponent<Canvas>().sortingOrder = 1;
+        MapGenerator.Instance.currentMap.GetComponent<Canvas>().sortingOrder = 2;
+        yield return null;
     }
 }

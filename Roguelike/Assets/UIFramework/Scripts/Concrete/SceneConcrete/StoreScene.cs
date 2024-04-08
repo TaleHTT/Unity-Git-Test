@@ -8,14 +8,17 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class StoreScene : SceneState
 {
+    public static StoreScene Instance { get; private set; }
+
     /// <summary>
     /// 场景名称
     /// </summary>
     readonly string sceneName = "StoreScene";
-    PanelManager panelManager;
+    public PanelManager panelManager;
 
     public override void OnEnter()
     {
+        Instance = this;
         panelManager = new PanelManager();
 
         if (SceneManager.GetActiveScene().name != sceneName)
@@ -44,6 +47,7 @@ public class StoreScene : SceneState
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
         panelManager.Push(new StorePanel());
+        GameRoot.Instance.mapGenerator.SetActive(true);
         Debug.Log($"{sceneName}场景加载完毕！");
     }
 }
