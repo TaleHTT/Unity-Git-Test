@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -39,9 +41,10 @@ public class GameRoot : MonoBehaviour
     {
         mapGenerator = GameObject.Find("mapGenerator");
         mapGenerator.GetComponent<Canvas>().sortingOrder = -2;
+        yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => MapGenerator.Instance.currentMap != null);
         MapGenerator.Instance.currentMap.GetComponent<Canvas>().sortingOrder = -1;
-        //yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(1f);
         mapGenerator.gameObject.SetActive(false);
         mapGenerator.GetComponent<Canvas>().sortingOrder = 1;
         MapGenerator.Instance.currentMap.GetComponent<Canvas>().sortingOrder = 2;

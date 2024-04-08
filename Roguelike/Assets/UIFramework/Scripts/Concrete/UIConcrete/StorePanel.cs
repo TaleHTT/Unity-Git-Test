@@ -16,8 +16,8 @@ public class StorePanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("ContinueButton").onClick.AddListener(() =>
         {
-            //GameRoot.Instance.mapGenerator.SetActive(true);
-            GameRoot.Instance.SceneSystem.SetScene(new Part_1());
+            GameRoot.Instance.mapGenerator.SetActive(true);
+            //GameRoot.Instance.SceneSystem.SetScene(new Part_1());
         });
         /*UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {

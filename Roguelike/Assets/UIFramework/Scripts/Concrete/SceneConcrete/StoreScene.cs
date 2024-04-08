@@ -47,7 +47,7 @@ public class StoreScene : SceneState
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
         panelManager.Push(new StorePanel());
-        GameRoot.Instance.mapGenerator.SetActive(true);
+        //GameRoot.Instance.mapGenerator.SetActive(true);
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }
