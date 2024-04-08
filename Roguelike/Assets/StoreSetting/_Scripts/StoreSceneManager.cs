@@ -71,7 +71,7 @@ public class StoreSceneManager : MonoBehaviour
     {
         for (int i = 0; i < PlayerTeamSlotDetect.Instance.globalMaxPlayerNum; i++)
         {
-            Debug.Log($"{PlayerTeamSlotDetect.Instance.playerTeamSlots[i].name} : {PlayerTeamManager.Instance.playerPrefabInTeam[i]}");
+            //Debug.Log($"{PlayerTeamSlotDetect.Instance.playerTeamSlots[i].name} : {PlayerTeamManager.Instance.playerPrefabInTeam[i]}");
         }
     }
 

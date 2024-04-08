@@ -1,4 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
@@ -10,4 +13,11 @@ public class PlayerManager : MonoBehaviour
         else
             instance = this;
     }
+
+    private void Update()
+    {
+        playerCount = TeamWheel.Instance.numOfCharacterInTeam;
+    }
+
+
 }

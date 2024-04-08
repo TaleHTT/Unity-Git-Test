@@ -8,8 +8,9 @@ public enum E_LevelType
     None = 0,
     Part_1 = 1,
     Part_2 = 2,
-    Num = 3, //枚举的数量，类似Count+1的存在
-    Shop = 4,
+    Part_3 = 3,
+    Num = 4, //枚举的数量，类似Count+1的存在
+    Shop = 5,
 }
 
 public enum E_NodeType

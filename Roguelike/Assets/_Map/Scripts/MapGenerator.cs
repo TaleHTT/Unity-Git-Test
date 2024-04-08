@@ -210,7 +210,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (type == E_NodeType.Battle && node.nodeUI != null)
         {
-            int temp = UnityEngine.Random.Range((int)E_LevelType.Part_1, (int)E_LevelType.Part_2 + 1);
+            int temp = UnityEngine.Random.Range((int)E_LevelType.Part_1, (int)E_LevelType.Part_3 + 1);
             node.level = (E_LevelType)temp;
             node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => LoadSceneByLevelType(node.level));
         }
@@ -220,6 +220,10 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 具体的分配方法
+    /// </summary>
+    /// <param name="level"></param>
     private void LoadSceneByLevelType(E_LevelType level)
     {
         switch (level)
@@ -229,6 +233,9 @@ public class MapGenerator : MonoBehaviour
                 break;
             case E_LevelType.Part_2:
                 GameRoot.Instance.SceneSystem.SetScene(new Part_2());
+                break;
+            case E_LevelType.Part_3:
+                GameRoot.Instance.SceneSystem.SetScene(new Part_3());
                 break;
         }
         this.gameObject.SetActive(false);
