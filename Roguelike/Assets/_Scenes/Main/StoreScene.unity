@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefabInTeam: []
   globalMaxPlayerNum: 6
+  currentPlayerNum: 0
 --- !u!4 &1312641210
 Transform:
   m_ObjectHideFlags: 0

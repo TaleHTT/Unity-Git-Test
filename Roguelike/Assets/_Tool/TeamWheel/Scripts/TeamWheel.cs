@@ -79,11 +79,11 @@ public class TeamWheel : MonoBehaviour
     private IEnumerator IE_NumOfCharacterInTeamsCal()
     {
         yield return new WaitForSeconds(0.5f);
-        numOfCharacterInTeam = 0;
+        /*numOfCharacterInTeam = 0;
         for (int i = 0; i < globalMaxCharacterNum; i++)
         {
-            if (charactersInTeam[i] == null) numOfCharacterInTeam++;
-        }
+            if (charactersInTeam[i].gameObject != null) numOfCharacterInTeam++;
+        }*/
     }
 
     [Tooltip("队伍中物体靠近对应位置点的速度")]

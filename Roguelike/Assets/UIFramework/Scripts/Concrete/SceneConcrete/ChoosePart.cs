@@ -12,11 +12,9 @@ public class ChoosePart : SceneState
     /// 场景名称
     /// </summary>
     readonly string sceneName = "ChoosePart";
-    PanelManager panelManager;
 
     public override void OnEnter()
     {
-        panelManager = new PanelManager();
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
@@ -25,7 +23,7 @@ public class ChoosePart : SceneState
         }
         else
         {
-            panelManager.Push(new ChoosePartPanel());
+            GameRoot.Instance.panelManager.Push(new ChoosePartPanel());
         }
 
     }
@@ -33,7 +31,7 @@ public class ChoosePart : SceneState
     public override void OnExit()
     {
         SceneManager.sceneLoaded -= SceneLoaded;
-        panelManager.PopAll();
+        GameRoot.Instance.panelManager.PopAll();
     }
 
     /// <summary>
@@ -43,7 +41,7 @@ public class ChoosePart : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        panelManager.Push(new ChoosePartPanel());
+        GameRoot.Instance.panelManager.Push(new ChoosePartPanel());
         Debug.Log($"{sceneName}场景加载完毕！");
     }
 }

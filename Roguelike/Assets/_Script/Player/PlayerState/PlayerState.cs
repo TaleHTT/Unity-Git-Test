@@ -37,6 +37,6 @@ public class PlayerState : IDeadLogciable
         player.enemyDetects.Clear();
         player.anim.SetBool("Attack", false);
         player.isDead = true;
-        //PlayerManager.instance.playerCount--;
+        PlayerTeamManager.Instance.currentPlayerNum--;
     }
 }

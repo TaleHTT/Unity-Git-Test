@@ -12,15 +12,15 @@ public class StartScene : SceneState
     /// 场景名称
     /// </summary>
     readonly string sceneName = "StartScene";
-    PanelManager panelManager;
+
 
     /// <summary>
     /// 进入场景执行方法，具体内容在SceneLoaded中实现
     /// </summary>
     public override void OnEnter()
     {
-        panelManager = new PanelManager();
 
+        Time.timeScale = 1.0f;
         if(SceneManager.GetActiveScene().name != sceneName)
         {
             SceneManager.LoadScene(sceneName);
@@ -28,7 +28,7 @@ public class StartScene : SceneState
         }
         else
         {
-            panelManager.Push(new StartPanel());
+            GameRoot.Instance.panelManager.Push(new StartPanel());
         }
         
     }
@@ -36,7 +36,7 @@ public class StartScene : SceneState
     public override void OnExit()
     {
         SceneManager.sceneLoaded -= SceneLoaded;
-        panelManager.PopAll();
+        GameRoot.Instance.panelManager.PopAll();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class StartScene : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        panelManager.Push(new StartPanel());
+        GameRoot.Instance.panelManager.Push(new StartPanel());
         Debug.Log($"{sceneName}场景加载完毕！");
     }
 }

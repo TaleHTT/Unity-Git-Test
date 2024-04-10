@@ -9,7 +9,7 @@ public class Trigger_PassPartCheck : MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        if (timer < 0 || PlayerManager.instance.playerCount <= 0)
+        if (timer < 0 || PlayerTeamManager.Instance.currentPlayerNum <= 0)
             EntityEventSystem.instance.Trigger_FailPassPart();
     }
     private void OnTriggerEnter2D(Collider2D collision)

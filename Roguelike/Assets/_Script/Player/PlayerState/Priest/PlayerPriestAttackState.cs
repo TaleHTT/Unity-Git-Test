@@ -26,7 +26,7 @@ public class PlayerPriestAttackState : PlayerState
             if (player_Priest.playerDetects[i].GetComponent<CharacterStats>().currentHealth == player_Priest.playerDetects[i].GetComponent<CharacterStats>().maxHp.GetValue())
                 howPlayerMaxHp++;
         }
-        if (howPlayerMaxHp == PlayerManager.instance.playerCount)
-            stateMachine.ChangeState(player_Priest.priestIdleState);
+        /*if (howPlayerMaxHp == PlayerManager.instance.playerCount)
+            stateMachine.ChangeState(player_Priest.priestIdleState);*/
     }
 }

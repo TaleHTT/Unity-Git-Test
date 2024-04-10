@@ -229,13 +229,13 @@ public class MapGenerator : MonoBehaviour
         switch (level)
         {
             case E_LevelType.Part_1:
-                GameRoot.Instance.SceneSystem.SetScene(new Part_1());
+                GameRoot.Instance.sceneSystem.SetScene(new Part_1());
                 break;
             case E_LevelType.Part_2:
-                GameRoot.Instance.SceneSystem.SetScene(new Part_2());
+                GameRoot.Instance.sceneSystem.SetScene(new Part_2());
                 break;
             case E_LevelType.Part_3:
-                GameRoot.Instance.SceneSystem.SetScene(new Part_3());
+                GameRoot.Instance.sceneSystem.SetScene(new Part_3());
                 break;
         }
         this.gameObject.SetActive(false);

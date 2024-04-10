@@ -549,12 +549,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  experience: 0
   currentHealth: 0
   maxHp:
     baseValue: 40
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 100
     modfiers: []
   armor:
     baseValue: 0

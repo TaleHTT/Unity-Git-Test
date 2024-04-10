@@ -13,7 +13,8 @@ public class GameRoot : MonoBehaviour
     /// <summary>
     /// ≥°æ∞π‹¿Ì∆˜
     /// </summary>
-    public SceneSystem SceneSystem { get; private set; }
+    public SceneSystem sceneSystem { get; private set; }
+    public PanelManager panelManager { get; private set; }
     public GameObject mapGenerator;
 
     private void Awake()
@@ -27,14 +28,15 @@ public class GameRoot : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        SceneSystem = new SceneSystem();
+        sceneSystem = new SceneSystem();
+        panelManager = new PanelManager();
         DontDestroyOnLoad(this.gameObject);
         StartCoroutine(InitMap());
     }
 
     private void Start()
     {
-        SceneSystem.SetScene(new StartScene());
+        sceneSystem.SetScene(new StartScene());
     }
 
     IEnumerator InitMap()

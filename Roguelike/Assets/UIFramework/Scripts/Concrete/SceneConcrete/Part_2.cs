@@ -12,11 +12,9 @@ public class Part_2 : SceneState
     /// ³¡¾°Ãû³Æ
     /// </summary>
     readonly string sceneName = "Part_2";
-    PanelManager panelManager;
 
     public override void OnEnter()
     {
-        panelManager = new PanelManager();
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
@@ -33,7 +31,7 @@ public class Part_2 : SceneState
     public override void OnExit()
     {
         SceneManager.sceneLoaded -= SceneLoaded;
-        panelManager.PopAll();
+        GameRoot.Instance.panelManager.PopAll();
     }
 
     /// <summary>
