@@ -33,18 +33,13 @@ public class CharacterStats : MonoBehaviour, ITakeDamageable
             currentHealth = maxHp.GetValue();
     }
 
-    public virtual void remoteTakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         currentHealth -= ((damage + level - armor.GetValue()) * woundedMultiplier.GetValue());
     }
 
-    public virtual void treatTakeDamage(float damage)
+    public virtual void TakeTreat(float damage)
     {
         currentHealth += damage + level;
-    }
-
-    public virtual void meleeTakeDamage(float damage)
-    {
-        currentHealth -= (damage + level - armor.GetValue()) * woundedMultiplier.GetValue();
     }
 }

@@ -4,8 +4,8 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private PlayerBase player => GetComponentInParent<PlayerBase>();
     private void SaberAttackTrigger()
     {
-        if(player.closetEnemy != null)
-            player.closetEnemy.GetComponent<CharacterStats>().meleeTakeDamage(player.stats.damage.GetValue());
+        if (player.closetEnemy != null)
+            player.closetEnemy.GetComponent<EnemyStats>().TakeDamage(player.stats.damage.GetValue());
     }
     private void ArcherAttackTrigger()
     {
@@ -14,10 +14,5 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void CasterAttackTrigger()
     {
         player.AnimationCasterAttack();
-    }
-    private void PriestAttackTrigger()
-    {
-        if(player.treatTarget != null)
-            player.treatTarget.GetComponent<CharacterStats>().treatTakeDamage(player.stats.damage.GetValue());
     }
 }

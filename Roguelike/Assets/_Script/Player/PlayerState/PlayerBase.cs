@@ -17,9 +17,9 @@ public class PlayerBase : Entity
     public bool isDead;
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     public bool drawTheBorderOrNot;
-    public Transform treatTarget;
     public Transform closetEnemy;
     public List<GameObject> enemyDetects;
+    public bool canBreakAwayFromTheTeam = false;
     public PlayerStateMachine stateMachine { get; private set; }
     protected override void Awake()
     {

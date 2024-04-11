@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManger : MonoBehaviour
-{ 
+{
     public static SkillManger instance;
-    private Archer_Skill_Controller archer_Skill;
+    public Archer_Skill archer_Skill {  get; set; }
+    public Saber_Skill saber_Skill { get; set; }
     private void Awake()
     {
         if (instance != null)
@@ -16,6 +14,7 @@ public class SkillManger : MonoBehaviour
     }
     protected virtual void Start()
     {
-        archer_Skill = GetComponent<Archer_Skill_Controller>();
+        archer_Skill = GetComponent<Archer_Skill>();
+        saber_Skill = GetComponent <Saber_Skill>();
     }
 }

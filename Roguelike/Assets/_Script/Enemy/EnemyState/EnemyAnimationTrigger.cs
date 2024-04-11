@@ -8,9 +8,13 @@ public class EnemyAnimationTrigger : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.transform.position, enemy.stats.attackRadius.GetValue());
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<PlayerBase>() != null)
+            if (hit.GetComponent<PlayerStats>() != null)
             {
-                hit.GetComponent<PlayerBase>().stats.meleeTakeDamage(enemy.stats.damage.GetValue());
+                if(hit.GetComponent<Sbaer_Skill_Controller>() != null)
+                {
+                    hit.GetComponent<Sbaer_Skill_Controller>().numOfHit++;
+                }
+                hit.GetComponent<PlayerStats>().TakeDamage(enemy.stats.damage.GetValue());
             }
         }
     }

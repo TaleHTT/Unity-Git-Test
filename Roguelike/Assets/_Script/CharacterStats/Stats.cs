@@ -9,11 +9,17 @@ public class Stats
     public List<float> modfiers;
     public float GetValue()
     {
-        float finalvalue = baseValue;
+        float finalValue = baseValue;
         foreach (float modfier in modfiers)
-            finalvalue += modfier;
+            finalValue += modfier;
 
-        return finalvalue;
+        return finalValue;
+    }
+    public float AddArmor(float percentage)
+    {
+        float finaArmor = GetValue();
+        finaArmor = (1 + percentage) * finaArmor;
+        return finaArmor;
     }
     public void AddModfiers(float modfier)
     {

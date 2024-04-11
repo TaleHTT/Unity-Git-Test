@@ -1,9 +1,12 @@
-public class PlayerState : IDeadLogciable
+using UnityEngine;
+
+public class PlayerState
 {
     public PlayerBase player { get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }
+    public float stateTimer {  get; set; }
     public float defaultAttackSpeed { get; private set; }
-    public bool triggerCalled;
+    public bool triggerCalled { get; set; }
     private string animBoolName;
     public PlayerState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName)
     {
@@ -13,6 +16,7 @@ public class PlayerState : IDeadLogciable
     }
     public virtual void Update()
     {
+        stateTimer -= Time.deltaTime;
         player.EnemyDetect();
     }
     public virtual void Enter()

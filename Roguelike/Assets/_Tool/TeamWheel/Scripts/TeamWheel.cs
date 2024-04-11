@@ -76,7 +76,7 @@ public class TeamWheel : MonoBehaviour
         float step = speed * Time.deltaTime;
         for (int i = 0; i < globalMaxCharacterNum; i++)
         {
-            if (charactersInTeam[i] == null)
+            if (charactersInTeam[i] == null || charactersInTeam[i].GetComponent<PlayerBase>().canBreakAwayFromTheTeam)
             {
                 continue;
                 //charactersInTeam.RemoveAt(i);

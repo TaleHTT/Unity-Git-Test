@@ -25,18 +25,5 @@ public class Player_Priest : PlayerBase
         base.Update();
         if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(priestDeadState);
-        PriestTreatLogci();
-    }
-    public void PriestTreatLogci()
-    {
-        float leasthp = Mathf.Infinity;
-        for(int i = 0; i < playerDetects.Count; i++)
-        {
-            if (leasthp > playerDetects[i].GetComponent<CharacterStats>().currentHealth)
-            {
-                leasthp = playerDetects[i].GetComponent<CharacterStats>().currentHealth;
-                treatTarget = playerDetects[i].transform;
-            }
-        }
     }
 }

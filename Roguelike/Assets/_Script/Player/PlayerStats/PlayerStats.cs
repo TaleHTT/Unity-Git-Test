@@ -6,9 +6,9 @@ public class PlayerStats : CharacterStats
         base.Start();
         player = GetComponent<PlayerBase>();
     }
-    public override void meleeTakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
-        base.meleeTakeDamage(damage);
+        base.TakeDamage(damage);
         player.DamageEffect();
     }
 }

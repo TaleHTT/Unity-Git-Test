@@ -2,7 +2,7 @@ using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState : IDeadLogciable
+public class EnemyState
 {
     private float pathGenerateInterval;//º‰∏Ù ±º‰
     private float pathGenerateTimer;

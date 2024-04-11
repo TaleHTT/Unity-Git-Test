@@ -34,7 +34,7 @@ public class PlayerSaberIdleState : PlayerState
         {
             player.enemyDetects.Add(enemy.gameObject);
         }
-        if (player.enemyDetects.Count > 0)
+        if (player.enemyDetects.Count > 0 && (player_Saber.isDefense == false))
             player.stateMachine.ChangeState(player_Saber.saberAttackState);
     }
 }
