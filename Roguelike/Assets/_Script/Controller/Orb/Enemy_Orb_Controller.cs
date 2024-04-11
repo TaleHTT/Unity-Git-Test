@@ -26,7 +26,7 @@ public class Enemy_Orb_Controller : Orb_Controller
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {
-            if (target.GetComponent<PlayerBase>() != null)
+            if(target.GetComponent<PlayerBase>() != null)
             {
                 attackDetects.Add(target.transform);
                 AttackLogic();

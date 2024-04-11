@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player_Saber : PlayerBase
 {
     public bool isDefense {  get; set; }
+    public Saber_Skill_Controller saber_Skill_Controller { get; set; }
     public PlayerSaberIdleState saberIdleState { get; private set; }
     public PlayerSaberDeadState saberDeadState { get; private set; }
     public PlayerSaberAttackState saberAttackState { get; private set; }
@@ -10,6 +11,7 @@ public class Player_Saber : PlayerBase
     protected override void Awake()
     {
         base.Awake();
+        saber_Skill_Controller = GetComponent<Saber_Skill_Controller>();
         saberIdleState = new PlayerSaberIdleState(this, stateMachine, "Idle", this);
         saberDeadState = new PlayerSaberDeadState(this, stateMachine, "Dead", this);
         saberAttackState = new PlayerSaberAttackState(this, stateMachine, "Attack", this);
@@ -27,5 +29,7 @@ public class Player_Saber : PlayerBase
             stateMachine.ChangeState(saberDeadState);
         if (isDefense == false && Input.GetKeyDown(KeyCode.Q))
             stateMachine.ChangeState(saberDefenseState);
+        if (isHit == true)
+            saber_Skill_Controller.numOfHit++;
     }
 }

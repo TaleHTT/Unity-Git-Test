@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerCasterIdleState : PlayerState
 {
     private Player_Caster player_Caster;
@@ -22,19 +19,7 @@ public class PlayerCasterIdleState : PlayerState
     public override void Update()
     {
         base.Update();
-        player.detectTimer -= Time.deltaTime;
-        if (player.detectTimer > 0)
-        {
-            player.detectTimer = 1;
-            return;
-        }
-        player.enemyDetects = new List<GameObject>();
-        var colliders = Physics2D.OverlapCircleAll(player.transform.position, player.stats.attackRadius.GetValue(), player.whatIsEnemy);
-        foreach (var enemy in colliders)
-        {
-            player.enemyDetects.Add(enemy.gameObject);
-        }
-        if (player.enemyDetects.Count > 0)
-            player.stateMachine.ChangeState(player_Caster.casterAttackState);
+        if (player_Caster.enemyDetects.Count > 0)
+            stateMachine.ChangeState(player_Caster.casterAttackState);
     }
 }

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerArcherAttackState : PlayerState
 {
     private Player_Archer player_Archer;
@@ -24,10 +20,7 @@ public class PlayerArcherAttackState : PlayerState
     {
         base.Update();
         player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
-
         if (player.enemyDetects.Count <= 0)
-        {
             stateMachine.ChangeState(player_Archer.archerIdleState);
-        }
     }
 }

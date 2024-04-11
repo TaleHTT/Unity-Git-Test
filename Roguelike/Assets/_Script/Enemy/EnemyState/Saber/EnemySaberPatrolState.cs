@@ -3,8 +3,10 @@ using UnityEngine;
 public class EnemySaberPatrolState : EnemySaberGroundState
 {
     private Vector3 target;
+    private Enemy_Saber enemy_Saber;
     public EnemySaberPatrolState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animboolName, enemy_Saber)
     {
+        this.enemy_Saber = enemy_Saber;
     }
 
     public override void Enter()

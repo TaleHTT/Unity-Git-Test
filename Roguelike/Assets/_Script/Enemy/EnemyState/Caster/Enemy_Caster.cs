@@ -32,14 +32,6 @@ public class Enemy_Caster : EnemyBase
         if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(casterDeadState);
     }
-    public override void playerDetect()
-    {
-        base.playerDetect();
-        if (playerDetects.Count > 0)
-        {
-            stateMachine.ChangeState(casterChaseState);
-        }
-    }
     public override void AnimationCasterAttack()
     {
         base.AnimationCasterAttack();

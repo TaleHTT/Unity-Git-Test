@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    public Transform[] target;
-    public float damage;
-    private float coolDownTimer;
+    public float coolDownTimer {  get; set; }
     public float persistentTimer;
     public float coolDown;
     protected virtual void Update()

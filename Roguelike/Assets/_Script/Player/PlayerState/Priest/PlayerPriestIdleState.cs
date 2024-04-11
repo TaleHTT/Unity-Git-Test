@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerPriestIdleState : PlayerState
 {
     Player_Priest player_Priest;
@@ -23,10 +19,7 @@ public class PlayerPriestIdleState : PlayerState
     public override void Update()
     {
         base.Update();
-        for(int i = 0; i < player_Priest.playerDetects.Count; i++)
-        {
-            if (player_Priest.playerDetects[i].GetComponent<CharacterStats>().currentHealth < player_Priest.playerDetects[i].GetComponent<CharacterStats>().maxHp.GetValue())
-                stateMachine.ChangeState(player_Priest.priestAttackState);
-        }
+        if (player_Priest.enemyDetects.Count > 0)
+            stateMachine.ChangeState(player_Priest.priestAttackState);
     }
 }

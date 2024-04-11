@@ -21,7 +21,7 @@ public class EnemySaberChaseState : EnemySaberGroundState
     public override void Update()
     {
         base.Update();
-        if (enemy.playerDetects.Count <= 0)
+        if (enemy_Saber.playerDetects.Count <= 0)
             stateMachine.ChangeState(enemy_Saber.saberIdleState);
         AutoPath();
         if (pathPointList == null)

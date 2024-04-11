@@ -8,19 +8,33 @@ public enum PlayerOccupation
     Caster,
     Priest
 }
-public class PlayerBase : Entity
+public class PlayerBase : Base
 {
     public PlayerOccupation occupation;
+
+    [Header("Attack info")]
+    public LayerMask whatIsEnemy;
+
+    [Tooltip("¹¥»÷·¶Î§")]
+    [SerializeField] public float attackRadius {  get; set; }
+
     [Tooltip("ËÀÍöºó£¬¾­¹ýtimerÃëºóÏú»Ù")]
-    public float timer;
+    [SerializeField] public float timer {  get; set; }
+
     [Tooltip("ÊÇ·ñËÀÍö")]
-    public bool isDead;
+    [SerializeField] public bool isDead {  get; set; }
+
+    [Tooltip("ÊÇ·ñÊÜ»÷")]
+    [SerializeField] public bool isHit {  get; set; }
+
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
-    public bool drawTheBorderOrNot;
-    public Transform closetEnemy;
-    public List<GameObject> enemyDetects;
-    public bool canBreakAwayFromTheTeam = false;
-    public PlayerStateMachine stateMachine { get; private set; }
+    [SerializeField] public bool drawTheBorderOrNot {  get; set; }
+
+    public Transform closetEnemy {  get; set; }
+    public List<GameObject> enemyDetects { get; set; }
+
+    [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
+    public PlayerStateMachine stateMachine { get; set; }
     protected override void Awake()
     {
         base.Awake();
@@ -35,28 +49,23 @@ public class PlayerBase : Entity
     protected override void Update()
     {
         base.Update();
-        AttackLogic();
-        if (isDead)
-            StartCoroutine(DeadDestroy(timer));
-
+        isHit = false;
         stateMachine.currentState.Update();
+        if (isDead)
+        {
+            StartCoroutine(DeadDestroy(timer));
+            return;
+        }
+        EnemyDetect();
+        CloestTargetDetect();
     }
     public void OnDrawGizmos()
     {
         if (!drawTheBorderOrNot)
             return;
-        Gizmos.DrawWireSphere(transform.position, stats.attackRadius.GetValue());
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
-    public override void DamageEffect()
-    {
-        base.DamageEffect();
-    }
-    IEnumerator DeadDestroy(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        Destroy(this.gameObject);
-    }
-    public void AttackLogic()
+    public void CloestTargetDetect()
     {
         float distance = Mathf.Infinity;
         for (int i = 0; i < enemyDetects.Count; i++)
@@ -77,11 +86,20 @@ public class PlayerBase : Entity
             return;
         }
         enemyDetects = new List<GameObject>();
-        var colliders = Physics2D.OverlapCircleAll(transform.position, stats.attackRadius.GetValue(), whatIsEnemy);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {
             enemyDetects.Add(enemy.gameObject);
         }
+    }
+    public IEnumerator DeadDestroy(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        Destroy(this.gameObject);
+    }
+    public override void DamageEffect()
+    {
+        base.DamageEffect();
     }
     public virtual void AnimationArcherAttack()
     {

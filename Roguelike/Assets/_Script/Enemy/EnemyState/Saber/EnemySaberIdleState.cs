@@ -1,15 +1,13 @@
-public class EnemySaberIdleState : EnemyState
+public class EnemySaberIdleState : EnemySaberGroundState
 {
-    public Enemy_Saber enemy_Saber;
-    public EnemySaberIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animBoolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animBoolName)
+    public EnemySaberIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animBoolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animBoolName, enemy_Saber)
     {
-        this.enemy_Saber = enemy_Saber;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.SetVelocity(0, 0);
         stateTimer = 1f;
     }
 

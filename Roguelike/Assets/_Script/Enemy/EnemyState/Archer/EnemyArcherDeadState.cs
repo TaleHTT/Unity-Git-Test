@@ -19,6 +19,5 @@ public class EnemyArcherDeadState : EnemyState
     public override void Update()
     {
         base.Update();
-        enemy.SetVelocity(0, 0);
     }
 }

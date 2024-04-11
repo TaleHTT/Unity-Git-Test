@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerPriestDeadState : PlayerState
 {
     Player_Priest player_Priest;

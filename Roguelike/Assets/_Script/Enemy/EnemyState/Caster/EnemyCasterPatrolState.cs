@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class EnemyCasterPatrolState : EnemyCasterGroundState
+public class EnemyCasterPatrolState : EnemyState
 {
     private Vector3 target;
-    public EnemyCasterPatrolState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Caster enemy_Caster) : base(enemy, stateMachine, animboolName, enemy_Caster)
+    private Enemy_Caster enemy_Caster;
+    public EnemyCasterPatrolState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Caster enemy_Caster) : base(enemy, stateMachine, animboolName)
     {
+        this.enemy_Caster = enemy_Caster;
     }
 
     public override void Enter()

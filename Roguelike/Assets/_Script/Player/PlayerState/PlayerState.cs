@@ -17,7 +17,6 @@ public class PlayerState
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
-        player.EnemyDetect();
     }
     public virtual void Enter()
     {

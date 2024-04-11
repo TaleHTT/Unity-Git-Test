@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyState
 {
-    private float pathGenerateInterval;//¼ä¸ôÊ±¼ä
+    private float pathGenerateInterval;
     private float pathGenerateTimer;
     public int currentIndex;
     public int targetPointIndex = 0;
@@ -24,7 +24,6 @@ public class EnemyState
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
-        enemy.playerDetect();
     }
     public virtual void Enter()
     {
@@ -39,18 +38,18 @@ public class EnemyState
         pathGenerateTimer += Time.deltaTime;
         if (pathGenerateTimer >= pathGenerateInterval)
         {
-            GeneratePath(enemy.target.transform.position);
+            GeneratePath(enemy.cloestTarget.transform.position);
             pathGenerateTimer = 0;
         }
         if (pathPointList == null || pathPointList.Count == 0)
         {
-            GeneratePath(enemy.target.transform.position);
+            GeneratePath(enemy.cloestTarget.transform.position);
         }
         else if (Vector2.Distance(enemy.transform.position, pathPointList[currentIndex]) <= .1f)
         {
             currentIndex++;
             if (currentIndex >= pathPointList.Count)
-                GeneratePath(enemy.target.transform.position);
+                GeneratePath(enemy.cloestTarget.transform.position);
         }
     }
     public void GeneratePath(Vector3 target)

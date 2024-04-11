@@ -1,15 +1,13 @@
-public class EnemyArcherIdleState : EnemyState
+public class EnemyArcherIdleState : EnemyArcherGroundState
 {
-    private Enemy_Archer enemy_Archer;
-    public EnemyArcherIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Archer enemy_Archer) : base(enemy, stateMachine, animboolName)
+    public EnemyArcherIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Archer enemy_Archer) : base(enemy, stateMachine, animboolName, enemy_Archer)
     {
-        this.enemy_Archer = enemy_Archer;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.SetVelocity(0, 0);
         stateTimer = 1f;
     }
 

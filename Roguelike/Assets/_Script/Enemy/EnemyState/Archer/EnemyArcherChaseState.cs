@@ -5,6 +5,7 @@ public class EnemyArcherChaseState : EnemyArcherGroundState
     private Vector3 target;
     public EnemyArcherChaseState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Archer enemy_Archer) : base(enemy, stateMachine, animboolName, enemy_Archer)
     {
+
     }
 
     public override void Enter()

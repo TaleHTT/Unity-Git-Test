@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class Sbaer_Skill_Controller : MonoBehaviour
+public class Saber_Skill_Controller : MonoBehaviour
 {
     [Range(0, 1)] private float addArmor;
-
-    [SerializeField] private int maxNumOfHit;
+    [SerializeField] private int maxNumOfHit {  get; set; }
     public int numOfHit { get; set; }
 
     Player_Saber player_Saber;
