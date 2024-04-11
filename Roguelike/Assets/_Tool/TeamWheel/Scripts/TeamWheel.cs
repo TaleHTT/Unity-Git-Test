@@ -7,11 +7,13 @@ using UnityEngine.UIElements;
 
 public class TeamWheel : MonoBehaviour
 {
+    public static TeamWheel Instance;
+
     public bool edit;
     public bool drawTheBorder;
     public GameObject[] charactersInTeamPrefabs;
     /// <summary>
-    /// 存储charactersInTeamPrefabs生成的对应的游戏物体
+    /// 存储实际游戏场景中的队伍中的角色游戏物体
     /// </summary>
     private GameObject[] charactersInTeam;
 
@@ -25,6 +27,7 @@ public class TeamWheel : MonoBehaviour
     /// 存储游戏场景中的位置点对应的游戏物体
     /// </summary>
     private GameObject[] characterPlacePoints;
+    public int numOfCharacterInTeam = 6;
 
     /// <summary>
     /// 整局角色的最大上限制，默认为6
@@ -46,6 +49,8 @@ public class TeamWheel : MonoBehaviour
     private void Awake()
     {
         Init();
+        NumOfCharacterInTeamsCal();
+        Instance = this;
     }
 
     private void Update()
@@ -64,6 +69,21 @@ public class TeamWheel : MonoBehaviour
         CenterPointInit();
         CharactersPointInit();
         CharactersInTeamInit();
+    }
+
+    private void NumOfCharacterInTeamsCal()
+    {
+        StartCoroutine(IE_NumOfCharacterInTeamsCal());
+    }
+
+    private IEnumerator IE_NumOfCharacterInTeamsCal()
+    {
+        yield return new WaitForSeconds(0.5f);
+        /*numOfCharacterInTeam = 0;
+        for (int i = 0; i < globalMaxCharacterNum; i++)
+        {
+            if (charactersInTeam[i].gameObject != null) numOfCharacterInTeam++;
+        }*/
     }
 
     [Tooltip("队伍中物体靠近对应位置点的速度")]

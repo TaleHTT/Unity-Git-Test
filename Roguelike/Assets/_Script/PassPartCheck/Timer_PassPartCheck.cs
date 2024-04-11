@@ -11,8 +11,8 @@ public class Timer_PassPartCheck : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
             EntityEventSystem.instance.Timer_SuccessPassPart();
-        if(hp <= 0 || PlayerManager.instance.playerCount <= 0)
-            EntityEventSystem.instance.Timer_FailPassPart();
+        /*if(hp <= 0 || PlayerManager.instance.playerCount <= 0)
+            EntityEventSystem.instance.Timer_FailPassPart();*/
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

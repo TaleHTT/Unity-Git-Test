@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 开始场景
 /// </summary>
-public class ChoosePart : SceneState
+public class Part_3 : SceneState
 {
     /// <summary>
     /// 场景名称
     /// </summary>
-    readonly string sceneName = "ChoosePart";
+    readonly string sceneName = "Part_3";
 
     public override void OnEnter()
     {
@@ -23,7 +23,7 @@ public class ChoosePart : SceneState
         }
         else
         {
-            GameRoot.Instance.panelManager.Push(new ChoosePartPanel());
+            //panelManager.Push();
         }
 
     }
@@ -41,7 +41,7 @@ public class ChoosePart : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        GameRoot.Instance.panelManager.Push(new ChoosePartPanel());
+        //panelManager.Push();
         Debug.Log($"{sceneName}场景加载完毕！");
     }
 }

@@ -23,11 +23,14 @@ public class PassPart : MonoBehaviour
     {
         //场景转换
         Debug.Log("Success");
+        //GameRoot.Instance.SceneSystem.SetScene(new StoreScene());
     }
     public void Target_PartFailPass()
     {
         //场景转换
         Debug.Log("Fail");
+        GameRoot.Instance.panelManager.Push(new FailPanel());
+        Time.timeScale = 0.001f;
     }
     public void Timer_PartSuccessPass()
     {
@@ -49,4 +52,5 @@ public class PassPart : MonoBehaviour
         //场景转换
         Debug.Log("Fail");
     }
+
 }

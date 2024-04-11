@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+//using UnityEngine.UIElements;
 
 public class MapGenerator : MonoBehaviour
 {
+    public static MapGenerator Instance;
     private bool isMapGenerateCompelete = false;
 
     /// <summary>
     /// 地图预制体，子物体应由Node组成，Node的位置对应的就是预设的可以生成节点的位置
     /// </summary>
     public GameObject mapPrefab;
-    private GameObject currentMap;
+    public GameObject currentMap;
     /// <summary>
     /// Boss图标
     /// </summary>
@@ -28,7 +29,7 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     public GameObject nodePrefab;
     /// <summary>
-    /// 道路连线预制体，挂在UILine即可
+    /// 道路连线预制体，挂在LineUI即可
     /// </summary>
     public GameObject linePrefab;
 
@@ -65,7 +66,12 @@ public class MapGenerator : MonoBehaviour
 
     public void Awake()
     {
+        Instance = this;
         StartCoroutine(IE_InitMap());
+        StartGenerate();
+
+        //测试用
+
     }
 
     /// <summary>
@@ -109,12 +115,6 @@ public class MapGenerator : MonoBehaviour
         isMapGenerateCompelete = true;
     }
 
-    public void Clear()
-    {
-        Debug.Log("Clear");
-        StartCoroutine(IE_InitMap());
-    }
-
     IEnumerator IE_StartGenerate()
     {
         yield return new WaitUntil(() => this.isMapGenerateCompelete == true);
@@ -131,6 +131,13 @@ public class MapGenerator : MonoBehaviour
         CreateLineUI();
     }
 
+    public void Clear()
+    {
+        Debug.Log("Clear");
+        StartCoroutine(IE_InitMap());
+    }
+
+
     /// <summary>
     /// 为每一对相连的节点创建一条UI线段
     /// </summary>
@@ -146,7 +153,7 @@ public class MapGenerator : MonoBehaviour
                     //UI线段，作为两个节点之间的图形表示
                     GameObject lineUI = Instantiate(linePrefab, LineParent);
                     //获取UI线段上的LineRenderer组件，设置起点和重点两个节点的位置
-                    UILine myLine = lineUI.GetComponent<UILine>();
+                    LineUI myLine = lineUI.GetComponent<LineUI>();
                     GeneratePositions(myLine, node.position, lowerNode.position);
 
                     node.lineUIs.Add(lineUI);
@@ -155,7 +162,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void GeneratePositions(UILine line, Vector3 source, Vector3 Destination)
+    private void GeneratePositions(LineUI line, Vector3 source, Vector3 Destination)
     {
         float segement = (int)((Destination - source).magnitude / 30);
         line.PositionCount = (int)segement + 1;
@@ -179,17 +186,59 @@ public class MapGenerator : MonoBehaviour
             {
                 if (!node.IsSeleced) continue;
                 GameObject nodeUI = Instantiate(nodePrefab, node.transform);
+                node.nodeUI = nodeUI;
                 nodeUI.transform.position += new Vector3(UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON), UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON));
                 node.position = nodeUI.transform.position;
                 nodeUI.GetComponent<Image>().sprite = node.icon;
                 node.uiImage = nodeUI.GetComponent<Image>();
+                nodeUI.AddComponent<Button>();
                 // 获取UI元素上的Button组件，添加一个点击事件，调用SelectNode方法
                 ///Button button = nodeUI.GetComponent<Button>();
                 //button.onClick.AddListener(() => SelectNode(node));
                 // 将UI元素赋值给节点的ui属性
                 // node.ui = nodeUI;
+                AssignLevel(node, node.type);
+
             }
         }
+    }
+
+    /// <summary>
+    /// 分配怪物关卡时前往的关卡
+    /// </summary>
+    private void AssignLevel(Node node, E_NodeType type)
+    {
+        if (type == E_NodeType.Battle && node.nodeUI != null)
+        {
+            int temp = UnityEngine.Random.Range((int)E_LevelType.Part_1, (int)E_LevelType.Part_3 + 1);
+            node.level = (E_LevelType)temp;
+            node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => LoadSceneByLevelType(node.level));
+        }
+        if (node.nodeUI == null)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// 具体的分配方法
+    /// </summary>
+    /// <param name="level"></param>
+    private void LoadSceneByLevelType(E_LevelType level)
+    {
+        switch (level)
+        {
+            case E_LevelType.Part_1:
+                GameRoot.Instance.sceneSystem.SetScene(new Part_1());
+                break;
+            case E_LevelType.Part_2:
+                GameRoot.Instance.sceneSystem.SetScene(new Part_2());
+                break;
+            case E_LevelType.Part_3:
+                GameRoot.Instance.sceneSystem.SetScene(new Part_3());
+                break;
+        }
+        this.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -229,7 +278,11 @@ public class MapGenerator : MonoBehaviour
             {
                 foreach(var node in nodes[i])
                 {
-                    if(node.IsSeleced) node.type = E_NodeType.Battle;
+                    if (node.IsSeleced) 
+                    {
+                        node.type = E_NodeType.Battle;
+                    }
+                    
                 }
                 continue;
             }
@@ -246,17 +299,18 @@ public class MapGenerator : MonoBehaviour
                 if(r < battleProb)
                 {
                     node.type = E_NodeType.Battle;
-                    //typeCount[(int)E_NodeType.Battle]++;
                 }
                 else
                 {
                     node.type = E_NodeType.Shop;
-                    //typeCount[(int)E_NodeType.Shop]++;
                 }
             }
 
         }
     }
+
+    
+
     /// <summary>
     /// 生成节点
     /// </summary>
@@ -285,7 +339,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// 连接当前层数的节点
+    /// 连接并初始化当前层数的节点
     /// </summary>
     /// <param name="layer">层数</param>
     /// <param name="MaxNode">上一次的节点数传入，第一次传入为MAXNODES大小</param>

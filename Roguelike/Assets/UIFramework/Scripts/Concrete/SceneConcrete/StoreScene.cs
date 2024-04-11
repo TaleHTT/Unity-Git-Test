@@ -8,15 +8,17 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class StoreScene : SceneState
 {
+    public static StoreScene Instance { get; private set; }
+
     /// <summary>
     /// 场景名称
     /// </summary>
     readonly string sceneName = "StoreScene";
-    PanelManager panelManager;
+
 
     public override void OnEnter()
     {
-        panelManager = new PanelManager();
+        Instance = this;
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
@@ -25,7 +27,7 @@ public class StoreScene : SceneState
         }
         else
         {
-            panelManager.Push(new StorePanel());
+            GameRoot.Instance.panelManager.Push(new StorePanel());
         }
 
     }
@@ -33,7 +35,7 @@ public class StoreScene : SceneState
     public override void OnExit()
     {
         SceneManager.sceneLoaded -= SceneLoaded;
-        panelManager.PopAll();
+        GameRoot.Instance.panelManager.PopAll();
     }
 
     /// <summary>
@@ -43,7 +45,8 @@ public class StoreScene : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        panelManager.Push(new StorePanel());
+        GameRoot.Instance.panelManager.Push(new StorePanel());
+        //GameRoot.Instance.mapGenerator.SetActive(true);
         Debug.Log($"{sceneName}场景加载完毕！");
     }
 }

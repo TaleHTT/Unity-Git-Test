@@ -16,7 +16,7 @@ public class ChoosePartPanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("Part_1").onClick.AddListener(() =>
         {
-            GameRoot.Instance.SceneSystem.SetScene(new Part_1());
+            GameRoot.Instance.sceneSystem.SetScene(new Part_1());
         });
     }
 

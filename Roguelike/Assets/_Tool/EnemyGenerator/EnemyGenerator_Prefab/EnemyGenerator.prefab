@@ -44,9 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a4bf51d4ca9bf4cbbf7c278ad9d23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   EnemyList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6958606284551094166, guid: 32874bceddc216946be7d5f33092930e, type: 3}
+  - {fileID: 6958606284551094166, guid: 32874bceddc216946be7d5f33092930e, type: 3}
   radius: 3
-  enemyCollector: {fileID: 0}
+  enemyCollector: {fileID: 3688920304475294734, guid: dce3f26d970318e4c854cf8186bcc68c, type: 3}
   drawTheBorderOrNot: 1

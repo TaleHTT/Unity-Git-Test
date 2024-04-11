@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 开始主界面
+/// 游戏中失败弹出的UI画面
 /// </summary>
-public class StartPanel : BasePanel
+public class FailPanel : BasePanel
 {
-    static readonly string path = "Prefab/Panel/StartPanel";
+    static readonly string path = "Prefab/Panel/FailPanel";
 
-    public StartPanel() : base(new UIType(path)) { }
+    public FailPanel() : base(new UIType(path)) { }
 
     public override void OnEnter()
     {
-        UITool.GetOrAddComponentInChildren<Button>("StartButton").onClick.AddListener(() =>
+        UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {
-            GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+            GameRoot.Instance.sceneSystem.SetScene(new StartScene());
         });
     }
 
