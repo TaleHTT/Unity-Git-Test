@@ -1,17 +1,19 @@
 using UnityEngine;
-public class CharacterStats : MonoBehaviour, ITakeDamageable
+public class CharacterStats : MonoBehaviour
 {
     [SerializeField] private int level;
     [Tooltip("经验值")]
     public int experience;
-    [Tooltip("当前血量")]
-    public float currentHealth;
     [Tooltip("最大生命值")]
     public Stats maxHp;
+    [Tooltip("当前血量")]
+    public float currentHealth;
     [Tooltip("攻击力")]
-    public Stats damage;
+    public Stats baseDamage;
+    public float actualDamage;
     [Tooltip("护甲")]
-    public Stats armor;
+    public Stats baseArmor;
+    public float actualArmor;
     [Tooltip("受伤倍率")]
     public Stats woundedMultiplier;
     [Tooltip("移动速度")]
@@ -22,20 +24,30 @@ public class CharacterStats : MonoBehaviour, ITakeDamageable
     public Stats attackSpeed;
     [Tooltip("治疗范围")]
     public Stats treatRadius;
+    private void Awake()
+    {
+        actualArmor = baseArmor.GetValue();
+        actualDamage = baseDamage.GetValue();
+    }
     public virtual void Start()
     {
-        currentHealth = maxHp.GetValue();
+        UpdataHp();
     }
+
 
     public virtual void Update()
     {
         if(currentHealth > maxHp.GetValue())
             currentHealth = maxHp.GetValue();
     }
+    public void UpdataHp()
+    {
+        currentHealth = maxHp.GetValue();
+    }
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth -= ((damage + level - armor.GetValue()) * woundedMultiplier.GetValue());
+        currentHealth -= ((damage + level - actualArmor) * woundedMultiplier.GetValue());
     }
     public virtual void AuthenticTakeDamage(float damage)
     {

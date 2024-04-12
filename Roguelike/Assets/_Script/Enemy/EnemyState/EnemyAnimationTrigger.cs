@@ -7,7 +7,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
     {
         if (enemy.cloestTarget != null)
         {
-            enemy.cloestTarget.GetComponent<PlayerStats>().TakeDamage(enemy.stats.damage.GetValue());
+            enemy.cloestTarget.GetComponent<PlayerStats>().TakeDamage(enemy.stats.baseDamage.GetValue());
             enemy.cloestTarget.GetComponent<PlayerBase>().isHit = true;
         }
     }

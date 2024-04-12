@@ -45,6 +45,8 @@ public class EnemyBase : Base
     {
         base.Awake();
         seeker = GetComponent<Seeker>();
+        playerDetects = new List<GameObject>();
+        attackDetects = new List<GameObject>();
         stateMachine = new EnemyStateMachine();
 
     }
@@ -76,7 +78,6 @@ public class EnemyBase : Base
             detectTimer = 1;
             return;
         }
-        playerDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
@@ -103,7 +104,6 @@ public class EnemyBase : Base
             detectTimer = 1;
             return;
         }
-        attackDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
         foreach (var player in colliders)
         {

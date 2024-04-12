@@ -7,6 +7,6 @@ public class Player_Summons_Animation_Trigger : MonoBehaviour
     private void AttackTrigger()
     {
         if (player_Summons_Hound_Controller.cloestTarget != null)
-            player_Summons_Hound_Controller.cloestTarget.GetComponent<EnemyStats>().TakeDamage(player_Summons_Hound_Controller.stats.damage.GetValue());
+            player_Summons_Hound_Controller.cloestTarget.GetComponent<EnemyStats>().TakeDamage(player_Summons_Hound_Controller.stats.baseDamage.GetValue());
     }
 }

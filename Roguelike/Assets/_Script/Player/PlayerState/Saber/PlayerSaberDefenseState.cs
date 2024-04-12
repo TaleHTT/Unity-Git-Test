@@ -1,4 +1,6 @@
-﻿public class PlayerSaberDefenseState : PlayerState
+﻿using UnityEngine;
+
+public class PlayerSaberDefenseState : PlayerState
 {
     private Player_Saber player_Saber;
     public PlayerSaberDefenseState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Saber player_Saber) : base(player, stateMachine, animboolName)

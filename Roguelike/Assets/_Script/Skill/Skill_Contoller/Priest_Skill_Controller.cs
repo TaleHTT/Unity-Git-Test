@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Priest_Skill_Controller : MonoBehaviour
@@ -9,6 +10,7 @@ public class Priest_Skill_Controller : MonoBehaviour
     private List<GameObject> playerDetect;
     public LayerMask whatIsPlayer;
     private const int numberOfRespawns = 1;
+    public int numberOfTreatments;
 
     private void Update()
     {

@@ -10,7 +10,7 @@ public class CenterPointMoveLogic : MonoBehaviour
     private Vector3 CenterPointAutoPathTarget;
     private Vector3 target;
     private Seeker seeker;
-    private void Start()
+    private void Awake()
     {
         seeker = GetComponent<Seeker>();
     }
@@ -24,7 +24,10 @@ public class CenterPointMoveLogic : MonoBehaviour
         target = pathPointList[currentIndex];
         if (transform.position != CenterPointAutoPathTarget)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+            if (Input.GetMouseButton(0))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+            }
         }
     }
     public void AutoPath()

@@ -15,10 +15,10 @@ public class Archer_Skill_Controller : MonoBehaviour
     }
     private void Update()
     {
-        if (SkillManger.instance.archer_Skill.coolDownTimer == 0)
-        {
-            houndPool.Get();
-        }
+        //if (SkillManger.instance.archer_Skill.coolDownTimer == 0)
+        //{
+        //    houndPool.Get();
+        //}
     }
     private GameObject CreateHoundFunc()
     {

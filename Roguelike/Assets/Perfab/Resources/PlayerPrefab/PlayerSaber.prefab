@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 400380595393304917}
   - component: {fileID: 3169250363434736711}
   - component: {fileID: 8229864949177114547}
+  - component: {fileID: 7142369143678821317}
   m_Layer: 3
   m_Name: PlayerSaber
   m_TagString: Untagged
@@ -550,16 +551,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   experience: 0
-  currentHealth: 0
   maxHp:
     baseValue: 50
     modfiers: []
-  damage:
-    baseValue: 100
+  currentHealth: 0
+  baseDamage:
+    baseValue: 0
     modfiers: []
-  armor:
+  actualDamage: 0
+  baseArmor:
     baseValue: 2
     modfiers: []
+  actualArmor: 0
   woundedMultiplier:
     baseValue: 1
     modfiers: []
@@ -587,13 +590,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5239fce73ddd30f4b8bd622682253e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectTimer: 0
+  detectTimer: 2
   stats: {fileID: 400380595393304917}
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
-  drawTheBorderOrNot: 0
+  attackRadius: 10
+  drawTheBorderOrNot: 1
+  isDefense: 0
+  isMove: 0
+  centerPointMoveLogic: {fileID: 9022757447865706155, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
 --- !u!114 &8229864949177114547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +629,25 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &7142369143678821317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752013259794122915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1025fc90abd58d841be898f6f4390e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addArmor: 0.6
+  extraAddHp: 0.4
+  extraAddArmor: 0.4
+  extraAddDamage: 0.4
+  maxNumOfHit: 0
+  isHave_X_Equipment: 1
+  numOfHit: 0
 --- !u!1 &7828097832155384944
 GameObject:
   m_ObjectHideFlags: 0

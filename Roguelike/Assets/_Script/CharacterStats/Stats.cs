@@ -15,10 +15,10 @@ public class Stats
 
         return finalValue;
     }
-    public float AddArmor(float percentage)
+    public float AddArmor(float percentage, float baseArmor)
     {
-        float finaArmor = GetValue();
-        finaArmor = (1 + percentage) * finaArmor;
+        float finaArmor;
+        finaArmor = (1 + percentage) * baseArmor;
         return finaArmor;
     }
     public void AddModfiers(float modfier)

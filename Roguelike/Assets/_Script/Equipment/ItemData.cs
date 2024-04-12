@@ -36,8 +36,8 @@ public class ItemData : ScriptableObject
     public void AddModfiers(PlayerStats stats)
     {
         stats.maxHp.AddModfiers(maxHp);
-        stats.damage.AddModfiers(damage);
-        stats.armor.AddModfiers(armor);
+        stats.baseDamage.AddModfiers(damage);
+        stats.baseArmor.AddModfiers(armor);
         stats.woundedMultiplier.AddModfiers(woundedMultiplier);
         stats.moveSpeed.AddModfiers(moveSpeed);
         stats.attackRadius.AddModfiers(attackRadius);
@@ -46,8 +46,8 @@ public class ItemData : ScriptableObject
     public void RemoveModfiers(PlayerStats stats)
     {
         stats.maxHp.RemoveModfiers(maxHp);
-        stats.damage.RemoveModfiers(damage);
-        stats.armor.RemoveModfiers(armor);
+        stats.baseDamage.RemoveModfiers(damage);
+        stats.baseArmor.RemoveModfiers(armor);
         stats.woundedMultiplier.RemoveModfiers(woundedMultiplier);
         stats.moveSpeed.RemoveModfiers(moveSpeed);
         stats.attackRadius.RemoveModfiers(attackRadius);

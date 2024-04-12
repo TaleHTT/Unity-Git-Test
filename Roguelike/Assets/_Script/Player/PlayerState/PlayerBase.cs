@@ -16,7 +16,7 @@ public class PlayerBase : Base
     public LayerMask whatIsEnemy;
 
     [Tooltip("攻击范围")]
-    [SerializeField] private float attackRadius;
+    public float attackRadius;
 
     [Tooltip("死亡后，经过timer秒后销毁")]
     [SerializeField] public float timer {  get; set; }
@@ -38,6 +38,7 @@ public class PlayerBase : Base
     protected override void Awake()
     {
         base.Awake();
+        enemyDetects = new List<GameObject>();
         stateMachine = new PlayerStateMachine();
     }
     protected override void Start()
@@ -89,7 +90,6 @@ public class PlayerBase : Base
             detectTimer = 1;
             return;
         }
-        enemyDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {

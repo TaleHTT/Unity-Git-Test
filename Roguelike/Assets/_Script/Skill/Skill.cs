@@ -5,6 +5,10 @@ public class Skill : MonoBehaviour
     public float coolDownTimer {  get; set; }
     public float persistentTimer;
     public float coolDown;
+    private void Awake()
+    {
+        coolDownTimer = 5f;
+    }
     protected virtual void Update()
     {
         coolDownTimer -= Time.deltaTime;

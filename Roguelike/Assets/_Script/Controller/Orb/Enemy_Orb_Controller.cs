@@ -40,7 +40,7 @@ public class Enemy_Orb_Controller : Orb_Controller
         {
             if (hit.GetComponent<PlayerStats>() != null)
             {
-                hit.GetComponent<PlayerStats>().TakeDamage(damage);
+                hit.GetComponent<PlayerStats>()?.AuthenticTakeDamage(damage);
             }
         }
     }
