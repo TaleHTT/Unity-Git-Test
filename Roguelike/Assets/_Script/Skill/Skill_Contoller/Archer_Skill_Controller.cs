@@ -4,43 +4,38 @@ using UnityEngine.Pool;
 public class Archer_Skill_Controller : MonoBehaviour
 {
     [SerializeField] private GameObject Summon_Hound_Prefab;
-
-    private ObjectPool<GameObject> pool;
+    [SerializeField] private GameObject multipleArrows_Prefab;
+    private ObjectPool<GameObject> houndPool;
 
     Player_Archer player_Archer;
     private void Awake()
     {
         player_Archer = GetComponent<Player_Archer>();
-        pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestory, true, 10, 1000);
+        houndPool = new ObjectPool<GameObject>(CreateHoundFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
     }
     private void Update()
     {
-        if(SkillManger.instance.archer_Skill.coolDownTimer == 0)
+        if (SkillManger.instance.archer_Skill.coolDownTimer == 0)
         {
-            pool.Get();
+            houndPool.Get();
         }
     }
-    private void CreatMultipleArrows()
+    private GameObject CreateHoundFunc()
     {
-        //player_Archer.arrowPerfab.GetComponent<Arrow_Controller>().arrowDir
+        var hound = Instantiate(Summon_Hound_Prefab, transform.position, Quaternion.identity);
+        return hound;
     }
-    private GameObject createFunc()
+    private void ActionOnGet(GameObject objects)
     {
-        var orb = Instantiate(Summon_Hound_Prefab, transform.position, Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().pool = pool;
-        return orb;
+        objects.transform.position = transform.position;
+        objects.SetActive(true);
     }
-    private void actionOnGet(GameObject orb)
+    private void ActionOnRelease(GameObject objects)
     {
-        orb.transform.position = transform.position;
-        orb.SetActive(true);
+        objects.SetActive(false);
     }
-    private void actionOnRelease(GameObject orb)
+    private void ActionOnDestory(GameObject objects)
     {
-        orb.SetActive(false);
-    }
-    private void actionOnDestory(GameObject orb)
-    {
-        Destroy(orb);
+        Destroy(objects);
     }
 }

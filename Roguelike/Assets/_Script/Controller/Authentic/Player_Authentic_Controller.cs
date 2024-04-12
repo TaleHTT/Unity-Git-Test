@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Enemy_Arrow_Controller : Arrow_Controller
+public class Player_Authentic_Controller : Arrow_Controller
 {
     protected override void OnEnable()
     {
@@ -12,11 +12,11 @@ public class Enemy_Arrow_Controller : Arrow_Controller
     {
         base.Update();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            collision.GetComponent<PlayerStats>()?.TakeDamage(damage);
+            collision.GetComponent<EnemyStats>()?.AuthenticTakeDamage(damage);
             pool.Release(gameObject);
         }
     }
@@ -25,7 +25,7 @@ public class Enemy_Arrow_Controller : Arrow_Controller
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {
-            if (target.GetComponent<PlayerBase>() != null)
+            if (target.GetComponent<EnemyBase>() != null)
             {
                 attackDetects.Add(target.transform);
                 AttackLogic();

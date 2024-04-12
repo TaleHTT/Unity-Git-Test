@@ -587,18 +587,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5239fce73ddd30f4b8bd622682253e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 64
   detectTimer: 0
   stats: {fileID: 400380595393304917}
   occupation: 0
-  timer: 2
-  isDead: 0
-  drawTheBorderOrNot: 1
-  treatTarget: {fileID: 0}
-  closetEnemy: {fileID: 0}
-  enemyDetects: []
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64
+  drawTheBorderOrNot: 0
 --- !u!114 &8229864949177114547
 MonoBehaviour:
   m_ObjectHideFlags: 0

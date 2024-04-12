@@ -37,6 +37,10 @@ public class CharacterStats : MonoBehaviour, ITakeDamageable
     {
         currentHealth -= ((damage + level - armor.GetValue()) * woundedMultiplier.GetValue());
     }
+    public virtual void AuthenticTakeDamage(float damage)
+    {
+        currentHealth -= damage;
+    }
 
     public virtual void TakeTreat(float damage)
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -8,7 +6,7 @@ public class Player_Archer : PlayerBase
     private ObjectPool<GameObject> pool;
     [Tooltip("¼ýÊ¸Ô¤ÖÆÌå")]
     public GameObject arrowPerfab;
-    public PlayerArcherIdleState archerIdleState {  get; private set; }
+    public PlayerArcherIdleState archerIdleState { get; private set; }
     public PlayerArcherDeadState archerDeadState { get; private set; }
     public PlayerArcherAttackState archerAttackState { get; private set; }
     protected override void Awake()

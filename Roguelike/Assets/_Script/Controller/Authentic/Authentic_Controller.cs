@@ -1,15 +1,15 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Arrow_Controller : MonoBehaviour
+public class Authentic_Controller : MonoBehaviour
 {
     public ObjectPool<GameObject> pool;
-    [Tooltip("ÒÆ¶¯ËÙ¶È")]
+    [Tooltip("ç§»åŠ¨é€Ÿåº¦")]
     public float moveSpeed;
-    [Tooltip("ÉËº¦")]
+    [Tooltip("ä¼¤å®³")]
     public float damage;
-    [Tooltip("¾­¹ıtimerÃëºó¼ıÊ¸×Ô¶¯Ïú»Ù")]
+    [Tooltip("ç»è¿‡timerç§’åç®­çŸ¢è‡ªåŠ¨é”€æ¯")]
     public float timer;
     private float coolDownTimer;
     public List<Transform> attackDetects;

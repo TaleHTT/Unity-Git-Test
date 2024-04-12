@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Enemy_Arrow_Controller : Arrow_Controller
+public class Enemy_Authentic_Controller : Authentic_Controller
 {
     protected override void OnEnable()
     {
@@ -16,7 +16,7 @@ public class Enemy_Arrow_Controller : Arrow_Controller
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            collision.GetComponent<PlayerStats>()?.TakeDamage(damage);
+            collision.GetComponent<PlayerStats>()?.AuthenticTakeDamage(damage);
             pool.Release(gameObject);
         }
     }

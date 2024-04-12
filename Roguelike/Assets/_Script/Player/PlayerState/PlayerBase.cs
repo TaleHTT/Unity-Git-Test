@@ -16,7 +16,7 @@ public class PlayerBase : Base
     public LayerMask whatIsEnemy;
 
     [Tooltip("¹¥»÷·¶Î§")]
-    [SerializeField] public float attackRadius {  get; set; }
+    [SerializeField] private float attackRadius;
 
     [Tooltip("ËÀÍöºó£¬¾­¹ýtimerÃëºóÏú»Ù")]
     [SerializeField] public float timer {  get; set; }
@@ -28,7 +28,7 @@ public class PlayerBase : Base
     [SerializeField] public bool isHit {  get; set; }
 
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
-    [SerializeField] public bool drawTheBorderOrNot {  get; set; }
+    [SerializeField] private bool drawTheBorderOrNot;
 
     public Transform closetEnemy {  get; set; }
     public List<GameObject> enemyDetects { get; set; }
@@ -55,6 +55,10 @@ public class PlayerBase : Base
         {
             StartCoroutine(DeadDestroy(timer));
             return;
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
         EnemyDetect();
         CloestTargetDetect();
@@ -95,7 +99,7 @@ public class PlayerBase : Base
     public IEnumerator DeadDestroy(float timer)
     {
         yield return new WaitForSeconds(timer);
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
     public override void DamageEffect()
     {
