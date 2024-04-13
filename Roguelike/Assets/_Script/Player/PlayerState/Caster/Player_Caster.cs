@@ -5,7 +5,7 @@ public class Player_Caster : PlayerBase
 {
     private ObjectPool<GameObject> pool;
     [Tooltip("∑®«Ú‘§÷∆ÃÂ")]
-    public GameObject OrbPerfab;
+    public GameObject orbPerfab;
     public PlayerCasterIdleState casterIdleState { get; private set; }
     public PlayerCasterAttackState casterAttackState { get; private set; }
     public PlayerCasterDeadState casterDeadState { get; private set; }
@@ -35,8 +35,8 @@ public class Player_Caster : PlayerBase
     }
     private GameObject createFunc()
     {
-        var orb = Instantiate(OrbPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().pool = pool;
+        var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
+        orb.GetComponent<Orb_Controller>().orbPool = pool;
         return orb;
     }
     private void actionOnGet(GameObject orb)

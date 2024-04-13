@@ -25,7 +25,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
     }
     private void CasterAttackTrigger()
     {
-        player.AnimationCasterAttack();
+        player.AnimationCasterAttack();         
     }
     private void PriestTreatTrigger()
     {

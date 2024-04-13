@@ -12,6 +12,7 @@ public class EnemyBase : Base
 {
     public EnemyOccupation occupation;
 
+    public int layersOfBurning;
     public LayerMask whatIsPlayer {  get; set; }
 
     [Header("Chase info")]

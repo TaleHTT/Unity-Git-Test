@@ -17,7 +17,9 @@ public class Player_Orb_Controller : Orb_Controller
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             AttackTakeDamage();
-            pool.Release(gameObject);
+            if (isStrengthen == true)
+                burningRingsPool.Get();
+            orbPool.Release(gameObject);
             attackDetects.Clear();
         }
     }
@@ -35,12 +37,29 @@ public class Player_Orb_Controller : Orb_Controller
     }
     public void AttackTakeDamage()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        foreach (Collider2D hit in colliders)
+        if(isStrengthen == false)
         {
-            if (hit.GetComponent<EnemyStats>() != null)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+            foreach (Collider2D hit in colliders)
             {
-                hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(damage);
+                if (hit.GetComponent<EnemyStats>() != null)
+                {
+                    hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(damage);
+                }
+            }
+        }
+        else
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, strengthExplosionRadius);
+            foreach (Collider2D hit in colliders)
+            {
+                if (hit.GetComponent<EnemyStats>() != null)
+                {
+                    hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(strengthExplosionDamage);
+                    if(SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
+                        hit.GetComponent<EnemyBase>().
+
+                }
             }
         }
     }
