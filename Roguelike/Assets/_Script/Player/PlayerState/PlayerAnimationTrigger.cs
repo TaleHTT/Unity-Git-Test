@@ -3,14 +3,13 @@ using UnityEngine;
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private PlayerBase player => GetComponentInParent<PlayerBase>();
-    private Saber_Skill_Controller saber_Skill_Controller => GetComponent<Saber_Skill_Controller>();
     private Priest_Skill_Controller priest_Skill_Controller => GetComponent<Priest_Skill_Controller>();
     private void SaberAttackTrigger()
     {
-        if (player.closetEnemy != null && saber_Skill_Controller.isHave_X_Equipment == false)
+        if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == false)
             player.closetEnemy.GetComponent<EnemyStats>()?.TakeDamage(player.stats.baseDamage.GetValue());
 
-        else if(player.closetEnemy != null && saber_Skill_Controller.isHave_X_Equipment == true)
+        else if(player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
             foreach(var hit in colliders)

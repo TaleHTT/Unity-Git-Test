@@ -1,7 +1,9 @@
 using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
-    [SerializeField] private int level;
+    [Tooltip("流血伤害")]
+    public float bleedingDamage;
+    public int level;
     [Tooltip("经验值")]
     public int experience;
     [Tooltip("最大生命值")]

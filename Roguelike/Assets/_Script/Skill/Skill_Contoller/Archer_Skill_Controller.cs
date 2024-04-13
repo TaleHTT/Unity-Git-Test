@@ -4,8 +4,9 @@ using UnityEngine.Pool;
 public class Archer_Skill_Controller : MonoBehaviour
 {
     [SerializeField] private GameObject Summon_Hound_Prefab;
-    [SerializeField] private GameObject multipleArrows_Prefab;
     private ObjectPool<GameObject> houndPool;
+
+    public bool isHave_X_Equipment;
 
     Player_Archer player_Archer;
     private void Awake()
@@ -23,10 +24,12 @@ public class Archer_Skill_Controller : MonoBehaviour
     private GameObject CreateHoundFunc()
     {
         var hound = Instantiate(Summon_Hound_Prefab, transform.position, Quaternion.identity);
+        hound.GetComponent<Summons_Base>().houndPool = houndPool;
         return hound;
     }
     private void ActionOnGet(GameObject objects)
     {
+        objects.GetComponent<Summons_Base>().isDead = false;
         objects.transform.position = transform.position;
         objects.SetActive(true);
     }

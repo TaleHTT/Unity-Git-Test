@@ -11,4 +11,13 @@ public class PlayerStats : CharacterStats
         base.TakeDamage(damage);
         player.DamageEffect();
     }
+    public override void TakeTreat(float damage)
+    {
+        base.TakeTreat(damage);
+    }
+    public override void AuthenticTakeDamage(float damage)
+    {
+        base.AuthenticTakeDamage(damage);
+        player.DamageEffect();
+    }
 }

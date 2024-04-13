@@ -24,9 +24,6 @@ public class PlayerBase : Base
     [Tooltip("ÊÇ·ñËÀÍö")]
     [SerializeField] public bool isDead {  get; set; }
 
-    [Tooltip("ÊÇ·ñÊÜ»÷")]
-    [SerializeField] public bool isHit {  get; set; }
-
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     [SerializeField] private bool drawTheBorderOrNot;
 
@@ -50,7 +47,6 @@ public class PlayerBase : Base
     protected override void Update()
     {
         base.Update();
-        isHit = false;
         stateMachine.currentState.Update();
         if (isDead)
         {

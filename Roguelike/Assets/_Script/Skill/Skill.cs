@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
+    public bool isHave_X_Equipment;
     public float coolDownTimer {  get; set; }
     public float persistentTimer;
     public float coolDown;

@@ -14,10 +14,19 @@ public class Player_Arrow_Controller : Arrow_Controller
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (SkillManger.instance.archer_Skill.isHave_X_Equipment == true)
         {
-            collision.GetComponent<EnemyStats>()?.TakeDamage(damage);
-            pool.Release(gameObject);
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                pool.Release(gameObject);
+            return;
+        }
+        else
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                collision.GetComponent<PlayerStats>()?.TakeDamage(damage);
+                pool.Release(gameObject);
+            }
         }
     }
     public void AttackTarget()

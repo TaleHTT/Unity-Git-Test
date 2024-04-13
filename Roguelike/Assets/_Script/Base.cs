@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,15 @@ using UnityEngine;
 /// </summary>
 public class Base : MonoBehaviour
 {
+    private float timer;
+
+    public int amountOfHit;
+
+    public int layersOfBleeding;
+
+    [Tooltip("ÊÇ·ñÊÜ»÷")]
+    public bool isHit;
+
     public float detectTimer;
 
     public CharacterStats stats;
@@ -12,7 +22,7 @@ public class Base : MonoBehaviour
     public CapsuleCollider2D cd { get; private set; }
     protected virtual void Awake()
     {
-
+        timer = SkillManger.instance.archer_Skill.persistentTimer;
     }
     protected virtual void Start()
     {
@@ -22,10 +32,35 @@ public class Base : MonoBehaviour
     }
     protected virtual void Update()
     {
-
+        isHit = false;
+        if (amountOfHit == 2)
+        {
+            amountOfHit = 0;
+            layersOfBleeding++;
+            SkillManger.instance.archer_Skill.persistentTimer = timer;
+        }
+        if(layersOfBleeding > 0)
+        {
+                SkillManger.instance.archer_Skill.persistentTimer -= Time.deltaTime;
+            if (SkillManger.instance.archer_Skill.persistentTimer < 0)
+            {
+                layersOfBleeding = 0;
+                return;
+            }
+            else
+            {
+                StartCoroutine(BleedingDamage());
+            }
+        }
     }
     public virtual void DamageEffect()
     {
 
+    }
+    public IEnumerator BleedingDamage()
+    {
+        yield return new WaitForSeconds(1);
+
+        stats.AuthenticTakeDamage(stats.bleedingDamage * layersOfBleeding);
     }
 }

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Player_Summons_Base : Summons_Base
 {
-    public bool isDead { get; set; }
-    public float timer { get; set; }
     public LayerMask whatIsEnemy { get; set; }
     public List<GameObject> enemyDetects { get; set; }
     protected override void Awake()
@@ -19,11 +17,6 @@ public class Player_Summons_Base : Summons_Base
     protected override void Update()
     {
         base.Update();
-        if (isDead)
-        {
-            StartCoroutine(DeadDestroy(timer));
-            return;
-        }
         enemyDetect();
         attackDetect();
         CloestTargetDetect();

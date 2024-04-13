@@ -10,7 +10,6 @@ public class Saber_Skill_Controller : MonoBehaviour
     [SerializeField] private int maxNumOfHit;
     private Player_Saber player_Saber;
     public int numOfHit;
-    public bool isHave_X_Equipment;
 
     private void Awake()
     {
@@ -18,7 +17,7 @@ public class Saber_Skill_Controller : MonoBehaviour
     }
     private void Start()
     {
-        if (isHave_X_Equipment)
+        if (SkillManger.instance.saber_Skill.isHave_X_Equipment)
         {
             player_Saber.stats.maxHp.AddModfiers(player_Saber.stats.maxHp.GetValue() * extraAddHp);
             player_Saber.stats.UpdataHp();
@@ -39,12 +38,12 @@ public class Saber_Skill_Controller : MonoBehaviour
         if (numOfHit == maxNumOfHit)
         {
             CounterAttack(player_Saber.stats.actualArmor);
-            numOfHit = maxNumOfHit;
+            numOfHit = 0;
         }
     }
     private void CounterAttack(float counterAttackDamage)
     {
-        if(isHave_X_Equipment == false)
+        if(SkillManger.instance.saber_Skill.isHave_X_Equipment == false)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius);
             foreach(var hit in colliders)

@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class Orb_Controller : MonoBehaviour
 {
+    public int numberOfPenetrations;
     public ObjectPool<GameObject> pool;
     [Tooltip("ÒÆ¶¯ËÙ¶È")]
     public float moveSpeed;

@@ -16,9 +16,16 @@ public class Enemy_Orb_Controller : Orb_Controller
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            AttackTakeDamage();
-            pool.Release(gameObject);
-            attackDetects.Clear();
+            if(numberOfPenetrations <= 0)
+            {
+                pool.Release(gameObject);
+                attackDetects.Clear();
+            }
+            else
+            {
+                numberOfPenetrations--;
+                AttackTakeDamage();
+            }
         }
     }
     public void AttackTarget()

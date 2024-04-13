@@ -25,9 +25,6 @@ public class EnemyBase : Base
     [Tooltip("ÅĞ¶ÏÊÇ·ñËÀÍö")]
     [SerializeField] public bool isDead {  get; set; }
 
-    [Tooltip("ÊÇ·ñÊÜ»÷")]
-    [SerializeField] public bool isHit {  get; set; }
-
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷ºÍÑ°µĞ·¶Î§")]
     [SerializeField] public bool drawTheBorderOrNot {  get; set; }
 
@@ -59,7 +56,6 @@ public class EnemyBase : Base
     protected override void Update()
     {
         base.Update();
-        isHit = false;
         stateMachine.currentState.Update();
         if (isDead)
         {

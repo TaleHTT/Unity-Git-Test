@@ -15,4 +15,13 @@ public class EnemyStats : CharacterStats
         base.TakeDamage(damage);
         enemy.DamageEffect();
     }
+    public override void TakeTreat(float damage)
+    {
+        base.TakeTreat(damage);
+    }
+    public override void AuthenticTakeDamage(float damage)
+    {
+        base.AuthenticTakeDamage(damage);
+        enemy.DamageEffect();
+    }
 }
