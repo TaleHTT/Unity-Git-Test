@@ -22048,9 +22048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0743f5914efff246b5d7ea67cb02c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: []
-  damage: 0
-  coolDown: 0
+  Summon_Hound_Prefab: {fileID: 0}
+  isHave_X_Equipment: 0
 --- !u!114 &378727006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23118,7 +23117,7 @@ PrefabInstance:
     - target: {fileID: 6862032374790227972, guid: 5fcd0430d325ccd4da30e1fc9ee361fc, type: 3}
       propertyPath: enemyCollector
       value: 
-      objectReference: {fileID: 6997823488930186103, guid: dce3f26d970318e4c854cf8186bcc68c, type: 3}
+      objectReference: {fileID: 5670164184901458647, guid: 5fcd0430d325ccd4da30e1fc9ee361fc, type: 3}
     - target: {fileID: 6862032374790227972, guid: 5fcd0430d325ccd4da30e1fc9ee361fc, type: 3}
       propertyPath: patrolPoint.Array.size
       value: 5

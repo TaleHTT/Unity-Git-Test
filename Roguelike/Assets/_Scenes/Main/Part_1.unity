@@ -23831,7 +23831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Summon_Hound_Prefab: {fileID: 0}
-  multipleArrows_Prefab: {fileID: 0}
+  isHave_X_Equipment: 0
 --- !u!114 &378727006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23856,6 +23856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d92271c2741fae49adff5687fc17a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHave_X_Equipment: 0
   persistentTimer: 5
   coolDown: 10
 --- !u!114 &378727008
@@ -23870,6 +23871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa064380fadc9b4aa5ad6a79f040253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHave_X_Equipment: 0
   persistentTimer: 0
   coolDown: 0
 --- !u!114 &378727009
@@ -23884,6 +23886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a992d9b8c7519b54b9238fc12b2a3dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHave_X_Equipment: 0
   persistentTimer: 0
   coolDown: 0
 --- !u!1 &512009784
@@ -25235,7 +25238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: edit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: speed

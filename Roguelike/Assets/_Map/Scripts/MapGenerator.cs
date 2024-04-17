@@ -238,6 +238,7 @@ public class MapGenerator : MonoBehaviour
                 GameRoot.Instance.sceneSystem.SetScene(new Part_3());
                 break;
         }
+        PlayerTeam.SaveData();
         this.gameObject.SetActive(false);
     }
 

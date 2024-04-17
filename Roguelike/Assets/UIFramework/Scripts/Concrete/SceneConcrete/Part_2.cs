@@ -41,7 +41,7 @@ public class Part_2 : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        //panelManager.Push();
+        GameRoot.Instance.panelManager.Push(new Part_2Panel());
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }
