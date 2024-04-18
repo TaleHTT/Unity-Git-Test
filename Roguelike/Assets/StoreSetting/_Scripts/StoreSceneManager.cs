@@ -1,48 +1,77 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoreSceneManager : MonoBehaviour
 {
-    
+    [SerializeField]
+    GameObject storePanel;
 
-    public static class ImageToPlayerPrefab
+    [SerializeField]
+    GameObject[] storeSlots;
+
+    /// <summary>
+    /// 商店界面在StoreSlot会生成的角色
+    /// </summary>
+    [SerializeField]
+    GameObject[] playerInStoreSlotPrefabs;
+
+    public static class ImagePlayerPrefabTransition
     {
-        public static string saberGameObjectName = "Saber";
+        public static string saberImageGameObjectName = "Saber(Clone)";
         public static string saberPrefabPath = "PlayerPrefab/PlayerSaber";
 
-        public static string archerGameObjectName = "Archer";
+        public static string saberPrefabName = "PlayerSaber";
+        public static string saberImagePreafabPath = "PlayerImage/Saber";
+
+
+        public static string archerImageGameObjectName = "Archer(Clone)";
         public static string archerPrefabPath = "PlayerPrefab/PlayerArcher";
 
-        public static string casterGameObjectName = "Caster";
+        public static string archerPrefabName = "PlayerArcher";
+        public static string archerImagePreafabPath = "PlayerImage/Archer";
+
+
+        public static string casterImageGameObjectName = "Caster(Clone)";
         public static string casterPrefabPath = "PlayerPrefab/PlayerCaster";
 
+        public static string casterPrefabName = "PlayerCaster";
+        public static string casterImagePreafabPath = "PlayerImage/Caster";
+
         public static Dictionary<string, Object> imageToPlayerPrefab;
+        public static Dictionary<string, Object> playerPrefabToImage;
 
         public static void Init()
         {
-            imageToPlayerPrefab = new Dictionary<string, Object>();
+            imageToPlayerPrefab = new Dictionary<string, Object>
+            {
+                { saberImageGameObjectName, Resources.Load<GameObject>(saberPrefabPath) },
+                { archerImageGameObjectName, Resources.Load<GameObject>(archerPrefabPath) },
+                { casterImageGameObjectName, Resources.Load<GameObject>(casterPrefabPath) }
+            };
 
-            /*GameObject test = Resources.Load<Object>("PlayerImage/Archer") as GameObject;
-            Debug.Log(test);*/
+            playerPrefabToImage = new Dictionary<string, Object>
+            {
+                { saberPrefabName, Resources.Load<GameObject>(saberImagePreafabPath) },
+                { archerPrefabName, Resources.Load<GameObject>(archerImagePreafabPath) },
+                { casterPrefabName, Resources.Load<GameObject>(casterImagePreafabPath) }
+            };
 
-            //imageToPlayerPrefab.Add(Resources.Load<GameObject>(saberImagePath), test);
 
-            imageToPlayerPrefab.Add(saberGameObjectName, Resources.Load<GameObject>(saberPrefabPath));
-            imageToPlayerPrefab.Add(archerGameObjectName, Resources.Load<GameObject>(archerPrefabPath));
-            imageToPlayerPrefab.Add(casterGameObjectName, Resources.Load<GameObject>(casterPrefabPath));
         }
     }
 
     private void Awake()
     {
-        ImageToPlayerPrefab.Init();
+        ImagePlayerPrefabTransition.Init();
         //playerPrefabInTeam = new GameObject[6];
+        
     }
 
     private void Start()
     {
+        RandomGeneratePlayerInStoreSlot();
+        SetPlayerInTeamDataToPlayerTeamSlot();
     }
 
     private void Update()
@@ -51,13 +80,46 @@ public class StoreSceneManager : MonoBehaviour
         ShowPlayerPrefabInTeam();
     }
 
+    /// <summary>
+    /// 将data中的playerprefab数据转换成image显示出来
+    /// </summary>
+    void SetPlayerInTeamDataToPlayerTeamSlot()
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            if(PlayerTeam.playerInTeamPrefabs[i] != null)
+            {
+                //PlayerTeamSlotDetect.Instance.playerTeamSlots[i] = 
+                GameObject _ = Instantiate(ImagePlayerPrefabTransition.playerPrefabToImage[PlayerTeam.playerInTeamPrefabs[i].name] as GameObject, 
+                    storePanel.transform);
+                _.transform.position = PlayerTeamSlotDetect.Instance.playerTeamSlots[i].transform.position;
+                PlayerTeamSlotDetect.Instance.playersInTeam[i] = _;
+
+            }
+        }
+    }
+
+    /// <summary>
+    /// 在选取格中随机生成image物体
+    /// </summary>
+    void RandomGeneratePlayerInStoreSlot()
+    {
+        int minPrefabIndex = 0, maxPrefabIndex = playerInStoreSlotPrefabs.Length;
+        for(int i = 0; i < storeSlots.Length; i++)
+        {
+            int index = Random.Range(minPrefabIndex, maxPrefabIndex);
+            GameObject _ = Instantiate(playerInStoreSlotPrefabs[index], storePanel.transform);
+            _.transform.position = storeSlots[i].transform.position;
+        }
+    }
+
     public void SetPlayerPrefabInTeam()
     {
         for(int i = 0; i < PlayerTeamSlotDetect.Instance.globalMaxPlayerNum; i++)
         {
             if (PlayerTeamSlotDetect.Instance.playersInTeam[i] != null)
             {
-                PlayerTeamManager.Instance.playerPrefabInTeam[i] = ImageToPlayerPrefab.imageToPlayerPrefab[PlayerTeamSlotDetect.Instance.playersInTeam[i].name] as GameObject;
+                PlayerTeamManager.Instance.playerPrefabInTeam[i] = ImagePlayerPrefabTransition.imageToPlayerPrefab[PlayerTeamSlotDetect.Instance.playersInTeam[i].GetComponent<Image>().name] as GameObject;
                 //Debug.Log(playerPrefabInTeam[i]);
             }
             else
