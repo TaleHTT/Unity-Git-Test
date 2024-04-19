@@ -40,7 +40,10 @@ public class Node : MonoBehaviour
     /// <summary>
     /// 该节点是否被选中
     /// </summary>
-    public bool IsSeleced = false;
+    public bool IsSeleced = true;
+    /// <summary>
+    /// 根据进度判断当前节点是否可以点击
+    /// </summary>
     public bool IsActive = false;
     /// <summary>
     /// 该节点点击后前往的场景

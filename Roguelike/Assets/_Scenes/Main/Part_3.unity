@@ -22033,9 +22033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb542749fa70204691da5ef91f13573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: []
-  damage: 0
-  coolDown: 0
 --- !u!114 &378727005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23057,7 +23054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9416145298a424fb55418f97ded0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 0
 --- !u!1001 &1154608029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23638,6 +23634,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: edit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
@@ -23647,7 +23647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: charactersInTeamPrefabs.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: charactersInTeamPrefabs.Array.data[0]
@@ -23657,6 +23657,26 @@ PrefabInstance:
       propertyPath: charactersInTeamPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 2990418013000992433, guid: e6abc4217dc80654fa9a71677ad61d9b, type: 3}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: charactersInTeamPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: charactersInTeamPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: charactersInTeamPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: charactersInTeamPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828685775978387965, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: charactersInTeamPrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

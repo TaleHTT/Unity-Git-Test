@@ -14,8 +14,19 @@ public class StartPanel : BasePanel
 
     public override void OnEnter()
     {
-        UITool.GetOrAddComponentInChildren<Button>("StartButton").onClick.AddListener(() =>
+        UITool.GetOrAddComponentInChildren<Button>("NewGameButton").onClick.AddListener(() =>
         {
+            PlayerTeam.DeleteData();
+            GameRoot.Progress.DeleteData();
+            MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
+            GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+        });
+
+        UITool.GetOrAddComponentInChildren<Button>("ContinueGameButton").onClick.AddListener(() =>
+        {
+            PlayerTeam.LoadData();
+            GameRoot.Progress.LoadData();
+            MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
         });
     }

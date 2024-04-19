@@ -17,6 +17,35 @@ public class GameRoot : MonoBehaviour
     public PanelManager panelManager { get; private set; }
     public GameObject mapGenerator;
 
+    public class Progress
+    {
+        static private readonly string PROGRESS_DATA = "ProgressData.data";
+        static public int currentLevel = 0;
+
+        class ProgressData
+        {
+            public int level;
+        }
+
+        static public void SaveData()
+        {
+            ProgressData data = new ProgressData();
+            data.level = currentLevel;
+            SaveSystem.SaveByJson(PROGRESS_DATA, data);
+        }
+
+        static public void LoadData()
+        {
+            ProgressData data = SaveSystem.LoadFromJson<ProgressData>(PROGRESS_DATA);
+            currentLevel = data.level;
+        }
+
+        static public void DeleteData()
+        {
+            SaveSystem.DeleteSaveFile(PROGRESS_DATA);
+        }
+    }
+
     private void Awake()
     {
 
@@ -37,6 +66,11 @@ public class GameRoot : MonoBehaviour
     private void Start()
     {
         sceneSystem.SetScene(new StartScene());
+    }
+
+    private void Update()
+    {
+        Debug.Log(Progress.currentLevel);
     }
 
     IEnumerator InitMap()

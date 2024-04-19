@@ -50,8 +50,9 @@ public static class SaveSystem
         catch (System.Exception exception)
         {
 #if UNITY_EDITOR
-            Debug.LogError($"读取数据失败：{path}.\n{exception}");
+            Debug.LogError($"读取数据失败：{path}.\n{exception}\n新创建一个为空的文件");
 #endif
+            //SaveByJson(saveFileName);
             return default;
         }
     }

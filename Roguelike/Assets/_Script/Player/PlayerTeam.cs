@@ -36,4 +36,9 @@ class PlayerTeam
 
         Array.Copy(playerTeamData.playerPrefabs, playerInTeamPrefabs, TeamSize);
     }
+
+    public static void DeleteData()
+    {
+        SaveSystem.DeleteSaveFile(PLAYER_TEAM_INFO_FILE_NAME);
+    }
 }

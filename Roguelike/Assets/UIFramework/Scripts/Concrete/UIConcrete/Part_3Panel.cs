@@ -16,6 +16,9 @@ public class Part_3Panel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("ContinueButton").onClick.AddListener(() =>
         {
+            GameRoot.Progress.currentLevel++;
+            GameRoot.Progress.SaveData();
+            MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
         });
     }
