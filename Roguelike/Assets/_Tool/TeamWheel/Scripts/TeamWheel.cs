@@ -17,6 +17,8 @@ public class TeamWheel : MonoBehaviour
     /// </summary>
     private GameObject[] charactersInTeam;
 
+    PlayerTeam playerTeam;
+
     public GameObject centerPointPrefab;
     private GameObject centerPoint;
 
@@ -48,6 +50,7 @@ public class TeamWheel : MonoBehaviour
 
     private void Awake()
     {
+        playerTeam = new PlayerTeam();
         Init();
         NumOfCharacterInTeamsCal();
         Instance = this;
@@ -172,8 +175,9 @@ public class TeamWheel : MonoBehaviour
         {
             for (int i = 0; i < globalMaxCharacterNum; i++)
             {
-                if (PlayerTeamManager.Instance.playerPrefabInTeam[i] == null) continue;
-                charactersInTeam[i] = Instantiate(PlayerTeamManager.Instance.playerPrefabInTeam[i], characterPlacePoints[i].transform.position,
+                PlayerTeam.LoadData();
+                if (PlayerTeam.playerInTeamPrefabs[i] == null) continue;
+                charactersInTeam[i] = Instantiate(PlayerTeam.playerInTeamPrefabs[i], characterPlacePoints[i].transform.position,
                     Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
             }
         }

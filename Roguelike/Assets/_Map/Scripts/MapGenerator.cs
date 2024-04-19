@@ -69,9 +69,6 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
         StartCoroutine(IE_InitMap());
         StartGenerate();
-
-        //测试用
-
     }
 
     /// <summary>
@@ -176,6 +173,36 @@ public class MapGenerator : MonoBehaviour
     }
 
     /// <summary>
+    /// 根据关卡进度，给不同节点设置active程度
+    /// </summary>
+    /// <param name="currentLevel">当前关卡进度，当前层的node设置成active，其他都disactive，从0开始</param>
+    public void NodeLevelSet(int currentLevelInput)
+    {
+        for (int i = 0; i < LAYERS; i++)
+        {
+            if (currentLevelInput == i)
+            {
+                foreach (Node item in nodes[i])
+                {
+                    item.IsActive = true;
+                    if (item.GetComponentInChildren<Button>() == null) continue;
+                    item.GetComponentInChildren<Button>().interactable = true;
+                }
+            }
+            else
+            {
+                foreach (Node item in nodes[i])
+                {
+                    item.IsActive = false;
+                    if (item.GetComponentInChildren<Button>() == null) continue;
+                    item.GetComponentInChildren<Button>().interactable = false;
+                }
+            }
+            
+        }
+    }
+
+    /// <summary>
     /// 为每一个节点创建UI元素
     /// </summary>
     private void CreateNodeUI()
@@ -198,7 +225,6 @@ public class MapGenerator : MonoBehaviour
                 // 将UI元素赋值给节点的ui属性
                 // node.ui = nodeUI;
                 AssignLevel(node, node.type);
-
             }
         }
     }
@@ -238,6 +264,7 @@ public class MapGenerator : MonoBehaviour
                 GameRoot.Instance.sceneSystem.SetScene(new Part_3());
                 break;
         }
+        PlayerTeam.SaveData();
         this.gameObject.SetActive(false);
     }
 

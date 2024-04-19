@@ -27,11 +27,15 @@ public class PlayerTeamSlotDetect : MonoBehaviour
         _EventSystem = FindObjectOfType<EventSystem>();
         //主场景的射线检测器
         gra = FindObjectOfType<GraphicRaycaster>();
+    }
+
+    private void Start()
+    {
         playersInTeam = new GameObject[globalMaxPlayerNum];
         PlayerTeamSLotsInit();
     }
 
-    public void PlayerTeamSLotsInit()
+    private void PlayerTeamSLotsInit()
     {
         playerTeamSlots = new GameObject[globalMaxPlayerNum];
         int index = 0;
