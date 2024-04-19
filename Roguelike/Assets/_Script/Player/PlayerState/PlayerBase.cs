@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,20 +11,13 @@ public enum PlayerOccupation
 }
 public class PlayerBase : Base
 {
+    [Header("Occupation info")]
     public PlayerOccupation occupation;
 
-    [Header("Attack info")]
+    [Header("Attack Layer info")]
     public LayerMask whatIsEnemy;
 
-    [Tooltip("¹¥»÷·¶Î§")]
-    public float attackRadius;
-
-    [Tooltip("ËÀÍöºó£¬¾­¹ýtimerÃëºóÏú»Ù")]
-    [SerializeField] public float timer {  get; set; }
-
-    [Tooltip("ÊÇ·ñËÀÍö")]
-    [SerializeField] public bool isDead {  get; set; }
-
+    [Header("Show Range info")]
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     [SerializeField] private bool drawTheBorderOrNot;
 
@@ -48,15 +42,6 @@ public class PlayerBase : Base
     {
         base.Update();
         stateMachine.currentState.Update();
-        if (isDead)
-        {
-            StartCoroutine(DeadDestroy(timer));
-            return;
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
         EnemyDetect();
         CloestTargetDetect();
     }
@@ -64,7 +49,7 @@ public class PlayerBase : Base
     {
         if (!drawTheBorderOrNot)
             return;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
+        Gizmos.DrawWireSphere(transform.position, stats.attackRadius);
     }
     public void CloestTargetDetect()
     {
@@ -80,22 +65,11 @@ public class PlayerBase : Base
     }
     public void EnemyDetect()
     {
-        detectTimer -= Time.deltaTime;
-        if (detectTimer > 0)
-        {
-            detectTimer = 1;
-            return;
-        }
-        var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, stats.attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {
             enemyDetects.Add(enemy.gameObject);
         }
-    }
-    public IEnumerator DeadDestroy(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        gameObject.SetActive(false);
     }
     public override void DamageEffect()
     {
@@ -108,6 +82,15 @@ public class PlayerBase : Base
     public virtual void AnimationCasterAttack()
     {
 
+    }
+    public virtual void AnimationPriestAttack()
+    {
+        
+    }
+
+    public virtual void AnimationIceCasterAttack()
+    {
+        
     }
 }
 

@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +33,7 @@ public class PlayerTeamManager : MonoBehaviour
 
     private void CurrentSceneDetect()
     {
-        if(SceneManager.GetActiveScene().name == "StoreScene")
+        if (SceneManager.GetActiveScene().name == "StoreScene")
         {
             inStoreScene = true;
         }
@@ -48,7 +47,7 @@ public class PlayerTeamManager : MonoBehaviour
     {
         if (!inStoreScene) return;
         currentPlayerNum = 0;
-        for(int i = 0; i < globalMaxPlayerNum; i++)
+        for (int i = 0; i < globalMaxPlayerNum; i++)
         {
             if (playerPrefabInTeam[i] != null)
             {

@@ -1,4 +1,5 @@
 using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,12 +63,12 @@ public class EnemyState
     }
     public void DeadLogci()
     {
-        enemy.cd.enabled = false;
-        enemy.stats.attackRadius.baseValue = 0;
+        enemy.stats.attackRadius = 0;
         enemy.chaseRadius = 0;
         enemy.attackDetects.Clear();
         enemy.playerDetects.Clear();
         enemy.isDead = true;
         EnemyManager.instance.enemyCount--;
+        enemy.cd.enabled = false;
     }
 }

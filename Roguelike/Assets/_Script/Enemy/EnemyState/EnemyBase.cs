@@ -20,12 +20,6 @@ public class EnemyBase : Base
     public float chaseRadius;
     public float attackRadius;
 
-    [Tooltip("ËÀÍöºó£¬¾­¹ýtimerÃëºóÏú»ÙÎïÌå")]
-    [SerializeField] public float timer {  get; set; }
-
-    [Tooltip("ÅÐ¶ÏÊÇ·ñËÀÍö")]
-    [SerializeField] public bool isDead {  get; set; }
-
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷ºÍÑ°µÐ·¶Î§")]
     [SerializeField] public bool drawTheBorderOrNot {  get; set; }
 
@@ -60,7 +54,19 @@ public class EnemyBase : Base
         stateMachine.currentState.Update();
         if (isDead)
         {
-            StartCoroutine(DeadDestroy(timer));
+            if(layersOfBurning > 0)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, DataManager.instance.caster_Skill_Data.radius);
+                foreach(var hit in colliders)
+                {
+                    if(hit.GetComponent<EnemyBase>() != null)
+                    {
+                        hit.GetComponent<EnemyBase>().layersOfBurning++;
+                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(stats.damage.GetValue() * (1 + DataManager.instance.caster_Skill_Data.extraAddDamage) * layersOfBurning);
+                    }
+                }
+            }
+            StartCoroutine(DeadDestroy(deadTimer));
             return;
         }
         playerDetect();
@@ -69,12 +75,6 @@ public class EnemyBase : Base
     }
     public void playerDetect()
     {
-        detectTimer -= Time.deltaTime;
-        if (detectTimer > 0)
-        {
-            detectTimer = 1;
-            return;
-        }
         var colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
@@ -95,12 +95,6 @@ public class EnemyBase : Base
     }
     public void AttackDetect()
     {
-        detectTimer -= Time.deltaTime;
-        if (detectTimer < 0)
-        {
-            detectTimer = 1;
-            return;
-        }
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
@@ -113,11 +107,6 @@ public class EnemyBase : Base
             return;
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
         Gizmos.DrawWireSphere(transform.position, attackRadius);
-    }
-    public IEnumerator DeadDestroy(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        Destroy(gameObject);
     }
     public override void DamageEffect()
     {

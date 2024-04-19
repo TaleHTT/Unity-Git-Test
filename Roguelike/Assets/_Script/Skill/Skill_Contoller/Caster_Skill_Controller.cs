@@ -9,41 +9,38 @@ public class Caster_Skill_Controller : MonoBehaviour
     public GameObject burningRingsPrefab;
     [Tooltip("陨石预制体")]
     public GameObject meteoritePrefab;
-    public int numberOfAttack;
-    public int maxNumberOfAttack;
+    private int numberOfAttack;
     public float explodeDamage;
-    public float explodeRadius;
-    [SerializeField][Range(0, 1)] private float add; 
+    public float timer;
     Player_Caster player_Caster;
     private void Awake()
     {
         player_Caster = GetComponent<Player_Caster>();
-        meteoritePool = new ObjectPool<GameObject>(CreatemeteoritesFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
+        timer = DataManager.instance.caster_Skill_Data.CD;
+        meteoritePool = new ObjectPool<GameObject>(CreateMeteoritesFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         burningRingsPool = new ObjectPool<GameObject>(CreateburningRingsFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         player_Caster.orbPerfab.GetComponent<Orb_Controller>().burningRingsPool = burningRingsPool;
-        player_Caster.orbPerfab.GetComponent<Orb_Controller>().strengthExplosionRadius = explodeRadius;
-        player_Caster.orbPerfab.GetComponent<Orb_Controller>().strengthExplosionDamage = player_Caster.orbPerfab.GetComponent<Orb_Controller>().damage * (1 + add);
+        player_Caster.orbPerfab.GetComponent<Orb_Controller>().strengthExplosionRadius = DataManager.instance.caster_Skill_Data.skill_1_explodeRadius;
+        player_Caster.orbPerfab.GetComponent<Orb_Controller>().strengthExplosionDamage = player_Caster.orbPerfab.GetComponent<Orb_Controller>().damage * (1 + DataManager.instance.caster_Skill_Data.skill_1_extraAddExplodeDamage);
     }
     private void Update()
     {
         StrengthenTheOrb();
-        if (SkillManger.instance.caster_Skill.coolDown <= 0)
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
             meteoritePool.Get();
+            timer = DataManager.instance.caster_Skill_Data.CD;
+        }
     }
     private void StrengthenTheOrb()
     {
-        if(numberOfAttack >= maxNumberOfAttack)
-        {
+        if(numberOfAttack >= DataManager.instance.caster_Skill_Data.maxNumberOfAttack)
             player_Caster.orbPerfab.transform.localScale = Vector2.one * 2;
-            player_Caster.orbPerfab.GetComponent<Orb_Controller>().cd.radius = player_Caster.orbPerfab.GetComponent<Orb_Controller>().cd.radius * 2;
-        }
         else
-        {
             player_Caster.orbPerfab.transform.localScale = player_Caster.orbPerfab.GetComponent<Orb_Controller>().defaultScale;
-            player_Caster.orbPerfab.GetComponent<Orb_Controller>().cd.radius = player_Caster.orbPerfab.GetComponent<Orb_Controller>().cdDefaultRadius;
-        }
     }
-    private GameObject CreatemeteoritesFunc()
+    private GameObject CreateMeteoritesFunc()
     {
         var _object = Instantiate(meteoritePrefab, transform.position, Quaternion.identity);
         _object.GetComponent<Meteorite_Conroller>().meteoritePool = meteoritePool;

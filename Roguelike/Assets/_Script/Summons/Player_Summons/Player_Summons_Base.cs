@@ -35,11 +35,6 @@ public class Player_Summons_Base : Summons_Base
     }
     public void enemyDetect()
     {
-        if (detectTimer < 0)
-        {
-            detectTimer = 1;
-            return;
-        }
         enemyDetects = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsEnemy);
         foreach (var enemy in colliders)
@@ -50,11 +45,6 @@ public class Player_Summons_Base : Summons_Base
     }
     public void attackDetect()
     {
-        if (detectTimer < 0)
-        {
-            detectTimer = 1;
-            return;
-        }
         attackDetects = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)

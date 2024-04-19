@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Saber_Skill_Controller : MonoBehaviour
 {
-    [SerializeField][Range(0, 1)] private float addArmor;
-    [SerializeField][Range(0, 1)] private float extraAddHp;
-    [SerializeField][Range(0, 1)] private float extraAddArmor;
-    [SerializeField][Range(0, 1)] private float extraAddDamage;
-    [SerializeField] private float extraAddAttackRadius;
-    [SerializeField] private int maxNumOfHit;
-    private Player_Saber player_Saber;
-    public int numOfHit;
+    public int numOfHit { get; set; }
+    public bool isZeroPosition { get; set; }
+    public float detectRadius {  get; set; }
+
+    public Saber_Skill_Data saber_Skill_Data;
+    public Collider2D[] colliders {  get; set; }
+    public Player_Saber player_Saber {  get; set; }
+    public List<GameObject> saberDetect {  get; set; }
 
     private void Awake()
     {
@@ -17,52 +18,54 @@ public class Saber_Skill_Controller : MonoBehaviour
     }
     private void Start()
     {
-        if (SkillManger.instance.saber_Skill.isHave_X_Equipment)
+        if (SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
-            player_Saber.stats.maxHp.AddModfiers(player_Saber.stats.maxHp.GetValue() * extraAddHp);
-            player_Saber.stats.UpdataHp();
+            player_Saber.stats.armor.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
 
-            player_Saber.stats.baseDamage.AddModfiers(player_Saber.stats.baseDamage.GetValue() * extraAddDamage);
-            player_Saber.stats.baseArmor.AddModfiers(player_Saber.stats.baseArmor.GetValue() * extraAddArmor);
+            player_Saber.stats.maxHp.AddModfiers(player_Saber.stats.maxHp.GetValue() * saber_Skill_Data.extraAddHp);
+            player_Saber.stats.UpdataHp();   
         }        
     }
     private void Update()
     {
         if (player_Saber.isDefense == true)
-        {
-            player_Saber.stats.actualArmor = player_Saber.stats.baseArmor.AddArmor(addArmor, player_Saber.stats.baseArmor.GetValue());
-        }
+            player_Saber.stats.armor.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
         else
-            player_Saber.stats.actualArmor = player_Saber.stats.baseArmor.GetValue();
+            player_Saber.stats.armor.RemoveModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
 
-        if (numOfHit == maxNumOfHit)
+        if(SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
+            player_Saber.stats.damage.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddDamage);
+
+        if (numOfHit == saber_Skill_Data.maxNumOfHit)
         {
-            CounterAttack(player_Saber.stats.actualArmor);
+            CounterAttack(player_Saber.stats.armor.GetValue());
             numOfHit = 0;
+        }
+    }
+    private void SaberDetect()
+    {
+        colliders = Physics2D.OverlapCircleAll(transform.position, detectRadius);
+        foreach(var saber in colliders)
+        {
+            if (saber.GetComponent<Player_Saber>() != null)
+                saberDetect.Add(saber.gameObject);
         }
     }
     private void CounterAttack(float counterAttackDamage)
     {
-        if(SkillManger.instance.saber_Skill.isHave_X_Equipment == false)
+        if(SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius);
-            foreach(var hit in colliders)
-            {
-                if(hit.GetComponent<EnemyStats>() != null)
-                {
-                    hit.GetComponent<EnemyStats>().TakeDamage((1 + addArmor) * counterAttackDamage);
-                }
-            }
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.stats.attackRadius);
         }
         else
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius + extraAddAttackRadius);
-            foreach (var hit in colliders)
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.stats.attackRadius * (1 + saber_Skill_Data.extraAddAttackRadius));
+        }
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<EnemyStats>() != null)
             {
-                if (hit.GetComponent<EnemyStats>() != null)
-                {
-                    hit.GetComponent<EnemyStats>().TakeDamage((1 + addArmor) * counterAttackDamage);
-                }
+                hit.GetComponent<EnemyStats>().TakeDamage((1 + saber_Skill_Data.extraAddArmor) * counterAttackDamage);
             }
         }
     }

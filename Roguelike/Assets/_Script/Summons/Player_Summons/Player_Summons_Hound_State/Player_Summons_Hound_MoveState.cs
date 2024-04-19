@@ -17,7 +17,7 @@
     public override void Update()
     {
         base.Update();
-        if (player_Summons_Hound_Controller.enemyDetects.Count > 0)
-            stateMachine.ChangeState(player_Summons_Hound_Controller.houndChaseState);
+        if (player_Summons_Hound.enemyDetects.Count > 0)
+            stateMachine.ChangeState(player_Summons_Hound.houndChaseState);
     }
 }

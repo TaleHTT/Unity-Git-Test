@@ -33,9 +33,9 @@ public class PlayerState
     {
         triggerCalled = true;
     }
-    public void DeadLogci()
+    public void DeadLogic()
     {
-        player.stats.attackRadius.baseValue = 0;
+        player.stats.attackRadius = 0;
         player.cd.enabled = false;
         player.enemyDetects.Clear();
         player.anim.SetBool("Attack", false);

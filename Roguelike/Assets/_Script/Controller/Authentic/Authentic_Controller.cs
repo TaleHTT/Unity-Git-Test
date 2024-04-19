@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class Authentic_Controller : MonoBehaviour
 {
-    public ObjectPool<GameObject> pool;
+    public ObjectPool<GameObject> authenticPool;
     [Tooltip("移动速度")]
     public float moveSpeed;
     [Tooltip("伤害")]
@@ -28,7 +28,7 @@ public class Authentic_Controller : MonoBehaviour
         if (coolDownTimer < 0)
         {
             coolDownTimer = timer;
-            pool.Release(gameObject);
+            authenticPool.Release(gameObject);
         }
     }
     public void ArrowDir() => arrowDir = (attackTarget.position - transform.position).normalized;

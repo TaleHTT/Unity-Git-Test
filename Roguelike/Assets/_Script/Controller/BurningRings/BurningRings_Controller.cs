@@ -4,7 +4,6 @@ using UnityEngine.Pool;
 
 public class BurningRings_Controller : MonoBehaviour
 {
-    [SerializeField][Range(0, 1)] private float add;
     public ObjectPool<GameObject> burningRingsPool;
     public float timer;
     public float burningDamage;
@@ -13,7 +12,7 @@ public class BurningRings_Controller : MonoBehaviour
     public Player_Orb_Controller player_Orb_Controller;
     private void Awake()
     {
-        burningDamage = (1 + add) * player_Orb_Controller.damage;
+        burningDamage = (1 + DataManager.instance.caster_Skill_Data.skill_1_extraAddExplodeDamage) * player_Orb_Controller.damage;
     }
     private void Update()
     {

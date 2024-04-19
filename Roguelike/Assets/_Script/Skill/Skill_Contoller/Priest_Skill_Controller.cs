@@ -1,78 +1,103 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Priest_Skill_Controller : MonoBehaviour
 {
-    public float damage;
-    [SerializeField][Range(0, 1)] private float resurrectionHpPercent;
-    public float amountOfHealing;
-    public float treatRadius;
-    public GameObject treatTarget;
-    private List<GameObject> playerDetect;
-    public LayerMask whatIsPlayer;
-    public LayerMask whatIsEnemy;
-    private int numberOfRespawns = 1;
-    public int numberOfTreatments {  get; set; }
+    private float timer;
     public float attackRidus;
-    public int maxNumberOfTreatments;
     private Player_Priest player_Priest;
+    public int numberOfTreatments { get; set; }
+    public GameObject[] treatTarget {  get; set; }
+    public List<GameObject> treatDetect;
+
 
     private void Awake()
     {
+        timer = DataManager.instance.priest_Skill_Data.CD;
         player_Priest = GetComponent<Player_Priest>();
+        if (player_Priest.stats.level <= 5)
+            treatTarget = new GameObject[player_Priest.stats.level];
+        else
+            treatTarget = new GameObject[5];
     }
     private void Update()
     {
-        if(SkillManger.instance.priest_Skill.isHave_X_Equipment == true)
+        if (player_Priest.isDead)
+            return;
+        timer -= Time.deltaTime;
+        if (SkillManger.instance.priest_Skill.isHave_X_Equipment == true)
         {
-            if(numberOfTreatments == maxNumberOfTreatments)
+            if (numberOfTreatments >= DataManager.instance.priest_Skill_Data.maxNumberOfTreatments)
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRidus, whatIsEnemy);
-                foreach(var hit in colliders)
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRidus, DataManager.instance.priest_Skill_Data.whatIsEnemy);
+                foreach (var hit in colliders)
                 {
                     if (hit.GetComponent<EnemyBase>() != null)
-                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(damage);
+                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(DataManager.instance.priest_Skill_Data.authenticDamage);
                 }
             }
+            numberOfTreatments = 0;
         }
         RespawnsPlayer();
-        PlayerDetect();
+        TreatDetect();
         TreatTarget();
+        TreatSkill();
     }
     public void RespawnsPlayer()
     {
-        for(int i = 0; i < playerDetect.Count; i++)
+        if (player_Priest.isDead)
+            return;
+        for (int i = 0; i < treatDetect.Count; i++)
         {
-            if (playerDetect[i].GetComponent<PlayerBase>().isDead == true && numberOfRespawns != 0)
+            if (treatDetect[i].GetComponent<PlayerBase>().isDead == true && DataManager.instance.priest_Skill_Data.numberOfRespawns != 0)
             {
-                playerDetect[i].GetComponent<PlayerBase>().isDead = false;
-                playerDetect[i].GetComponent<PlayerBase>().stats.currentHealth = resurrectionHpPercent * player_Priest.stats.maxHp.GetValue();
-                numberOfRespawns--;
+                treatDetect[i].GetComponent<PlayerBase>().isDead = false;
+                treatDetect[i].GetComponent<PlayerBase>().stats.currentHealth = DataManager.instance.priest_Skill_Data.resurrectionHpPercent * player_Priest.stats.maxHp.GetValue();
+                DataManager.instance.priest_Skill_Data.numberOfRespawns--;
             }
         }
     }
-    public void PlayerDetect()
+    public void TreatDetect()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, treatRadius, whatIsPlayer);
-        foreach(var player in colliders)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, DataManager.instance.priest_Skill_Data.treatRadius, DataManager.instance.priest_Skill_Data.whatIsPlayer);
+        foreach (var player in colliders)
         {
-            if(player.GetComponent<PlayerBase>() != null)
+            if (player.GetComponent<PlayerBase>() != null)
             {
-                playerDetect.Add(player.gameObject);
+                treatDetect.Add(player.gameObject);
+                if (player.GetComponent<Priest_Skill>() != null)
+                {
+                    treatDetect.Remove(player.gameObject);
+                }
             }
         }
     }
     public void TreatTarget()
     {
-        float hp = Mathf.Infinity;
-        for(int i = 0; i < playerDetect.Count; i++)
+        for(int i = 0;i < treatDetect.Count - 1;i++)
         {
-            if(hp > playerDetect[i].GetComponent<PlayerStats>().currentHealth)
+            if (treatDetect[i].GetComponent<PlayerStats>().currentHealth >= treatDetect[i + 1].GetComponent<PlayerStats>().currentHealth)
             {
-                hp = playerDetect[i].GetComponent <PlayerStats>().currentHealth;
-                treatTarget = playerDetect[i];
+                GameObject temp = treatDetect[i];
+                treatDetect[i] = treatDetect[i + 1];
+                treatDetect[i + 1] = temp;
             }
+        }
+        for(int i = 0;i < treatTarget.Length; i++)
+        {
+            treatTarget[i] = treatDetect[i];
+        }
+    }
+    private void TreatSkill()
+    {
+        if (treatTarget != null && timer <= 0)
+        {
+            for (int i = 0; i < treatTarget.Length; i++)
+            {
+                treatTarget[i].GetComponent<PlayerStats>()?.TakeTreat((DataManager.instance.priest_Skill_Data.extraAddHeal + 1) * player_Priest.stats.maxHp.GetValue());
+                numberOfTreatments++;
+            }
+            timer = DataManager.instance.priest_Skill_Data.CD;
         }
     }
 }

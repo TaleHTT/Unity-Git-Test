@@ -26,7 +26,7 @@
         stateMachine.currentState.Update();
     }
 
-    internal void DamageEffect()
+    public void DamageEffect()
     {
 
     }

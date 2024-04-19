@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 public class Player_Caster : PlayerBase
 {
-    private ObjectPool<GameObject> pool;
+    private ObjectPool<GameObject> orbPool;
     [Tooltip("∑®«Ú‘§÷∆ÃÂ")]
     public GameObject orbPerfab;
     public PlayerCasterIdleState casterIdleState { get; private set; }
@@ -12,7 +12,7 @@ public class Player_Caster : PlayerBase
     protected override void Awake()
     {
         base.Awake();
-        pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestory, true, 10, 1000);
+        orbPool = new ObjectPool<GameObject>(CreateFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         casterIdleState = new PlayerCasterIdleState(this, stateMachine, "Idle", this);
         casterAttackState = new PlayerCasterAttackState(this, stateMachine, "Attack", this);
         casterDeadState = new PlayerCasterDeadState(this, stateMachine, "Dead", this);
@@ -31,24 +31,24 @@ public class Player_Caster : PlayerBase
     public override void AnimationCasterAttack()
     {
         base.AnimationCasterAttack();
-        pool.Get();
+        orbPool.Get();
     }
-    private GameObject createFunc()
+    private GameObject CreateFunc()
     {
         var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().orbPool = pool;
+        orb.GetComponent<Orb_Controller>().orbPool = orbPool;
         return orb;
     }
-    private void actionOnGet(GameObject orb)
+    private void ActionOnGet(GameObject orb)
     {
         orb.transform.position = transform.position;
         orb.SetActive(true);
     }
-    private void actionOnRelease(GameObject orb)
+    private void ActionOnRelease(GameObject orb)
     {
         orb.SetActive(false);
     }
-    private void actionOnDestory(GameObject orb)
+    private void ActionOnDestory(GameObject orb)
     {
         Destroy(orb);
     }

@@ -6,7 +6,7 @@ public class PlayerCasterDeadState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        DeadLogci();
+        DeadLogic();
     }
     public override void Exit()
     {

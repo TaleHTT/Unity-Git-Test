@@ -19,6 +19,6 @@
     {
         base.Update();
         if (stateTimer <= 0)
-            stateMachine.ChangeState(player_Summons_Hound_Controller.houndMoveState);
+            stateMachine.ChangeState(player_Summons_Hound.houndMoveState);
     }
 }

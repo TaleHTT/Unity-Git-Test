@@ -12,7 +12,7 @@ public enum Shape
     X,
     Rootnumber
 }
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Inventory/Equipment")]
 public class ItemData : ScriptableObject
 {
     public Shape shape;
@@ -36,21 +36,19 @@ public class ItemData : ScriptableObject
     public void AddModfiers(PlayerStats stats)
     {
         stats.maxHp.AddModfiers(maxHp);
-        stats.baseDamage.AddModfiers(damage);
-        stats.baseArmor.AddModfiers(armor);
+        stats.damage.AddModfiers(damage);
+        stats.armor.AddModfiers(armor);
         stats.woundedMultiplier.AddModfiers(woundedMultiplier);
         stats.moveSpeed.AddModfiers(moveSpeed);
-        stats.attackRadius.AddModfiers(attackRadius);
         stats.attackSpeed.AddModfiers(attackSpeed);
     }
     public void RemoveModfiers(PlayerStats stats)
     {
         stats.maxHp.RemoveModfiers(maxHp);
-        stats.baseDamage.RemoveModfiers(damage);
-        stats.baseArmor.RemoveModfiers(armor);
+        stats.damage.RemoveModfiers(damage);
+        stats.armor.RemoveModfiers(armor);
         stats.woundedMultiplier.RemoveModfiers(woundedMultiplier);
         stats.moveSpeed.RemoveModfiers(moveSpeed);
-        stats.attackRadius.RemoveModfiers(attackRadius);
         stats.attackSpeed.RemoveModfiers(attackSpeed);
     }
 }

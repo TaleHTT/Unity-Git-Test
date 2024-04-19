@@ -12,7 +12,7 @@ public class PlayerSaberDefenseState : PlayerState
     {
         base.Enter();
         player_Saber.isDefense = true;
-        stateTimer = SkillManger.instance.saber_Skill.persistentTimer;
+        stateTimer = DataManager.instance.saber_Skill_Data.persistentTimer;
     }
 
     public override void Exit()

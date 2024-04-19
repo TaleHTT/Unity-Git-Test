@@ -7,7 +7,7 @@ public class PlayerSaberDeadState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        DeadLogci();
+        DeadLogic();
     }
 
     public override void Exit()

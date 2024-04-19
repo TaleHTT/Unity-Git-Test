@@ -25,14 +25,11 @@ public class Orb_Controller : MonoBehaviour
     public float attackRadius { get; private set; } = Mathf.Infinity;
     public Transform attackTarget { get; private set; }
     public Vector3 arrowDir { get; private set; }
-    public CircleCollider2D cd { get; set; }
     public Vector2 defaultScale;
     public float cdDefaultRadius;
     private void Awake()
     {
         defaultScale = transform.localScale;
-        cd = GetComponent<CircleCollider2D>();
-        cdDefaultRadius = cd.radius;
     }
     protected virtual void OnEnable()
     {

@@ -2,14 +2,14 @@
 
 public class Player_Summons_Animation_Trigger : MonoBehaviour
 {
-    Player_Summons_Hound player_Summons_Hound_Controller => GetComponent<Player_Summons_Hound>();
+    Player_Summons_Hound player_Summons_Hound => GetComponent<Player_Summons_Hound>();
 
     private void AttackTrigger()
     {
-        if (player_Summons_Hound_Controller.cloestTarget != null)
+        if (player_Summons_Hound.cloestTarget != null)
         {
-            player_Summons_Hound_Controller.cloestTarget.GetComponent<EnemyStats>().TakeDamage(player_Summons_Hound_Controller.stats.baseDamage.GetValue());
-            player_Summons_Hound_Controller.cloestTarget.GetComponent<EnemyBase>().amountOfHit++;
+            player_Summons_Hound.cloestTarget.GetComponent<EnemyStats>().TakeDamage(player_Summons_Hound.damage);
+            player_Summons_Hound.cloestTarget.GetComponent<EnemyBase>().amountOfHit++;
         }
     }
 }

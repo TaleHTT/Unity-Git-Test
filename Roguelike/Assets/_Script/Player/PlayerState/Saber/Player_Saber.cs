@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Player_Saber : PlayerBase
 {
-    public bool isDefense;
-    public bool isMove;
-    public CenterPointMoveLogic centerPointMoveLogic;
+    public bool isMove {  get; set; }
+    public bool isDefense {  get; set; }
+    public float coolTimer { get; set; }
+    public float standTimer {  get; set; }
     public Saber_Skill_Controller saber_Skill_Controller { get; set; }
     public PlayerSaberIdleState saberIdleState { get; private set; }
     public PlayerSaberDeadState saberDeadState { get; private set; }
@@ -27,6 +28,8 @@ public class Player_Saber : PlayerBase
     protected override void Update()
     {
         base.Update();
+        standTimer += Time.deltaTime;
+        coolTimer += Time.deltaTime;
         if(Input.GetMouseButton(0))
             isMove = true;
         else
@@ -35,9 +38,18 @@ public class Player_Saber : PlayerBase
 
         if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(saberDeadState);
-        if (SkillManger.instance.saber_Skill.CanUseSkill() && isMove == false)
+
+        if (coolTimer >= DataManager.instance.saber_Skill_Data.coolTimer && isMove == false && standTimer >= DataManager.instance.saber_Skill_Data.standTimer)
+        {
             stateMachine.ChangeState(saberDefenseState);
+            standTimer = 0;
+            coolTimer = 0;
+        }
+
         if (isHit == true)
+        {
             saber_Skill_Controller.numOfHit++;
+            isHit = false;
+        }
     }
 }

@@ -45,6 +45,8 @@ public class Player_Orb_Controller : Orb_Controller
                 if (hit.GetComponent<EnemyStats>() != null)
                 {
                     hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(damage);
+                    if (SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
+                        hit.GetComponent<EnemyBase>().layersOfBurning++;
                 }
             }
         }
@@ -56,9 +58,10 @@ public class Player_Orb_Controller : Orb_Controller
                 if (hit.GetComponent<EnemyStats>() != null)
                 {
                     hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(strengthExplosionDamage);
-                    if(SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
-                        hit.GetComponent<EnemyBase>().
-
+                    if (SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
+                    {
+                        hit.GetComponent<EnemyBase>().layersOfBurning++;
+                    }
                 }
             }
         }
