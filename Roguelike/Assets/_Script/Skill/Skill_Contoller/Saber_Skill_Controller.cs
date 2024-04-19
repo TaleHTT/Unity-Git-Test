@@ -55,11 +55,11 @@ public class Saber_Skill_Controller : MonoBehaviour
     {
         if(SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
-            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.stats.attackRadius);
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius);
         }
         else
         {
-            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.stats.attackRadius * (1 + saber_Skill_Data.extraAddAttackRadius));
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius * (1 + saber_Skill_Data.extraAddAttackRadius));
         }
         foreach (var hit in colliders)
         {

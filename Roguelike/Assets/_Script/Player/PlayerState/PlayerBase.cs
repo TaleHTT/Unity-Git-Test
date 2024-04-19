@@ -49,7 +49,7 @@ public class PlayerBase : Base
     {
         if (!drawTheBorderOrNot)
             return;
-        Gizmos.DrawWireSphere(transform.position, stats.attackRadius);
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
     public void CloestTargetDetect()
     {
@@ -65,7 +65,7 @@ public class PlayerBase : Base
     }
     public void EnemyDetect()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, stats.attackRadius, whatIsEnemy);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {
             enemyDetects.Add(enemy.gameObject);

@@ -74,7 +74,7 @@ public class Two_Handed_Saber_Skill_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(1f / DataManager.instance.two_Handed_Saber_Skill_Data.times);
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_TwoHandedSaber.stats.attackRadius * 2, player_TwoHandedSaber.whatIsEnemy);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_TwoHandedSaber.attackRadius * 2, player_TwoHandedSaber.whatIsEnemy);
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)

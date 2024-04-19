@@ -16,8 +16,6 @@ public class CharacterStats : MonoBehaviour
     public Stats woundedMultiplier;
     [Tooltip("移动速度")]
     public Stats moveSpeed;
-    [Tooltip("攻击范围")]
-    public float attackRadius;
     [Tooltip("攻击速度")]
     public Stats attackSpeed;
     [Tooltip("治疗范围")]

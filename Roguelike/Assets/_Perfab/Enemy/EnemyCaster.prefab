@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  experience: 0
   currentHealth: 0
   maxHp:
     baseValue: 100
@@ -522,9 +523,6 @@ MonoBehaviour:
     modfiers: []
   moveSpeed:
     baseValue: 2
-    modfiers: []
-  attackRadius:
-    baseValue: 4
     modfiers: []
   attackSpeed:
     baseValue: 0
@@ -572,26 +570,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc6c37154e77584fa4d84dc0a9914c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 8
-  detectTimer: 0
-  stats: {fileID: 8323377847542438778}
+  hit_Assassin: 0
+  deadTimer: 0
+  attackRadius: 5
   occupation: 2
+  layersOfBurning: 0
   chaseRadius: 5
-  timer: 2
-  isDead: 0
   drawTheBorderOrNot: 1
-  isAttacking: 0
-  playerDetects: []
-  attackDetects: []
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cloestPlayer: {fileID: 0}
   OrbPerfab: {fileID: 9028758903354831614, guid: 094ae0160197d8d45bd7ef1db1c7a52c, type: 3}
 --- !u!1 &8610597906973072182
 GameObject:

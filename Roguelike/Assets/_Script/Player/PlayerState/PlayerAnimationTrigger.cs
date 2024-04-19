@@ -13,7 +13,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
 
         else if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.stats.attackRadius, player.whatIsEnemy);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
             foreach (var hit in colliders)
             {
                 if (hit.GetComponent<EnemyBase>() != null)
@@ -47,7 +47,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void TwoHandedSaberAttackTrigger()
     {
         player.stats.currentHealth -= player.stats.currentHealth * DataManager.instance.two_Handed_Saber_Skill_Data.depleteHp;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.stats.attackRadius, player.whatIsEnemy);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)

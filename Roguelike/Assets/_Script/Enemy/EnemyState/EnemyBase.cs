@@ -18,10 +18,10 @@ public class EnemyBase : Base
     [Header("Chase info")]
     [Tooltip("Ë÷µĞ·¶Î§")]
     public float chaseRadius;
-    public float attackRadius;
+    //public float attackRadius;
 
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷ºÍÑ°µĞ·¶Î§")]
-    [SerializeField] public bool drawTheBorderOrNot {  get; set; }
+    [SerializeField] public bool drawTheBorderOrNot;
 
     [Tooltip("ÊÇ·ñÕıÔÚ¹¥»÷")]
     public bool isAttacking {  get; set; }
@@ -29,7 +29,7 @@ public class EnemyBase : Base
     public List<GameObject> attackDetects { get; set; }
 
     [Tooltip("Ñ²Âßµã")]
-    public Transform[] patrolPoints {  get; set; }
+    public Transform[] patrolPoints;
     public Transform cloestTarget { get; set; }
     public Seeker seeker { get; private set; }
     public EnemyStateMachine stateMachine { get; set; }

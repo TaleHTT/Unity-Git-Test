@@ -548,28 +548,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819a8f563e7ff1448d2c22cefad4462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bleedingDamage: 0
   level: 0
   experience: 0
+  currentHealth: 0
   maxHp:
     baseValue: 50
     modfiers: []
-  currentHealth: 0
-  baseDamage:
+  damage:
     baseValue: 0
     modfiers: []
-  actualDamage: 0
-  baseArmor:
-    baseValue: 2
+  armor:
+    baseValue: 0
     modfiers: []
-  actualArmor: 0
   woundedMultiplier:
     baseValue: 1
     modfiers: []
   moveSpeed:
     baseValue: 0
     modfiers: []
-  attackRadius: 0
   attackSpeed:
     baseValue: 0
     modfiers: []
@@ -588,14 +584,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5239fce73ddd30f4b8bd622682253e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfHit: 0
-  layersOfBleeding: 0
-  isHit: 0
+  hit_Assassin: 0
+  deadTimer: 0
+  attackRadius: 2
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
-  timer: 0
   drawTheBorderOrNot: 1
 --- !u!114 &7142369143678821317
 MonoBehaviour:
