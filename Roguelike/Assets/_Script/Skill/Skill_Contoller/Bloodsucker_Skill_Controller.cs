@@ -103,7 +103,7 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     }
     public void RangeDamage()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Bloodsucker.stats.attackRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Bloodsucker.attackRadius);
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)

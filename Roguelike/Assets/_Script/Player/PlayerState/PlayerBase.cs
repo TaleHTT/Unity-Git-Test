@@ -22,14 +22,14 @@ public class PlayerBase : Base
     [SerializeField] private bool drawTheBorderOrNot;
 
     public Transform closetEnemy {  get; set; }
-    public List<GameObject> enemyDetects { get; set; }
+
+    [HideInInspector] public List<GameObject> enemyDetects;
 
     [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
     public PlayerStateMachine stateMachine { get; set; }
     protected override void Awake()
     {
         base.Awake();
-        enemyDetects = new List<GameObject>();
         stateMachine = new PlayerStateMachine();
     }
     protected override void Start()
@@ -65,6 +65,7 @@ public class PlayerBase : Base
     }
     public void EnemyDetect()
     {
+        enemyDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {

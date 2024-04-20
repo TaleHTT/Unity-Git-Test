@@ -1,11 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player_Saber : PlayerBase
 {
+    private float timer;
     public bool isMove {  get; set; }
     public bool isDefense {  get; set; }
-    public float coolTimer { get; set; }
-    public float standTimer {  get; set; }
     public Saber_Skill_Controller saber_Skill_Controller { get; set; }
     public PlayerSaberIdleState saberIdleState { get; private set; }
     public PlayerSaberDeadState saberDeadState { get; private set; }
@@ -24,12 +24,11 @@ public class Player_Saber : PlayerBase
     {
         base.Start();
         stateMachine.Initialize(saberIdleState);
+        timer = DataManager.instance.saber_Skill_Data.standTimer;
     }
     protected override void Update()
     {
         base.Update();
-        standTimer += Time.deltaTime;
-        coolTimer += Time.deltaTime;
         if(Input.GetMouseButton(0))
             isMove = true;
         else
@@ -39,17 +38,24 @@ public class Player_Saber : PlayerBase
         if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(saberDeadState);
 
-        if (coolTimer >= DataManager.instance.saber_Skill_Data.coolTimer && isMove == false && standTimer >= DataManager.instance.saber_Skill_Data.standTimer)
-        {
-            stateMachine.ChangeState(saberDefenseState);
-            standTimer = 0;
-            coolTimer = 0;
-        }
-
         if (isHit == true)
         {
             saber_Skill_Controller.numOfHit++;
             isHit = false;
+        }
+        if (isMove == false)
+        {
+            if (isDefense == true)
+            {
+                timer = DataManager.instance.saber_Skill_Data.standTimer;
+                return;
+            }
+            else if (isDefense == false)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                    stateMachine.ChangeState(saberDefenseState);
+            }
         }
     }
 }

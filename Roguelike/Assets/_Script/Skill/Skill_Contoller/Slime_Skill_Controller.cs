@@ -39,7 +39,7 @@ public class Slime_Skill_Controller : MonoBehaviour
     {
         if (SkillManger.instance.slime_Skill.isHave_X_Equipment)
         {
-            player_Slime.stats.attackRadius *= DataManager.instance.slime_Skill_Data.skill_X_ExtraAddAttackRadius;
+            player_Slime.attackRadius *= DataManager.instance.slime_Skill_Data.skill_X_ExtraAddAttackRadius;
             player_Slime.stats.maxHp.AddModfiers(slimeDetect.Count * (player_Slime.stats.maxHp.GetValue() * (1 + DataManager.instance.slime_Skill_Data.skill_X_ExtraAddHp)));
             player_Slime.stats.damage.AddModfiers(slimeDetect.Count * (player_Slime.stats.damage.GetValue() * (1 + DataManager.instance.slime_Skill_Data.skill_X_ExtraAddDamage)));
             player_Slime.stats.armor.AddModfiers(slimeDetect.Count * (player_Slime.stats.armor.GetValue() * (1 + DataManager.instance.slime_Skill_Data.skill_X_ExtraAddArmor)));
@@ -63,7 +63,7 @@ public class Slime_Skill_Controller : MonoBehaviour
     }
     public void RangeAttack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Slime.stats.attackRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_Slime.attackRadius);
         foreach(var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)

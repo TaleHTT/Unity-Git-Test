@@ -13,7 +13,7 @@ public class EnemyBase : Base
     public EnemyOccupation occupation;
 
     public int layersOfBurning;
-    public LayerMask whatIsPlayer {  get; set; }
+    public LayerMask whatIsPlayer;
 
     [Header("Chase info")]
     [Tooltip("Ë÷µÐ·¶Î§")]
@@ -25,8 +25,8 @@ public class EnemyBase : Base
 
     [Tooltip("ÊÇ·ñÕýÔÚ¹¥»÷")]
     public bool isAttacking {  get; set; }
-    public List<GameObject> playerDetects {  get; set; }
-    public List<GameObject> attackDetects { get; set; }
+    public List<GameObject> playerDetects;
+    public List<GameObject> attackDetects;
 
     [Tooltip("Ñ²Âßµã")]
     public Transform[] patrolPoints;
@@ -37,8 +37,6 @@ public class EnemyBase : Base
     {
         base.Awake();
         seeker = GetComponent<Seeker>();
-        playerDetects = new List<GameObject>();
-        attackDetects = new List<GameObject>();
         stateMachine = new EnemyStateMachine();
 
     }
@@ -69,13 +67,17 @@ public class EnemyBase : Base
             StartCoroutine(DeadDestroy(deadTimer));
             return;
         }
-        playerDetect();
+    }
+    public void FixedUpdate()
+    {
         AttackDetect();
+        PlayerDetect();
         CloestTargetDetect();
     }
-    public void playerDetect()
+    public void PlayerDetect()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsPlayer);
+        playerDetects = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
             playerDetects.Add(player.gameObject);
@@ -95,7 +97,9 @@ public class EnemyBase : Base
     }
     public void AttackDetect()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
+        Debug.Log("Enter");
+        attackDetects = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
             attackDetects.Add(player.gameObject);

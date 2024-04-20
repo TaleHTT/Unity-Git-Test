@@ -20,6 +20,5 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
         else
             instance = this;
-
     }
 }

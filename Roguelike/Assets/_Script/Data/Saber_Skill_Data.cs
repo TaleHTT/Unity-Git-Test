@@ -16,8 +16,6 @@ public class Saber_Skill_Data : ScriptableObject
     public float persistentTimer;
     [Tooltip("静止时间")]
     public float standTimer;
-    [Tooltip("冷却时间")]
-    public float coolTimer;
     [Tooltip("最大受击数")]
     public int maxNumOfHit;
 }

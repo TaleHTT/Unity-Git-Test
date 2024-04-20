@@ -586,7 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit_Assassin: 0
   deadTimer: 0
-  attackRadius: 2
+  attackRadius: 10
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2

@@ -1,7 +1,7 @@
 public class PlayerSaberAttackState : PlayerState
 {
-    private Player_Saber player_Saber;
-    public PlayerSaberAttackState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Saber player_Saber) : base(player, stateMachine, animboolName)
+    Player_Saber player_Saber;
+    public PlayerSaberAttackState(PlayerBase player, PlayerStateMachine stateMachine, string animBoolName, Player_Saber player_Saber) : base(player, stateMachine, animBoolName )
     {
         this.player_Saber = player_Saber;
     }

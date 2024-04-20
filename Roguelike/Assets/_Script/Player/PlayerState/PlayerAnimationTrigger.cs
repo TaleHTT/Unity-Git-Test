@@ -6,8 +6,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private PlayerBase player => GetComponentInParent<PlayerBase>();
     Player_Shaman player_Shaman => GetComponent<Player_Shaman>();
     Player_Bloodsucker player_Bloodsucker => GetComponent<Player_Bloodsucker>();
-    Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponent<Two_Handed_Saber_Skill_Controller>();
+    Saber_Skill_Controller saber_Skill_Controller => GetComponent<Saber_Skill_Controller>();
     Assassin_Skill_Controller assassin_Skill_Controller => GetComponent<Assassin_Skill_Controller>();
+    Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponent<Two_Handed_Saber_Skill_Controller>();
     private void Update()
     {
         if(player_Bloodsucker != null)
@@ -16,7 +17,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
                 attackTarget = player_Bloodsucker.closetEnemy;
             else
             {
-                if (Vector2.Distance(transform.position, attackTarget.position) > player_Bloodsucker.stats.attackRadius || attackTarget.GetComponent<EnemyStats>().currentHealth <= 0)
+                if (Vector2.Distance(transform.position, attackTarget.position) > player_Bloodsucker.attackRadius || attackTarget.GetComponent<EnemyStats>().currentHealth <= 0)
                     attackTarget = player_Bloodsucker.closetEnemy;
                 else
                     return;
@@ -28,7 +29,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
         if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == false)
             player.closetEnemy.GetComponent<EnemyStats>()?.TakeDamage(player.stats.damage.GetValue());
 
-        else if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true)
+        else if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saber_Skill_Controller.saberDetect.Count == 1 && saber_Skill_Controller.isZeroPosition == true)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
             foreach (var hit in colliders)

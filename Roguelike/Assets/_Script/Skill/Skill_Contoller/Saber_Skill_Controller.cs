@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class Saber_Skill_Controller : MonoBehaviour
 {
-    public int numOfHit { get; set; }
-    public bool isZeroPosition { get; set; }
-    public float detectRadius {  get; set; }
+    public bool isZeroPosition;
+    public int numOfHit;
 
     public Saber_Skill_Data saber_Skill_Data;
     public Collider2D[] colliders {  get; set; }
@@ -15,27 +14,20 @@ public class Saber_Skill_Controller : MonoBehaviour
     private void Awake()
     {
         player_Saber = GetComponent<Player_Saber>();
+        SaberDetect();
     }
     private void Start()
     {
         if (SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
+            player_Saber.stats.damage.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddDamage);
             player_Saber.stats.armor.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
-
             player_Saber.stats.maxHp.AddModfiers(player_Saber.stats.maxHp.GetValue() * saber_Skill_Data.extraAddHp);
-            player_Saber.stats.UpdataHp();   
+            player_Saber.stats.UpdateHp();   
         }        
     }
     private void Update()
     {
-        if (player_Saber.isDefense == true)
-            player_Saber.stats.armor.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
-        else
-            player_Saber.stats.armor.RemoveModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddArmor);
-
-        if(SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
-            player_Saber.stats.damage.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddDamage);
-
         if (numOfHit == saber_Skill_Data.maxNumOfHit)
         {
             CounterAttack(player_Saber.stats.armor.GetValue());
@@ -44,7 +36,8 @@ public class Saber_Skill_Controller : MonoBehaviour
     }
     private void SaberDetect()
     {
-        colliders = Physics2D.OverlapCircleAll(transform.position, detectRadius);
+        saberDetect = new List<GameObject>();
+        colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity);
         foreach(var saber in colliders)
         {
             if (saber.GetComponent<Player_Saber>() != null)
@@ -55,11 +48,11 @@ public class Saber_Skill_Controller : MonoBehaviour
     {
         if(SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
-            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius);
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius/*Mathf.Infinity*/);
         }
         else
         {
-            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius * (1 + saber_Skill_Data.extraAddAttackRadius));
+            colliders = Physics2D.OverlapCircleAll(transform.position, player_Saber.attackRadius/*Mathf.Infinity*/ * (1 + saber_Skill_Data.extraAddAttackRadius));
         }
         foreach (var hit in colliders)
         {

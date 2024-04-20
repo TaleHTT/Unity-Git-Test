@@ -34,14 +34,14 @@ public class Base : MonoBehaviour
     public int layersOfBleeding_Two_Handed_Saber {  get; set; }
     protected virtual void Awake()
     {
-        timer_Hound = DataManager.instance.hound_Skill_Data.durationTimer;
-        timer_Two_Handed_Saber = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
-    }
-    protected virtual void Start()
-    {
         cd = GetComponent<CapsuleCollider2D>();
         stats = GetComponent<CharacterStats>();
         anim = GetComponentInChildren<Animator>();
+    }
+    protected virtual void Start()
+    {
+        timer_Hound = DataManager.instance.hound_Skill_Data.durationTimer;
+        timer_Two_Handed_Saber = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
     }
     protected virtual void Update()
     {
