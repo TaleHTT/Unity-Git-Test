@@ -63,7 +63,7 @@ public class EnemyState
     }
     public void DeadLogci()
     {
-        enemy.stats.attackRadius = 0;
+        enemy.attackRadius = 0;
         enemy.chaseRadius = 0;
         enemy.attackDetects.Clear();
         enemy.playerDetects.Clear();

@@ -112,25 +112,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb15fd21997ef584a884d0ca47fec0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 8
-  detectTimer: 0
-  stats: {fileID: 4197466263694692084}
+  hit_Assassin: 0
+  deadTimer: 0
+  attackRadius: 2
   occupation: 0
+  layersOfBurning: 0
   chaseRadius: 5
-  timer: 2
-  isDead: 0
-  drawTheBorderOrNot: 0
-  playerDetects: []
-  attackDetects: []
+  drawTheBorderOrNot: 1
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cloestPlayer: {fileID: 0}
 --- !u!114 &4197466263694692084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  experience: 0
   currentHealth: 0
   maxHp:
     baseValue: 100
@@ -160,10 +155,10 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 2
     modfiers: []
-  attackRadius:
-    baseValue: 2
-    modfiers: []
   attackSpeed:
+    baseValue: 0
+    modfiers: []
+  treatRadius:
     baseValue: 0
     modfiers: []
 --- !u!114 &4072270579258872181
@@ -459,7 +454,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1962978833
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5bdd6c37d70a73048840f49b5f4c1587, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

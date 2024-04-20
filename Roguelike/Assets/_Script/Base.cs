@@ -19,12 +19,15 @@ public class Base : MonoBehaviour
     public float deadTimer;
 
     private float timer_Hound;
+    [Tooltip("¹¥»÷·¶Î§")]
+    public float attackRadius;
     [Tooltip("ÊÇ·ñËÀÍö")]
     public bool isDead { get; set; }
     public bool isHit {  get; set; }
     public Animator anim { get; set; }
     public int amountOfHit { get; set; }
     public CapsuleCollider2D cd { get; set; }
+
     public CharacterStats stats {  get; set; }
     public int layersOfBleeding_Hound {  get; set; }
     public float timer_Two_Handed_Saber {  get; set; }
