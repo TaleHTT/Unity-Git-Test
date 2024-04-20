@@ -92,5 +92,10 @@ public class PlayerBase : Base
     {
         
     }
+
+    public virtual void AnimationBloodsuckerAttack()
+    {
+
+    }
 }
 
