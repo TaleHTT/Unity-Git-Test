@@ -7,34 +7,38 @@ using UnityEngine.Pool;
 public class Summons_Base : MonoBehaviour
 {
     public float moveSpeed;
-    [SerializeField] private float currentHp;
-    public float maxHp {  get; set; }
-    public float damage {  get; set; }
+    public float currentHp;
+    public float maxHp;
+    public float damage;
     public Animator anim {  get; set; }
     public bool isDead { get; set; }
     public float timer { get; set; }
+    public float chaseRadius;
+    public float attackRadius;
+    public Transform cloestTarget;
+    public bool drawTheBorderOrNot;
     public Seeker seeker { get; set; }
-    public float chaseRadius { get; set; }
-    public float attackRadius {  get; set; }
+    public List<GameObject> attackDetects;
     public CapsuleCollider2D cd { get; set; }
-    public Transform cloestTarget { get; set; }
-    public bool drawTheBorderOrNot { get; set; }
-    public List<GameObject> attackDetects { get; set; }
     public ObjectPool<GameObject> houndPool {  get; set; }
-
-    protected virtual void Awake()
+    private void OnEnable()
     {
         currentHp = maxHp;
+    }
+    protected virtual void Awake()
+    {
         seeker = GetComponent<Seeker>();
         anim = GetComponentInChildren<Animator>();
     }
     protected virtual void Start()
     {
-        timer = SkillManger.instance.archer_Skill.persistentTimer;
+
     }
     protected virtual void Update()
     {
         UpdataHp();
+        if (currentHp <= 0)
+            StartCoroutine(DeadDestroy(timer));
     }
 
     private void UpdataHp()
@@ -59,4 +63,5 @@ public class Summons_Base : MonoBehaviour
     {
         currentHp -= damage;
     }
+
 }

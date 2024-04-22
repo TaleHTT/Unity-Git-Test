@@ -6,12 +6,14 @@ public class Player_Caster : PlayerBase
     private ObjectPool<GameObject> orbPool;
     [Tooltip("∑®«Ú‘§÷∆ÃÂ")]
     public GameObject orbPerfab;
+    private Caster_Skill_Controller caster_Skill_Controller;
     public PlayerCasterIdleState casterIdleState { get; private set; }
     public PlayerCasterAttackState casterAttackState { get; private set; }
     public PlayerCasterDeadState casterDeadState { get; private set; }
     protected override void Awake()
     {
         base.Awake();
+        caster_Skill_Controller = GetComponent<Caster_Skill_Controller>();
         orbPool = new ObjectPool<GameObject>(CreateFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         casterIdleState = new PlayerCasterIdleState(this, stateMachine, "Idle", this);
         casterAttackState = new PlayerCasterAttackState(this, stateMachine, "Attack", this);
@@ -31,11 +33,13 @@ public class Player_Caster : PlayerBase
     public override void AnimationCasterAttack()
     {
         base.AnimationCasterAttack();
+        caster_Skill_Controller.numberOfAttack++;
         orbPool.Get();
     }
     private GameObject CreateFunc()
     {
         var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
+        orb.GetComponent<Orb_Controller>().caster_Skill_Controller = caster_Skill_Controller;
         orb.GetComponent<Orb_Controller>().orbPool = orbPool;
         return orb;
     }

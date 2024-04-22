@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1675060836376885956}
-  stats: {fileID: 2546544219925617084}
+  stats: {fileID: 0}
+  summons_Base: {fileID: 0}
 --- !u!1 &4984727642812228253
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +314,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.3
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -447,9 +448,9 @@ GameObject:
   - component: {fileID: 1362268610461691782}
   - component: {fileID: 4389080248295494094}
   - component: {fileID: 7934664116145361763}
-  - component: {fileID: 2546544219925617084}
   - component: {fileID: 6040865542924541734}
-  - component: {fileID: 1082153698685705515}
+  - component: {fileID: -587788435207650066}
+  - component: {fileID: 8204803998564825021}
   m_Layer: 3
   m_Name: PlayerArcher
   m_TagString: Untagged
@@ -536,7 +537,47 @@ CapsuleCollider2D:
   m_Offset: {x: -0.04769051, y: -0.08776367}
   m_Size: {x: 0.8183272, y: 1.9713535}
   m_Direction: 0
---- !u!114 &2546544219925617084
+--- !u!114 &6040865542924541734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102913051065131674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7c709f01598d14295dea8ab46a3f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 1
+  deadTimer: 0
+  attackRadius: 10
+  amountOfHit: 0
+  layersOfBleeding_Hound: 0
+  occupation: 1
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64
+  drawTheBorderOrNot: 1
+  closetEnemy: {fileID: 0}
+  enemyDetects: []
+  arrowPerfab: {fileID: 5067555322004596321, guid: ae2c9ad2db3541c4e9c5b4e7b3e982de, type: 3}
+--- !u!114 &-587788435207650066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102913051065131674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0743f5914efff246b5d7ea67cb02c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHave_X_Equipment: 1
+  multipleArrow: {fileID: 7065399952090764699, guid: dbc536e7a62922342a442c6d73930cd3, type: 3}
+  Summon_Hound_Prefab: {fileID: 2028266070186361932, guid: 15f4bdb31b1726a479913279cd374c35, type: 3}
+--- !u!114 &8204803998564825021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -552,16 +593,16 @@ MonoBehaviour:
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 40
+    baseValue: 0
     modfiers: []
   damage:
-    baseValue: 100
+    baseValue: 0
     modfiers: []
   armor:
     baseValue: 0
     modfiers: []
   woundedMultiplier:
-    baseValue: 1
+    baseValue: 0
     modfiers: []
   moveSpeed:
     baseValue: 0
@@ -572,55 +613,6 @@ MonoBehaviour:
   treatRadius:
     baseValue: 0
     modfiers: []
---- !u!114 &6040865542924541734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6102913051065131674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f7c709f01598d14295dea8ab46a3f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hit_Assassin: 0
-  deadTimer: 0
-  attackRadius: 5
-  occupation: 1
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 64
-  drawTheBorderOrNot: 1
-  arrowPerfab: {fileID: 5067555322004596321, guid: ae2c9ad2db3541c4e9c5b4e7b3e982de, type: 3}
---- !u!114 &1082153698685705515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6102913051065131674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!1 &6576041366174991320
 GameObject:
   m_ObjectHideFlags: 0

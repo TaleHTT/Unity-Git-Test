@@ -14,10 +14,10 @@ public class Saber_Skill_Controller : MonoBehaviour
     private void Awake()
     {
         player_Saber = GetComponent<Player_Saber>();
-        SaberDetect();
     }
     private void Start()
     {
+        SaberDetect();
         if (SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saberDetect.Count == 1 && isZeroPosition == true)
         {
             player_Saber.stats.damage.AddModfiers(player_Saber.stats.armor.GetValue() * saber_Skill_Data.extraAddDamage);

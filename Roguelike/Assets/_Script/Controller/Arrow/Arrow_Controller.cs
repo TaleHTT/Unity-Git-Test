@@ -19,6 +19,7 @@ public class Arrow_Controller : MonoBehaviour
     protected virtual void OnEnable()
     {
         List<Transform> attackDetects = new List<Transform>();
+        coolDownTimer = timer;
     }
 
     protected virtual void Update()

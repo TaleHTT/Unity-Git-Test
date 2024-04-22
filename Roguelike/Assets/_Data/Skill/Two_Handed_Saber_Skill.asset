@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561e36779de36b94ea05b2a18123636e, type: 3}
   m_Name: Two_Handed_Saber_Skill
   m_EditorClassIdentifier: 
-  enemy_ExtraAddAttackSpeed: 0
-  num_ExtraAddAttackSpeed: 0
-  extraAddDamage: 0
-  depleteHp: 0
-  recoverHp: 0
-  skill_1_DurationTimer: 0
-  skill_2_DurantionTimer: 0
-  bleedDamage: 0
-  times: 0
-  CD: 0
+  enemy_ExtraAddAttackSpeed: 0.5
+  num_ExtraAddAttackSpeed: 0.5
+  extraAddDamage: 0.5
+  depleteHp: 0.1
+  recoverHp: 0.5
+  skill_1_DurationTimer: 5
+  skill_2_DurationTimer: 5
+  bleedDamage: 2
+  times: 5
+  CD: 5

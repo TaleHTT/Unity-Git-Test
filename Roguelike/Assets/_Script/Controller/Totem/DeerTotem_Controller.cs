@@ -1,24 +1,29 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 public class DeerTotem_Controller : MonoBehaviour
 {
-    private float tiemr;
+    private float deadTiemr;
+    private float timer = 1;
     public float damage { get; set; }
     public float Hp { get; set; }
     public float treat { get; set; }
     public ObjectPool<GameObject> deerTotemPool { get; set; }
     private void OnEnable()
     {
-        tiemr = DataManager.instance.shaman_Skill_Data.skill_1_duration;
+        deadTiemr = DataManager.instance.shaman_Skill_Data.skill_1_duration;
     }
     private void Update()
     {
-        StartCoroutine(ClearNegativesAndTreat());
-        tiemr -= Time.deltaTime;
-        if (tiemr <= 0 || Hp <= 0)
+        deadTiemr -= Time.deltaTime;
+        if (deadTiemr <= 0 || Hp <= 0)
             deerTotemPool.Release(gameObject);
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            Treat();
+            timer = 1;
+        }
     }
     private void OnDisable()
     {
@@ -39,13 +44,26 @@ public class DeerTotem_Controller : MonoBehaviour
         {
             if (hit.GetComponent<PlayerBase>() != null)
             {
+                PlayerBase target = hit.GetComponent<PlayerBase>();
                 hit.GetComponent<PlayerStats>().TakeTreat(treat);
+                if (target.negativeEffect.Count > 0)
+                {
+                    int a = target.randomNum[Random.Range(0, target.negativeEffect.Count)];
+                    target.randomNum.Remove(a);
+                    switch (a)
+                    {
+                        case 0:
+                            {
+                                target.layersOfBleeding_Hound = 0;
+                                target.layersOfBleeding_Two_Handed_Saber = 0;
+                            }
+                            break;
+                        case 1:
+                            target.markDurationTimer = 0;
+                            break;
+                    }
+                }
             }
         }
-    }
-    public IEnumerator ClearNegativesAndTreat()
-    {
-        yield return new WaitForSeconds(1);
-        Treat();
     }
 }

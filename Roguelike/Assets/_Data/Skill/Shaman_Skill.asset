@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f06d6f22714ae41a9efb3e0827f8bc, type: 3}
   m_Name: Shaman_Skill
   m_EditorClassIdentifier: 
-  skill_1_ExtraAddTreatHp: 0
-  normal_ExtraTreatHp: 0
-  extraAddAttackSpeed: 0
-  extraAddMoveSpeed: 0
-  extraAddDamage: 0
-  skill_1_AddHp: 0
-  skill_2_AddHp: 0
-  skill_1_duration: 0
-  skill_2_duraiton: 0
-  skill_1_radius: 0
-  skill_2_radius: 0
-  skill_1_CD: 0
-  skill_2_CD: 0
+  skill_1_ExtraAddTreatHp: 0.5
+  normal_ExtraTreatHp: 0.5
+  extraAddAttackSpeed: 0.5
+  extraAddMoveSpeed: 0.5
+  extraAddDamage: 0.5
+  skill_1_AddHp: 0.5
+  skill_2_AddHp: 0.5
+  skill_1_duration: 10
+  skill_2_duraiton: 10
+  skill_1_radius: 5
+  skill_2_radius: 5
+  skill_1_CD: 9999
+  skill_2_CD: 9999

@@ -1,4 +1,6 @@
-﻿public class EnemySaberGroundState : EnemyState
+﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+
+public class EnemySaberGroundState : EnemyState
 {
     public Enemy_Saber enemy_Saber;
     public EnemySaberGroundState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Saber enemy_Saber) : base(enemy, stateMachine, animboolName)
@@ -23,5 +25,7 @@
             stateMachine.ChangeState(enemy_Saber.saberChaseState);
         if (enemy_Saber.attackDetects.Count > 0)
             stateMachine.ChangeState(enemy_Saber.saberAttackState);
+        if (enemy_Saber.stats.currentHealth <= 0)
+            stateMachine.ChangeState(enemy_Saber.saberDeadState);
     }
 }

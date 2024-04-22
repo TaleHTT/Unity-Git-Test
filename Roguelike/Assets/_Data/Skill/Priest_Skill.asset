@@ -12,3 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96b85c9eab73f249ba2d0a5f6e39c8e, type: 3}
   m_Name: Priest_Skill
   m_EditorClassIdentifier: 
+  resurrectionHpPercent: 0.5
+  extraAddHeal: 0.5
+  maxNumberOfTreatments: 1
+  numberOfRespawns: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64
+  authenticDamage: 5
+  treatRadius: 10
+  CD: 1

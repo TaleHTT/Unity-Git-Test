@@ -1,5 +1,4 @@
 using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum EnemyOccupation
@@ -10,6 +9,7 @@ public enum EnemyOccupation
 }
 public class EnemyBase : Base
 {
+    public bool isTest;
     public EnemyOccupation occupation;
 
     public int layersOfBurning;
@@ -18,13 +18,12 @@ public class EnemyBase : Base
     [Header("Chase info")]
     [Tooltip("Ë÷µÐ·¶Î§")]
     public float chaseRadius;
-    //public float attackRadius;
 
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷ºÍÑ°µÐ·¶Î§")]
     [SerializeField] public bool drawTheBorderOrNot;
 
     [Tooltip("ÊÇ·ñÕýÔÚ¹¥»÷")]
-    public bool isAttacking {  get; set; }
+    public bool isAttacking { get; set; }
     public List<GameObject> playerDetects;
     public List<GameObject> attackDetects;
 
@@ -48,25 +47,37 @@ public class EnemyBase : Base
 
     protected override void Update()
     {
-        base.Update();
         stateMachine.currentState.Update();
         if (isDead)
         {
-            if(layersOfBurning > 0)
+            if (layersOfBurning > 0)
             {
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, DataManager.instance.caster_Skill_Data.radius);
-                foreach(var hit in colliders)
+                foreach (var hit in colliders)
                 {
-                    if(hit.GetComponent<EnemyBase>() != null)
+                    if (hit.GetComponent<EnemyBase>() != null)
                     {
-                        hit.GetComponent<EnemyBase>().layersOfBurning++;
+                        hit.GetComponent<EnemyBase>().layersOfBurning = layersOfBurning ;
                         hit.GetComponent<EnemyStats>().AuthenticTakeDamage(stats.damage.GetValue() * (1 + DataManager.instance.caster_Skill_Data.extraAddDamage) * layersOfBurning);
                     }
                 }
             }
-            StartCoroutine(DeadDestroy(deadTimer));
+        }
+        if (isDead)
+        {
+            deadTimer -= Time.deltaTime;
+            if(deadTimer < 0)
+                gameObject.SetActive(false);
+            deadTimer = 3;
             return;
         }
+        else
+        {
+            gameObject.SetActive(true);
+        }
+        HuntingMark();
+        Hound_Bleed();
+        Two_Handed_Bleed();
     }
     public void FixedUpdate()
     {
@@ -97,7 +108,6 @@ public class EnemyBase : Base
     }
     public void AttackDetect()
     {
-        Debug.Log("Enter");
         attackDetects = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
         foreach (var player in colliders)

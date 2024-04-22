@@ -8,8 +8,8 @@ public class Meteorite_Conroller : MonoBehaviour
     private float moveSpeed;
     private List<GameObject> attackDetects;
     private Transform attackTarget;
-    private Vector3 meteoriteDir;
-    public float damage;
+    private Vector3 attackDir;
+    public float damage {  get; set; }
     public float attackRadius {  get; set; } = Mathf.Infinity;
     public bool drawTheBorderOrNot;
     public ObjectPool<GameObject> meteoritePool;
@@ -20,12 +20,13 @@ public class Meteorite_Conroller : MonoBehaviour
     }
     private void Awake()
     {
+        damage = PrefabManager.instance.player_Orb_Controller.damage * 0.8f;
         moveSpeed = PrefabManager.instance.player_Orb_Controller.moveSpeed * 0.8f;
         transform.localScale = PrefabManager.instance.player_Orb_Controller.transform.localScale * 3;
     }
     private void Update()
     {
-        transform.Translate(meteoriteDir * moveSpeed * Time.deltaTime);
+        transform.Translate(attackDir * moveSpeed * Time.deltaTime);
         StartCoroutine(DestoryGameObject());
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -34,17 +35,20 @@ public class Meteorite_Conroller : MonoBehaviour
         {
             ContactPoint2D cp = collision.GetContact(0);
             Vector3 vect = cp.normal;
-            Vector3 reflecct = Vector3.Reflect(meteoriteDir, vect);
-            meteoriteDir = reflecct;
+            Vector3 reflecct = Vector3.Reflect(attackDir, vect);
+            attackDir = reflecct;
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            collision.gameObject.GetComponent<EnemyStats>()?.TakeDamage(damage);
+            //collision.transform.position = new Vector2(transform.position.x - attackDir.x, transform.position.y - attackDir.y);
             meteoritePool.Release(gameObject);
             attackDetects.Clear();
         }
     }
     public void AttackTarget()
     {
+        attackDetects = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {
@@ -61,7 +65,7 @@ public class Meteorite_Conroller : MonoBehaviour
 
         meteoritePool.Release(gameObject);
     }
-    public void AttackDir() => meteoriteDir = (attackTarget.position - transform.position).normalized;
+    public void AttackDir() => attackDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
     {
         float distance = Mathf.Infinity;

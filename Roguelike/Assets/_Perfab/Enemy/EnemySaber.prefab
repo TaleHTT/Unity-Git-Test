@@ -112,13 +112,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb15fd21997ef584a884d0ca47fec0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit_Assassin: 0
+  randomNum: 
+  twoHanedAttackTimer: 1
+  isHunting: 0
   deadTimer: 0
-  attackRadius: 2
+  attackRadius: 0
+  isDead: 0
+  amountOfHit: 0
+  layersOfBleeding_Two_Handed_Saber: 0
+  isTest: 1
   occupation: 0
   layersOfBurning: 0
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
   chaseRadius: 5
   drawTheBorderOrNot: 1
+  playerDetects: []
+  attackDetects: []
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -147,7 +158,7 @@ MonoBehaviour:
     baseValue: 10
     modfiers: []
   armor:
-    baseValue: 8
+    baseValue: 0
     modfiers: []
   woundedMultiplier:
     baseValue: 1
@@ -306,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 5716400119599641976}
   stats: {fileID: 4197466263694692084}
+  summons_Base: {fileID: 0}
 --- !u!1 &1160885529629400648
 GameObject:
   m_ObjectHideFlags: 0

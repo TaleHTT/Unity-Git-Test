@@ -6,26 +6,35 @@ public class Shaman_Skill_Controller : MonoBehaviour
     private float skill_1_Timer;
     private float skill_2_Timer;
     public GameObject deerTotemPrefab;
-    private GameObject birdTotemPrefab;
+    public GameObject birdTotemPrefab;
     private Player_Shaman player_Shaman;
-    private GameObject explodingTotemPrefab;
     private ObjectPool<GameObject> deerTotemPool;
     private ObjectPool<GameObject> birdTotemPool;
     private void Awake()
     {
         player_Shaman = GetComponent<Player_Shaman>();
-        skill_1_Timer = DataManager.instance.shaman_Skill_Data.skill_1_CD;
         deerTotemPool = new ObjectPool<GameObject>(CreateRangeTreatFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         birdTotemPool = new ObjectPool<GameObject>(CreateRangeAddMoveSpeedFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
+    }
+    private void Start()
+    {
+        skill_1_Timer = DataManager.instance.shaman_Skill_Data.skill_1_CD;
+        skill_2_Timer = DataManager.instance.shaman_Skill_Data.skill_2_CD;
     }
     private void Update()
     {
         skill_1_Timer -= Time.deltaTime;
         skill_2_Timer -= Time.deltaTime;
         if (skill_1_Timer <= 0)
+        {
             deerTotemPool.Get();
+            skill_1_Timer = DataManager.instance.shaman_Skill_Data.skill_1_CD;
+        }
         if (skill_2_Timer <= 0)
+        {
             birdTotemPool.Get();
+            skill_2_Timer = DataManager.instance.shaman_Skill_Data.skill_2_CD;
+        }
     }
     private GameObject CreateRangeTreatFunc()
     {

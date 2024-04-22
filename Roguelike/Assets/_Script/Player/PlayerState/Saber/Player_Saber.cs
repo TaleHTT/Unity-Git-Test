@@ -1,11 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
 public class Player_Saber : PlayerBase
 {
-    private float timer;
-    public bool isMove {  get; set; }
-    public bool isDefense {  get; set; }
+    private float stadnTimer;
+    public bool isMove { get; set; }
+    public bool isDefense { get; set; }
     public Saber_Skill_Controller saber_Skill_Controller { get; set; }
     public PlayerSaberIdleState saberIdleState { get; private set; }
     public PlayerSaberDeadState saberDeadState { get; private set; }
@@ -24,12 +23,12 @@ public class Player_Saber : PlayerBase
     {
         base.Start();
         stateMachine.Initialize(saberIdleState);
-        timer = DataManager.instance.saber_Skill_Data.standTimer;
+        stadnTimer = DataManager.instance.saber_Skill_Data.standTimer;
     }
     protected override void Update()
     {
         base.Update();
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
             isMove = true;
         else
             isMove = false;
@@ -47,13 +46,13 @@ public class Player_Saber : PlayerBase
         {
             if (isDefense == true)
             {
-                timer = DataManager.instance.saber_Skill_Data.standTimer;
+                stadnTimer = DataManager.instance.saber_Skill_Data.standTimer;
                 return;
             }
             else if (isDefense == false)
             {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
+                stadnTimer -= Time.deltaTime;
+                if (stadnTimer <= 0)
                     stateMachine.ChangeState(saberDefenseState);
             }
         }

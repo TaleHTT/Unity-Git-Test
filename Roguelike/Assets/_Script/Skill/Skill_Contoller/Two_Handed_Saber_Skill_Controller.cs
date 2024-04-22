@@ -1,100 +1,94 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Two_Handed_Saber_Skill_Controller : MonoBehaviour
 {
-    private float timer;
-    private float cdTimer;
-    private bool isUseSkill;
-    private List<GameObject> bleedDetect;
-    public int numOfAttack {  get; set; }
+    public List<GameObject> bleedDetect;
+    public List<GameObject> enemyDetect;
+    public float timer = 1;
+    public int numOfAttacks;
+    private float addSpeed;
+    private float baseValue;
     Player_TwoHandedSaber player_TwoHandedSaber;
     private void Awake()
     {
         bleedDetect = new List<GameObject>();
-        cdTimer = DataManager.instance.two_Handed_Saber_Skill_Data.CD;
         player_TwoHandedSaber = GetComponent<Player_TwoHandedSaber>();
-        timer = DataManager.instance.two_Handed_Saber_Skill_Data.skill_2_DurationTimer;
     }
     private void Start()
     {
-        if (SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment)
-        {
-            player_TwoHandedSaber.stats.attackSpeed.AddModfiers(DataManager.instance.two_Handed_Saber_Skill_Data.enemy_ExtraAddAttackSpeed * player_TwoHandedSaber.enemyDetects.Count);
-            player_TwoHandedSaber.stats.attackSpeed.AddModfiers(DataManager.instance.two_Handed_Saber_Skill_Data.num_ExtraAddAttackSpeed * numOfAttack);
-        }        
+        baseValue = player_TwoHandedSaber.stats.attackSpeed.GetValue();
     }
     private void Update()
     {
-        if (player_TwoHandedSaber.isAttack == false)
-            StartCoroutine(RecoverAttackSpeed());
-        cdTimer -= Time.deltaTime;
-        if (player_TwoHandedSaber.stats.currentHealth / player_TwoHandedSaber.stats.maxHp.GetValue() < 0.5f && cdTimer <= 0)
+        BleedDetect();
+        if (player_TwoHandedSaber.stats.isUseSkill)
         {
-            StartCoroutine(SkillDuration());
-            SwordAttack();
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_TwoHandedSaber.attackRadius * 2, player_TwoHandedSaber.whatIsEnemy);
+                foreach(var hit in colliders)
+                {
+                    if(hit.GetComponent<EnemyBase>() != null)
+                    {
+                        for(int i = 0; i < DataManager.instance.two_Handed_Saber_Skill_Data.times; i++)
+                        {
+                            hit.GetComponent<EnemyStats>().TakeDamage((float)((player_TwoHandedSaber.stats.damage.baseValue) * (2 - Math.Truncate(((player_TwoHandedSaber.stats.currentHealth / player_TwoHandedSaber.stats.maxHp.GetValue()) * 10)) / 10)) * (1 + DataManager.instance.two_Handed_Saber_Skill_Data.extraAddDamage));
+                            hit.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber++;
+                            if (SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment)
+                                numOfAttacks++;
+                        }
+                    }
+                }
+                timer = 1;
+            }
         }
-        TreatHp();
+        if (SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment)
+            AddAttackSpeed();
     }
-    public void BleedDectec()
+
+    public void BleedDetect()
     {
-        float radius = Mathf.Infinity;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, player_TwoHandedSaber.whatIsEnemy);
-        foreach(var hit in colliders)
+        TreatHp();
+        bleedDetect = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity, player_TwoHandedSaber.whatIsEnemy);
+        foreach (var bleed in colliders)
         {
-            if (hit.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber > 0)
-                bleedDetect.Add(hit.gameObject);
+            if (bleed.GetComponent<EnemyBase>() != null)
+            {
+                if (bleed.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber > 0)
+                    bleedDetect.Add(bleed.gameObject);
+            }
         }
     }
     public void TreatHp()
     {
-        for(int i = 0; i < bleedDetect.Count; i++)
+        for (int i = 0; i < bleedDetect.Count; i++)
         {
             if (bleedDetect[i].GetComponent<EnemyBase>().isDead == true)
             {
                 player_TwoHandedSaber.stats.currentHealth *= (1 + DataManager.instance.two_Handed_Saber_Skill_Data.recoverHp);
                 bleedDetect.Remove(bleedDetect[i]);
-                if (bleedDetect[i].GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber <= 0)
-                    bleedDetect.Remove(bleedDetect[i]);
             }
+            else if (bleedDetect[i].GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber <= 0)
+                bleedDetect.Remove(bleedDetect[i]);
         }
     }
-    public void SwordAttack()
+    public void AddAttackSpeed()
     {
-        if (isUseSkill == false)
-            return;
-        else
+        float sum;
+        float value_Num;
+        float value_EnemyNum;
+        value_Num = baseValue * DataManager.instance.two_Handed_Saber_Skill_Data.num_ExtraAddAttackSpeed * numOfAttacks;
+        value_EnemyNum = baseValue * DataManager.instance.two_Handed_Saber_Skill_Data.enemy_ExtraAddAttackSpeed * player_TwoHandedSaber.enemyDetects.Count;
+        sum = value_EnemyNum + value_Num;
+        if (sum != addSpeed)
         {
-            StartCoroutine(Attack());
+            player_TwoHandedSaber.stats.attackSpeed.RemoveModfiers(addSpeed);
+            addSpeed = sum;
+            player_TwoHandedSaber.stats.attackSpeed.AddModfiers(sum);
         }
-    }
-
-    public IEnumerator Attack()
-    {
-        yield return new WaitForSeconds(1f / DataManager.instance.two_Handed_Saber_Skill_Data.times);
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player_TwoHandedSaber.attackRadius * 2, player_TwoHandedSaber.whatIsEnemy);
-        foreach (var hit in colliders)
-        {
-            if (hit.GetComponent<EnemyBase>() != null)
-            {
-                hit.GetComponent<EnemyStats>().TakeDamage(player_TwoHandedSaber.stats.damage.GetValue() * (1 + DataManager.instance.two_Handed_Saber_Skill_Data.extraAddDamage));
-                hit.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber++;
-            }
-        }
-    }
-
-    public IEnumerator SkillDuration()
-    {
-        isUseSkill = true;
-        yield return new WaitForSeconds(timer);
-        isUseSkill = false;
-    }
-    public IEnumerator RecoverAttackSpeed()
-    {
-        yield return new WaitForSeconds(3);
-        player_TwoHandedSaber.stats.attackSpeed.RemoveModfiers(DataManager.instance.two_Handed_Saber_Skill_Data.enemy_ExtraAddAttackSpeed * player_TwoHandedSaber.enemyDetects.Count);
-        player_TwoHandedSaber.stats.attackSpeed.RemoveModfiers(DataManager.instance.two_Handed_Saber_Skill_Data.num_ExtraAddAttackSpeed * numOfAttack);
     }
 }

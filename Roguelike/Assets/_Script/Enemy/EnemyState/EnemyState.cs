@@ -24,6 +24,8 @@ public class EnemyState
     }
     public virtual void Update()
     {
+        if (enemy.isTest)
+            return;
         stateTimer -= Time.deltaTime;
     }
     public virtual void Enter()

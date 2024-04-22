@@ -9,6 +9,7 @@ public class Caster_Skill_Data : ScriptableObject
     public float skill_1_explodeRadius;
     public float skill_2_explodeRadius;
     public int maxNumberOfAttack;
+    public float duration;
     public float radius;
     public float CD;
 }

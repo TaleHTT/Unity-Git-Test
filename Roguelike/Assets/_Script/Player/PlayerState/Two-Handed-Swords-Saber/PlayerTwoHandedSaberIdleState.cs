@@ -9,6 +9,7 @@
     public override void Enter()
     {
         base.Enter();
+        stateTimer = 3;
     }
 
     public override void Exit()
@@ -19,7 +20,9 @@
     public override void Update()
     {
         base.Update();
-        if (player_TwoHandedSaber.enemyDetects.Count > 0)
+        if (stateTimer < 0)
+            player_TwoHandedSaber.two_Handed_Saber_Skill_Controller.numOfAttacks = 0;
+        if (player_TwoHandedSaber.enemyDetects.Count > 0 && player_TwoHandedSaber.stats.isUseSkill == false)
             stateMachine.ChangeState(player_TwoHandedSaber.twoHandedSaberAttackState);
     }
 }

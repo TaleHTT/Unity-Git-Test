@@ -1,4 +1,4 @@
-﻿public class Player_Summons_Hound : Player_Summons_Base
+﻿public class Player_Summons_Hound : Player_Summons_Base, IPlayerTakeDamageable
 {
     public Player_Summons_StateMachine stateMachine { get; set; }
     public Player_Summons_Hound_IdleState houndIdleState { get; set; }
@@ -10,11 +10,11 @@
     {
         base.Awake();
         stateMachine = new Player_Summons_StateMachine();
-        houndIdleState = new Player_Summons_Hound_IdleState(this, stateMachine, "Idle");
-        houndMoveState = new Player_Summons_Hound_MoveState(this, stateMachine, "Move");
-        houndDeadState = new Player_Summons_Hound_DeadState(this, stateMachine, "Dead");
-        houndChaseState = new Player_Summons_Hound_ChaseState(this, stateMachine, "Move");
-        houndAttackState = new Player_Summons_Hound_AttackState(this, stateMachine, "Attack");
+        houndIdleState = new Player_Summons_Hound_IdleState(this, stateMachine, "Idle", this);
+        houndMoveState = new Player_Summons_Hound_MoveState(this, stateMachine, "Move", this);
+        houndDeadState = new Player_Summons_Hound_DeadState(this, stateMachine, "Dead", this);
+        houndChaseState = new Player_Summons_Hound_ChaseState(this, stateMachine, "Move", this);
+        houndAttackState = new Player_Summons_Hound_AttackState(this, stateMachine, "Attack", this);
     }
     protected override void Start()
     {
@@ -26,8 +26,13 @@
         stateMachine.currentState.Update();
     }
 
-    public void DamageEffect()
+    void IPlayerTakeDamageable.TakeDamage(float damage)
     {
+        currentHp -= damage;
+    }
 
+    void IPlayerTakeDamageable.TakeTreat(float damage)
+    {
+        currentHp += damage;
     }
 }

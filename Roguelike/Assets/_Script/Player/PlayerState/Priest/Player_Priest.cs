@@ -6,7 +6,7 @@ public class Player_Priest : PlayerBase
 {
     public List<GameObject> playerDetects;
     private ObjectPool<GameObject> authenticPool;
-    [Tooltip("法球预制体")]
+    [Tooltip("真伤预制体")]
     public GameObject authenticPerfab;
 
     public PlayerPriestIdleState priestIdleState { get; private set; }
@@ -34,6 +34,7 @@ public class Player_Priest : PlayerBase
     public override void AnimationPriestAttack()
     {
         base.AnimationPriestAttack();
+        authenticPool.Get();
     }
     private GameObject CreateFunc()
     {

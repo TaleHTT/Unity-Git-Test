@@ -3,8 +3,10 @@
 public class Player_Summons_Hound_ChaseState : Player_Summons_State
 {
     private Vector3 target;
-    public Player_Summons_Hound_ChaseState(Player_Summons_Hound summons_Hound, Player_Summons_StateMachine stateMachine, string animBoolName) : base(summons_Hound, stateMachine, animBoolName)
+    Player_Summons_Hound player_Summons_Hound;
+    public Player_Summons_Hound_ChaseState(Player_Summons_Hound summons_Hound_Controller, Player_Summons_StateMachine stateMachine, string animBoolName, Player_Summons_Hound player_Summons_Hound) : base(summons_Hound_Controller, stateMachine, animBoolName)
     {
+        this.player_Summons_Hound = player_Summons_Hound;
     }
 
     public override void Eixt()
@@ -20,6 +22,8 @@ public class Player_Summons_Hound_ChaseState : Player_Summons_State
     public override void Update()
     {
         base.Update();
+        if (player_Summons_Hound.attackDetects.Count > 0)
+            stateMachine.ChangeState(player_Summons_Hound.houndAttackState);
         if (player_Summons_Hound.enemyDetects.Count <= 0)
             stateMachine.ChangeState(player_Summons_Hound.houndIdleState);
         AutoPath();

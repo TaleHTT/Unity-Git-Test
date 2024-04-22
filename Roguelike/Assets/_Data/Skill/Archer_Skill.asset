@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bae1e6a61abf84ebf550022e69b043, type: 3}
   m_Name: Archer_Skill
   m_EditorClassIdentifier: 
-  extraAddDamage: 0
-  skill_1_CD: 0
-  skill_2_CD: 0
+  extraAddDamage: 0.5
+  skill_1_CD: 5
+  skill_2_CD: 5

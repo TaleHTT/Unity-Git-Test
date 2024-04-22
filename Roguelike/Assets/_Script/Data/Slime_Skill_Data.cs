@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+[CreateAssetMenu(fileName = "Slime_Skill", menuName = "Skill/Slime_Skill")]
 public class Slime_Skill_Data : ScriptableObject
 {
     [Range(0, 1)] public float skill_X_ExtraAddAttackRadius;

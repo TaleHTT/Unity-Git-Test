@@ -1,6 +1,5 @@
-﻿using System.Data;
-using UnityEngine;
-
+﻿using UnityEngine;
+[CreateAssetMenu(fileName = "Bloodsucker_Skill", menuName = "Skill/Bloodsucker_Skill")]
 public class Bloodsucker_Skill_Data : ScriptableObject
 {
     [Range(0, 1)] public float normalExtraAddDamage;

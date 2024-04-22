@@ -1,7 +1,9 @@
 public class PlayerSaberDeadState : PlayerState
 {
-    public PlayerSaberDeadState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Saber player_Saber) : base(player, stateMachine, animboolName)
+    Player_Saber player_Saber;
+    public PlayerSaberDeadState(PlayerBase player, PlayerStateMachine stateMachine, string animBoolName, Player_Saber player_Saber) : base(player, stateMachine, animBoolName)
     {
+        this.player_Saber = player_Saber;
     }
 
     public override void Enter()
@@ -18,5 +20,7 @@ public class PlayerSaberDeadState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (player_Saber.isDead == false)
+            stateMachine.ChangeState(player_Saber.saberIdleState);
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum PlayerOccupation
@@ -21,9 +19,9 @@ public class PlayerBase : Base
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     [SerializeField] private bool drawTheBorderOrNot;
 
-    public Transform closetEnemy {  get; set; }
+    public Transform closetEnemy;
 
-    [HideInInspector] public List<GameObject> enemyDetects;
+    public List<GameObject> enemyDetects;
 
     [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
     public PlayerStateMachine stateMachine { get; set; }
@@ -42,6 +40,9 @@ public class PlayerBase : Base
     {
         base.Update();
         stateMachine.currentState.Update();
+    }
+    private void FixedUpdate()
+    {
         EnemyDetect();
         CloestTargetDetect();
     }
@@ -53,6 +54,7 @@ public class PlayerBase : Base
     }
     public void CloestTargetDetect()
     {
+        closetEnemy = null;
         float distance = Mathf.Infinity;
         for (int i = 0; i < enemyDetects.Count; i++)
         {
@@ -86,12 +88,12 @@ public class PlayerBase : Base
     }
     public virtual void AnimationPriestAttack()
     {
-        
+
     }
 
     public virtual void AnimationIceCasterAttack()
     {
-        
+
     }
 
     public virtual void AnimationBloodsuckerAttack()

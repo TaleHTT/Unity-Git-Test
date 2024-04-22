@@ -38,7 +38,7 @@ public class Player_Archer : PlayerBase
     private GameObject createFunc()
     {
         var orb = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().orbPool = pool;
+        orb.GetComponent<Arrow_Controller>().pool = pool;
         return orb;
     }
     private void actionOnGet(GameObject orb)

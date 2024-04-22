@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd86714e24f9e2141aafab0defdfa750, type: 3}
   m_Name: Caster_Skill
   m_EditorClassIdentifier: 
-  extraAddDamage: 0
-  maxNumberOfAttack: 0
-  explodeRadius: 0
+  skill_1_extraAddExplodeDamage: 0.5
+  skill_2_extraAddExplodeDamage: 0.5
+  extraAddBruningDamage: 0.5
+  extraAddDamage: 0.5
+  skill_1_explodeRadius: 2
+  skill_2_explodeRadius: 2
+  maxNumberOfAttack: 999
+  duration: 5
+  radius: 10
+  CD: 999

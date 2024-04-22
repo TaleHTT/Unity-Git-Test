@@ -19,9 +19,7 @@ public class SkillManger : MonoBehaviour
             Destroy(gameObject);
         else
             instance = this;
-    }
-    protected virtual void Start()
-    {
+
         slime_Skill = GetComponent<Slime_Skill>();
         saber_Skill = GetComponent<Saber_Skill>();
         caster_Skill = GetComponent<Caster_Skill>();

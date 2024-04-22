@@ -20,5 +20,7 @@ public class PlayerPriestDeadState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (player_Priest.isDead == false)
+            stateMachine.ChangeState(player_Priest.priestIdleState);
     }
 }

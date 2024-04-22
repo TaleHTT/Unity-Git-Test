@@ -4,11 +4,11 @@ public class PlayerAnimationTrigger : MonoBehaviour
 {
     Transform attackTarget;
     private PlayerBase player => GetComponentInParent<PlayerBase>();
-    Player_Shaman player_Shaman => GetComponent<Player_Shaman>();
-    Player_Bloodsucker player_Bloodsucker => GetComponent<Player_Bloodsucker>();
-    Saber_Skill_Controller saber_Skill_Controller => GetComponent<Saber_Skill_Controller>();
-    Assassin_Skill_Controller assassin_Skill_Controller => GetComponent<Assassin_Skill_Controller>();
-    Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponent<Two_Handed_Saber_Skill_Controller>();
+    Player_Shaman player_Shaman => GetComponentInParent<Player_Shaman>();
+    Player_Bloodsucker player_Bloodsucker => GetComponentInParent<Player_Bloodsucker>();
+    Saber_Skill_Controller saber_Skill_Controller => GetComponentInParent<Saber_Skill_Controller>();
+    Assassin_Skill_Controller assassin_Skill_Controller => GetComponentInParent<Assassin_Skill_Controller>();
+    Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponentInParent<Two_Handed_Saber_Skill_Controller>();
     private void Update()
     {
         if(player_Bloodsucker != null)
@@ -76,22 +76,22 @@ public class PlayerAnimationTrigger : MonoBehaviour
         if (player.closetEnemy != null)
         {
             player.closetEnemy.GetComponent<EnemyStats>().TakeDamage(player.stats.damage.GetValue());
-            player_Shaman.treatTarget.GetComponent<PlayerBase>().stats.currentHealth *= (1 + DataManager.instance.shaman_Skill_Data.normal_ExtraTreatHp) * player_Shaman.stats.maxHp.GetValue();
+            player_Shaman.treatTarget.GetComponent<PlayerStats>().currentHealth *= (1 + DataManager.instance.shaman_Skill_Data.normal_ExtraTreatHp) * player_Shaman.stats.maxHp.GetValue();
         }
     }
     private void TwoHandedSaberAttackTrigger()
     {
-        player.stats.currentHealth -= player.stats.currentHealth * DataManager.instance.two_Handed_Saber_Skill_Data.depleteHp;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)
             {
-                hit.GetComponent<EnemyStats>()?.TakeDamage((float)((double)(player.stats.damage.GetValue()) * (1 + Math.Floor((player.stats.currentHealth / player.stats.maxHp.GetValue())))));
+                player.stats.currentHealth -= player.stats.currentHealth * DataManager.instance.two_Handed_Saber_Skill_Data.depleteHp;
+                hit.GetComponent<EnemyStats>()?.TakeDamage((float)((player.stats.damage.baseValue) * (2 - Math.Truncate(((player.stats.currentHealth / player.stats.maxHp.GetValue()) * 10)) / 10)));
                 hit.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber++;
-                hit.GetComponent<EnemyBase>().timer_Two_Handed_Saber = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
+                hit.GetComponent<EnemyBase>().timer_Two_Handed_Saber_Bleed = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
                 if(SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment == true)
-                    two_Handed_Saber_Skill_Controller.numOfAttack++;
+                    two_Handed_Saber_Skill_Controller.numOfAttacks++;
             }
         }
     }

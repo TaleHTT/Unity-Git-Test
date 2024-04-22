@@ -5,7 +5,7 @@ public class Priest_Skill_Data : ScriptableObject
     [Range(0, 1)] public float resurrectionHpPercent;
     [Range(0, 1)] public float extraAddHeal;
     public int maxNumberOfTreatments;
-    public int numberOfRespawns = 1;
+    public int numberOfRespawns;
     public LayerMask whatIsPlayer;
     public LayerMask whatIsEnemy;
     public float authenticDamage;

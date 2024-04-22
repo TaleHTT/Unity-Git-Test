@@ -4,12 +4,15 @@ using UnityEngine.Pool;
 
 public class Orb_Controller : MonoBehaviour
 {
+    [Tooltip("燃烧圈预制体")]
+    public GameObject burningRingsPrefab;
+    public ObjectPool<GameObject> burningRingsPool;
+    public Transform burningTransform {  get; set; }
+    public Caster_Skill_Controller caster_Skill_Controller {  get; set; }
     public bool isStrengthen;
-    public float strengthExplosionRadius;
-    public float strengthExplosionDamage;
+    public float strengthExplosionDamage {  get; set; }
     public int numberOfPenetrations;
     public ObjectPool<GameObject> orbPool;
-    public ObjectPool<GameObject> burningRingsPool;
     [Tooltip("移动速度")]
     public float moveSpeed;
     [Tooltip("伤害")]
@@ -25,15 +28,15 @@ public class Orb_Controller : MonoBehaviour
     public float attackRadius { get; private set; } = Mathf.Infinity;
     public Transform attackTarget { get; private set; }
     public Vector3 arrowDir { get; private set; }
-    public Vector2 defaultScale;
     public float cdDefaultRadius;
     private void Awake()
     {
-        defaultScale = transform.localScale;
+        burningRingsPool = new ObjectPool<GameObject>(CreateburningRingsFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
     }
     protected virtual void OnEnable()
     {
         List<Transform> attackDetects = new List<Transform>();
+        coolDownTimer = timer;
     }
     protected virtual void Update()
     {
@@ -63,5 +66,24 @@ public class Orb_Controller : MonoBehaviour
     {
         if (!drawTheBorderOrNot)
             Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+    private GameObject CreateburningRingsFunc()
+    {
+        var _object = Instantiate(burningRingsPrefab, burningTransform.position, Quaternion.identity);
+        _object.GetComponent<BurningRings_Controller>().burningRingsPool = burningRingsPool;
+        return _object;
+    }
+    private void ActionOnGet(GameObject _object)
+    {
+        _object.transform.position = burningTransform.position;
+        _object.SetActive(true);
+    }
+    private void ActionOnRelease(GameObject _object)
+    {
+        _object.SetActive(false);
+    }
+    private void ActionOnDestory(GameObject _object)
+    {
+        Destroy(_object);
     }
 }

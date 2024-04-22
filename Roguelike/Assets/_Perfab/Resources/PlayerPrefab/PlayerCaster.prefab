@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7088133556391390971}
   - component: {fileID: 4003333943958535356}
   - component: {fileID: 8969670449536239938}
+  - component: {fileID: 6127185683055140349}
   m_Layer: 3
   m_Name: PlayerCaster
   m_TagString: Untagged
@@ -301,15 +302,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e20e04681bec646bb50e3997287f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit_Assassin: 0
+  timer: 1
   deadTimer: 0
-  attackRadius: 5
+  attackRadius: 10
+  amountOfHit: 0
+  layersOfBleeding_Hound: 0
   occupation: 2
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
-  drawTheBorderOrNot: 0
-  orbPerfab: {fileID: 0}
+  drawTheBorderOrNot: 1
+  closetEnemy: {fileID: 0}
+  enemyDetects: []
+  orbPerfab: {fileID: 497706659671472300, guid: c89082886921f2c4bb8cdca2ef5d54c9, type: 3}
+--- !u!114 &6127185683055140349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990418013000992433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98589c7a85bb7b443aca6fac10d1fff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burningRingsPrefab: {fileID: 0}
+  meteoritePrefab: {fileID: 0}
+  explodeDamage: 0
+  timer: 0
 --- !u!1 &4642531419730160476
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 9126415858052857041}
   stats: {fileID: 7088133556391390971}
+  summons_Base: {fileID: 0}
 --- !u!1 &7113920490809336969
 GameObject:
   m_ObjectHideFlags: 0

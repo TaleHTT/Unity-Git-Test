@@ -20,5 +20,7 @@
     public override void Update()
     {
         base.Update();
+        if (player_TwoHandedSaber.isDead == false)
+            stateMachine.ChangeState(player_TwoHandedSaber.twoHandedSaberIdleState);
     }
 }

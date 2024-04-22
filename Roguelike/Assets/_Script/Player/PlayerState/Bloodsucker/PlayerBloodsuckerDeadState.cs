@@ -19,5 +19,7 @@
     public override void Update()
     {
         base.Update();
+        if (player_Bloodsucker.isDead == false)
+            stateMachine.ChangeState(player_Bloodsucker.bloodsuckerIdleState);
     }
 }

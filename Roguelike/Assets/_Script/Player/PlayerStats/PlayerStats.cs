@@ -1,4 +1,4 @@
-public class PlayerStats : CharacterStats
+public class PlayerStats : CharacterStats, IPlayerTakeDamageable
 {
     private PlayerBase player;
     public override void Start()

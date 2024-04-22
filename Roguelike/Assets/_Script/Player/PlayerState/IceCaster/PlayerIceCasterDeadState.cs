@@ -20,5 +20,7 @@
     public override void Update()
     {
         base.Update();
+        if (player_IceCaster.isDead == false)
+            stateMachine.ChangeState(player_IceCaster.iceCasterIdleState);
     }
 }

@@ -15,13 +15,13 @@ public class PlayerSaberDefenseState : PlayerState
         player_Saber.isDefense = true;
         stateTimer = DataManager.instance.saber_Skill_Data.persistentTimer;
         value = player_Saber.stats.armor.GetValue() * DataManager.instance.saber_Skill_Data.extraAddArmor;
-        player_Saber.stats.armor.AddModfiers(player_Saber.stats.armor.GetValue() * DataManager.instance.saber_Skill_Data.extraAddArmor);
+        player_Saber.stats.armor.baseValue += value;
     }
 
     public override void Exit()
     {
         base.Exit();
-        player_Saber.stats.armor.RemoveModfiers(value);
+        player_Saber.stats.armor.baseValue -= value;
         player_Saber.isDefense = false;
     }
 

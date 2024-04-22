@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Player_Summons_Base : Summons_Base
 {
-    public LayerMask whatIsEnemy { get; set; }
-    public List<GameObject> enemyDetects { get; set; }
+    public LayerMask whatIsEnemy;
+    public List<GameObject> enemyDetects;
     protected override void Awake()
     {
         base.Awake();
@@ -17,12 +17,16 @@ public class Player_Summons_Base : Summons_Base
     protected override void Update()
     {
         base.Update();
+    }
+    private void FixedUpdate()
+    {
         enemyDetect();
         attackDetect();
         CloestTargetDetect();
     }
     public void CloestTargetDetect()
     {
+        cloestTarget = null;
         float distance = Mathf.Infinity;
         for (int i = 0; i < enemyDetects.Count; i++)
         {

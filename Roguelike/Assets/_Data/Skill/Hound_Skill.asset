@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1feb04df16e1d8745a8de6b3de5c592f, type: 3}
   m_Name: Hound_Skill
   m_EditorClassIdentifier: 
-  bleedDamage: 0
-  durationTimer: 0
+  bleedDamage: 2
+  durationTimer: 999
