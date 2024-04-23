@@ -13,6 +13,9 @@ public class Player_Bloodsucker : PlayerBase
     {
         base.Awake();
         batPool = new ObjectPool<GameObject>(CreateFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
+        bloodsuckerIdleState = new PlayerBloodsuckerIdleState(this, stateMachine, "Idle", this);
+        bloodsuckerAttackState = new PlayerBloodsuckerAttackState(this, stateMachine, "Attack", this);
+        bloodsuckerDeadState = new PlayerBloodsuckerDeadState(this, stateMachine, "Dead", this);
     }
     protected override void Start()
     {
@@ -26,7 +29,7 @@ public class Player_Bloodsucker : PlayerBase
     public override void AnimationBloodsuckerAttack()
     {
         base.AnimationBloodsuckerAttack();
-        batPool.Get();
+        //batPool.Get();
     }
     private GameObject CreateFunc()
     {

@@ -43,7 +43,8 @@ public class PlayerAnimationTrigger : MonoBehaviour
     {
         if(player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
         {
-            attackTarget.GetComponent<EnemyStats>()?.TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.normalExtraAddDamage));
+            attackTarget.GetComponent<EnemyStats>()?.TakeDamage(player_Bloodsucker.stats.damage.GetValue());
+            player_Bloodsucker.stats.damage.AddModfiers(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.normalExtraAddDamage);
             player_Bloodsucker.stats.TakeTreat((1 + DataManager.instance.bloodsucker_Skill_Data.normalExtraAddHp_1) * player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.normalExtraAddDamage);
         }
         else if(player_Bloodsucker.position == 3 || player_Bloodsucker.position == 4 || player_Bloodsucker.position == 5)

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d159fc0b79c4e26469b7cc6c6165b59d, type: 3}
   m_Name: Assassin_Skill
   m_EditorClassIdentifier: 
-  extraAddWoundedMultiplier: 0
-  extraAddAttackSpeed: 0
-  extraAddDamage: 0
-  extraAddHp: 0
-  skill_1_durationTimer: 0
-  skill_2_durationTimer: 0
-  skill_3_durationTimer: 0
-  radius: 0
+  extraAddWoundedMultiplier: 0.5
+  extraAddAttackSpeed: 0.5
+  extraAddDamage: 0.5
+  extraAddHp: 0.5
+  skill_1_durationTimer: 5
+  skill_2_durationTimer: 5
+  skill_3_durationTimer: 5
+  radius: 5

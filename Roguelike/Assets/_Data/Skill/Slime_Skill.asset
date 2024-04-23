@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8964f0f0ae19146b3407e0da1dfa6f, type: 3}
   m_Name: Slime_Skill
   m_EditorClassIdentifier: 
-  skill_X_ExtraAddAttackRadius: 0
-  skill_X_ExtraAddAttackSpeed: 0
-  skill_2_ExtraAddAttackSpeed: 0
-  skill_X_ExtraAddDamage: 0
-  skill_2_ExtraAddDamage: 0
-  skill_X_ExtraAddArmor: 0
-  skill_2_ExtraAddArmor: 0
-  skill_1_ExtraAddHp: 0
-  skill_2_ExtraAddHp: 0
-  skill_X_ExtraAddHp: 0
-  skill_1_CD: 0
-  skill_2_CD: 0
-  duration: 0
-  radius: 0
+  skill_X_ExtraAddAttackRadius: 0.5
+  skill_X_ExtraAddAttackSpeed: 0.5
+  skill_2_ExtraAddAttackSpeed: 0.5
+  skill_X_ExtraAddDamage: 0.5
+  skill_2_ExtraAddDamage: 0.5
+  skill_X_ExtraAddArmor: 0.5
+  skill_2_ExtraAddArmor: 0.5
+  skill_1_ExtraAddHp: 0.5
+  skill_2_ExtraAddHp: 0.5
+  skill_X_ExtraAddHp: 0.5
+  skill_1_CD: 1
+  skill_2_CD: 4
+  duration: 3
+  radius: 5

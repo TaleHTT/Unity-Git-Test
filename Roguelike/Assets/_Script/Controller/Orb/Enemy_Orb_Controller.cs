@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Orb_Controller : Orb_Controller
@@ -30,6 +31,7 @@ public class Enemy_Orb_Controller : Orb_Controller
     }
     public void AttackTarget()
     {
+        List<Transform> attackDetects = new List<Transform>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {

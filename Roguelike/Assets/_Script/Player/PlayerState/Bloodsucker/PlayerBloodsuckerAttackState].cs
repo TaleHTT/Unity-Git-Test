@@ -19,5 +19,8 @@
     public override void Update()
     {
         base.Update();
+        player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        if (player.enemyDetects.Count <= 0)
+            stateMachine.ChangeState(player_Bloodsucker.bloodsuckerIdleState);
     }
 }

@@ -23,5 +23,5 @@ MonoBehaviour:
   skill_2_duraiton: 10
   skill_1_radius: 5
   skill_2_radius: 5
-  skill_1_CD: 9999
-  skill_2_CD: 9999
+  skill_1_CD: 99999
+  skill_2_CD: 2

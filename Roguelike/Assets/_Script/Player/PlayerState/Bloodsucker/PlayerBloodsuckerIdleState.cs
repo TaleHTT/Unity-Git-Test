@@ -19,5 +19,7 @@
     public override void Update()
     {
         base.Update();
+        if (player_Bloodsucker.enemyDetects.Count > 0)
+            stateMachine.ChangeState(player_Bloodsucker.bloodsuckerAttackState);
     }
 }

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cac131daba8e54ebda67cbb47f8e15, type: 3}
   m_Name: Bloodsucker_Skill
   m_EditorClassIdentifier: 
-  normalExtraAddDamage: 0
-  normalExtraAddHp_1: 0
-  normalExtraAddHp_2: 0
-  skill_1_ExtraRemoveHp: 0
-  skill_1_ExtraAddDamage: 0
-  skill_2_ExtraAddDamage: 0
-  skill_2_ExtraAddHp: 0
-  skill_2_Duration: 0
-  indexTimerDamage: 0
-  skill_2_CD: 0
-  indexTimer: 0
-  width: 0
-  length: 0
+  normalExtraAddDamage: 0.01
+  normalExtraAddHp_1: 0.5
+  normalExtraAddHp_2: 0.5
+  skill_1_ExtraRemoveHp: 0.01
+  skill_1_ExtraAddDamage: 0.5
+  skill_2_ExtraAddDamage: 0.5
+  skill_2_ExtraAddHp: 0.5
+  skill_2_Duration: 2
+  indexTimerDamage: 3
+  skill_2_CD: 4
+  indexTimer: 9999999
+  width: 3
+  length: 3

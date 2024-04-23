@@ -13,7 +13,7 @@
     protected override void Start()
     {
         base.Start();
-        stateMachine.ChangeState(slimeIdleState);
+        stateMachine.Initialize(slimeIdleState);
     }
     protected override void Update()
     {

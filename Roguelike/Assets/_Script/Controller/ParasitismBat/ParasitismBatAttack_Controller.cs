@@ -5,18 +5,21 @@ using UnityEngine.Pool;
 public class ParasitismBatAttack_Controller : MonoBehaviour
 {
     public ObjectPool<GameObject> parasitismBatPool {  get; set; }
-    public Player_Bloodsucker player_Bloodsucker { get; set; }
     public Bloodsucker_Skill_Controller bloodsucker_Skill_Controller { get; set; }
     List<GameObject> enemyDetect;
     GameObject cloestTarget;
     public float moveSpeed;
-    bool isBack = false;
+    bool isBack;
+    private void OnEnable()
+    {
+        isBack = false;
+    }
     private void Update()
     {
         EnemyDetect();
         AttackTarget();
         if (isBack == true)
-            transform.position = Vector2.MoveTowards(transform.position, player_Bloodsucker.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, bloodsucker_Skill_Controller.player_Bloodsucker.transform.position, moveSpeed * Time.deltaTime);
         else
             transform.position = Vector2.MoveTowards(transform.position, cloestTarget.transform.position, moveSpeed * Time.deltaTime);
     }
@@ -34,6 +37,7 @@ public class ParasitismBatAttack_Controller : MonoBehaviour
     }
     public void EnemyDetect()
     {
+        enemyDetect = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity);
         foreach(var hit in colliders)
         {
@@ -43,16 +47,17 @@ public class ParasitismBatAttack_Controller : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Eenmy"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddDamage);
+            Debug.Log("1");
+            collision.GetComponent<EnemyStats>().TakeDamage(bloodsucker_Skill_Controller.player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddDamage);
             isBack = true;
         }
         if(isBack == true)
         {
             if(collision.gameObject.tag == "Bloodsucker")
             {
-                collision.GetComponent<Player_Bloodsucker>().stats.TakeTreat(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddHp);
+                collision.GetComponent<Player_Bloodsucker>().stats.TakeTreat(bloodsucker_Skill_Controller.player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddHp);
                 parasitismBatPool.Release(gameObject);
                 bloodsucker_Skill_Controller.parasitismBatNum--;
             }
