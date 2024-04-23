@@ -514,7 +514,7 @@ MonoBehaviour:
     baseValue: 100
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 5
     modfiers: []
   armor:
     baseValue: 8
@@ -591,8 +591,6 @@ MonoBehaviour:
   playerDetects: []
   attackDetects: []
   patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

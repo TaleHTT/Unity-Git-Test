@@ -19,8 +19,9 @@ public class Enemy_Orb_Controller : Orb_Controller
         {
             if(numberOfPenetrations <= 0)
             {
-                orbPool.Release(gameObject);
+                AttackTakeDamage();
                 attackDetects.Clear();
+                orbPool.Release(gameObject);
             }
             else
             {

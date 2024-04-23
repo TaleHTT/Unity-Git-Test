@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 所有UI面板的父类，包含UI面板的状态信息
 /// </summary>
-public abstract class BasePanel
+public abstract class BasePanel: MonoBehaviour
 {
     /// <summary>
     /// UI信息

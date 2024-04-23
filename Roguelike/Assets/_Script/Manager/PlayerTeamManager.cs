@@ -28,7 +28,7 @@ public class PlayerTeamManager : MonoBehaviour
     {
         CurrentSceneDetect();
         GetPlayerNumberInTeam();
-        Debug.Log($"currentPlayerNum = {currentPlayerNum}");
+        //Debug.Log($"currentPlayerNum = {currentPlayerNum}");
     }
 
     private void CurrentSceneDetect()

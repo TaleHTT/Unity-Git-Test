@@ -391,7 +391,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558998421
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -549,11 +549,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7c709f01598d14295dea8ab46a3f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
+  randomNum: 
+  twoHanedAttackTimer: 1
+  hit_Assassin: 0
+  isHunting: 0
   deadTimer: 0
-  attackRadius: 10
+  attackRadius: 5.5
+  isDead: 0
   amountOfHit: 0
-  layersOfBleeding_Hound: 0
+  layersOfBleeding_Two_Handed_Saber: 0
   occupation: 1
   whatIsEnemy:
     serializedVersion: 2
@@ -577,6 +581,7 @@ MonoBehaviour:
   isHave_X_Equipment: 1
   multipleArrow: {fileID: 7065399952090764699, guid: dbc536e7a62922342a442c6d73930cd3, type: 3}
   Summon_Hound_Prefab: {fileID: 2028266070186361932, guid: 15f4bdb31b1726a479913279cd374c35, type: 3}
+  player_Archer: {fileID: 0}
 --- !u!114 &8204803998564825021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,26 +594,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819a8f563e7ff1448d2c22cefad4462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUseSkill: 0
   level: 0
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 0
+    baseValue: 110
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 24
     modfiers: []
   armor:
-    baseValue: 0
+    baseValue: 9
     modfiers: []
   woundedMultiplier:
-    baseValue: 0
+    baseValue: 1
     modfiers: []
   moveSpeed:
     baseValue: 0
     modfiers: []
   attackSpeed:
-    baseValue: 0
+    baseValue: 0.5
     modfiers: []
   treatRadius:
     baseValue: 0
