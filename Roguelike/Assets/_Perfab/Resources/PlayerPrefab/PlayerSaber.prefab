@@ -394,17 +394,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819a8f563e7ff1448d2c22cefad4462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUseSkill: 0
   level: 0
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 50
+    baseValue: 150
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 20
     modfiers: []
   armor:
-    baseValue: 2
+    baseValue: 13
     modfiers: []
   woundedMultiplier:
     baseValue: 1
@@ -413,7 +414,7 @@ MonoBehaviour:
     baseValue: 0
     modfiers: []
   attackSpeed:
-    baseValue: 0
+    baseValue: -0.25
     modfiers: []
   treatRadius:
     baseValue: 0
@@ -432,12 +433,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomNum: 
   twoHanedAttackTimer: 1
+  hit_Assassin: 0
   isHunting: 0
   deadTimer: 0
-  attackRadius: 10
+  attackRadius: 2
   isDead: 0
   amountOfHit: 0
-  layersOfBleeding_Hound: 0
   layersOfBleeding_Two_Handed_Saber: 0
   occupation: 0
   whatIsEnemy:
@@ -534,7 +535,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558998421
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1459458051413904079, guid: 3accdbde4e56f5c4e9cfa311b8cef55f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

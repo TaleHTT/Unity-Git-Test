@@ -45,8 +45,8 @@ public class Player_Caster : PlayerBase
     }
     private void ActionOnGet(GameObject orb)
     {
-        orb.transform.position = transform.position;
         orb.SetActive(true);
+        orb.transform.position = transform.position; 
     }
     private void ActionOnRelease(GameObject orb)
     {
