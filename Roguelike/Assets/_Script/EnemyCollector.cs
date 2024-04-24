@@ -6,10 +6,13 @@ using UnityEngine;
 public class EnemyCollector:MonoBehaviour
 {
     static public bool hasEnemiesActive = true;
+    static public EnemyCollector instance { get; private set;}
 
-    private void Start()
+
+    private void Awake()
     {
         StartCoroutine(IE_EnemyDetect());
+        instance = this;
     }
 
     IEnumerator IE_EnemyDetect()

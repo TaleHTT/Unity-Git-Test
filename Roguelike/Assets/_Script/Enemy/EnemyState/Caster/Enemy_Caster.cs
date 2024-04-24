@@ -40,6 +40,7 @@ public class Enemy_Caster : EnemyBase
     private GameObject createFunc()
     {
         var orb = Instantiate(OrbPerfab, transform.position,Quaternion.identity);
+        orb.GetComponent<Orb_Controller>().damage = stats.damage.GetValue();
         orb.GetComponent<Orb_Controller>().orbPool = pool;
         return orb;
     }

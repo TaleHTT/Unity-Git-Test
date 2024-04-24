@@ -14,18 +14,22 @@ public class EnemyGenerator : MonoBehaviour
     private Vector3 centerPoint;
     public float radius;
 
-    public GameObject enemyCollector;
+    public GameObject enemyCollectorPrefab;
     private GameObject enemyCollectorInScene;
 
     public bool drawTheBorderOrNot;
 
-    private void Awake()
+    private void Start()
     {
-        if(GameObject.Find("EnemyCollector(Clone)") == null)
+        if (GameObject.Find("EnemyCollector(Clone)") == null)
         {
-            enemyCollectorInScene = Instantiate(enemyCollector);
+            enemyCollectorInScene = Instantiate(enemyCollectorPrefab);
         }
-        centerPoint = this.transform.position;   
+        else
+        {
+            enemyCollectorInScene = GameObject.Find("EnemyCollector(Clone)");
+        }
+        centerPoint = this.transform.position;
         EnemyListInScene = new List<GameObject>();
         GenerateObject();
     }

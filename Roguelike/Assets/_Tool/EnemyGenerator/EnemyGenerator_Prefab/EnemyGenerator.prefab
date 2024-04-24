@@ -54,5 +54,5 @@ MonoBehaviour:
   - {fileID: 6958606284551094166, guid: 32874bceddc216946be7d5f33092930e, type: 3}
   - {fileID: 6958606284551094166, guid: 32874bceddc216946be7d5f33092930e, type: 3}
   radius: 3
-  enemyCollector: {fileID: 3688920304475294734, guid: dce3f26d970318e4c854cf8186bcc68c, type: 3}
+  enemyCollectorPrefab: {fileID: 3688920304475294734, guid: dce3f26d970318e4c854cf8186bcc68c, type: 3}
   drawTheBorderOrNot: 1

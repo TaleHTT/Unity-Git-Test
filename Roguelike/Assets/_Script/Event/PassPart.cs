@@ -23,7 +23,8 @@ public class PassPart : MonoBehaviour
     {
         //³¡¾°×ª»»
         Debug.Log("Success");
-        //GameRoot.Instance.SceneSystem.SetScene(new StoreScene());
+        GameRoot.Progress.currentLevel++;
+        GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
     }
     public void Target_PartFailPass()
     {

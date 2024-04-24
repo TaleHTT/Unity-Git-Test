@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,15 @@ public class FailPanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {
+            GameRoot.Instance.DestroyMyself();
             GameRoot.Instance.sceneSystem.SetScene(new StartScene());
         });
+    }
+
+    IEnumerator IE_Func()
+    {
+        yield return new WaitForSeconds(1f); 
+        
     }
 
     public override void OnExit()

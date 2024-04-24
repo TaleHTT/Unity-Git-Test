@@ -14,8 +14,8 @@ public class Target_PassPartCheck : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-            /*if (PlayerTeamManager.Instance.currentPlayerNum <= 0)
-                EntityEventSystem.instance.Target_FailPassPart();*/
+            if (PlayerTeamManager.Instance.currentPlayerNum <= 0)
+                EntityEventSystem.instance.Target_FailPassPart();
             if (!EnemyCollector.hasEnemiesActive)
                 EntityEventSystem.instance.Traget_SuccessPassPart();
         }

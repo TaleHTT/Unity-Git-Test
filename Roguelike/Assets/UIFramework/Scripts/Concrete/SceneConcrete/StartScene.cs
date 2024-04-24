@@ -46,7 +46,8 @@ public class StartScene : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        GameRoot.Instance.panelManager.Push(new StartPanel());
+        if(SceneManager.GetActiveScene().name == "StartScene")
+            GameRoot.Instance.panelManager.Push(new StartPanel());
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }

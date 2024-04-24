@@ -21,16 +21,19 @@ public class GameRoot : MonoBehaviour
     {
         static private readonly string PROGRESS_DATA = "ProgressData.data";
         static public int currentLevel = 0;
+        static public int currentCoin = 0;
 
         class ProgressData
         {
             public int level;
+            public int coin;
         }
 
         static public void SaveData()
         {
             ProgressData data = new ProgressData();
             data.level = currentLevel;
+            data.coin = currentCoin;
             SaveSystem.SaveByJson(PROGRESS_DATA, data);
         }
 
@@ -38,6 +41,7 @@ public class GameRoot : MonoBehaviour
         {
             ProgressData data = SaveSystem.LoadFromJson<ProgressData>(PROGRESS_DATA);
             currentLevel = data.level;
+            currentCoin = data.coin;
         }
 
         static public void DeleteData()
@@ -53,10 +57,6 @@ public class GameRoot : MonoBehaviour
         {
             Instance = this;
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
         sceneSystem = new SceneSystem();
         panelManager = new PanelManager();
         DontDestroyOnLoad(this.gameObject);
@@ -70,7 +70,7 @@ public class GameRoot : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Progress.currentLevel);
+        //Debug.Log(Progress.currentLevel);
     }
 
     IEnumerator InitMap()
@@ -85,5 +85,10 @@ public class GameRoot : MonoBehaviour
         mapGenerator.GetComponent<Canvas>().sortingOrder = 1;
         MapGenerator.Instance.currentMap.GetComponent<Canvas>().sortingOrder = 2;
         yield return null;
+    }
+
+    public void DestroyMyself()
+    {
+        Destroy(this.gameObject);
     }
 }

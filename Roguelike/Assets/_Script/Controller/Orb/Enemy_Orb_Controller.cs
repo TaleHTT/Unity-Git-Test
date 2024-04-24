@@ -19,8 +19,9 @@ public class Enemy_Orb_Controller : Orb_Controller
         {
             if(numberOfPenetrations <= 0)
             {
-                orbPool.Release(gameObject);
+                AttackTakeDamage();
                 attackDetects.Clear();
+                orbPool.Release(gameObject);
             }
             else
             {
@@ -31,7 +32,7 @@ public class Enemy_Orb_Controller : Orb_Controller
     }
     public void AttackTarget()
     {
-        List<Transform> attackDetects = new List<Transform>();
+        attackDetects = new List<Transform>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {
