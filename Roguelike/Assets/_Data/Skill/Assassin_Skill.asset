@@ -16,6 +16,7 @@ MonoBehaviour:
   extraAddAttackSpeed: 0.5
   extraAddDamage: 0.5
   extraAddHp: 0.5
+  extraMoveSpeed: 0.4
   skill_1_durationTimer: 5
   skill_2_durationTimer: 5
   skill_3_durationTimer: 5

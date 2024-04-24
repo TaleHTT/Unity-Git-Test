@@ -61,6 +61,9 @@ public class DeerTotem_Controller : MonoBehaviour
                         case 1:
                             target.markDurationTimer = 0;
                             break;
+                        case 2:
+                            target.timer_Cold = 0;
+                            break;
                     }
                 }
             }

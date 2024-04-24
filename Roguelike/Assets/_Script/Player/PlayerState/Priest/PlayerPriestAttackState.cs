@@ -20,7 +20,7 @@ public class PlayerPriestAttackState : PlayerState
     {
         base.Update();
         player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
-        if (player.enemyDetects.Count <= 0)
+        if (triggerCalled)
             stateMachine.ChangeState(player_Priest.priestIdleState);
     }
 }

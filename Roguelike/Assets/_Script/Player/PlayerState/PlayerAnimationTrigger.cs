@@ -9,6 +9,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
     Saber_Skill_Controller saber_Skill_Controller => GetComponentInParent<Saber_Skill_Controller>();
     Assassin_Skill_Controller assassin_Skill_Controller => GetComponentInParent<Assassin_Skill_Controller>();
     Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponentInParent<Two_Handed_Saber_Skill_Controller>();
+    Player_Assassin player_Assassin => GetComponentInParent<Player_Assassin>();
     private void Update()
     {
         if(player_Bloodsucker != null)
@@ -23,6 +24,10 @@ public class PlayerAnimationTrigger : MonoBehaviour
                     return;
             }
         }
+    }
+    private void AnimationFinishTrigger()
+    {
+        player.AnimationFinishTrigger();
     }
     private void SaberAttackTrigger()
     {
@@ -59,18 +64,32 @@ public class PlayerAnimationTrigger : MonoBehaviour
     }
     private void AssassinAttackTrigger()
     {
-        if (player.closetEnemy != null)
+        if(player.closetEnemy != null)
         {
-            player.closetEnemy.GetComponent<EnemyStats>()?.TakeDamage(player.stats.damage.GetValue());
-            player.closetEnemy.GetComponent<EnemyBase>().hit_Assassin++;
-            if (player.closetEnemy.GetComponent<EnemyBase>().isHunting)
-                player.closetEnemy.GetComponent<EnemyBase>().markDurationTimer = DataManager.instance.assassin_Skill_Data.skill_2_durationTimer;
-            if (player.closetEnemy.GetComponent<EnemyBase>().isDead && SkillManger.instance.assassin_Skill.isHave_X_Equipment)
+            if (player_Assassin.isStrengthen)
             {
-                player.stats.currentHealth += player.stats.damage.GetValue() * (1 + DataManager.instance.assassin_Skill_Data.extraAddHp);
-                assassin_Skill_Controller.num_KillEnemy++;
+                player_Assassin.assassinateTarget.GetComponent<EnemyStats>().TakeDamage(player_Assassin.stats.damage.GetValue() * 3);
+                player_Assassin.assassinateTarget.GetComponent<EnemyBase>().hit_Assassin++;
+                if (player_Assassin.assassinateTarget.GetComponent<EnemyBase>().isHunting)
+                    player_Assassin.assassinateTarget.GetComponent<EnemyBase>().markDurationTimer = DataManager.instance.assassin_Skill_Data.skill_2_durationTimer;
+                player_Assassin.isStealth = false;
+                player_Assassin.target = player_Assassin.assassinateTarget;
+            }
+            else
+            {
+                player_Assassin.closetEnemy.GetComponent<EnemyStats>().TakeDamage(player_Assassin.stats.damage.GetValue() * 3);
+                player_Assassin.closetEnemy.GetComponent<EnemyBase>().hit_Assassin++;
+                if (player_Assassin.closetEnemy.GetComponent<EnemyBase>().isHunting)
+                    player_Assassin.closetEnemy.GetComponent<EnemyBase>().markDurationTimer = DataManager.instance.assassin_Skill_Data.skill_2_durationTimer;
+                player_Assassin.isStealth = false;
+                player_Assassin.target = player_Assassin.closetEnemy.gameObject;
             }
         }
+    }
+    private void DeadDetectTrigger()
+    {
+        player_Assassin.DeadDetect();
+        player_Assassin.isStrengthen = false;
     }
     private  void ShamanAttackTrigger()
     {
@@ -107,5 +126,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void PriestAttackTrigger()
     {
         player.AnimationPriestAttack();
+    }
+    private void IceCasterAttackTrigger()
+    {
+        player.AnimationIceCasterAttack();
     }
 }

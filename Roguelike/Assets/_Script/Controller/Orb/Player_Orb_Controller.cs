@@ -43,7 +43,7 @@ public class Player_Orb_Controller : Orb_Controller
     }
     public void AttackTarget()
     {
-        List<Transform> attackDetects = new List<Transform>();
+        attackDetects = new List<Transform>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
         foreach (var target in colliders)
         {

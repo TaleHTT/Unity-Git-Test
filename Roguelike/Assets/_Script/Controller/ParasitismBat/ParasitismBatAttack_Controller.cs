@@ -60,6 +60,7 @@ public class ParasitismBatAttack_Controller : MonoBehaviour
                 collision.GetComponent<Player_Bloodsucker>().stats.TakeTreat(bloodsucker_Skill_Controller.player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddHp);
                 parasitismBatPool.Release(gameObject);
                 bloodsucker_Skill_Controller.parasitismBatNum--;
+                bloodsucker_Skill_Controller.currentBlood++;
             }
         }
     }

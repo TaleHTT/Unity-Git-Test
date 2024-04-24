@@ -1,7 +1,9 @@
 using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
-    public bool isUseSkill;
+    public bool isDefens {  get; set; }
+    public int defensNum { get; set; }
+    public bool isUseSkill {  get; set; }
     public int level;
     [Tooltip("æ≠—È÷µ")]
     public int experience;
@@ -39,12 +41,22 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
+        if(isDefens)
+        {
+            defensNum--;
+            return;
+        }
         if (currentHealth <= 1 && isUseSkill)
             return;
         currentHealth -= ((damage + level - armor.GetValue()) * woundedMultiplier.GetValue());
     }
     public virtual void AuthenticTakeDamage(float damage)
     {
+        if (isDefens)
+        {
+            defensNum--;
+            return;
+        }
         if (currentHealth <= 1 && isUseSkill)
             return;
         currentHealth -= damage;

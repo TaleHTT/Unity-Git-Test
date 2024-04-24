@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Archer_Skill_Controller : MonoBehaviour
+public class Archer_Skill_Controller : Skill_Controller
 {
     private int amount_Hound;
     private Vector2 attackDir;

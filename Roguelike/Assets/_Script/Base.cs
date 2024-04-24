@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -15,7 +14,7 @@ public class Base : MonoBehaviour
 {
     public List<int> randomNum = new List<int>();
     public Dictionary<int, NegativeEffectType> negativeEffect = new Dictionary<int, NegativeEffectType>();
-    public NegativeEffectType negativeEffectType {  get; set; }
+    public NegativeEffectType negativeEffectType { get; set; }
     private float houndAttackTimer = 1;
     public float twoHanedAttackTimer = 1;
     public int hit_Assassin;
@@ -38,17 +37,32 @@ public class Base : MonoBehaviour
     public CapsuleCollider2D cd { get; set; }
 
     public CharacterStats stats { get; set; }
-    public int layersOfBleeding_Hound {  get; set; }
+    public int layersOfBleeding_Hound { get; set; }
     public float timer_Two_Handed_Saber_Bleed { get; set; }
-    public int layersOfBleeding_Two_Handed_Saber;
+    public int layersOfBleeding_Two_Handed_Saber { get; set; }
+    public int layerOfCold;
+    public float timer_Cold;
+    float animSpeed;
+    public bool isFreeze;
+    bool isGet = false;
+    public bool isHitInFreeze;
+    float coldTimer;
+    float defauatMoveSpeed;
+    float defauatAttaclSpeed;
+    float value;
     protected virtual void Awake()
     {
+        timer_Cold = 3;
+        coldTimer = 2;
         cd = GetComponent<CapsuleCollider2D>();
         stats = GetComponent<CharacterStats>();
         anim = GetComponentInChildren<Animator>();
+        defauatMoveSpeed = stats.moveSpeed.GetValue();
+        defauatAttaclSpeed = stats.attackSpeed.GetValue();
     }
     protected virtual void Start()
     {
+        value = stats.woundedMultiplier.GetValue();
         timer_Hound_Bleed = DataManager.instance.hound_Skill_Data.durationTimer;
         timer_Two_Handed_Saber_Bleed = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
     }
@@ -57,7 +71,7 @@ public class Base : MonoBehaviour
         if (isDead == true)
         {
             deadTimer -= Time.deltaTime;
-            if(deadTimer < 0)
+            if (deadTimer < 0)
                 gameObject.SetActive(false);
             return;
         }
@@ -66,13 +80,14 @@ public class Base : MonoBehaviour
             deadTimer = 3;
             gameObject.SetActive(true);
         }
+        ColdEffect();
         HuntingMark();
         Hound_Bleed();
-        Two_Handed_Bleed();     
+        Two_Handed_Bleed();
     }
     public void Two_Handed_Bleed()
     {
-        if(layersOfBleeding_Two_Handed_Saber > 0)
+        if (layersOfBleeding_Two_Handed_Saber > 0)
         {
             timer_Two_Handed_Saber_Bleed -= Time.deltaTime;
             if (timer_Two_Handed_Saber_Bleed <= 0)
@@ -135,7 +150,7 @@ public class Base : MonoBehaviour
                     }
                     else
                     {
-                        if(randomNum.Contains(0) == false)
+                        if (randomNum.Contains(0) == false)
                             randomNum.Add(0);
                         negativeEffect.Add(0, NegativeEffectType.Bleed);
                     }
@@ -143,6 +158,85 @@ public class Base : MonoBehaviour
                     houndAttackTimer = 1;
                 }
             }
+        }
+    }
+    public void ColdEffect()
+    {
+        if (layerOfCold >= 1)
+        {
+            timer_Cold -= Time.deltaTime;
+            float removeMoveSpeed = defauatMoveSpeed * 0.25f * layerOfCold;
+            float removeAttackSpeed = defauatAttaclSpeed * 0.25f * layerOfCold;
+            if (layerOfCold >= 4)
+            {
+                isFreeze = true;
+                if (isFreeze)
+                {
+                    coldTimer -= Time.deltaTime;
+                    GetAnimSpeed(isGet);
+                    isGet = true;
+                    Freeze(isFreeze);
+                    if (coldTimer > 0)
+                    {
+                        if (isHitInFreeze == true)
+                        {
+                            layerOfCold = 0;
+                            isFreeze = false;
+                            Freeze(isFreeze);
+                            stats.moveSpeed.baseValue += removeMoveSpeed;
+                            stats.attackSpeed.baseValue += removeAttackSpeed;
+                            timer_Cold = 3;
+                            coldTimer = 2;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        layerOfCold = 0;
+                        isFreeze = false;
+                        Freeze(isFreeze);
+                        stats.moveSpeed.baseValue += removeMoveSpeed;
+                        stats.attackSpeed.baseValue += removeAttackSpeed;
+                        timer_Cold = 3;
+                        coldTimer = 2;
+                    }
+                }
+            };
+            if (timer_Cold < 0 && isFreeze == false)
+            {
+                stats.moveSpeed.baseValue += removeMoveSpeed;
+                stats.attackSpeed.baseValue += removeAttackSpeed;
+                timer_Cold = 3;
+            }
+            stats.moveSpeed.baseValue = defauatMoveSpeed - removeMoveSpeed;
+            stats.attackSpeed.baseValue = defauatAttaclSpeed - removeAttackSpeed;
+        }
+    }
+    public void GetAnimSpeed(bool isGet)
+    {
+        if (isGet)
+        {
+            return;
+        }
+        else
+        {
+            isGet = true;
+            animSpeed = anim.speed;
+        }
+    }
+    public void Freeze(bool isFreeze)
+    {
+        if (isFreeze == true)
+        {
+            Transform freezeTransform = transform;
+            //gameObject.GetComponent<Skill_Controller>().enabled = false;
+            transform.position = freezeTransform.position;
+            anim.speed = 0;
+        }
+        else
+        {
+            //gameObject.GetComponent<Skill_Controller>().enabled = true;
+            anim.speed = animSpeed;
         }
     }
     public void HuntingMark()
@@ -153,10 +247,10 @@ public class Base : MonoBehaviour
             isHunting = true;
             markDurationTimer = DataManager.instance.assassin_Skill_Data.skill_1_durationTimer;
         }
-        if(isHunting == true)
+        if (isHunting == true)
         {
-            Debug.Log("1");
-            if(negativeEffect.TryGetValue(1, out NegativeEffectType value))
+            markDurationTimer -= Time.deltaTime;
+            if (negativeEffect.TryGetValue(1, out NegativeEffectType value))
             {
                 value = NegativeEffectType.Hunt;
             }
@@ -165,12 +259,11 @@ public class Base : MonoBehaviour
                 negativeEffect.Add(1, NegativeEffectType.Hunt);
                 randomNum.Add(1);
             }
-            markDurationTimer -= Time.deltaTime;
-            //stats.woundedMultiplier.AddModfiers(stats.woundedMultiplier.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddWoundedMultiplier);
+            stats.woundedMultiplier.baseValue = this.value * (1 + DataManager.instance.assassin_Skill_Data.extraAddWoundedMultiplier);
         }
-        if(markDurationTimer <= 0)
+        if (markDurationTimer <= 0)
         {
-            //stats.woundedMultiplier.RemoveModfiers(stats.woundedMultiplier.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddWoundedMultiplier);
+            stats.woundedMultiplier.baseValue = this.value;
             isHunting = false;
             negativeEffect.Remove(1);
             if (randomNum.Contains(1) == false)
@@ -180,11 +273,5 @@ public class Base : MonoBehaviour
     public virtual void DamageEffect()
     {
 
-    }
-    public IEnumerator TwoHandedSaberBleedDamage()
-    {
-        yield return new WaitForSeconds(1);
-
-        stats.AuthenticTakeDamage(DataManager.instance.two_Handed_Saber_Skill_Data.bleedDamage * layersOfBleeding_Two_Handed_Saber);
     }
 }

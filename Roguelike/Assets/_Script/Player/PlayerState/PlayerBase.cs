@@ -101,5 +101,6 @@ public class PlayerBase : Base
     {
 
     }
+    public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 }
 

@@ -78,6 +78,7 @@ public class EnemyBase : Base
         HuntingMark();
         Hound_Bleed();
         Two_Handed_Bleed();
+        ColdEffect();
     }
     public void FixedUpdate()
     {
@@ -112,7 +113,8 @@ public class EnemyBase : Base
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsPlayer);
         foreach (var player in colliders)
         {
-            attackDetects.Add(player.gameObject);
+            if(player.GetComponent<PlayerBase>().isStealth == false)
+                attackDetects.Add(player.gameObject);
         }
     }
     public void OnDrawGizmos()

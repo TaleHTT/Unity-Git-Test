@@ -20,7 +20,7 @@
     {
         base.Update();
         player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
-        if (player_Shaman.enemyDetects.Count <= 0)
+        if (triggerCalled)
             stateMachine.ChangeState(player_Shaman.shamanIdleState);
     }
 }

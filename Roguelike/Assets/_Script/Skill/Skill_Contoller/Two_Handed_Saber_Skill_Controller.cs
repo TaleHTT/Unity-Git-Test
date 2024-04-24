@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Two_Handed_Saber_Skill_Controller : MonoBehaviour
+public class Two_Handed_Saber_Skill_Controller : Skill_Controller
 {
     public List<GameObject> bleedDetect;
     public List<GameObject> enemyDetect;

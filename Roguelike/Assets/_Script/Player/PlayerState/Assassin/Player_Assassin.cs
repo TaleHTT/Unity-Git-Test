@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player_Assassin : PlayerBase
 {
+    public GameObject target;
+    public bool isStrengthen;
+    public bool isTest;
     public Seeker seeker {  get; set; }
     public float durationTimer {  get; set; }
     public GameObject assassinateTarget {  get; set; }
@@ -17,7 +20,6 @@ public class Player_Assassin : PlayerBase
         base.Awake();
         seeker = GetComponent<Seeker>();
         assassin_Skill_Controller = GetComponent<Assassin_Skill_Controller>();
-        durationTimer = DataManager.instance.assassin_Skill_Data.skill_1_durationTimer;
         assassinIdleState = new PlayerAssassinIdleState(this, stateMachine, "Idle", this);
         assassinMoveState = new PlayerAssassinMoveState(this, stateMachine, "Move", this);
         assassinDeadState = new PlayerAssassinDeadState(this, stateMachine, "Dead", this);
@@ -27,6 +29,7 @@ public class Player_Assassin : PlayerBase
     protected override void Start()
     {
         base.Start();
+        durationTimer = DataManager.instance.assassin_Skill_Data.skill_1_durationTimer;
         stateMachine.Initialize(assassinIdleState);
     }
     protected override void Update()
@@ -34,6 +37,12 @@ public class Player_Assassin : PlayerBase
         base.Update();
         if (stats.currentHealth <= 0 && isDead == false)
             stateMachine.ChangeState(assassinDeadState);
+        AssassinateTarget();
+        if(target != null)
+        {
+            if (Vector2.Distance(transform.position, target.transform.position) > attackRadius)
+                target = null;
+        }
     }
     public void AssassinateTarget()
     {
@@ -44,6 +53,41 @@ public class Player_Assassin : PlayerBase
             {
                 hp = enemyDetects[i].GetComponent<EnemyBase>().stats.currentHealth;
                 assassinateTarget = enemyDetects[i];
+            }
+        }
+    }
+    public void DeadDetect()
+    {
+        if (target != null)
+        {
+            if (isStrengthen)
+            {
+                if (target.GetComponent<EnemyBase>().isDead)
+                {
+                    if (SkillManger.instance.assassin_Skill.isHave_X_Equipment)
+                    {
+                        stats.TakeTreat(stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddHp);
+                        assassin_Skill_Controller.num_KillEnemy++;
+                        Debug.Log("20");
+                    }
+                    stateMachine.ChangeState(assassinStealthIdleState);
+                    target = null;
+                }
+            }
+            else if (isStrengthen == false)
+            {
+                if (SkillManger.instance.assassin_Skill.isHave_X_Equipment)
+                {
+                    if (target.GetComponent<EnemyBase>().isDead)
+                    {
+                        if (target.GetComponent<EnemyBase>().isHunting)
+                            stateMachine.ChangeState(assassinStealthIdleState);
+                        stats.TakeTreat(stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddHp);
+                        assassin_Skill_Controller.num_KillEnemy++;
+                        Debug.Log("10");
+                        target = null;
+                    }
+                }
             }
         }
     }

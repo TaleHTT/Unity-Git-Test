@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-public class Caster_Skill_Controller : MonoBehaviour
+public class Caster_Skill_Controller : Skill_Controller
 {
     private ObjectPool<GameObject> meteoritePool;
 

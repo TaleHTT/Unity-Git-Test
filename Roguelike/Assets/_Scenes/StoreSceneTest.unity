@@ -338,6 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaf9d8989c7fae4f83fe05d745e93b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storePanel: {fileID: 0}
+  storeSlots: []
+  playerInStoreSlotPrefabs: []
 --- !u!4 &770737742
 Transform:
   m_ObjectHideFlags: 0
@@ -563,6 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefabInTeam: []
   globalMaxPlayerNum: 6
+  currentPlayerNum: 0
 --- !u!4 &1467805918
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508271453188343623, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431231901953227553, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_Pivot.x

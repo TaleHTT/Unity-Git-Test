@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Priest_Skill_Controller : MonoBehaviour
+public class Priest_Skill_Controller : Skill_Controller
 {
     public int randomNum {  get; set; }
     private float timer;
@@ -145,6 +145,9 @@ public class Priest_Skill_Controller : MonoBehaviour
                             break;
                         case 1:
                             target.markDurationTimer = 0;
+                            break;
+                        case 2:
+                            target.timer_Cold = 0;
                             break;
                     }
                 }

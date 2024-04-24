@@ -1,9 +1,7 @@
 ﻿public class PlayerAssassinMoveState : PlayerAssassinGroundState
 {
-    Player_Assassin player_Assassin;
-    public PlayerAssassinMoveState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Assassin player_Assassin) : base(player, stateMachine, animboolName)
+    public PlayerAssassinMoveState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Assassin player_Assassin) : base(player, stateMachine, animboolName, player_Assassin)
     {
-        this.player_Assassin = player_Assassin;
     }
 
     public override void Enter()

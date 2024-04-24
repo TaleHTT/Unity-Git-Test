@@ -29,7 +29,7 @@ public class PlayerState
         player.anim.speed = defaultAttackSpeed;
         player.anim.SetBool(animBoolName, false);
     }
-    public void AnimationFinishTrigger()
+    public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
     }

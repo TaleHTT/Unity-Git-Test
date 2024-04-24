@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Bloodsucker_Skill_Controller : MonoBehaviour
+public class Bloodsucker_Skill_Controller : Skill_Controller
 {
     ObjectPool<GameObject> parasitismBatAttackPool;
     ObjectPool<GameObject> parasitismBatDefensPool;
@@ -10,11 +10,9 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     public GameObject parasitismBatDefensPrefab;
     public GameObject parasitismBatAttackPrefab;
     public GameObject rectanglePrefab;
-    int maxDefensNum = 2;
-    public int currentDefenNum;
     public int parasitismBatNum { get; set; }
     public float duration;
-    const int maxBlood = 5;
+    float maxBlood;
     public int currentNum;
     float indexTimer;
     public int currentBlood;
@@ -22,19 +20,31 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     public float timer = 1;
     Vector2 attackDir;
     List<GameObject> skillDetect;
-    int num = 1;
+    private int maxBatNum;
+    float index = 0;
+
     public Player_Bloodsucker player_Bloodsucker => GetComponent<Player_Bloodsucker>();
     private void Awake()
     {
         rectanglePool = new ObjectPool<GameObject>(CreatRectangleFunc, ActionRectangleOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
         parasitismBatAttackPool = new ObjectPool<GameObject>(CreateParasitismBatAttackFunc, ActionParasitismBatAttackOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
-        parasitismBatDefensPool = new ObjectPool<GameObject>(CreateParasitismBatDefensFunc, ActionParasitismBatAttackOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
+        parasitismBatDefensPool = new ObjectPool<GameObject>(CreateParasitismBatDefensFunc, ActionParasitismBatDefensOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
     }
     private void Start()
     {
         duration = DataManager.instance.bloodsucker_Skill_Data.skill_2_Duration;
         skill_2_Timer = DataManager.instance.bloodsucker_Skill_Data.skill_2_CD;
         indexTimer = DataManager.instance.bloodsucker_Skill_Data.indexTimer;
+        if (SkillManger.instance.bloodsucker_Skill.isHave_X_Equipment)
+        {
+            maxBlood = Mathf.Infinity;
+            maxBatNum = 2;
+        }
+        else
+        {
+            maxBlood = 5;
+            maxBatNum = 1;
+        }
     }
     private void Update()
     {
@@ -44,8 +54,6 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
             SkillDetect();
         }
         skill_2_Timer -= Time.deltaTime;
-        if (currentDefenNum <= 0)
-            currentDefenNum = maxDefensNum;
         if (currentBlood >= maxBlood)
         {
             if (player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
@@ -74,32 +82,42 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
         }
         if (skill_2_Timer < 0)
         {
-            if (player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
+            if (player_Bloodsucker.enemyDetects.Count > 0)
             {
-                duration -= Time.deltaTime;
-                if (duration > 0)
+                if (player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
                 {
-                    if (parasitismBatNum >= 1)
-                        return;
+                    duration -= Time.deltaTime;
+                    if (duration > 0)
+                    {
+                        if (parasitismBatNum >= maxBatNum)
+                            return;
+                        else
+                        {
+                            index -= Time.deltaTime;
+                            if(index < 0)
+                            {
+                                parasitismBatAttackPool.Get();
+                                parasitismBatNum++;
+                                index = 0.2f;
+                            }
+                        }
+                    }
                     else
                     {
-                        parasitismBatAttackPool.Get();
-                        parasitismBatNum++;
+                        skill_2_Timer = DataManager.instance.bloodsucker_Skill_Data.skill_2_CD;
+                        duration = DataManager.instance.bloodsucker_Skill_Data.skill_2_Duration;
                     }
                 }
-                else
-                {
-                    skill_2_Timer = DataManager.instance.bloodsucker_Skill_Data.skill_2_CD;
-                    duration = DataManager.instance.bloodsucker_Skill_Data.skill_2_Duration;
-                }
             }
-            else if (player_Bloodsucker.position == 3 || player_Bloodsucker.position == 4 || player_Bloodsucker.position == 5)
+            if (player_Bloodsucker.position == 3 || player_Bloodsucker.position == 4 || player_Bloodsucker.position == 5)
             {
-                for(int i = 0; i < 2; i++)
+                if (player_Bloodsucker.stats.isDefens == false)
                 {
+                    player_Bloodsucker.stats.defensNum = 2;
+                    player_Bloodsucker.stats.isDefens = true;
                     parasitismBatDefensPool.Get();
-                    num *= -1;
                 }
+                duration -= Time.deltaTime;
             }
         }
     }
@@ -115,7 +133,10 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     }
     public void BloodAdd()
     {
-        player_Bloodsucker.stats.currentHealth -= player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraRemoveHp;
+        if(SkillManger.instance.bloodsucker_Skill.isHave_X_Equipment)
+            player_Bloodsucker.stats.currentHealth -= player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraRemoveHp * 0.5f;
+        else
+            player_Bloodsucker.stats.currentHealth -= player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraRemoveHp;
         currentBlood++;
     }
     public void RangeDamage()
@@ -125,7 +146,10 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
         {
             if (hit.GetComponent<EnemyBase>() != null)
             {
-                hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage));
+                if(SkillManger.instance.bloodsucker_Skill.isHave_X_Equipment)
+                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage) + hit.GetComponent<EnemyStats>().armor.GetValue() * 0.5f);
+                else
+                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage));
             }
         }
         currentBlood -= 5;
@@ -141,7 +165,7 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     }
     private GameObject CreateParasitismBatDefensFunc()
     {
-        var bat = Instantiate(parasitismBatDefensPrefab, new Vector2(transform.position.x + num, transform.position.y), Quaternion.identity);
+        var bat = Instantiate(parasitismBatDefensPrefab, transform.position, Quaternion.identity);
         bat.GetComponent<ParasitismBatDefens_Controller>().parasitismBatDefensPool = parasitismBatDefensPool;
         bat.GetComponent<ParasitismBatDefens_Controller>().bloodsucker_Skill_Controller = this;
         return bat;
@@ -165,12 +189,8 @@ public class Bloodsucker_Skill_Controller : MonoBehaviour
     }
     private void ActionParasitismBatDefensOnGet(GameObject bat)
     {
-        for(int i = 0; i < 2; i++)
-        {
-            bat.transform.position = new Vector2(transform.position.x + num, transform.position.y);
-            bat.SetActive(true);
-            num *= -1;
-        }
+        bat.transform.position = transform.position;
+        bat.SetActive(true);
     }
     private void ActionOnRelease(GameObject bat)
     {

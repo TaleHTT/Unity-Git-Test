@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerAssassinGroundState : PlayerState
 {
-    Player_Assassin player_Assassin;
+    public Player_Assassin player_Assassin;
     private List<Vector3> pathPointList;
     private int currentIndex;
     private Vector3 CenterPointAutoPathTarget;
     private Vector3 target;
-    public PlayerAssassinGroundState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName) : base(player, stateMachine, animboolName)
+    public PlayerAssassinGroundState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Assassin player_Assassin) : base(player, stateMachine, animboolName)
     {
+        this.player_Assassin = player_Assassin;
     }
     public override void Enter()
     {
@@ -30,10 +31,14 @@ public class PlayerAssassinGroundState : PlayerState
             player_Assassin.durationTimer -= Time.deltaTime;
             if (player_Assassin.durationTimer <= 0)
             {
+                player_Assassin.isStrengthen = true;
                 player_Assassin.isStealth = false;
+                player_Assassin.deadTimer = DataManager.instance.assassin_Skill_Data.skill_1_durationTimer;
                 stateMachine.ChangeState(player_Assassin.assassinIdleState);
             }
         }
+        if (player_Assassin.isTest == true)
+            return;
         AutoPath();
         if (pathPointList == null)
             return;

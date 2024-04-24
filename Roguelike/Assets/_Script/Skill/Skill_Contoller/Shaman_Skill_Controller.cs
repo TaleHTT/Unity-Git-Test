@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-public class Shaman_Skill_Controller : MonoBehaviour
+public class Shaman_Skill_Controller : Skill_Controller
 {
     private float skill_1_Timer;
     private float skill_2_Timer;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime_Skill_Controller : MonoBehaviour
+public class Slime_Skill_Controller : Skill_Controller
 {
     float duration;
     float skill_1_timer;

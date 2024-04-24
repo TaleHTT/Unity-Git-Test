@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Saber_Skill_Controller : MonoBehaviour
+public class Saber_Skill_Controller : Skill_Controller
 {
     public bool isZeroPosition;
     public int numOfHit;

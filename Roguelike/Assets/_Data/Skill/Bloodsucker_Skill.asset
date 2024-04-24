@@ -19,7 +19,7 @@ MonoBehaviour:
   skill_1_ExtraAddDamage: 0.5
   skill_2_ExtraAddDamage: 0.5
   skill_2_ExtraAddHp: 0.5
-  skill_2_Duration: 2
+  skill_2_Duration: 999999
   indexTimerDamage: 3
   skill_2_CD: 4
   indexTimer: 9999999
