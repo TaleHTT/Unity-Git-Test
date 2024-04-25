@@ -41,6 +41,7 @@ public class Player_Caster : PlayerBase
         var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
         orb.GetComponent<Orb_Controller>().caster_Skill_Controller = caster_Skill_Controller;
         orb.GetComponent<Orb_Controller>().orbPool = orbPool;
+        orb.GetComponent<Orb_Controller>().damage = stats.damage.GetValue();
         return orb;
     }
     private void ActionOnGet(GameObject orb)

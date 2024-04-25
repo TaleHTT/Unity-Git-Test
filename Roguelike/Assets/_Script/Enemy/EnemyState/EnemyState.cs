@@ -1,9 +1,8 @@
 using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState
+public class EnemyState : IEnemy
 {
     private float pathGenerateInterval;
     private float pathGenerateTimer;
@@ -72,5 +71,10 @@ public class EnemyState
         enemy.isDead = true;
         EnemyManager.instance.enemyCount--;
         enemy.cd.enabled = false;
+    }
+
+    public void AnimationFinishTrigger()
+    {
+        
     }
 }

@@ -21123,6 +21123,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1714671227590547493, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b6bd45cf9870f6345bcb667e727f3346, type: 3}
+    - target: {fileID: 1714671227590547493, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3818703633217455950, guid: 1889dee57c4f0e44bbf9b432f651c7f2, type: 3}
       propertyPath: m_Name
       value: TeamWheel

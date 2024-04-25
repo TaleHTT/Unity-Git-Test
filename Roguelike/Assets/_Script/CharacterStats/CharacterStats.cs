@@ -1,6 +1,7 @@
 using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
+    public bool isUnconquered {  get; set; }
     public bool isDefens {  get; set; }
     public int defensNum { get; set; }
     public bool isUseSkill {  get; set; }
@@ -41,6 +42,8 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
+        if (isUnconquered)
+            return;
         if(isDefens)
         {
             defensNum--;
@@ -52,6 +55,8 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void AuthenticTakeDamage(float damage)
     {
+        if (isUnconquered)
+            return;
         if (isDefens)
         {
             defensNum--;

@@ -242,10 +242,10 @@ MonoBehaviour:
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 1000
+    baseValue: 100
     modfiers: []
   damage:
-    baseValue: 100
+    baseValue: 18
     modfiers: []
   armor:
     baseValue: 8
@@ -257,7 +257,7 @@ MonoBehaviour:
     baseValue: 0
     modfiers: []
   attackSpeed:
-    baseValue: 0
+    baseValue: -0.1
     modfiers: []
   treatRadius:
     baseValue: 0
@@ -302,11 +302,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e20e04681bec646bb50e3997287f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
+  randomNum: 
+  twoHanedAttackTimer: 1
+  hit_Assassin: 0
+  isHunting: 0
   deadTimer: 0
-  attackRadius: 10
+  attackRadius: 7
+  isDead: 0
   amountOfHit: 0
-  layersOfBleeding_Hound: 0
+  layerOfCold: 0
+  timer_Cold: 3
+  isFreeze: 0
+  isHitInFreeze: 0
   occupation: 2
   whatIsEnemy:
     serializedVersion: 2
@@ -327,10 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98589c7a85bb7b443aca6fac10d1fff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burningRingsPrefab: {fileID: 0}
   meteoritePrefab: {fileID: 0}
-  explodeDamage: 0
-  timer: 0
+  numberOfAttack: 0
 --- !u!1 &4642531419730160476
 GameObject:
   m_ObjectHideFlags: 0

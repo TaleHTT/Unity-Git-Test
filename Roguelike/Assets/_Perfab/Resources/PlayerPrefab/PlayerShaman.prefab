@@ -112,27 +112,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819a8f563e7ff1448d2c22cefad4462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUseSkill: 0
   level: 0
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 100
+    baseValue: 140
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 26
     modfiers: []
   armor:
-    baseValue: 0
+    baseValue: 11
     modfiers: []
   woundedMultiplier:
-    baseValue: 0
+    baseValue: 1
     modfiers: []
   moveSpeed:
     baseValue: 0
     modfiers: []
   attackSpeed:
-    baseValue: 0
+    baseValue: -0.2
     modfiers: []
   treatRadius:
     baseValue: 0
@@ -168,10 +167,13 @@ MonoBehaviour:
   hit_Assassin: 0
   isHunting: 0
   deadTimer: 0
-  attackRadius: 5
+  attackRadius: 2.2
   isDead: 0
   amountOfHit: 0
-  layersOfBleeding_Two_Handed_Saber: 0
+  layerOfCold: 0
+  timer_Cold: 3
+  isFreeze: 0
+  isHitInFreeze: 0
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2

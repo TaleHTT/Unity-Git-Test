@@ -18,7 +18,7 @@ public class PlayerBase : Base
 
     [Header("Show Range info")]
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
-    [SerializeField] private bool drawTheBorderOrNot;
+    public bool drawTheBorderOrNot;
 
     public Transform closetEnemy;
 
@@ -47,7 +47,7 @@ public class PlayerBase : Base
         EnemyDetect();
         CloestTargetDetect();
     }
-    public void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         if (!drawTheBorderOrNot)
             return;
