@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StoreSceneManager : MonoBehaviour
 {
+    public bool test;
+
     [SerializeField]
     GameObject storePanel;
 
@@ -15,6 +18,15 @@ public class StoreSceneManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     GameObject[] playerInStoreSlotPrefabs;
+
+    [SerializeField]
+    TextMeshProUGUI coinText;
+
+    /*class ImageGameObject
+    {
+        public int cost;
+        GameObject playerInStoreSlotPrefab;
+    }*/
 
     public static class ImagePlayerPrefabTransition
     {
@@ -64,20 +76,24 @@ public class StoreSceneManager : MonoBehaviour
     private void Awake()
     {
         ImagePlayerPrefabTransition.Init();
+
         //playerPrefabInTeam = new GameObject[6];
         
     }
 
     private void Start()
     {
-        RandomGeneratePlayerInStoreSlot();
+        if(!test)
+            RandomGeneratePlayerInStoreSlot();
         SetPlayerInTeamDataToPlayerTeamSlot();
     }
 
     private void Update()
     {
-        SetPlayerPrefabInTeam();
+        if(!test)
+            SetPlayerPrefabInTeam();
         ShowPlayerPrefabInTeam();
+        coinText.text = GameRoot.Progress.currentCoin.ToString();
     }
 
     /// <summary>

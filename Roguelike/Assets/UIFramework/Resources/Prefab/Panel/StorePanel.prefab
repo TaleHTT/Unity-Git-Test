@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 1868706572185984480}
   m_Layer: 5
   m_Name: Slot (4)
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 53371442911753404}
   m_Layer: 5
   m_Name: Slot (5)
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 5561187640531250485}
   m_Layer: 5
   m_Name: Slot (1)
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1053,7 +1053,7 @@ GameObject:
   - component: {fileID: 1650895773250932662}
   m_Layer: 5
   m_Name: Slot (2)
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1847,7 +1847,7 @@ GameObject:
   - component: {fileID: 2240414575046298542}
   m_Layer: 5
   m_Name: Slot (3)
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2142,7 +2142,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7205219730723598568}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.2548285, w: 0.96698624}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2155,7 +2155,7 @@ RectTransform:
   - {fileID: 6344390405279698593}
   - {fileID: 2903861405010404388}
   m_Father: {fileID: 629762162673238181}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -29.527}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -348, y: 221}
@@ -2189,7 +2189,7 @@ GameObject:
   - component: {fileID: 3170930461327035124}
   m_Layer: 5
   m_Name: Slot
-  m_TagString: Slot
+  m_TagString: PlayerSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2638,6 +2638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaf9d8989c7fae4f83fe05d745e93b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
   storePanel: {fileID: 4508271453188343623}
   storeSlots:
   - {fileID: 902448034314300101}
@@ -2647,6 +2648,7 @@ MonoBehaviour:
   - {fileID: 2434435701449687850, guid: 8c1b9e4c72ff375458e1983d869bac09, type: 3}
   - {fileID: 8543380013161612824, guid: fca8dc9ae53312843b5c0877e1bba681, type: 3}
   - {fileID: 6676687037468885245, guid: 194c3c92b3f74d949a6a3a83c904a465, type: 3}
+  coinText: {fileID: 7464589289292125641}
 --- !u!1 &9204331701765458219
 GameObject:
   m_ObjectHideFlags: 0

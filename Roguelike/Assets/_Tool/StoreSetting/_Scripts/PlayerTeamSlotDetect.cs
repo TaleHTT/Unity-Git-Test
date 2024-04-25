@@ -41,7 +41,7 @@ public class PlayerTeamSlotDetect : MonoBehaviour
         int index = 0;
         foreach (Transform item in transform) 
         {
-            if(item.gameObject.tag == "Slot")
+            if(item.gameObject.tag == "PlayerSlot")
             {
                 playerTeamSlots[index] = item.gameObject;
                 index++;

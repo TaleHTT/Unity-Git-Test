@@ -61,6 +61,7 @@ public class GameRoot : MonoBehaviour
         panelManager = new PanelManager();
         DontDestroyOnLoad(this.gameObject);
         StartCoroutine(InitMap());
+        Progress.currentCoin = 10;
     }
 
     private void Start()

@@ -8,6 +8,8 @@ TagManager:
   - Item
   - Slot
   - Bloodsucker
+  - PlayerSlot
+  - StoreSlot
   layers:
   - Default
   - TransparentFX
