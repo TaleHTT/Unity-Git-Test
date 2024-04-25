@@ -2,6 +2,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Saber_Skill", menuName = "Skill/Saber_Skill")]
 public class Saber_Skill_Data : ScriptableObject
 {
+    public float armorBaseValue;
+    public float counterBaseValue;
     [Tooltip("额外增加的血量")]
     [Range(0, 1)] public float extraAddHp;
     [Tooltip("额外增加的护甲")]

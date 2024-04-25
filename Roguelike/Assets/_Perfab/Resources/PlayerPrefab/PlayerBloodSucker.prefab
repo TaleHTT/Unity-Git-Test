@@ -280,16 +280,16 @@ MonoBehaviour:
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 100
+    baseValue: 120
     modfiers: []
   damage:
-    baseValue: 0
+    baseValue: 20
     modfiers: []
   armor:
-    baseValue: 0
+    baseValue: 10
     modfiers: []
   woundedMultiplier:
-    baseValue: 0
+    baseValue: 1
     modfiers: []
   moveSpeed:
     baseValue: 0
@@ -314,14 +314,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomNum: 
   twoHanedAttackTimer: 1
-  coldRemoveTimer: 0
   hit_Assassin: 0
   isHunting: 0
   deadTimer: 0
-  attackRadius: 3
+  attackRadius: 4.06
   isDead: 0
   amountOfHit: 0
+  layerOfCold: 0
   timer_Cold: 0
+  isFreeze: 0
+  isHitInFreeze: 0
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -329,6 +331,8 @@ MonoBehaviour:
   drawTheBorderOrNot: 1
   closetEnemy: {fileID: 0}
   enemyDetects: []
+  meleeAttackRadius: 3
+  remoteAttackRadius: 5.5
   position: 3
   batPrefab: {fileID: 8424353857034146737, guid: 5fef56d406b63d145a0b02aa55f898ae, type: 3}
 --- !u!114 &6177502559783300836

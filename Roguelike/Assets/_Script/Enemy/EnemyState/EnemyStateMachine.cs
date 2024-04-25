@@ -1,12 +1,12 @@
 public class EnemyStateMachine
 {
-    public EnemyState currentState;
-    public void Initialize(EnemyState state)
+    public IEnemy currentState;
+    public void Initialize(IEnemy state)
     {
         currentState = state;
         currentState.Enter();
     }
-    public void ChangeState(EnemyState state)
+    public void ChangeState(IEnemy state)
     {
         currentState.Exit();
         currentState = state;

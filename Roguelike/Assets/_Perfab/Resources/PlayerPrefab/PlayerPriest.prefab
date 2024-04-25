@@ -454,15 +454,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomNum: 
-  timer: 1
+  twoHanedAttackTimer: 1
+  hit_Assassin: 0
+  isHunting: 0
   deadTimer: 3
   attackRadius: 3.17
   isDead: 0
   amountOfHit: 0
+  layerOfCold: 0
+  timer_Cold: 3
+  isFreeze: 0
+  isHitInFreeze: 0
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   drawTheBorderOrNot: 1
   closetEnemy: {fileID: 0}
   enemyDetects: []
@@ -481,6 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRidus: 0
+  teamMender: []
   treatDetect: []
 --- !u!1 &4222686753688720264
 GameObject:

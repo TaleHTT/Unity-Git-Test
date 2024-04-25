@@ -15,9 +15,9 @@ MonoBehaviour:
   enemy_ExtraAddAttackSpeed: 0.5
   num_ExtraAddAttackSpeed: 0.5
   extraAddDamage: 0.5
-  depleteHp: 0.1
-  recoverHp: 0.5
-  skill_1_DurationTimer: 5
+  depleteHp: 0.02
+  recoverHp: 0.05
+  skill_1_DurationTimer: 3
   skill_2_DurationTimer: 5
   bleedDamage: 2
   times: 5

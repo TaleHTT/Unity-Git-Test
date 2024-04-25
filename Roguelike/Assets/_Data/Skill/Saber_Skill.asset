@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38edd5d2ba61564fb59e2ac675a620b, type: 3}
   m_Name: Saber_Skill
   m_EditorClassIdentifier: 
-  extraAddHp: 0.5
-  extraAddArmor: 0.5
-  extraAddDamage: 0.5
-  moveSpeesDecreased: 0
+  armorBaseValue: 0
+  counterBaseValue: 20
+  extraAddHp: 0.1
+  extraAddArmor: 0.1
+  extraAddDamage: 0.1
+  moveSpeesDecreased: 0.2
   extraAddAttackRadius: 2
   persistentTimer: 3
-  standTimer: 3
-  maxNumOfHit: 2
+  standTimer: 2
+  maxNumOfHit: 5
