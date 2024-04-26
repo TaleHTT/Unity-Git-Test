@@ -66,7 +66,7 @@ public class PlayerBase : Base
             }
         }
     }
-    public void EnemyDetect()
+    public virtual void EnemyDetect()
     {
         enemyDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Pool;
 
 public class Player_Bloodsucker : PlayerBase
@@ -65,6 +66,26 @@ public class Player_Bloodsucker : PlayerBase
         else if (position == 3 || position == 4 || position == 5)
         {
             Gizmos.DrawWireSphere(transform.position, remoteAttackRadius);
+        }
+    }
+    public override void EnemyDetect()
+    {
+        enemyDetects = new List<GameObject>();
+        if(position == 0 || position == 1 || position == 2)
+        {
+            var colliders = Physics2D.OverlapCircleAll(transform.position, meleeAttackRadius, whatIsEnemy);
+            foreach (var enemy in colliders)
+            {
+                enemyDetects.Add(enemy.gameObject);
+            }
+        }
+        else
+        {
+            var colliders = Physics2D.OverlapCircleAll(transform.position, remoteAttackRadius, whatIsEnemy);
+            foreach (var enemy in colliders)
+            {
+                enemyDetects.Add(enemy.gameObject);
+            }
         }
     }
 }
