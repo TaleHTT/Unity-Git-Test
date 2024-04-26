@@ -47,6 +47,7 @@ public class StoreScene : SceneState
     {
         GameRoot.Instance.panelManager.Push(new StorePanel());
         //GameRoot.Instance.mapGenerator.SetActive(true);
+        GameRoot.Progress.SaveData();
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }

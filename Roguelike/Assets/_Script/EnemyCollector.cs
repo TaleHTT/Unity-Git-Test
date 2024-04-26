@@ -20,11 +20,16 @@ public class EnemyCollector:MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
-            if (this.transform.childCount == 0) 
+            hasEnemiesActive = false;
+            foreach (Transform child in this.transform)
             {
-                hasEnemiesActive = false;
-            }
-            Debug.Log(transform.childCount);
+                if (child.gameObject.activeSelf)
+                {
+                    hasEnemiesActive = true;
+                    break;
+                }
+            }  
+            //Debug.Log(transform.childCount);
         }
     }
 }

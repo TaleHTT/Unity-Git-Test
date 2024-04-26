@@ -10,6 +10,14 @@ public enum PlayerOccupation
 }
 public class PlayerBase : Base
 {
+    static public int cost = 3;
+    static public int GetCost()
+    {
+        return cost;
+    }
+
+    virtual public string prefabPath { get { return "Path is null"; } }
+
     [Header("Occupation info")]
     public PlayerOccupation occupation;
 

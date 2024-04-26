@@ -5,6 +5,11 @@ public class Player_Saber : PlayerBase
     private float stadnTimer;
     public bool isMove { get; set; }
     public bool isDefense { get; set; }
+
+    string Player_SaberPrefabPath = "PlayerPrefab/PlayerSaber";
+
+    public override string prefabPath { get { return Player_SaberPrefabPath; } }
+
     public Saber_Skill_Controller saber_Skill_Controller { get; set; }
     public PlayerSaberIdleState saberIdleState { get; private set; }
     public PlayerSaberDeadState saberDeadState { get; private set; }

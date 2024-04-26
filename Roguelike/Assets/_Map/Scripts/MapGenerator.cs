@@ -51,13 +51,13 @@ public class MapGenerator : MonoBehaviour
     /// 地图的层数
     /// </summary>
     [Header("地图参数")]
-    private int LAYERS = 5;
+    private int LAYERS = 9;
     /// <summary> 实际预制体每层的节点数 </summary>
-    private int LAYER_NODES = 7;
+    private int LAYER_NODES = 5;
     /// <summary> 限制每层最多出现的节点数 </summary>
-    const int MAXNODES = 6;
+    const int MAXNODES = 5;
     /// <summary> 限制每层最少出现的节点数 </summary>
-    const int MINNODES = 2;
+    const int MINNODES = 3;
 
     /// <summary>
     /// 存储地图上节点二维列表
@@ -214,7 +214,7 @@ public class MapGenerator : MonoBehaviour
                 if (!node.IsSeleced) continue;
                 GameObject nodeUI = Instantiate(nodePrefab, node.transform);
                 node.nodeUI = nodeUI;
-                nodeUI.transform.position += new Vector3(UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON), UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON));
+                //nodeUI.transform.position += new Vector3(UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON), UnityEngine.Random.Range(-RANDOMRANGE_ICON, RANDOMRANGE_ICON));
                 node.position = nodeUI.transform.position;
                 nodeUI.GetComponent<Image>().sprite = node.icon;
                 node.uiImage = nodeUI.GetComponent<Image>();
@@ -405,7 +405,7 @@ public class MapGenerator : MonoBehaviour
             {
                 for(int j = 0; j < maxNodeNum; j++)
                 {
-                    GenerateConnection(layer, upIndex, father, MAXNODES+1, 0, ref thisLayerContainCount);
+                    GenerateConnection(layer, upIndex, father, MAXNODES, 0, ref thisLayerContainCount);
                     //Debug.Log("GenerateConnection未实现");
                 }
                 break;  
@@ -493,7 +493,12 @@ public class MapGenerator : MonoBehaviour
         int limit = 0;
         while (nodes[layer][index].IsSeleced == true || IsCrossing(layer, index, upIndex))
         {
+            //索引处理，让点更集中
             index = UnityEngine.Random.Range(min, max);
+            if (index == min) index++;
+            index += UnityEngine.Random.Range(min, max);
+            index /= 2;
+
             limit++;
             if (limit > 15)
             {

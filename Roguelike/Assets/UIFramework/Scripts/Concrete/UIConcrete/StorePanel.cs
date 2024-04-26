@@ -23,6 +23,11 @@ public class StorePanel : BasePanel
         {
             GameRoot.Instance.SceneSystem.SetScene(new StartScene());
         });*/
+        UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
+        {
+            GameRoot.Instance.sceneSystem.SetScene(new StartScene());
+            //GameRoot.Instance.SceneSystem.SetScene(new Part_1());
+        });
     }
 
     public override void OnExit()
