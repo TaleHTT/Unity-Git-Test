@@ -4,24 +4,21 @@ using UnityEngine.Pool;
 
 public class Bat_Controller : MonoBehaviour
 {
-    public Player_Bloodsucker player_Bloodsucker {  get; set; }
-    public ObjectPool<GameObject> batPool {  get; set; }
-    public float damage;
-    public float explodeRadius;
-    public float moveSpeed;
     public float timer;
+    public float damage;
+    public float moveSpeed;
+    public float explodeRadius;
+    
     private float coolDownTimer;
-    public LayerMask whatIsEnemy;
-    List<GameObject> enemyDetects;
-    GameObject attackTarget;
-    Vector2 attackDir;
-    private void OnEnable()
+    [HideInInspector] public Vector2 attackDir;
+    [HideInInspector] public GameObject attackTarget;
+    [HideInInspector] public List<GameObject> attackDetects;
+    [HideInInspector] public ObjectPool<GameObject> batPool;
+    protected virtual void OnEnable()
     {
-        EnemyDetect();
-        AttackDir();
         coolDownTimer = timer;
     }
-    private void Update()
+    protected virtual void Update()
     {
         transform.Translate(attackDir * moveSpeed * Time.deltaTime);
         coolDownTimer -= Time.deltaTime;
@@ -29,54 +26,8 @@ public class Bat_Controller : MonoBehaviour
         {
             coolDownTimer = timer;
             batPool.Release(gameObject);
-            enemyDetects.Clear();
+            attackDetects.Clear();
         }
     }
     public void AttackDir() => attackDir = (attackTarget.transform.position - transform.position).normalized;
-    public void AttackTarget()
-    {
-        float distance = Mathf.Infinity;
-        for(int i = 0; i < enemyDetects.Count; i++)
-        {
-            if(distance > Vector2.Distance(transform.position, enemyDetects[i].transform.position))
-            {
-                distance = Vector2.Distance(transform.position, enemyDetects[i].transform.position);
-                attackTarget = enemyDetects[i];
-            }
-        }
-    }
-    public void EnemyDetect()
-    {
-        enemyDetects = new List<GameObject>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity, whatIsEnemy);
-        foreach(var hit in colliders)
-        {
-            if (hit.GetComponent<EnemyBase>() != null)
-            {
-                enemyDetects.Add(hit.gameObject);
-                AttackTarget();
-            }
-        }
-    }
-    private void TakeAttack()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explodeRadius, whatIsEnemy);
-        foreach (var hit in colliders)
-        {
-            if (hit.GetComponent<EnemyBase>() != null)
-            {
-                hit.GetComponent<EnemyStats>().TakeDamage(damage);
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            player_Bloodsucker.stats.TakeTreat(damage * (1 + DataManager.instance.bloodsucker_Skill_Data.normalExtraAddHp_2));
-            TakeAttack();
-            batPool.Release(gameObject);
-        }
-    }
 }

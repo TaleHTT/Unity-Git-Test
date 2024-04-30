@@ -20,5 +20,7 @@ public class EnemySaberDeadState : EnemyState
     public override void Update()
     {
         base.Update();
+        if (enemy_Saber.isDead == false)
+            stateMachine.ChangeState(enemy_Saber.saberIdleState);
     }
 }

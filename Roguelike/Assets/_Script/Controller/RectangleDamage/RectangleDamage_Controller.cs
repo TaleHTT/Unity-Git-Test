@@ -5,57 +5,27 @@ using UnityEngine.Pool;
 public class RectangleDamage_Controller : MonoBehaviour
 {
     public ObjectPool<GameObject> rectanglePool;
-    public float damage {  get; set; }
-    List<GameObject> attackTargets;
-    float timer;
-    int currentNumOfAttack;
-    const int maxAttackNum = 3;
-    private void OnEnable()
+    
+    [HideInInspector] public float timer;
+    [HideInInspector] public float damage;
+    [HideInInspector] public int currentNumOfAttack;
+    [HideInInspector] public const int maxAttackNum = 3;
+    [HideInInspector] public List<GameObject> attackTargets;
+    protected virtual void OnEnable()
     {
         timer = 1;
         currentNumOfAttack = 0;
     }
-    private void Awake()
+    protected virtual void Awake()
     {
         attackTargets = new List<GameObject>();
     }
-    private void Start()
+    protected virtual void Start()
     {
         transform.localScale = new Vector2(DataManager.instance.bloodsucker_Skill_Data.length, DataManager.instance.bloodsucker_Skill_Data.width);
     }
-    private void Update()
+    protected virtual void Update()
     {
-        if(currentNumOfAttack >= maxAttackNum)
-        {
-            rectanglePool.Release(gameObject);
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-            if (timer < 0)
-            {
-                foreach (var hit in attackTargets)
-                {
-                    if (hit.GetComponent<EnemyBase>() != null)
-                        hit.GetComponent<EnemyStats>().TakeDamage(damage);
-                }
-                currentNumOfAttack++;
-                timer = 1;
-            }
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            attackTargets.Add(collision.gameObject);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            attackTargets.Remove(collision.gameObject);
-        }
+
     }
 }

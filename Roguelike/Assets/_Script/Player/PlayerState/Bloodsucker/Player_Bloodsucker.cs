@@ -4,11 +4,11 @@ using UnityEngine.Pool;
 
 public class Player_Bloodsucker : PlayerBase
 {
-    public float meleeAttackRadius;
-    public float remoteAttackRadius;
     public int position;
     public GameObject batPrefab;
     ObjectPool<GameObject> batPool;
+    public float meleeAttackRadius;
+    public float remoteAttackRadius;
     public PlayerBloodsuckerIdleState bloodsuckerIdleState { get; set; }
     public PlayerBloodsuckerDeadState bloodsuckerDeadState { get; set; }
     public PlayerBloodsuckerAttackState bloodsuckerAttackState { get; set; }
@@ -37,9 +37,9 @@ public class Player_Bloodsucker : PlayerBase
     private GameObject CreateFunc()
     {
         var bat = Instantiate(batPrefab, transform.position, Quaternion.identity);
-        bat.GetComponent<Bat_Controller>().player_Bloodsucker = this;
-        bat.GetComponent<Bat_Controller>().batPool = batPool;
-        bat.GetComponent<Bat_Controller>().damage = stats.damage.GetValue();
+        bat.GetComponent<Player_Bat_Controller>().player_Bloodsucker = this;
+        bat.GetComponent<Player_Bat_Controller>().batPool = batPool;
+        bat.GetComponent<Player_Bat_Controller>().damage = stats.damage.GetValue();
         return bat;
     }
     private void ActionOnGet(GameObject bat)

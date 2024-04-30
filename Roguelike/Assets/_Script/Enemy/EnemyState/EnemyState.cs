@@ -8,12 +8,14 @@ public class EnemyState : IEnemy
     private float pathGenerateTimer;
     public int currentIndex;
     public int targetPointIndex = 0;
+    public float defaultAttackSpeed;
     public List<Vector3> pathPointList;
     public EnemyBase enemy { get; private set; }
     public EnemyStateMachine stateMachine { get; private set; }
     public float distance;
     public float stateTimer;
     string animBoolName;
+    public bool triggerCalled;
 
     public EnemyState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName)
     {
@@ -29,11 +31,14 @@ public class EnemyState : IEnemy
     }
     public virtual void Enter()
     {
+        defaultAttackSpeed = enemy.anim.speed;
         enemy.anim.SetBool(animBoolName, true);
+        triggerCalled = false;
     }
     public virtual void Exit()
     {
         enemy.anim.SetBool(animBoolName, false);
+        enemy.anim.speed = defaultAttackSpeed;
     }
     public void AutoPath()
     {
@@ -73,8 +78,8 @@ public class EnemyState : IEnemy
         enemy.cd.enabled = false;
     }
 
-    public void AnimationFinishTrigger()
+    public virtual void AnimationFinishTrigger()
     {
-        
+        triggerCalled = true;
     }
 }

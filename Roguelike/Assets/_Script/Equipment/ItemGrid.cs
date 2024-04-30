@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
-    public bool isRandom;
+    [SerializeField] public bool isRandom;
     int unlockTarget;
     int whichSlot = 0;
     [SerializeField] int gridSizeWidth;

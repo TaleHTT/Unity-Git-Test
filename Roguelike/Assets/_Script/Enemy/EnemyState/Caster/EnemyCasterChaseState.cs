@@ -3,9 +3,9 @@ using UnityEngine;
 public class EnemyCasterChaseState : EnemyCasterGroundState
 {
     private Vector3 target;
+
     public EnemyCasterChaseState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Caster enemy_Caster) : base(enemy, stateMachine, animboolName, enemy_Caster)
     {
-
     }
 
     public override void Enter()

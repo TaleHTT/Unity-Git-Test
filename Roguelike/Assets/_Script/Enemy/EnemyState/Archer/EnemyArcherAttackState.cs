@@ -19,7 +19,8 @@ public class EnemyArcherAttackState : EnemyArcherGroundState
     public override void Update()
     {
         base.Update();
-        if (enemy_Archer.attackDetects.Count <= 0)
+        enemy.anim.speed = enemy.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        if (triggerCalled)
             stateMachine.ChangeState(enemy_Archer.archerIdleState);
     }
 }

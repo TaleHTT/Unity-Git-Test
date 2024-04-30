@@ -3,10 +3,11 @@ using UnityEngine.Pool;
 
 public class Player_IceCaster : PlayerBase
 {
-    public float timer;
-    private ObjectPool<GameObject> orbPool;
     [Tooltip("法球预制体")]
     public GameObject orbPerfab;
+
+    [HideInInspector] public float timer;
+    private ObjectPool<GameObject> orbPool;
     public PlayerIceCasterAttackState iceCasterAttackState {  get; set; }
     public PlayerIceCasterDeadState iceCasterDeadState { get; set; }
     public PlayerIceCasterIdleState iceCasterIdleState { get; set; }
@@ -58,9 +59,9 @@ public class Player_IceCaster : PlayerBase
     private GameObject CreateFunc()
     {
         var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<IceOrb_Controller>().orbPool = orbPool;
-        orb.GetComponent<IceOrb_Controller>().player_IceCaster = this;
-        orb.GetComponent<IceOrb_Controller>().damage = stats.damage.GetValue();
+        orb.GetComponent<Player_IceOrb_Controller>().orbPool = orbPool;
+        orb.GetComponent<Player_IceOrb_Controller>().player_IceCaster = this;
+        orb.GetComponent<Player_IceOrb_Controller>().damage = stats.damage.GetValue();
         return orb;
     }
     private void ActionOnGet(GameObject orb)

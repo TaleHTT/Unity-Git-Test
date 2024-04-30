@@ -28,9 +28,9 @@ public class PlayerBase : Base
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     public bool drawTheBorderOrNot;
 
-    public Transform closetEnemy;
+    [HideInInspector] public Transform closetEnemy;
 
-    public List<GameObject> enemyDetects;
+    [HideInInspector] public List<GameObject> enemyDetects;
 
     [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
     public PlayerStateMachine stateMachine { get; set; }

@@ -1,12 +1,11 @@
 using Pathfinding;
-using System;
 using UnityEngine;
 
 public class BossBase : Base
 {
     public bool isTest;
-    public GameObject player {  get; set; }
     public LayerMask whatIsPlayer;
+    public GameObject player { get; set; }
     public Seeker seeker { get; private set; }
     public EnemyStateMachine stateMachine { get; set; }
     protected override void Awake()
@@ -41,9 +40,9 @@ public class BossBase : Base
         {
             float distance = Mathf.Infinity;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity, whatIsPlayer);
-            for(int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                if(distance > Vector2.Distance(transform.position, colliders[i].transform.position))
+                if (distance > Vector2.Distance(transform.position, colliders[i].transform.position))
                 {
                     distance = Vector2.Distance(transform.position, colliders[i].transform.position);
                     player = colliders[i].gameObject;

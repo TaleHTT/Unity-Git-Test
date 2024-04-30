@@ -23,5 +23,7 @@ public class EnemyCasterGroundState : EnemyState
             stateMachine.ChangeState(enemy_Caster.casterChaseState);
         if (enemy_Caster.attackDetects.Count > 0)
             stateMachine.ChangeState(enemy_Caster.casterAttackState);
+        if (enemy_Caster.stats.currentHealth <= 0)
+            stateMachine.ChangeState(enemy_Caster.casterDeadState);
     }
 }

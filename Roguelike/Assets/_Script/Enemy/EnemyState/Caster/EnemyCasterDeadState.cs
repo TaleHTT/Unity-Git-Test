@@ -20,5 +20,7 @@ public class EnemyCasterDeadState : EnemyState
     public override void Update()
     {
         base.Update();
+        if (enemy_Caster.isDead == false)
+            stateMachine.ChangeState(enemy_Caster.casterIdleState);
     }
 }

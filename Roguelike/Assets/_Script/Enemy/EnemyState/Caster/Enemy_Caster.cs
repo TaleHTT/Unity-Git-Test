@@ -6,6 +6,7 @@ public class Enemy_Caster : EnemyBase
     private ObjectPool<GameObject> pool;
     [Tooltip("∑®«Ú‘§÷∆ÃÂ")]
     public GameObject OrbPerfab;
+    private Enemy_Caster_Skill_Controller enemy_Caster_Skill_Controller;
     public EnemyCasterIdleState casterIdleState { get; private set; }
     public EnemyCasterAttackState casterAttackState { get; private set; }
     public EnemyCasterDeadState casterDeadState { get; private set; }
@@ -14,6 +15,7 @@ public class Enemy_Caster : EnemyBase
     protected override void Awake()
     {
         base.Awake();
+        enemy_Caster_Skill_Controller = GetComponent<Enemy_Caster_Skill_Controller>();
         pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestory, true, 10, 1000);
         casterIdleState = new EnemyCasterIdleState(this, stateMachine, "Idle", this);
         casterAttackState = new EnemyCasterAttackState(this, stateMachine, "Attack", this);
@@ -29,19 +31,19 @@ public class Enemy_Caster : EnemyBase
     protected override void Update()
     {
         base.Update();
-        if (stats.currentHealth <= 0 && isDead == false)
-            stateMachine.ChangeState(casterDeadState);
     }
     public override void AnimationCasterAttack()
     {
         base.AnimationCasterAttack();
+        enemy_Caster_Skill_Controller.numberOfAttack++;
         pool.Get();
     }
     private GameObject createFunc()
     {
         var orb = Instantiate(OrbPerfab, transform.position,Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().damage = stats.damage.GetValue();
-        orb.GetComponent<Orb_Controller>().orbPool = pool;
+        orb.GetComponent<Enemy_Orb_Controller>().enemy_Caster_Skill_Controller = enemy_Caster_Skill_Controller;
+        orb.GetComponent<Enemy_Orb_Controller>().damage = stats.damage.GetValue();
+        orb.GetComponent<Enemy_Orb_Controller>().orbPool = pool;
         return orb;
     }
     private void actionOnGet(GameObject orb)

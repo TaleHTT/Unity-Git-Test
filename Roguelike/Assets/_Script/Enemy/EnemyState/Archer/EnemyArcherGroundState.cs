@@ -26,5 +26,7 @@ public class EnemyArcherGroundState : EnemyState
             stateMachine.ChangeState(enemy_Archer.archerChaseState);
         if (enemy.attackDetects.Count > 0)
             stateMachine.ChangeState(enemy_Archer.archerAttackState);
+        if (enemy_Archer.stats.currentHealth <= 0)
+            stateMachine.ChangeState(enemy_Archer.archerDeadState);
     }
 }

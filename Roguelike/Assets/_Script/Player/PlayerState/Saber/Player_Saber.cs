@@ -3,8 +3,8 @@ using UnityEngine;
 public class Player_Saber : PlayerBase
 {
     private float stadnTimer;
-    public bool isMove { get; set; }
-    public bool isDefense { get; set; }
+    [HideInInspector] public bool isMove;
+    [HideInInspector] public bool isDefense;
 
     string Player_SaberPrefabPath = "PlayerPrefab/PlayerSaber";
 

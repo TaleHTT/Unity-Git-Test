@@ -1,4 +1,5 @@
 using Pathfinding;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 public enum EnemyOccupation
@@ -86,7 +87,7 @@ public class EnemyBase : Base
         PlayerDetect();
         CloestTargetDetect();
     }
-    public void PlayerDetect()
+    public virtual void PlayerDetect()
     {
         playerDetects = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsPlayer);
@@ -117,7 +118,7 @@ public class EnemyBase : Base
                 attackDetects.Add(player.gameObject);
         }
     }
-    public void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         if (!drawTheBorderOrNot)
             return;
@@ -136,4 +137,19 @@ public class EnemyBase : Base
     {
 
     }
+    public virtual void AnimationPriestAttack()
+    {
+
+    }
+    public virtual void AnimationBloodsuckerAttack()
+    {
+
+    }
+
+    public virtual void AnimationIceCasterAttack()
+    {
+
+    }
+
+    public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 }
