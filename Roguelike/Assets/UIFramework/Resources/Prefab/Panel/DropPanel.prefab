@@ -1047,6 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeamSlots: []
   playersInTeam: []
+  gra: {fileID: 0}
   globalMaxPlayerNum: 6
 --- !u!1 &8967851125262207640
 GameObject:
@@ -1059,7 +1060,7 @@ GameObject:
   - component: {fileID: 7740441312747527076}
   - component: {fileID: 6778579683614410910}
   m_Layer: 0
-  m_Name: StoreSceneManger
+  m_Name: DropPanelManger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

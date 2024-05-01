@@ -16,7 +16,7 @@ public class PlayerTeamSlotDetect : MonoBehaviour
     /// </summary>
     public GameObject[] playersInTeam;
     private EventSystem _EventSystem;
-    private GraphicRaycaster gra;
+    public GraphicRaycaster gra;
     public int globalMaxPlayerNum;
 
     private void Awake()
@@ -26,7 +26,8 @@ public class PlayerTeamSlotDetect : MonoBehaviour
         //场景中要有EventSystem
         _EventSystem = FindObjectOfType<EventSystem>();
         //主场景的射线检测器
-        gra = FindObjectOfType<GraphicRaycaster>();
+        /*gra = FindObjectOfType<GraphicRaycaster>();
+        Debug.Log(gra.name);*/
     }
 
     private void Start()
