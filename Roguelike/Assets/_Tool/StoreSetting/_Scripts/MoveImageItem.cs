@@ -5,15 +5,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 
-public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    bool isInItem = false;
+    bool costPanelChange = false;
     public bool isInTeam = false;
     bool purchaseState;
+    bool isMoving = false;
 
     //记录玩家开始拖拽时的位置
     private Vector3 vector;
@@ -27,15 +30,13 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     //private CanvasGroup canvasGroup;
 
-
-
     private void Awake()
 
     {
         //场景中要有EventSystem
         _EventSystem = FindObjectOfType<EventSystem>();
         //主场景的射线检测器
-        gra = FindObjectOfType<GraphicRaycaster>();
+        gra = GameObject.Find("StorePanel").GetComponent<GraphicRaycaster>();
         rectTransform = GetComponent<RectTransform>();
         //canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -46,10 +47,22 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
+        isMoving = true;
         vector = this.transform.position;
         purchaseState = false;
-        if (!isInTeam) purchaseState = true; 
+        if (!isInTeam) purchaseState = true;
         //canvasGroup.blocksRaycasts = false;
+        Transform[] allGameObjects = GetComponentsInChildren<Transform>(true);
+        foreach (Transform item in allGameObjects)
+        {
+            GameObject itemGamObject = item.gameObject;
+            if (itemGamObject.name == "ShowPanel")
+            {
+                //Debug.Log("false");
+                itemGamObject.SetActive(false);
+                //SetSortingOrder(itemGamObject, 5);
+            }
+        }
     }
 
 
@@ -69,7 +82,8 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End Dragging");
+        isMoving = false;
+        //Debug.Log("End Dragging");
 
         //判断是否拖拽到格子上
         bool isSolt = false;
@@ -79,7 +93,10 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         //通过定义的读取方法读取鼠标所在位置的UI对象
         var list = GraphicRaycaster(Input.mousePosition);
-
+        /*for (int i = 0; i < list.Count; ++i)
+        {
+            Debug.Log(list[i].gameObject.name);
+        }*/
         foreach (var item in list)
         {
             if (item.gameObject == gameObject) continue;
@@ -112,8 +129,7 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         }
 
-
-        if (GameRoot.Progress.currentCoin < PlayerBase.cost) isSolt = false;
+        if (GameRoot.Progress.currentCoin < PlayerBase.cost && !StoreSceneManager.instance.test) isSolt = false;
         //判断是否检测在格子上
         if (isSolt)
         {
@@ -153,5 +169,57 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         System.Type logEntries = assembly.GetType("UnityEditor.LogEntries");
         System.Reflection.MethodInfo clearConsoleMethod = logEntries.GetMethod("Clear");
         clearConsoleMethod.Invoke(new object(), null);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //Debug.Log($"OnPointerEnter {this.gameObject.name}");
+        if(isMoving == false && !isInItem)
+        {
+            Transform[] allGameObjects = GetComponentsInChildren<Transform>(true);
+            foreach (Transform item in allGameObjects)
+            {        
+                GameObject itemGamObject = item.gameObject;
+                if (itemGamObject.name == "ShowPanel")
+                {
+                    itemGamObject.SetActive(true);
+                    SetSortingOrder(itemGamObject, 5);
+                }
+                //先加载价格再脱离父物体
+                if (itemGamObject.name == "CostPanel" && !costPanelChange)
+                {
+                    itemGamObject.transform.SetParent(this.transform.parent);
+                    costPanelChange = true;
+                }
+            }
+        }
+        isInItem = true;
+    }
+
+    void SetSortingOrder(GameObject element, int sortingOrder)
+    {
+        // 获取UI元素的画布组件
+        Canvas canvas = element.GetComponentInParent<Canvas>();
+
+        // 修改UI元素的渲染顺序
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = sortingOrder;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isInItem = false;
+        //Debug.Log($"OnPointerExit {this.gameObject.name}");
+        Transform[] allGameObjects = GetComponentsInChildren<Transform>(true);
+        foreach (Transform item in allGameObjects)
+        {
+            GameObject itemGamObject = item.gameObject;
+            if (itemGamObject.name == "ShowPanel")
+            {
+                Debug.Log("false");
+                itemGamObject.SetActive(false);
+                //SetSortingOrder(itemGamObject, 5);
+            }
+        }
     }
 }
