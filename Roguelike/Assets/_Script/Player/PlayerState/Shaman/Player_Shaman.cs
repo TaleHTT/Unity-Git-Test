@@ -5,9 +5,9 @@ public class Player_Shaman : PlayerBase
 {
     public GameObject treatTarget {  get; set; }
     public List<GameObject> treatDetect {  get; set; }
+    public PlayerShamanDeadState shamanDeadState { get; set; }
     public PlayerShamanIdleState shamanIdleState {  get; set; }
     public PlayerShamanAttackState shamanAttackState { get; set; }
-    public PlayerShamanDeadState shamanDeadState { get; set; }
 
     protected override void Awake()
     {

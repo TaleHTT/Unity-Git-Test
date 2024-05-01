@@ -40,7 +40,8 @@ public class Enemy_Archer : EnemyBase
     private GameObject createFunc()
     {
         var orb = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<Orb_Controller>().orbPool = pool;
+        orb.GetComponent<Enemy_Arrow_Controller>().damage = stats.damage.GetValue();
+        orb.GetComponent<Enemy_Arrow_Controller>().pool = pool;
         return orb;
     }
     private void actionOnGet(GameObject orb)

@@ -2,7 +2,6 @@ public class EnemyCasterIdleState : EnemyCasterGroundState
 {
     public EnemyCasterIdleState(EnemyBase enemy, EnemyStateMachine stateMachine, string animboolName, Enemy_Caster enemy_Caster) : base(enemy, stateMachine, animboolName, enemy_Caster)
     {
-
     }
 
     public override void Enter()

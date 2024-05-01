@@ -17,6 +17,7 @@ public class Enemy_Authentic_Controller : Authentic_Controller
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             collision.GetComponent<PlayerStats>()?.AuthenticTakeDamage(damage);
+            collision.GetComponent<PlayerBase>().isHit = true;
             authenticPool.Release(gameObject);
         }
     }

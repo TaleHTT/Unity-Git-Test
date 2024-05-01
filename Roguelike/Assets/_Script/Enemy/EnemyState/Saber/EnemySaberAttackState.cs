@@ -17,7 +17,8 @@ public class EnemySaberAttackState : EnemySaberGroundState
     public override void Update()
     {
         base.Update();
-        if (enemy_Saber.attackDetects.Count <= 0)
+        enemy.anim.speed = enemy.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        if (triggerCalled)
             stateMachine.ChangeState(enemy_Saber.saberIdleState);
     }
 }

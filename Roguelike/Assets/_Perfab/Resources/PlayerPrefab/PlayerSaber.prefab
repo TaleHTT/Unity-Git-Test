@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.15}
+  m_AnchoredPosition: {x: 0, y: 2.2}
   m_SizeDelta: {x: 930.75, y: 438.99997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &749024729202888454
@@ -379,8 +379,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04769051, y: -0.08776367}
-  m_Size: {x: 0.8183272, y: 1.9713535}
+  m_Offset: {x: -0.16157436, y: 0.11340046}
+  m_Size: {x: 3.5159473, y: 3.6869583}
   m_Direction: 0
 --- !u!114 &5583544917319784164
 MonoBehaviour:
@@ -394,7 +394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819a8f563e7ff1448d2c22cefad4462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUseSkill: 0
   level: 0
   experience: 0
   currentHealth: 0
@@ -431,15 +430,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5239fce73ddd30f4b8bd622682253e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomNum: 
-  twoHanedAttackTimer: 1
-  hit_Assassin: 0
-  isHunting: 0
-  deadTimer: 0
   attackRadius: 2
+  deadTimer: 0
   isDead: 0
+  layerOfCold: 0
+  isFreeze: 0
+  isHitInFreeze: 0
+  isHunting: 0
+  isHit: 0
+  isStealth: 0
   amountOfHit: 0
+  timer_Cold: 0
+  hit_Assassin: 0
+  timer_Hound_Bleed: 0
+  markDurationTimer: 0
+  layersOfBleeding_Hound: 0
+  timer_Two_Handed_Saber_Bleed: 0
   layersOfBleeding_Two_Handed_Saber: 0
+  negativeEffectType: 0
+  randomNum: 
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -447,6 +456,8 @@ MonoBehaviour:
   drawTheBorderOrNot: 1
   closetEnemy: {fileID: 0}
   enemyDetects: []
+  isMove: 0
+  isDefense: 0
 --- !u!114 &1696859803207282339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,8 +471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isZeroPosition: 0
-  numOfHit: 0
   saber_Skill_Data: {fileID: 11400000, guid: 4c3cc60201851364e90b160db4c9c771, type: 2}
+  numOfHit: 0
+  colliders: []
+  saberDetect: []
 --- !u!1 &3642720922044631248
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,9 +548,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558998421
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1459458051413904079, guid: 3accdbde4e56f5c4e9cfa311b8cef55f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5bd4a2f47e8f0e84894f7133d3688b50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

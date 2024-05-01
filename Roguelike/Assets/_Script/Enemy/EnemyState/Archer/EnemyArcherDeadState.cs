@@ -19,5 +19,7 @@ public class EnemyArcherDeadState : EnemyState
     public override void Update()
     {
         base.Update();
+        if (enemy_Archer.isDead == false)
+            stateMachine.ChangeState(enemy_Archer.archerIdleState);
     }
 }

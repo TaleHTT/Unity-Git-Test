@@ -7,17 +7,13 @@ public class MultipleArrow_Controller : MonoBehaviour
     public float damage {  get; set; }
     public Vector2 moveDir { get; set; }
     public ObjectPool<GameObject> multipleArrowPool {  get; set; }
-    private void Update()
+    protected virtual void Update()
+    {
+
+    }
+
+    public void Move()
     {
         transform.Translate(moveDir * moveSpeed * Time.deltaTime);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-        {
-            Debug.Log("Enter");
-            collision.GetComponent<EnemyStats>()?.TakeDamage(damage);
-            multipleArrowPool.Release(gameObject);
-        }
     }
 }

@@ -28,9 +28,9 @@ public class PlayerBase : Base
     [Tooltip("ÊÇ·ñÏÔÊ¾¹¥»÷·¶Î§")]
     public bool drawTheBorderOrNot;
 
-    public Transform closetEnemy;
+    [HideInInspector] public Transform closetEnemy;
 
-    public List<GameObject> enemyDetects;
+    [HideInInspector] public List<GameObject> enemyDetects;
 
     [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
     public PlayerStateMachine stateMachine { get; set; }
@@ -74,7 +74,7 @@ public class PlayerBase : Base
             }
         }
     }
-    public void EnemyDetect()
+    public virtual void EnemyDetect()
     {
         enemyDetects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);

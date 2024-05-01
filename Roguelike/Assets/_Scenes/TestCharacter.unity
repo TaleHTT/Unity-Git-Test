@@ -353,7 +353,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_Orb_Controller: {fileID: 9171332872435353072, guid: c89082886921f2c4bb8cdca2ef5d54c9, type: 3}
   enemy_Orb_Controller: {fileID: 6728965602666919014, guid: 094ae0160197d8d45bd7ef1db1c7a52c, type: 3}
-  multiple_Arrow_Controller: {fileID: 2554371818915836497, guid: dbc536e7a62922342a442c6d73930cd3, type: 3}
 --- !u!1 &619132237
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,8 +385,57 @@ Transform:
   - {fileID: 378727003}
   - {fileID: 1199008530}
   - {fileID: 506436502}
+  - {fileID: 858474516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858474515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858474516}
+  - component: {fileID: 858474517}
+  m_Layer: 0
+  m_Name: GameObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858474516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858474515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 619132238}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858474517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858474515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8b2a8803fc0fa4ca8726a3105f24f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iceEffect: {fileID: 8777323595308612088, guid: b9d5ca1ebce48894995b3e4849644549, type: 3}
+  attackEffect: {fileID: 896980091880385818, guid: 36e22bfbaed14d34992297e39b7be25f, type: 3}
+  huntEffect: {fileID: 3496065828168009382, guid: 4c89a99e3f8bef141a4a177903367e4a, type: 3}
+  treatEffect: {fileID: 7896629478315161263, guid: 9069e69c313d42646b9088db25c94c5e, type: 3}
 --- !u!1 &1199008529
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1490523431
 Transform:
   m_ObjectHideFlags: 0
@@ -611,18 +659,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8adadbb4d2723043b94907983cd4849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomNum: 
-  twoHanedAttackTimer: 1
-  hit_Assassin: 0
-  isHunting: 0
-  deadTimer: 0
   attackRadius: 0
+  deadTimer: 0
   isDead: 0
-  amountOfHit: 0
   layerOfCold: 0
-  timer_Cold: 0
   isFreeze: 0
   isHitInFreeze: 0
+  isHunting: 0
+  isHit: 0
+  isStealth: 0
+  amountOfHit: 0
+  timer_Cold: 0
+  hit_Assassin: 0
+  timer_Hound_Bleed: 0
+  markDurationTimer: 0
+  layersOfBleeding_Hound: 0
+  timer_Two_Handed_Saber_Bleed: 0
+  layersOfBleeding_Two_Handed_Saber: 0
+  negativeEffectType: 0
+  randomNum: 
   isTest: 0
   whatIsPlayer:
     serializedVersion: 2
@@ -633,7 +688,6 @@ MonoBehaviour:
   sprintSpeed: 0
   isFinishSkill: 0
   extraAddDamage: 0
-  angle: 0
   semicirclePerfab: {fileID: 0}
   hound: {fileID: 0}
 --- !u!114 &1490523433

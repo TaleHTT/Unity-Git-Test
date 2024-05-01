@@ -17,6 +17,7 @@ public class Enemy_Arrow_Controller : Arrow_Controller
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             collision.GetComponent<PlayerStats>()?.TakeDamage(damage);
+            collision.GetComponent<PlayerBase>().isHit = true;
             pool.Release(gameObject);
         }
     }

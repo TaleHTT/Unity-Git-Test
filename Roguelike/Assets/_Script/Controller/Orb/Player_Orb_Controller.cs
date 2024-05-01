@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Player_Orb_Controller : Orb_Controller
 {
-    public float num;
+    [HideInInspector] public Player_Caster_Skill_Controller player_Caster_Skill_Controller;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -12,9 +13,15 @@ public class Player_Orb_Controller : Orb_Controller
         transform.position = Vector3.one;
         isStrengthen = false;
     }
-    private void Start()
+    protected override void Awake()
     {
-        num = caster_Skill_Controller.numberOfAttack;
+        base.Awake();
+        burningRingsPool = new ObjectPool<GameObject>(CreateburningRingsFunc, ActionOnGet, ActionOnRelease, ActionOnDestory, true, 10, 1000);
+    }
+    protected override void Start()
+    {
+        base.Start();
+        num = player_Caster_Skill_Controller.numberOfAttack;
     }
     protected override void Update()
     {
@@ -23,8 +30,8 @@ public class Player_Orb_Controller : Orb_Controller
         {
             transform.localScale = new Vector2(2, 2);
             isStrengthen = true;
-            caster_Skill_Controller.numberOfAttack = 0;
-            num = caster_Skill_Controller.numberOfAttack;
+            player_Caster_Skill_Controller.numberOfAttack = 0;
+            num = player_Caster_Skill_Controller.numberOfAttack;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,6 +71,7 @@ public class Player_Orb_Controller : Orb_Controller
                 if (hit.GetComponent<EnemyStats>() != null)
                 {
                     hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(damage);
+                    hit.GetComponent<EnemyBase>().isHit = true;
                     if (SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
                         hit.GetComponent<EnemyBase>().layersOfBurning++;
                 }
@@ -77,6 +85,7 @@ public class Player_Orb_Controller : Orb_Controller
                 if (hit.GetComponent<EnemyStats>() != null)
                 {
                     hit.GetComponent<EnemyStats>()?.AuthenticTakeDamage(strengthExplosionDamage);
+                    hit.GetComponent<EnemyBase>().isHit = true;
                     if (SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
                     {
                         hit.GetComponent<EnemyBase>().layersOfBurning++;
@@ -84,5 +93,11 @@ public class Player_Orb_Controller : Orb_Controller
                 }
             }
         }
+    }
+    public GameObject CreateburningRingsFunc()
+    {
+        var _object = Instantiate(burningRingsPrefab, burningTransform.position, Quaternion.identity);
+        _object.GetComponent<Player_BurningRings_Controller>().burningRingsPool = burningRingsPool;
+        return _object;
     }
 }

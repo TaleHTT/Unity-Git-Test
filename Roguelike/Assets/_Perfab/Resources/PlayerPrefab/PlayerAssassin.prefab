@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.3, y: 21.8}
+  m_AnchoredPosition: {x: 117, y: 192}
   m_SizeDelta: {x: 291.5, y: 63.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5894824240932696754
@@ -454,8 +454,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04769051, y: -0.08776367}
-  m_Size: {x: 0.8183272, y: 1.9713535}
+  m_Offset: {x: 0.6831093, y: 0.09278679}
+  m_Size: {x: 1.5921154, y: 3.5705166}
   m_Direction: 0
 --- !u!114 &4514653911941741261
 MonoBehaviour:
@@ -505,18 +505,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987f67e07c5d9234c89896c5fabd78e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomNum: 
-  twoHanedAttackTimer: 1
-  hit_Assassin: 0
-  isHunting: 0
-  deadTimer: 0
   attackRadius: 10
+  deadTimer: 0
   isDead: 0
-  amountOfHit: 0
   layerOfCold: 0
-  timer_Cold: 0
   isFreeze: 0
   isHitInFreeze: 0
+  isHunting: 0
+  isHit: 0
+  isStealth: 0
+  amountOfHit: 0
+  timer_Cold: 0
+  hit_Assassin: 0
+  timer_Hound_Bleed: 0
+  markDurationTimer: 0
+  layersOfBleeding_Hound: 0
+  timer_Two_Handed_Saber_Bleed: 0
+  layersOfBleeding_Two_Handed_Saber: 0
+  negativeEffectType: 0
+  randomNum: 
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -524,9 +531,9 @@ MonoBehaviour:
   drawTheBorderOrNot: 1
   closetEnemy: {fileID: 0}
   enemyDetects: []
+  isTest: 1
   target: {fileID: 0}
   isStrengthen: 0
-  isTest: 1
 --- !u!114 &8113091464344808062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16f768e7ee3b1445a3745bd5ed2f759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  daggerPrefab: {fileID: 4263107839501248968, guid: 2bb38c8a9f7459248974142123cac061, type: 3}
+  value: 0
+  baseValue: 0
+  huntTarget: []
 --- !u!1 &8005363046461356695
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +624,7 @@ SpriteRenderer:
   m_SortingLayerID: -1558998421
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a15c77c41703e7344a77cc0e3a9d469e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -12,44 +12,49 @@ public enum NegativeEffectType
 }
 public class Base : MonoBehaviour
 {
-    public List<int> randomNum = new List<int>();
-    public Dictionary<int, NegativeEffectType> negativeEffect = new Dictionary<int, NegativeEffectType>();
-    public NegativeEffectType negativeEffectType { get; set; }
-    private float houndAttackTimer = 1;
-    public float twoHanedAttackTimer = 1;
-    public int hit_Assassin;
-    public bool isStealth { get; set; }
-    public bool isHunting;
-    public float markDurationTimer { get; set; }
+    [Tooltip("¹¥»÷·¶Î§")]
+    public float attackRadius;
 
     [Header("Destroy info")]
     [Tooltip("ËÀÍöºó£¬¾­¹ýtimerÃëºóÏú»Ù")]
     public float deadTimer;
-
-    public float timer_Hound_Bleed { get; set; }
-    [Tooltip("¹¥»÷·¶Î§")]
-    public float attackRadius;
     [Tooltip("ÊÇ·ñËÀÍö")]
     public bool isDead;
-    public bool isHit { get; set; }
-    public Animator anim { get; set; }
-    public int amountOfHit;
-    public CapsuleCollider2D cd { get; set; }
-
-    public CharacterStats stats { get; set; }
-    public int layersOfBleeding_Hound { get; set; }
-    public float timer_Two_Handed_Saber_Bleed { get; set; }
-    public int layersOfBleeding_Two_Handed_Saber { get; set; }
+    
     public int layerOfCold;
-    public float timer_Cold;
-    float animSpeed;
     public bool isFreeze;
-    bool isGet = false;
     public bool isHitInFreeze;
-    float coldTimer;
-    float defauatMoveSpeed;
-    float defauatAttaclSpeed;
-    float value;
+    
+    public bool isHunting;
+    private bool isGet = false;
+    
+    private float value;
+    private float coldTimer;
+    private float animSpeed;
+    private GameObject iceEffect;
+    private GameObject huntEffect;
+    private float defauatMoveSpeed;
+    private float defauatAttaclSpeed;
+    private float houndAttackTimer = 1;
+    private float twoHanedAttackTimer = 1;
+
+    [HideInInspector] public bool isHit;
+    [HideInInspector] public bool isStealth;
+    [HideInInspector] public int amountOfHit;
+    [HideInInspector] public float timer_Cold;
+    [HideInInspector] public int hit_Assassin;
+    [HideInInspector] public float timer_Hound_Bleed;
+    [HideInInspector] public float markDurationTimer;
+    [HideInInspector] public int layersOfBleeding_Hound;
+    [HideInInspector] public float timer_Two_Handed_Saber_Bleed;
+    [HideInInspector] public int layersOfBleeding_Two_Handed_Saber;
+    [HideInInspector] public NegativeEffectType negativeEffectType;
+    [HideInInspector] public List<int> randomNum = new List<int>();
+    public Dictionary<int, NegativeEffectType> negativeEffect = new Dictionary<int, NegativeEffectType>();
+
+    public Animator anim { get; set; }
+    public CapsuleCollider2D cd { get; set; }
+    public CharacterStats stats { get; set; }
     protected virtual void Awake()
     {
         timer_Cold = 3;
@@ -62,6 +67,8 @@ public class Base : MonoBehaviour
     }
     protected virtual void Start()
     {
+        iceEffect = GameObjectManager.Instance.iceEffect;
+        huntEffect = GameObjectManager.Instance.huntEffect;
         value = stats.woundedMultiplier.GetValue();
         timer_Hound_Bleed = DataManager.instance.hound_Skill_Data.durationTimer;
         timer_Two_Handed_Saber_Bleed = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
@@ -79,6 +86,18 @@ public class Base : MonoBehaviour
         {
             deadTimer = 3;
             gameObject.SetActive(true);
+        }
+        if (isFreeze)
+        {
+            Instantiate(iceEffect, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Destroy(iceEffect);
+        }
+        if (isHunting)
+        {
+            Instantiate(huntEffect, new Vector2(transform.position.x - 0.6f, transform.position.y + 1.5f), Quaternion.identity, this.transform);
         }
         ColdEffect();
         HuntingMark();
@@ -167,6 +186,16 @@ public class Base : MonoBehaviour
             timer_Cold -= Time.deltaTime;
             float removeMoveSpeed = defauatMoveSpeed * 0.25f * layerOfCold;
             float removeAttackSpeed = defauatAttaclSpeed * 0.25f * layerOfCold;
+            if (negativeEffect.TryGetValue(0, out NegativeEffectType value))
+            {
+                value = NegativeEffectType.Cold;
+            }
+            else
+            {
+                if (randomNum.Contains(2) == false)
+                    randomNum.Add(2);
+                negativeEffect.Add(2, NegativeEffectType.Cold);
+            }
             if (layerOfCold >= 4)
             {
                 isFreeze = true;
@@ -199,11 +228,17 @@ public class Base : MonoBehaviour
                         stats.attackSpeed.baseValue += removeAttackSpeed;
                         timer_Cold = 3;
                         coldTimer = 2;
+                        negativeEffect.Remove(0);
+                        if (randomNum.Contains(0) == false)
+                            randomNum.Remove(0);
                     }
                 }
             };
             if (timer_Cold < 0 && isFreeze == false)
             {
+                negativeEffect.Remove(0);
+                if (randomNum.Contains(0) == false)
+                    randomNum.Remove(0);
                 stats.moveSpeed.baseValue += removeMoveSpeed;
                 stats.attackSpeed.baseValue += removeAttackSpeed;
                 timer_Cold = 3;

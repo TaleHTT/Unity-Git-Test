@@ -4,10 +4,11 @@ using UnityEngine.Pool;
 
 public class Player_Priest : PlayerBase
 {
-    public List<GameObject> playerDetects;
-    private ObjectPool<GameObject> authenticPool;
     [Tooltip("’Ê…À‘§÷∆ÃÂ")]
     public GameObject authenticPerfab;
+
+    private ObjectPool<GameObject> authenticPool;
+    [HideInInspector] public List<GameObject> playerDetects;
 
     public PlayerPriestIdleState priestIdleState { get; private set; }
     public PlayerPriestDeadState priestDeadState { get; private set; }

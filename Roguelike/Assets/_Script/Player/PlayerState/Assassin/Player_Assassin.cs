@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Player_Assassin : PlayerBase
 {
-    public GameObject target;
-    public bool isStrengthen;
     public bool isTest;
+    
+    [HideInInspector] public GameObject target;
+    [HideInInspector] public bool isStrengthen;
     public Seeker seeker {  get; set; }
     public float durationTimer {  get; set; }
     public GameObject assassinateTarget {  get; set; }
@@ -24,7 +25,7 @@ public class Player_Assassin : PlayerBase
         assassinMoveState = new PlayerAssassinMoveState(this, stateMachine, "Move", this);
         assassinDeadState = new PlayerAssassinDeadState(this, stateMachine, "Dead", this);
         assassinAttackState = new PlayerAssassinAttackState(this, stateMachine, "Attack", this);
-        assassinStealthIdleState = new PlayerAssassinStealthIdleState(this, stateMachine, "Idle", this);
+        assassinStealthIdleState = new PlayerAssassinStealthIdleState(this, stateMachine, "StealthIdle", this);
     }
     protected override void Start()
     {
@@ -67,7 +68,7 @@ public class Player_Assassin : PlayerBase
                     if (SkillManger.instance.assassin_Skill.isHave_X_Equipment)
                     {
                         stats.TakeTreat(stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddHp);
-                        assassin_Skill_Controller.num_KillEnemy++;
+                        //assassin_Skill_Controller.num_KillEnemy++;
                         Debug.Log("20");
                     }
                     stateMachine.ChangeState(assassinStealthIdleState);
@@ -83,7 +84,7 @@ public class Player_Assassin : PlayerBase
                         if (target.GetComponent<EnemyBase>().isHunting)
                             stateMachine.ChangeState(assassinStealthIdleState);
                         stats.TakeTreat(stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddHp);
-                        assassin_Skill_Controller.num_KillEnemy++;
+                        //assassin_Skill_Controller.num_KillEnemy++;
                         Debug.Log("10");
                         target = null;
                     }

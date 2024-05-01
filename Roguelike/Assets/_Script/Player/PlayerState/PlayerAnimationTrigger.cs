@@ -1,20 +1,21 @@
 using System;
 using UnityEngine;
+
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     Transform attackTarget;
     private PlayerBase player => GetComponentInParent<PlayerBase>();
     Player_Shaman player_Shaman => GetComponentInParent<Player_Shaman>();
     Player_Bloodsucker player_Bloodsucker => GetComponentInParent<Player_Bloodsucker>();
-    Saber_Skill_Controller saber_Skill_Controller => GetComponentInParent<Saber_Skill_Controller>();
-    Assassin_Skill_Controller assassin_Skill_Controller => GetComponentInParent<Assassin_Skill_Controller>();
-    Two_Handed_Saber_Skill_Controller two_Handed_Saber_Skill_Controller => GetComponentInParent<Two_Handed_Saber_Skill_Controller>();
+    Player_Saber_Skill_Controller player_Saber_Skill_Controller => GetComponentInParent<Player_Saber_Skill_Controller>();
+    Player_Assassin_Skill_Controller player_Assassin_Skill_Controller => GetComponentInParent<Player_Assassin_Skill_Controller>();
+    Player_Two_Handed_Saber_Skill_Controller player_Two_Handed_Saber_Skill_Controller => GetComponentInParent<Player_Two_Handed_Saber_Skill_Controller>();
     Player_Assassin player_Assassin => GetComponentInParent<Player_Assassin>();
     private void Update()
     {
-        if(player_Bloodsucker != null)
+        if (player_Bloodsucker != null)
         {
-            if(attackTarget == null)
+            if (attackTarget == null)
                 attackTarget = player_Bloodsucker.closetEnemy;
             else
             {
@@ -32,27 +33,34 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void SaberAttackTrigger()
     {
         if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == false)
+        {
             player.closetEnemy.GetComponent<EnemyStats>()?.TakeDamage(player.stats.damage.GetValue());
+            player.closetEnemy.GetComponent<EnemyBase>().isHit = true;
+        }
 
-        else if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true && saber_Skill_Controller.saberDetect.Count == 1 && saber_Skill_Controller.isZeroPosition == true)
+        else if (player.closetEnemy != null && SkillManger.instance.saber_Skill.isHave_X_Equipment == true && player_Saber_Skill_Controller.saberDetect.Count == 1 && player_Saber_Skill_Controller.isZeroPosition == true)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, player.attackRadius, player.whatIsEnemy);
             foreach (var hit in colliders)
             {
                 if (hit.GetComponent<EnemyBase>() != null)
+                {
                     hit.GetComponent<EnemyStats>()?.TakeDamage(player.stats.damage.GetValue());
+                    hit.GetComponent<EnemyBase>().isHit = true;
+                }
             }
         }
     }
     private void BloodsuckerAttackTrigger()
     {
-        if(player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
+        if (player_Bloodsucker.position == 0 || player_Bloodsucker.position == 1 || player_Bloodsucker.position == 2)
         {
             attackTarget.GetComponent<EnemyStats>()?.TakeDamage(player_Bloodsucker.stats.damage.GetValue());
+            attackTarget.GetComponent<EnemyBase>().isHit = true;
             player_Bloodsucker.stats.damage.AddModfiers(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.normalExtraAddDamage);
             player_Bloodsucker.stats.TakeTreat((1 + DataManager.instance.bloodsucker_Skill_Data.normalExtraAddHp_1) * player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.normalExtraAddDamage);
         }
-        else if(player_Bloodsucker.position == 3 || player_Bloodsucker.position == 4 || player_Bloodsucker.position == 5)
+        else if (player_Bloodsucker.position == 3 || player_Bloodsucker.position == 4 || player_Bloodsucker.position == 5)
         {
             player.AnimationBloodsuckerAttack();
         }
@@ -60,12 +68,16 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void SlimeAttackTrigger()
     {
         if (player.closetEnemy != null)
+        {
             player.closetEnemy.GetComponent<EnemyStats>()?.TakeDamage(player.stats.damage.GetValue());
+            player.closetEnemy.GetComponent<EnemyBase>().isHit = true;
+        }
     }
     private void AssassinAttackTrigger()
     {
-        if(player.closetEnemy != null)
+        if (player.closetEnemy != null)
         {
+            player.closetEnemy.GetComponent<EnemyBase>().isHit = true;
             if (player_Assassin.isStrengthen)
             {
                 player_Assassin.assassinateTarget.GetComponent<EnemyStats>().TakeDamage(player_Assassin.stats.damage.GetValue() * 3);
@@ -91,11 +103,12 @@ public class PlayerAnimationTrigger : MonoBehaviour
         player_Assassin.DeadDetect();
         player_Assassin.isStrengthen = false;
     }
-    private  void ShamanAttackTrigger()
+    private void ShamanAttackTrigger()
     {
         if (player.closetEnemy != null)
         {
             player.closetEnemy.GetComponent<EnemyStats>().TakeDamage(player.stats.damage.GetValue());
+            player.closetEnemy.GetComponent<EnemyBase>().isHit = true;
             player_Shaman.treatTarget.GetComponent<PlayerStats>().currentHealth *= (1 + DataManager.instance.shaman_Skill_Data.normal_ExtraTreatHp) * player_Shaman.stats.maxHp.GetValue();
         }
     }
@@ -110,8 +123,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
                 hit.GetComponent<EnemyStats>()?.TakeDamage((float)((player.stats.damage.baseValue) * (2 - Math.Truncate(((player.stats.currentHealth / player.stats.maxHp.GetValue()) * 10)) / 10)));
                 hit.GetComponent<EnemyBase>().layersOfBleeding_Two_Handed_Saber++;
                 hit.GetComponent<EnemyBase>().timer_Two_Handed_Saber_Bleed = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
-                if(SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment == true)
-                    two_Handed_Saber_Skill_Controller.numOfAttacks++;
+                hit.GetComponent<EnemyBase>().isHit = true;
+                if (SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment == true)
+                    player_Two_Handed_Saber_Skill_Controller.numOfAttacks++;
             }
         }
     }

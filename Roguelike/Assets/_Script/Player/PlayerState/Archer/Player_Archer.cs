@@ -3,9 +3,10 @@ using UnityEngine.Pool;
 
 public class Player_Archer : PlayerBase
 {
-    private ObjectPool<GameObject> pool;
     [Tooltip("¼ýÊ¸Ô¤ÖÆÌå")]
     public GameObject arrowPerfab;
+    
+    private ObjectPool<GameObject> pool;
     public PlayerArcherIdleState archerIdleState { get; private set; }
     public PlayerArcherDeadState archerDeadState { get; private set; }
     public PlayerArcherAttackState archerAttackState { get; private set; }
@@ -38,8 +39,8 @@ public class Player_Archer : PlayerBase
     private GameObject createFunc()
     {
         var orb = Instantiate(arrowPerfab, transform.position, Quaternion.identity);
-        orb.GetComponent<Arrow_Controller>().damage = stats.damage.GetValue();
-        orb.GetComponent<Arrow_Controller>().pool = pool;
+        orb.GetComponent<Player_Arrow_Controller>().damage = stats.damage.GetValue();
+        orb.GetComponent<Player_Arrow_Controller>().pool = pool;
         return orb;
     }
     private void actionOnGet(GameObject orb)
