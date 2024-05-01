@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_IceCaster_Skill_Controller : IceCaster_Skill_Controller
@@ -41,8 +42,10 @@ public class Enemy_IceCaster_Skill_Controller : IceCaster_Skill_Controller
                     timer -= Time.deltaTime;
                     if (timer < 0)
                     {
+                        Instantiate(effect, transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(cloestTarget.transform.position.y - transform.position.y, cloestTarget.transform.position.x - transform.position.x)));
                         SectorDamage();
                         timer = DataManager.instance.iceCasterSkill_Data.skill_1_timer;
+                        StartCoroutine(DestoryEffect());
                     }
                 }
             }

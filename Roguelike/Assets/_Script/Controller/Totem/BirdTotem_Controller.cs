@@ -4,6 +4,8 @@ using UnityEngine.Pool;
 
 public class BirdTotem_Controller : MonoBehaviour
 {
+    public float ridius;
+
     [HideInInspector] public float Hp;
     [HideInInspector] public float timer;
     [HideInInspector] public float moveSpeedAdd;
@@ -30,5 +32,9 @@ public class BirdTotem_Controller : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0 || Hp <= 0)
             birdTotemPool.Release(gameObject);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, ridius);
     }
 }

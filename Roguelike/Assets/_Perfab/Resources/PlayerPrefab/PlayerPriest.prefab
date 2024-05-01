@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1558998421
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e100a54b313285248a8d7bf0f6f54f85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -402,8 +402,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04769051, y: -0.08776367}
-  m_Size: {x: 0.8183272, y: 1.9713535}
+  m_Offset: {x: 0.2609148, y: 0.04339385}
+  m_Size: {x: 1.52812, y: 3.6841145}
   m_Direction: 0
 --- !u!114 &306489615974320056
 MonoBehaviour:
@@ -453,18 +453,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fce34b0ecf28a47a31d39e3a5851b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomNum: 
-  twoHanedAttackTimer: 1
-  hit_Assassin: 0
-  isHunting: 0
-  deadTimer: 3
   attackRadius: 3.17
+  deadTimer: 3
   isDead: 0
-  amountOfHit: 0
   layerOfCold: 0
-  timer_Cold: 3
   isFreeze: 0
   isHitInFreeze: 0
+  isHunting: 0
+  isHit: 0
+  isStealth: 0
+  amountOfHit: 0
+  timer_Cold: 3
+  hit_Assassin: 0
+  timer_Hound_Bleed: 0
+  markDurationTimer: 0
+  layersOfBleeding_Hound: 0
+  timer_Two_Handed_Saber_Bleed: 0
+  layersOfBleeding_Two_Handed_Saber: 0
+  negativeEffectType: 0
+  randomNum: 
   occupation: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -472,8 +479,8 @@ MonoBehaviour:
   drawTheBorderOrNot: 1
   closetEnemy: {fileID: 0}
   enemyDetects: []
-  playerDetects: []
   authenticPerfab: {fileID: 2690817703736061277, guid: f9044a3fa1cc2fe47b45d40d9486afa6, type: 3}
+  playerDetects: []
 --- !u!114 &4035274549820555117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,8 +494,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRidus: 0
-  teamMender: []
+  timer: 0
+  randomNum: 0
+  numOfRespawns: 0
+  treatTarget: []
   treatDetect: []
+  teamMender: []
 --- !u!1 &4222686753688720264
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +535,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.3, y: 21.8}
+  m_AnchoredPosition: {x: -1.3, y: 217}
   m_SizeDelta: {x: 291.5, y: 63.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9218765114676166433

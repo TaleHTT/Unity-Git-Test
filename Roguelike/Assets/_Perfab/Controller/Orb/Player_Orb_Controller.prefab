@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5809470361399954389}
   - component: {fileID: 5720807333284460461}
   - component: {fileID: 864218680969611718}
-  - component: {fileID: 6045218378209187864}
   - component: {fileID: 9171332872435353072}
+  - component: {fileID: 8420069764039469151}
   m_Layer: 14
   m_Name: Player_Orb_Controller
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1962978833
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 002095ba37e06594687215252a57209a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,8 +114,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &6045218378209187864
-CircleCollider2D:
+--- !u!114 &9171332872435353072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497706659671472300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96a5283953ad094b927117294c33366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 0
+  burningRingsPrefab: {fileID: 8144175193594395487, guid: 2e90d54cb38dcff4db232fe3eaf09ed6, type: 3}
+  burningTransform: {fileID: 0}
+  isStrengthen: 0
+  strengthExplosionDamage: 0
+  moveSpeed: 4
+  damage: 10
+  timer: 10
+  explosionRadius: 2
+  drawTheBorderOrNot: 0
+  attackDetects: []
+  cdDefaultRadius: 0
+  player_Caster_Skill_Controller: {fileID: 0}
+--- !u!70 &8420069764039469151
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -143,32 +168,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &9171332872435353072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497706659671472300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96a5283953ad094b927117294c33366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burningRingsPrefab: {fileID: 8144175193594395487, guid: 2e90d54cb38dcff4db232fe3eaf09ed6, type: 3}
-  isStrengthen: 0
-  numberOfPenetrations: 0
-  moveSpeed: 4
-  damage: 10
-  timer: 10
-  explosionRadius: 2
-  drawTheBorderOrNot: 0
-  attackDetects: []
-  cdDefaultRadius: 0
-  num: 0
+  m_Offset: {x: -0.04, y: 0.01}
+  m_Size: {x: 0.32, y: 0.17}
+  m_Direction: 1

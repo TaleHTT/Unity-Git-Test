@@ -25,7 +25,7 @@ public class Player_Assassin : PlayerBase
         assassinMoveState = new PlayerAssassinMoveState(this, stateMachine, "Move", this);
         assassinDeadState = new PlayerAssassinDeadState(this, stateMachine, "Dead", this);
         assassinAttackState = new PlayerAssassinAttackState(this, stateMachine, "Attack", this);
-        assassinStealthIdleState = new PlayerAssassinStealthIdleState(this, stateMachine, "Idle", this);
+        assassinStealthIdleState = new PlayerAssassinStealthIdleState(this, stateMachine, "StealthIdle", this);
     }
     protected override void Start()
     {

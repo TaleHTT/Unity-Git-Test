@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IceCaster_Skill_Controller : Skill_Controller
 {
+    [HideInInspector] public float effect_timer = 0.5f;
     [HideInInspector] public float timer;
+    [HideInInspector] public GameObject effect;
     [HideInInspector] public float skill_1_Tiemr;
     [HideInInspector] public float durationTimer;
     [HideInInspector] public float skill_2_Tiemr;
@@ -15,6 +18,7 @@ public class IceCaster_Skill_Controller : Skill_Controller
     }
     protected virtual void Start()
     {
+        effect = GameObjectManager.Instance.attackEffect;
         durationTimer = DataManager.instance.iceCasterSkill_Data.skill_1_durationTimer;
         skill_1_Tiemr = DataManager.instance.iceCasterSkill_Data.skill_1_CD;
         skill_2_Tiemr = DataManager.instance.iceCasterSkill_Data.skill_2_CD;
@@ -51,5 +55,10 @@ public class IceCaster_Skill_Controller : Skill_Controller
                     attackDetect.Remove(attackDetect[i]);
             }
         }
+    }
+    public IEnumerator DestoryEffect()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(effect);
     }
 }

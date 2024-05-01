@@ -31,6 +31,8 @@ public class Base : MonoBehaviour
     private float value;
     private float coldTimer;
     private float animSpeed;
+    private GameObject iceEffect;
+    private GameObject huntEffect;
     private float defauatMoveSpeed;
     private float defauatAttaclSpeed;
     private float houndAttackTimer = 1;
@@ -65,6 +67,8 @@ public class Base : MonoBehaviour
     }
     protected virtual void Start()
     {
+        iceEffect = GameObjectManager.Instance.iceEffect;
+        huntEffect = GameObjectManager.Instance.huntEffect;
         value = stats.woundedMultiplier.GetValue();
         timer_Hound_Bleed = DataManager.instance.hound_Skill_Data.durationTimer;
         timer_Two_Handed_Saber_Bleed = DataManager.instance.two_Handed_Saber_Skill_Data.skill_1_DurationTimer;
@@ -82,6 +86,18 @@ public class Base : MonoBehaviour
         {
             deadTimer = 3;
             gameObject.SetActive(true);
+        }
+        if (isFreeze)
+        {
+            Instantiate(iceEffect, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Destroy(iceEffect);
+        }
+        if (isHunting)
+        {
+            Instantiate(huntEffect, new Vector2(transform.position.x - 0.6f, transform.position.y + 1.5f), Quaternion.identity, this.transform);
         }
         ColdEffect();
         HuntingMark();

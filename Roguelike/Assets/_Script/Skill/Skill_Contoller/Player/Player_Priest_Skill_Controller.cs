@@ -123,6 +123,7 @@ public class Player_Priest_Skill_Controller : Priest_Skill_Controller
                 }
                 PlayerBase target = treatTarget[i].GetComponent<PlayerBase>();
                 treatTarget[i].GetComponent<PlayerStats>()?.TakeTreat((DataManager.instance.priest_Skill_Data.extraAddHeal + 1) * player_Priest.stats.maxHp.GetValue());
+                Instantiate(GameObjectManager.Instance.treatEffect, treatTarget[i].transform.position, Quaternion.identity, transform);
                 numberOfTreatments++;
                 if (target.negativeEffect.Count > 0)
                 {

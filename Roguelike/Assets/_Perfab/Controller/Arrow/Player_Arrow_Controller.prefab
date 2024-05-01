@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5762477472052839242}
   - component: {fileID: 729796712175074089}
   - component: {fileID: 3994780020141946420}
-  - component: {fileID: 6079435312630001573}
+  - component: {fileID: 3458942263898838046}
   m_Layer: 10
   m_Name: Player_Arrow_Controller
   m_TagString: Untagged
@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1962978833
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d55d91f590260e4386ad858d1116528, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &6079435312630001573
-CircleCollider2D:
+--- !u!70 &3458942263898838046
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,9 +159,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: -0.076015614, y: 0.034006946}
+  m_Size: {x: 0.47595772, y: 0.12389901}
+  m_Direction: 1
