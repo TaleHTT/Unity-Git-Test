@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoreSceneManager : MonoBehaviour
 {
+    static public StoreSceneManager instance;
     public bool test;
 
     [SerializeField]
@@ -76,9 +77,9 @@ public class StoreSceneManager : MonoBehaviour
     private void Awake()
     {
         ImagePlayerPrefabTransition.Init();
-
+        instance = this;
         //playerPrefabInTeam = new GameObject[6];
-        
+
     }
 
     private void Start()

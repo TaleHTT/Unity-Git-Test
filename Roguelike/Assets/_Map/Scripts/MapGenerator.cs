@@ -417,6 +417,7 @@ public class MapGenerator : MonoBehaviour
             {
                 upperNodeCount = 1;
             }
+
             //
             for(int j = 0; j < upperNodeCount; j++)
             {
