@@ -19,7 +19,7 @@ public class PlayerSaberAttackState : PlayerState
     public override void Update()
     {
         base.Update();
-        player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        player.anim.speed = player.stats.attackSpeed.GetValue();
         if (triggerCalled)
             stateMachine.ChangeState(player_Saber.saberIdleState);
     }

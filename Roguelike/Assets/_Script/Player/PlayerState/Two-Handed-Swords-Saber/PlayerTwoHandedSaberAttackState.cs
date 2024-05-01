@@ -21,7 +21,7 @@
     public override void Update()
     {
         base.Update();
-        player.anim.speed = player.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        player.anim.speed = player.stats.attackSpeed.GetValue() + defaultSpeed;
         if (triggerCalled)
             stateMachine.ChangeState(player_TwoHandedSaber.twoHandedSaberIdleState);
     }
