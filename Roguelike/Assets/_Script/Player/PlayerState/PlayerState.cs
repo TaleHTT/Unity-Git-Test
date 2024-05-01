@@ -5,7 +5,7 @@ public class PlayerState
     public PlayerBase player { get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }
     public float stateTimer {  get; set; }
-    public float defaultAttackSpeed { get; private set; }
+    public float defaultSpeed { get; private set; }
     public bool triggerCalled { get; set; }
     private string animBoolName;
     public PlayerState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName)
@@ -20,13 +20,13 @@ public class PlayerState
     }
     public virtual void Enter()
     {
-        defaultAttackSpeed = player.anim.speed;
+        defaultSpeed = player.anim.speed;
         player.anim.SetBool(animBoolName, true);
         triggerCalled = false;
     }
     public virtual void Exit()
     {
-        player.anim.speed = defaultAttackSpeed;
+        player.anim.speed = defaultSpeed;
         player.anim.SetBool(animBoolName, false);
     }
     public virtual void AnimationFinishTrigger()

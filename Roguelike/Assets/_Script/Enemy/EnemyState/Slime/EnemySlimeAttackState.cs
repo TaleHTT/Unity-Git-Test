@@ -17,7 +17,7 @@
     public override void Update()
     {
         base.Update();
-        enemy.anim.speed = enemy.stats.attackSpeed.GetValue() + defaultAttackSpeed;
+        enemy.anim.speed = enemy.stats.attackSpeed.GetValue();
         if (triggerCalled)
             stateMachine.ChangeState(enemy_Slime.slimeIdleState);
     }
