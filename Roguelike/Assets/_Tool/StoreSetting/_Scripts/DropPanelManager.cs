@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreSceneManager : MonoBehaviour
+public class DropPanelManager : MonoBehaviour
 {
-    static public StoreSceneManager instance;
+    static public DropPanelManager instance;
     public bool test;
 
     [SerializeField]
@@ -84,20 +84,17 @@ public class StoreSceneManager : MonoBehaviour
 
     private void Start()
     {
-        if(!test)
+        if (!test)
             RandomGeneratePlayerInStoreSlot();
         SetPlayerInTeamDataToPlayerTeamSlot();
     }
 
     private void Update()
     {
-        if(!test)
+        if (!test)
             SetPlayerPrefabInTeam();
         ShowPlayerPrefabInTeam();
-        if () 
-        {
-            coinText.text = GameRoot.Progress.currentCoin.ToString();
-        } 
+        coinText.text = GameRoot.Progress.currentCoin.ToString();
     }
 
     /// <summary>
@@ -105,12 +102,12 @@ public class StoreSceneManager : MonoBehaviour
     /// </summary>
     void SetPlayerInTeamDataToPlayerTeamSlot()
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
-            if(PlayerTeam.playerInTeamPrefabs[i] != null)
+            if (PlayerTeam.playerInTeamPrefabs[i] != null)
             {
                 //PlayerTeamSlotDetect.Instance.playerTeamSlots[i] = 
-                GameObject _ = Instantiate(ImagePlayerPrefabTransition.playerPrefabToImage[PlayerTeam.playerInTeamPrefabs[i].name] as GameObject, 
+                GameObject _ = Instantiate(ImagePlayerPrefabTransition.playerPrefabToImage[PlayerTeam.playerInTeamPrefabs[i].name] as GameObject,
                     storePanel.transform);
                 _.transform.position = PlayerTeamSlotDetect.Instance.playerTeamSlots[i].transform.position;
                 PlayerTeamSlotDetect.Instance.playersInTeam[i] = _;
@@ -125,7 +122,7 @@ public class StoreSceneManager : MonoBehaviour
     void RandomGeneratePlayerInStoreSlot()
     {
         int minPrefabIndex = 0, maxPrefabIndex = playerInStoreSlotPrefabs.Length;
-        for(int i = 0; i < storeSlots.Length; i++)
+        for (int i = 0; i < storeSlots.Length; i++)
         {
             int index = Random.Range(minPrefabIndex, maxPrefabIndex);
             GameObject _ = Instantiate(playerInStoreSlotPrefabs[index], storePanel.transform);
@@ -135,7 +132,7 @@ public class StoreSceneManager : MonoBehaviour
 
     public void SetPlayerPrefabInTeam()
     {
-        for(int i = 0; i < PlayerTeamSlotDetect.Instance.globalMaxPlayerNum; i++)
+        for (int i = 0; i < PlayerTeamSlotDetect.Instance.globalMaxPlayerNum; i++)
         {
             if (PlayerTeamSlotDetect.Instance.playersInTeam[i] != null)
             {

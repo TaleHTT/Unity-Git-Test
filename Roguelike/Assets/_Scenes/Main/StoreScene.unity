@@ -135,9 +135,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 1673118849987325084, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471242648570044703, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: gridSizeWidth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471242648570044703, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: gridSizeHeight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3372462743300756518, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4508271453188343623, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_Name
@@ -147,13 +159,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5365428395511491150, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365428395511491150, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 480
+      objectReference: {fileID: 0}
     - target: {fileID: 5400776591428905077, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5534071685334527752, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431231901953227553, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: m_Pivot.x
@@ -236,6 +256,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6778579683614410910, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
+      propertyPath: test
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778579683614410910, guid: c9a1f2abc9f411d448468052a58133d0, type: 3}
       propertyPath: Storepanel
       value: 
       objectReference: {fileID: 1049891806}
@@ -255,6 +279,7 @@ GameObject:
   - component: {fileID: 232551418}
   - component: {fileID: 232551417}
   - component: {fileID: 232551416}
+  - component: {fileID: 232551419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -336,6 +361,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232551419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232551415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1539016fe5e381544b60fcda8e5d0102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedItem: {fileID: 0}
+  overlapItem: {fileID: 0}
+  items:
+  - {fileID: 11400000, guid: 7f87c04c7c587f44caf04be79536ac94, type: 2}
+  - {fileID: 11400000, guid: 74ce2fcb48f739044900419425f0f6da, type: 2}
+  - {fileID: 11400000, guid: 0dd0bf5af0cc61e4d8d9f7af02041ef2, type: 2}
+  - {fileID: 11400000, guid: 29cfe40e1e5ec3746801d90d7d5de69d, type: 2}
+  - {fileID: 11400000, guid: a63453c840c5f414d9480771fe449055, type: 2}
+  itemPrefab: {fileID: 906305090484390904, guid: 2573deb1c0eeb97469d0d58347635198, type: 3}
+  canvasTransform: {fileID: 1373230677}
 --- !u!1 &497518495
 GameObject:
   m_ObjectHideFlags: 0
