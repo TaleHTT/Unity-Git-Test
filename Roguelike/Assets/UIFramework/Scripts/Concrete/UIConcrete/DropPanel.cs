@@ -13,7 +13,9 @@ public class DropPanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("ContinueButton").onClick.AddListener(() =>
         {
-            GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+            GameRoot.Progress.SaveData();
+            GameRoot.Instance.mapGenerator.SetActive(true);
+            //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
         });
     }
 

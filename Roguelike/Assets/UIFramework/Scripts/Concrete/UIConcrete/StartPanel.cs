@@ -19,7 +19,8 @@ public class StartPanel : BasePanel
             PlayerTeam.DeleteData();
             GameRoot.Progress.DeleteData();
             MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
-            GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+            GameRoot.Instance.panelManager.Push(new DropPanel());
+            //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
         });
 
         UITool.GetOrAddComponentInChildren<Button>("ContinueGameButton").onClick.AddListener(() =>
@@ -27,7 +28,18 @@ public class StartPanel : BasePanel
             PlayerTeam.LoadData();
             GameRoot.Progress.LoadData();
             MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
-            GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+            GameRoot.Instance.panelManager.Push(new DropPanel());
+            //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+        });
+
+        UITool.GetOrAddComponentInChildren<Button>("ExitButton").onClick.AddListener(() =>
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+                // 在发布版本中退出应用程序
+            Application.Quit();
+#endif
         });
     }
 

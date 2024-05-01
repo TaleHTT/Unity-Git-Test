@@ -36,7 +36,15 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         //场景中要有EventSystem
         _EventSystem = FindObjectOfType<EventSystem>();
         //主场景的射线检测器
-        gra = GameObject.Find("StorePanel").GetComponent<GraphicRaycaster>();
+        if(SceneManager.GetActiveScene().name == "StoreScene")
+        {
+            gra = GameObject.Find("StorePanel").GetComponent<GraphicRaycaster>();
+        }
+        else
+        {
+            gra = GameObject.Find("DropPanel").GetComponent<GraphicRaycaster>();
+        }
+        
         rectTransform = GetComponent<RectTransform>();
         //canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -137,7 +145,10 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             this.rectTransform.position = SlotVector;
 
             //------------------------金币计算相关------------------------
-            if(purchaseState) GameRoot.Progress.currentCoin -= PlayerBase.cost;
+            if(SceneManager.GetActiveScene().name == "StoreScene") 
+            {
+                if (purchaseState) GameRoot.Progress.currentCoin -= PlayerBase.cost;
+            }
         }
         else
         {

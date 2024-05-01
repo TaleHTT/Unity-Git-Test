@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StoreSceneManager : MonoBehaviour
@@ -94,7 +95,7 @@ public class StoreSceneManager : MonoBehaviour
         if(!test)
             SetPlayerPrefabInTeam();
         ShowPlayerPrefabInTeam();
-        if () 
+        if (SceneManager.GetActiveScene().name == "StoreScene") 
         {
             coinText.text = GameRoot.Progress.currentCoin.ToString();
         } 

@@ -252,6 +252,7 @@ public class MapGenerator : MonoBehaviour
     /// <param name="level"></param>
     private void LoadSceneByLevelType(E_LevelType level)
     {
+        GameRoot.Instance.mapGenerator.SetActive(false);
         switch (level)
         {
             case E_LevelType.Part_1:

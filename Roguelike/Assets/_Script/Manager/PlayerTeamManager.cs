@@ -45,7 +45,7 @@ public class PlayerTeamManager : MonoBehaviour
 
     public void GetPlayerNumberInTeam()
     {
-        if (!inStoreScene) return;
+        //if (!inStoreScene) return;
         currentPlayerNum = 0;
         for (int i = 0; i < globalMaxPlayerNum; i++)
         {
