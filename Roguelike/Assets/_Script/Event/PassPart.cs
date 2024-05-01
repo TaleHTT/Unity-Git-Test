@@ -26,7 +26,8 @@ public class PassPart : MonoBehaviour
         GameRoot.Progress.currentLevel++;
         MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
         GameRoot.Progress.currentCoin += 3;
-        GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+        GameRoot.Instance.panelManager.Push(new DropPanel());
+        //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
     }
     public void Target_PartFailPass()
     {

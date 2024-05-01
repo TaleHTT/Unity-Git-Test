@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90c709645a7b6409d9bc473d7af870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRandom: 0
   gridSizeWidth: 6
   gridSizeHeight: 6
   rectTransform: {fileID: 0}
@@ -969,11 +970,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156746355}
   m_CullTransparentMesh: 1
---- !u!4 &185382181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8836693834648464798, guid: def1484357be3c541a36a1687ab685bf, type: 3}
-  m_PrefabInstance: {fileID: 569170502}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &210143784
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,6 +3626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90c709645a7b6409d9bc473d7af870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRandom: 0
   gridSizeWidth: 3
   gridSizeHeight: 3
   rectTransform: {fileID: 0}
@@ -3879,7 +3876,7 @@ RectTransform:
   - {fileID: 1821094041}
   - {fileID: 72975581}
   - {fileID: 1343088632}
-  - {fileID: 185382181}
+  - {fileID: 1721502634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4027,13 +4024,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerArcher
       objectReference: {fileID: 0}
-    - target: {fileID: 9167915631780743645, guid: a1c0d1abd518b7044b4baa585d269a29, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 6102913051065131674, guid: a1c0d1abd518b7044b4baa585d269a29, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167915631780743645, guid: a1c0d1abd518b7044b4baa585d269a29, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167915631780743645, guid: a1c0d1abd518b7044b4baa585d269a29, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4417,6 +4418,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a63453c840c5f414d9480771fe449055, type: 2}
   itemPrefab: {fileID: 906305090484390904, guid: 2573deb1c0eeb97469d0d58347635198, type: 3}
   canvasTransform: {fileID: 1984296143}
+--- !u!4 &1721502634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 599606006949527211, guid: def1484357be3c541a36a1687ab685bf, type: 3}
+  m_PrefabInstance: {fileID: 569170502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1734724973
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,6 +4676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90c709645a7b6409d9bc473d7af870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRandom: 0
   gridSizeWidth: 3
   gridSizeHeight: 3
   rectTransform: {fileID: 0}
