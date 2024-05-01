@@ -30,19 +30,20 @@ public class ItemGrid : MonoBehaviour
                 isCanUseSlot.Add(canUseGrid[i, j]);
             }
         }
-        if (isRandom == false)
-            return;
-        if (gridSizeWidth == 3 && gridSizeHeight == 3)
+        if (isRandom == true)
         {
-            int unlockSlot = Random.Range(1, 6);
-            for (int i = 0; i < unlockSlot; i++)
+            if (gridSizeWidth == 3 && gridSizeHeight == 3)
             {
-                int x = Random.Range(1, isCanUseSlot.Count);
-                if (unlockTarget != x)
+                int unlockSlot = Random.Range(1, 6);
+                for (int i = 0; i < unlockSlot; i++)
                 {
-                    unlockTarget = x;
+                    int x = Random.Range(1, isCanUseSlot.Count);
+                    if (unlockTarget != x)
+                    {
+                        unlockTarget = x;
+                    }
+                    isCanUseSlot[x] = true;
                 }
-                isCanUseSlot[x] = true;
             }
         }
         else if (gridSizeWidth >= 3 && gridSizeHeight >= 3)

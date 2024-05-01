@@ -50,8 +50,14 @@ TagManager:
   - name: Ground
     uniqueID: 92305643
     locked: 0
+  - name: Hold
+    uniqueID: 1223742977
+    locked: 0
   - name: Wall
     uniqueID: 199353729
+    locked: 0
+  - name: Back
+    uniqueID: 1456081035
     locked: 0
   - name: Equipment
     uniqueID: 4223731095

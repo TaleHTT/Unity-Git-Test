@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 总体基类
@@ -27,6 +28,7 @@ public class Base : MonoBehaviour
     
     public bool isHunting;
     private bool isGet = false;
+    private bool isEffect = false;
     
     private float value;
     private float coldTimer;
@@ -90,10 +92,12 @@ public class Base : MonoBehaviour
         if (isFreeze)
         {
             Instantiate(iceEffect, transform.position, Quaternion.identity);
+            isEffect = true;
         }
         else
         {
-            Destroy(iceEffect);
+            if(isEffect == true)
+                Destroy(iceEffect);
         }
         if (isHunting)
         {
