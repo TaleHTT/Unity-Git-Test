@@ -16,18 +16,21 @@ public class StorePanel : BasePanel
     {
         UITool.GetOrAddComponentInChildren<Button>("ContinueButton").onClick.AddListener(() =>
         {
+            GameRoot.Progress.currentLevel++;
+            MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.Instance.mapGenerator.SetActive(true);
+            GameRoot.SaveData();
             //GameRoot.Instance.SceneSystem.SetScene(new Part_1());
         });
         /*UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {
             GameRoot.Instance.SceneSystem.SetScene(new StartScene());
         });*/
-        UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
+        /*UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {
             GameRoot.Instance.sceneSystem.SetScene(new StartScene());
             //GameRoot.Instance.SceneSystem.SetScene(new Part_1());
-        });
+        });*/
     }
 
     public override void OnExit()

@@ -22,7 +22,7 @@ public static class SaveSystem
             //将json形式数据写入文本文件内
             File.WriteAllText(path, json);
 #if UNITY_EDITOR
-            Debug.Log($"数据存储成功，存储路径为：{path}");
+            Debug.Log($"{saveFileName}数据存储成功，存储路径为：{path}");
 #endif
         }
         catch (System.Exception exception)

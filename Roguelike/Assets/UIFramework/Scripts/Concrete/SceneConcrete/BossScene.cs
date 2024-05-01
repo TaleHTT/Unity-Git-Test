@@ -6,19 +6,17 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 开始场景
 /// </summary>
-public class Part_3 : SceneState
+public class BossScene : SceneState
 {
     /// <summary>
     /// 场景名称
     /// </summary>
-    readonly string sceneName = "Part_3";
+    readonly string sceneName = "BossScene";
 
     public override void OnEnter()
     {
-
         SceneManager.LoadScene(sceneName);
         SceneManager.sceneLoaded += SceneLoaded;
-
     }
 
     public override void OnExit()

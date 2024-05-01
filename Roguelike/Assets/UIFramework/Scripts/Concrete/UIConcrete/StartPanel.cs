@@ -25,8 +25,7 @@ public class StartPanel : BasePanel
 
         UITool.GetOrAddComponentInChildren<Button>("ContinueGameButton").onClick.AddListener(() =>
         {
-            PlayerTeam.LoadData();
-            GameRoot.Progress.LoadData();
+            GameRoot.LoatData();
             MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.Instance.panelManager.Push(new DropPanel());
             //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());

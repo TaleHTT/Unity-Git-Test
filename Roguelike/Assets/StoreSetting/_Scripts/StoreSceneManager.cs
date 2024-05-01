@@ -95,10 +95,7 @@ public class StoreSceneManager : MonoBehaviour
         if(!test)
             SetPlayerPrefabInTeam();
         ShowPlayerPrefabInTeam();
-        if (SceneManager.GetActiveScene().name == "StoreScene") 
-        {
-            coinText.text = GameRoot.Progress.currentCoin.ToString();
-        } 
+        coinText.text = "½ð±Ò: " + GameRoot.Progress.currentCoin.ToString();
     }
 
     /// <summary>
@@ -142,7 +139,6 @@ public class StoreSceneManager : MonoBehaviour
             {
                 PlayerTeamManager.Instance.playerPrefabInTeam[i] = ImagePlayerPrefabTransition.imageToPlayerPrefab[PlayerTeamSlotDetect.Instance.playersInTeam[i].GetComponent<Image>().name] as GameObject;
                 //Debug.Log(playerPrefabInTeam[i]);
-                Debug.Log("hello");
             }
             else
             {

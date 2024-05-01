@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum E_LevelType
+public enum E_BattleType
 {
     None = 0,
     Part_1 = 1,
     Part_2 = 2,
     Part_3 = 3,
-    Num = 4, //枚举的数量，类似Count+1的存在
-    Shop = 5,
+    Length = 4,
 }
 
 public enum E_NodeType
@@ -46,9 +45,9 @@ public class Node : MonoBehaviour
     /// </summary>
     public bool IsActive = false;
     /// <summary>
-    /// 该节点点击后前往的场景
+    /// 若为战斗节点对应的类型
     /// </summary>
-    public E_LevelType level;
+    public E_BattleType battleType = 0;
 
     public Node(Vector2 position, E_NodeType type = E_NodeType.Battle)
     {

@@ -175,7 +175,7 @@ public class TeamWheel : MonoBehaviour
         {
             for (int i = 0; i < globalMaxCharacterNum; i++)
             {
-                PlayerTeam.LoadData();
+                //PlayerTeam.LoadData();
                 if (PlayerTeam.playerInTeamPrefabs[i] == null) continue;
                 charactersInTeam[i] = Instantiate(PlayerTeam.playerInTeamPrefabs[i], characterPlacePoints[i].transform.position,
                     Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);

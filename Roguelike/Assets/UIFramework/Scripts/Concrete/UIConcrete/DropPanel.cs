@@ -11,18 +11,21 @@ public class DropPanel : BasePanel
 
     public override void OnEnter()
     {
+        Time.timeScale = 0;
+        //Debug.Log("ÓÎÏ·ÔÝÍ£");
         UITool.GetOrAddComponentInChildren<Button>("ContinueButton").onClick.AddListener(() =>
         {
-            GameRoot.Progress.SaveData();
-
             GameRoot.Instance.mapGenerator.SetActive(true);
             //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+            GameRoot.SaveData();
         });
     }
 
     public override void OnExit()
     {
         base.OnExit();
+        Time.timeScale = 1;
+        //Debug.Log("ÓÎÏ·¼ÌÐø");
     }
 
     public override void OnPause()

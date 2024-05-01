@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 //using UnityEngine.UIElements;
 
 public class MapGenerator : MonoBehaviour
@@ -207,7 +209,7 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void CreateNodeUI()
     {
-        for(int i = 0; i < LAYERS - 1;i++) 
+        for(int i = 0; i < LAYERS - 1; i++) 
         {
             foreach(var node in nodes[i])
             {
@@ -227,6 +229,11 @@ public class MapGenerator : MonoBehaviour
                 AssignLevel(node, node.type);
             }
         }
+        /*foreach(var node in nodes[LAYERS-1])
+        {
+            if (!node.IsSeleced) continue;
+            AssignLevel(node, node.type);
+        }*/
     }
 
     /// <summary>
@@ -234,38 +241,46 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void AssignLevel(Node node, E_NodeType type)
     {
-        if (type == E_NodeType.Battle && node.nodeUI != null)
-        {
-            int temp = UnityEngine.Random.Range((int)E_LevelType.Part_1, (int)E_LevelType.Part_3 + 1);
-            node.level = (E_LevelType)temp;
-            node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => LoadSceneByLevelType(node.level));
-        }
-        if (node.nodeUI == null)
-        {
-
-        }
+        node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => LoadSceneByNodeType(node, type));
     }
 
     /// <summary>
     /// 具体的分配方法
     /// </summary>
     /// <param name="level"></param>
-    private void LoadSceneByLevelType(E_LevelType level)
+    private void LoadSceneByLevelType(E_BattleType level)
     {
-        GameRoot.Instance.mapGenerator.SetActive(false);
         switch (level)
         {
-            case E_LevelType.Part_1:
+            case E_BattleType.Part_1:
                 GameRoot.Instance.sceneSystem.SetScene(new Part_1());
                 break;
-            case E_LevelType.Part_2:
+            case E_BattleType.Part_2:
                 GameRoot.Instance.sceneSystem.SetScene(new Part_2());
                 break;
-            case E_LevelType.Part_3:
+            case E_BattleType.Part_3:
                 GameRoot.Instance.sceneSystem.SetScene(new Part_3());
                 break;
         }
-        PlayerTeam.SaveData();
+    }
+
+    void LoadSceneByNodeType(Node node, E_NodeType type)
+    {
+        GameRoot.Instance.mapGenerator.SetActive(false);
+        switch (type)
+        {
+            case E_NodeType.Battle:
+                node.battleType = (E_BattleType)Random.Range(1, (int)E_BattleType.Length);
+                LoadSceneByLevelType(node.battleType);
+                break;
+            case E_NodeType.Shop:
+                GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
+                break;
+            case E_NodeType.Boss:
+                GameRoot.Instance.sceneSystem.SetScene(new BossScene());
+                break;
+        }
+        GameRoot.LoatData();
         this.gameObject.SetActive(false);
     }
 
@@ -287,6 +302,7 @@ public class MapGenerator : MonoBehaviour
                         break;
                     case E_NodeType.Shop:
                         node.icon = icons[(int)E_NodeType.Shop];
+                        //Debug.Log("this button is shop");
                         break;
                 }
             }
@@ -568,7 +584,7 @@ public class MapGenerator : MonoBehaviour
     public void SetBoss(Node node)
     {
         GameObject nodeUI = Instantiate(nodePrefab, node.transform);
-
+        node.nodeUI = nodeUI;
         node.type = E_NodeType.Boss;
         node.uiImage = nodeUI.GetComponent<Image>();
         node.IsSeleced = true;
@@ -576,5 +592,8 @@ public class MapGenerator : MonoBehaviour
 
         nodeUI.GetComponent<Image>().sprite = node.icon;
         nodeUI.GetComponent<Image>().SetNativeSize();
+
+        nodeUI.AddComponent<Button>();
+        AssignLevel(node, E_NodeType.Boss);
     }
 }

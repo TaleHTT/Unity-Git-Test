@@ -15,17 +15,8 @@ public class Part_2 : SceneState
 
     public override void OnEnter()
     {
-
-        if (SceneManager.GetActiveScene().name != sceneName)
-        {
-            SceneManager.LoadScene(sceneName);
-            SceneManager.sceneLoaded += SceneLoaded;
-        }
-        else
-        {
-            //panelManager.Push();
-        }
-
+        SceneManager.LoadScene(sceneName);
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
     public override void OnExit()
@@ -41,7 +32,7 @@ public class Part_2 : SceneState
     /// <param name="load"></param>
     public void SceneLoaded(Scene scene, LoadSceneMode load)
     {
-        GameRoot.Instance.panelManager.Push(new Part_2Panel());
+        GameRoot.Instance.panelManager.Push(new DuringLevelPanel());
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }

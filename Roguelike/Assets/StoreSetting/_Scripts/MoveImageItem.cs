@@ -125,7 +125,7 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             //检测是否在格子上
             else if (item.gameObject.tag == "PlayerSlot")
             {
-                Debug.Log("test");
+                //Debug.Log("test");
                 //如果在格子上则将isSlot设置为true方便后续代码
                 isSolt = true;
 
@@ -227,7 +227,7 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             GameObject itemGamObject = item.gameObject;
             if (itemGamObject.name == "ShowPanel")
             {
-                Debug.Log("false");
+                //Debug.Log("false");
                 itemGamObject.SetActive(false);
                 //SetSortingOrder(itemGamObject, 5);
             }

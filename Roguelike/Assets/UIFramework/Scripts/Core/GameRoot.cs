@@ -17,6 +17,18 @@ public class GameRoot : MonoBehaviour
     public PanelManager panelManager { get; private set; }
     public GameObject mapGenerator;
 
+    static public void SaveData()
+    {
+        Progress.SaveData();
+        PlayerTeam.SaveData();
+    }
+
+    static public void LoatData()
+    {
+        Progress.LoadData();
+        PlayerTeam.LoadData();
+    }
+
     public class Progress
     {
         static private readonly string PROGRESS_DATA = "ProgressData.data";

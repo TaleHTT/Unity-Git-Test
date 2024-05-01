@@ -19,17 +19,8 @@ public class StoreScene : SceneState
     public override void OnEnter()
     {
         Instance = this;
-
-        if (SceneManager.GetActiveScene().name != sceneName)
-        {
-            SceneManager.LoadScene(sceneName);
-            SceneManager.sceneLoaded += SceneLoaded;
-        }
-        else
-        {
-            GameRoot.Instance.panelManager.Push(new StorePanel());
-        }
-
+        SceneManager.LoadScene(sceneName);
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
     public override void OnExit()
@@ -47,7 +38,7 @@ public class StoreScene : SceneState
     {
         GameRoot.Instance.panelManager.Push(new StorePanel());
         //GameRoot.Instance.mapGenerator.SetActive(true);
-        GameRoot.Progress.SaveData();
+        GameRoot.SaveData();
         Debug.Log($"{sceneName}≥°æ∞º”‘ÿÕÍ±œ£°");
     }
 }

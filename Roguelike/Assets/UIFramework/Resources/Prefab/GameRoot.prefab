@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mapGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 7449738603596462663, guid: 826a225b231f2ff4dba9cc78c8d36d66, type: 3}
+      propertyPath: bossSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e1db2cf5170060d4aacdd434faf18812, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
