@@ -1,9 +1,13 @@
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
 //using UnityEngine.UIElements;
 
 public class MapGenerator : MonoBehaviour
@@ -174,13 +178,56 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    public static Node currentNode;
     /// <summary>
     /// 根据关卡进度，给不同节点设置active程度
     /// </summary>
     /// <param name="currentLevel">当前关卡进度，当前层的node设置成active，其他都disactive，从0开始</param>
     public void NodeLevelSet(int currentLevelInput)
     {
-        for (int i = 0; i < LAYERS; i++)
+        //当前关卡进度为刚刚开始，进行一次特殊处理
+        if (currentLevelInput == 0)
+        {
+            foreach (Node item in nodes[0])
+            {
+                item.IsActive = true;
+                if (item.GetComponentInChildren<Button>() == null) continue;
+                item.GetComponentInChildren<Button>().interactable = true;
+            }
+            for(int i = 1; i < LAYERS; i++)
+            {
+                foreach (Node item in nodes[i])
+                {
+                    item.IsActive = false;
+                    if (item.GetComponentInChildren<Button>() == null) continue;
+                    item.GetComponentInChildren<Button>().interactable = false;
+                }
+            }
+        }
+        else
+        {
+            foreach (Node item in nodes[currentLevelInput])
+            {
+                item.IsActive = false;
+                if (item.GetComponentInChildren<Button>() == null) continue;
+                item.GetComponentInChildren<Button>().interactable = false;
+            }
+            
+            foreach (Node node in currentNode.lowerNodes)
+            {
+                node.IsActive = false;
+                node.GetComponentInChildren<Button>().interactable = false;
+            }
+            foreach (Node node in currentNode.upperNodes)
+            {
+                node.IsActive = true;
+                node.GetComponentInChildren<Button>().interactable = true;
+            }
+            currentNode.IsActive = false;
+            currentNode.GetComponentInChildren<Button>().interactable = false;
+        }
+
+        /*for (int i = 0; i < LAYERS; i++)
         {
             if (currentLevelInput == i)
             {
@@ -200,8 +247,7 @@ public class MapGenerator : MonoBehaviour
                     item.GetComponentInChildren<Button>().interactable = false;
                 }
             }
-            
-        }
+        }*/
     }
 
     /// <summary>
@@ -241,7 +287,11 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void AssignLevel(Node node, E_NodeType type)
     {
-        node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => LoadSceneByNodeType(node, type));
+        node.nodeUI.GetComponentInChildren<Button>().onClick.AddListener(() => 
+        {
+            LoadSceneByNodeType(node, type);
+            currentNode = node;
+        });
     }
 
     /// <summary>
@@ -378,9 +428,168 @@ public class MapGenerator : MonoBehaviour
         int lastNodeNum = MAXNODES;
         for(int i = LAYERS - 2; i >= 0; i--)
         {
+            //SetCurrentLayerNodesActive(i, MINNODES, MAXNODES);
             ConnectNodes(i, ref lastNodeNum);
         }
+
+        /*for(int i = LAYERS-1; i >= 0; i--)
+        {
+            SetChildrenNode(i);
+        }*/
     }
+
+    
+
+    /// <summary>
+    /// 根据上下界随机设置被选中的节点作为本地图要显示的节点
+    /// </summary>
+    /// <param name="currentLayer">当前的层数</param>
+    /// <param name="minIndex">最少被选中的节点数量</param>
+    /// <param name="maxIndex">最多被选中的节点数量</param>
+    void SetCurrentLayerNodesActive(int currentLayer, int minNum, int maxNum)
+    {
+        //当前层被选中的节点的数量
+        int currentLayerNodesNum = Random.Range(minNum, maxNum + 1);
+        List<int> randomIndexList = Enumerable.Range(0, MAXNODES).ToList(); //存nodes节点的索引
+        int tempCnt = 0;
+        while(tempCnt < currentLayerNodesNum)
+        {
+            int temp = Random.Range(0,  randomIndexList.Count()); //获得randomIndexList的一个索引，randomIndexList[temp]对应的是真正的随机出来nodes当前层对应的索引
+            tempCnt++;
+            nodes[currentLayer][randomIndexList[temp]].IsSeleced = true;
+            randomIndexList.Remove(temp);
+        }
+    }
+
+    /// <summary>
+    /// 对指定层级设定子节点，层级从0开始
+    /// </summary>
+    /// <param name="currentLayer">指定的层级</param>
+    void SetChildrenNode(int currentLayer)
+    {
+        //对最底下的层做处理
+        if (currentLayer == 0)
+        {
+            foreach (Node node in nodes[currentLayer])
+            {
+                if (node.IsSeleced)
+                {
+                    node.lowerNodes = null;
+                }
+            }
+            return;
+        }
+
+        //对boss层专门处理
+        if (currentLayer == LAYERS-1)
+        {
+            Node fatherNode = null;
+            foreach(Node node in nodes[currentLayer])
+            {
+                if(node.IsSeleced)
+                {
+                    node.upperNodes = null;
+                    fatherNode = node;
+                    break;
+                }
+            }
+            foreach (Node node in nodes[currentLayer - 1])
+            {
+                if (node.IsSeleced)
+                {
+                    node.upperNodes.Add(fatherNode);
+                    fatherNode.lowerNodes.Add(node);
+                }
+            }
+            return;
+        }
+
+
+        //对中间层的处理
+        //枚举当前层中被选中的节点，
+        //对于该层中被选中的节点：
+        //记该节点在当前层级的索引与，儿子节点所在层级的索引的最小值合为 currentMinCnt;
+        //记枚举的上一个节点在当前层级的索引与，儿子节点所在层级的索引的最大值合为 lastMaxCnt;
+        //只要lastMaxCnt < currentMinCnt，则当前的父子连线关系无交叉
+        int lastMaxCnt = -1;
+        int currentMinCnt = -1;
+        for(int i = 0; i < nodes[currentLayer].Count; i++)
+        {
+            int minChildIndex;
+            int maxChildIndex;
+            //中间层的父子关系比较特殊，要根据索引来得到具体位关系
+            if (nodes[currentLayer][i].IsSeleced)
+            {
+                if(i == 0)
+                {
+                    int ChildNodeNum = Random.Range(1, 3);
+                    Node fatherNode = nodes[currentLayer][i];
+                    while (ChildNodeNum > 0)
+                    {
+                        int randomNum = Random.Range(0, 2);
+                        Node childNode = nodes[currentLayer - 1][i + randomNum];
+                        if (!fatherNode.lowerNodes.Contains(childNode))
+                        {
+                            ChildNodeNum--;
+                            childNode.upperNodes.Add(fatherNode);
+                            fatherNode.lowerNodes.Add(childNode);
+                        }
+                    }
+
+
+                }
+                else if (i == nodes[currentLayer].Count - 1)
+                {
+                    int ChildNodeNum = Random.Range(1, 3);
+                    Node fatherNode = nodes[currentLayer][i];
+                    while (ChildNodeNum > 0)
+                    {
+                        int randomNum = Random.Range(-1, 1);
+                        Node childNode = nodes[currentLayer - 1][i + randomNum];
+                        if (!fatherNode.lowerNodes.Contains(childNode))
+                        {
+                            ChildNodeNum--;
+                            childNode.upperNodes.Add(fatherNode);
+                            fatherNode.lowerNodes.Add(childNode);
+                        }
+                    }
+                }
+                else
+                {
+                    int ChildNodeNum = Random.Range(1, 4);
+                    Node fatherNode = nodes[currentLayer][i];
+                    while (ChildNodeNum > 0)
+                    {
+                        int randomNum = Random.Range(-1, 2);
+                        Node childNode = nodes[currentLayer - 1][i + randomNum];
+                        if (!fatherNode.lowerNodes.Contains(childNode))
+                        {
+                            ChildNodeNum--;
+                            childNode.upperNodes.Add(fatherNode);
+                            fatherNode.lowerNodes.Add(childNode);
+                        }
+                    }
+                }
+            }
+        }
+        //ChildCrossingSolve(currentLayer);
+    }
+
+    /// <summary>
+    /// 解决指定层与各个儿子节点之间的连线出现交错的问题
+    /// </summary>
+    /// <param name="currentLayer">指定层</param>
+    /// <returns></returns>
+    /*bool ChildCrossingSolve(int currentLayer)
+    {
+        for (int i = 0; i < nodes[currentLayer].Count; i++)
+        {
+            if (nodes[currentLayer][i].IsSeleced)
+            {
+
+            }
+        }
+    }*/
 
     /// <summary>
     /// 连接并初始化当前层数的节点
@@ -466,8 +675,6 @@ public class MapGenerator : MonoBehaviour
             }
             upIndex++;
         }
-
-
         #endregion
 
     }

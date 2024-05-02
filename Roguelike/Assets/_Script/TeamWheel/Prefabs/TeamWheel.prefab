@@ -48,14 +48,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a76c2dba8b88614aabeba43a782be45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edit: 1
   drawTheBorder: 1
   charactersInTeamPrefabs:
   - {fileID: 2990418013000992433, guid: e6abc4217dc80654fa9a71677ad61d9b, type: 3}
+  - {fileID: 0}
+  - {fileID: 6102913051065131674, guid: a1c0d1abd518b7044b4baa585d269a29, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2667620413104553451, guid: def1484357be3c541a36a1687ab685bf, type: 3}
   centerPointPrefab: {fileID: 9181942636850224577, guid: 153280da50404cf4fa21c79606500590, type: 3}
   TeamCharactersCollectorPrefab: {fileID: 7728169060277978237, guid: 98d39f64d3fb90d45895e4cdfcc2f014, type: 3}
   characterPlacePointPrefab: {fileID: 9050837064803926585, guid: e5000b3de589ac045b9c3b1700e80aa8, type: 3}
-  radius: 8
-  speed: 3
+  numOfCharacterInTeam: 6
+  radius: 3.5
+  speed: 30
 --- !u!212 &1714671227590547493
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558998421
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6bd45cf9870f6345bcb667e727f3346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -147,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd17954a9395f5245b7f6fbf549cb595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 7
+  stepInRotation: 0.03
 --- !u!114 &3695440167010926798
 MonoBehaviour:
   m_ObjectHideFlags: 0

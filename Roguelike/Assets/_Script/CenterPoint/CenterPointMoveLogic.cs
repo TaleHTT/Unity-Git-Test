@@ -53,12 +53,20 @@ public class CenterPointMoveLogic : MonoBehaviour
             pathPointList = Path.vectorPath;
         });
     }
+
+    public float stepInRotation;
     public virtual void MoveDir()
     {
         Vector2 mouseposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 arrowheadposition = new Vector2(transform.position.x, transform.position.y);
         float angle = WhatAngle(mouseposition, arrowheadposition);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        //transform.rotation = Quaternion.Euler(0, 0, angle);
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, angle);
+
+        Quaternion newRotation = Quaternion.Lerp(startRotation, endRotation, stepInRotation);
+        transform.rotation = newRotation;
     }
     public float WhatAngle(Vector2 a, Vector2 b)
     {

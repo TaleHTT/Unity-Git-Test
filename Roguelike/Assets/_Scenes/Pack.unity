@@ -4679,7 +4679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da90c709645a7b6409d9bc473d7af870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRandom: 0
+  isRandom: 1
   gridSizeWidth: 3
   gridSizeHeight: 3
   rectTransform: {fileID: 0}
