@@ -1,15 +1,12 @@
-public class PlayerStats : CharacterStats
+﻿public class Enemy_Summons_Stats : EnemyStats
 {
-    private PlayerBase player;
     public override void Start()
     {
         base.Start();
-        player = GetComponent<PlayerBase>();
     }
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        player.DamageEffect();
     }
     public override void TakeTreat(float damage)
     {
@@ -18,6 +15,5 @@ public class PlayerStats : CharacterStats
     public override void AuthenticTakeDamage(float damage)
     {
         base.AuthenticTakeDamage(damage);
-        player.DamageEffect();
     }
 }

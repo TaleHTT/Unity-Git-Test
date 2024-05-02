@@ -1,6 +1,6 @@
-﻿public class Player_Summons_Hound : Player_Summons_Base, IPlayerTakeDamageable
+﻿public class Player_Summons_Hound : Player_Summons_Base
 {
-    public Player_Summons_StateMachine stateMachine { get; set; }
+    public new Player_Summons_StateMachine stateMachine { get; set; }
     public Player_Summons_Hound_IdleState houndIdleState { get; set; }
     public Player_Summons_Hound_MoveState houndMoveState { get; set; }
     public Player_Summons_Hound_DeadState houndDeadState { get; set; }
@@ -24,15 +24,5 @@
     {
         base.Update();
         stateMachine.currentState.Update();
-    }
-
-    void IPlayerTakeDamageable.TakeDamage(float damage)
-    {
-        currentHp -= damage;
-    }
-
-    void IPlayerTakeDamageable.TakeTreat(float damage)
-    {
-        currentHp += damage;
     }
 }

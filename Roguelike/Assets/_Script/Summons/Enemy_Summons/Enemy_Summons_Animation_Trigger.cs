@@ -9,7 +9,7 @@ public class Enemy_Summons_Animation_Trigger : MonoBehaviour
         Debug.Log(enemy_Summons_Hound);
         if (enemy_Summons_Hound.cloestTarget != null)
         {
-            enemy_Summons_Hound.cloestTarget.GetComponent<PlayerStats>()?.TakeDamage(enemy_Summons_Hound.damage);
+            enemy_Summons_Hound.cloestTarget.GetComponent<PlayerStats>()?.TakeDamage(enemy_Summons_Hound.stats.damage.GetValue());
             enemy_Summons_Hound.cloestTarget.GetComponent<PlayerBase>().isHit = true;
             enemy_Summons_Hound.cloestTarget.GetComponent<PlayerBase>().amountOfHit++;
         }

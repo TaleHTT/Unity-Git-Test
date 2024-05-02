@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Pathfinding;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Summons_Base : Summons_Base
+public class Player_Summons_Base : PlayerBase
 {
-    public LayerMask whatIsEnemy;
-    public List<GameObject> enemyDetects;
+    public Seeker seeker;
+    public float chaseRadius;
+    public GameObject chaseTarget;
+    public List<GameObject> chaseTargets;
     protected override void Awake()
     {
         base.Awake();
+        seeker = GetComponent<Seeker>();
     }
     protected override void Start()
     {
@@ -21,40 +25,31 @@ public class Player_Summons_Base : Summons_Base
     private void FixedUpdate()
     {
         enemyDetect();
-        attackDetect();
+        EnemyDetect();
+        chaseDetect();
         CloestTargetDetect();
-    }
-    public void CloestTargetDetect()
-    {
-        cloestTarget = null;
-        float distance = Mathf.Infinity;
-        for (int i = 0; i < enemyDetects.Count; i++)
-        {
-            if (distance > Vector2.Distance(transform.position, enemyDetects[i].transform.position))
-            {
-                distance = Vector2.Distance(transform.position, enemyDetects[i].transform.position);
-                cloestTarget = enemyDetects[i].transform;
-            }
-        }
     }
     public void enemyDetect()
     {
-        enemyDetects = new List<GameObject>();
+        chaseTargets = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, chaseRadius, whatIsEnemy);
         foreach (var enemy in colliders)
         {
             if (enemy.GetComponent<EnemyBase>() != null)
-                enemyDetects.Add(enemy.gameObject);
+                chaseTargets.Add(enemy.gameObject);
         }
     }
-    public void attackDetect()
+    public void chaseDetect()
     {
-        attackDetects = new List<GameObject>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius, whatIsEnemy);
-        foreach (var enemy in colliders)
+        chaseTarget = null;
+        float distance = Mathf.Infinity;
+        for (int i = 0; i < chaseTargets.Count; i++)
         {
-            if (enemy.GetComponent<EnemyBase>() != null)
-                attackDetects.Add(enemy.gameObject);
+            if (distance > Vector3.Distance(chaseTargets[i].transform.position, transform.position))
+            {
+                distance = Vector3.Distance(chaseTargets[i].transform.position, transform.position);
+                chaseTarget = chaseTargets[i];
+            }
         }
     }
 }

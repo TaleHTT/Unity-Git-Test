@@ -22,7 +22,7 @@ public class Player_Summons_Hound_ChaseState : Player_Summons_State
     public override void Update()
     {
         base.Update();
-        if (player_Summons_Hound.attackDetects.Count > 0)
+        if (player_Summons_Hound.enemyDetects.Count > 0)
             stateMachine.ChangeState(player_Summons_Hound.houndAttackState);
         if (player_Summons_Hound.enemyDetects.Count <= 0)
             stateMachine.ChangeState(player_Summons_Hound.houndIdleState);
@@ -30,6 +30,6 @@ public class Player_Summons_Hound_ChaseState : Player_Summons_State
         if (pathPointList == null)
             return;
         target = pathPointList[currentIndex];
-        player_Summons_Hound.transform.position = Vector3.MoveTowards(player_Summons_Hound.transform.position, target, player_Summons_Hound.moveSpeed * Time.deltaTime);
+        player_Summons_Hound.transform.position = Vector3.MoveTowards(player_Summons_Hound.transform.position, target, player_Summons_Hound.stats.moveSpeed.GetValue() * Time.deltaTime);
     }
 }

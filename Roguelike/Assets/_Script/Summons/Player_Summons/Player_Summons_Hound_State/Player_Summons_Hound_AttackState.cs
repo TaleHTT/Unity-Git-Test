@@ -19,7 +19,7 @@
     public override void Update()
     {
         base.Update();
-        if (player_Summons_Hound.attackDetects.Count <= 0)
+        if (player_Summons_Hound.enemyDetects.Count <= 0)
             stateMachine.ChangeState(player_Summons_Hound.houndIdleState);
     }
 }

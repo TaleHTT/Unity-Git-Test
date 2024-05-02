@@ -30,6 +30,6 @@ public class Enemy_Summons_Hound_ChaseState : Enemy_Summons_State
         if (pathPointList == null)
             return;
         target = pathPointList[currentIndex];
-        enemy_Summons_Hound.transform.position = Vector3.MoveTowards(enemy_Summons_Hound.transform.position, target, enemy_Summons_Hound.moveSpeed * Time.deltaTime);
+        enemy_Summons_Hound.transform.position = Vector3.MoveTowards(enemy_Summons_Hound.transform.position, target, enemy_Summons_Hound.stats.moveSpeed.GetValue() * Time.deltaTime);
     }
 }

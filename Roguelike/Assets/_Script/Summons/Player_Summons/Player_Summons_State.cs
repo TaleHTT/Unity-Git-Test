@@ -40,18 +40,18 @@ public class Player_Summons_State
         pathGenerateTimer += Time.deltaTime;
         if (pathGenerateTimer >= pathGenerateInterval)
         {
-            GeneratePath(player_Summons_Base.cloestTarget.transform.position);
+            GeneratePath(player_Summons_Base.chaseTarget.transform.position);
             pathGenerateTimer = 0;
         }
         if (pathPointList == null || pathPointList.Count == 0)
         {
-            GeneratePath(player_Summons_Base.cloestTarget.transform.position);
+            GeneratePath(player_Summons_Base.chaseTarget.transform.position);
         }
         else if (Vector2.Distance(player_Summons_Base.transform.position, pathPointList[currentIndex]) <= .1f)
         {
             currentIndex++;
             if (currentIndex >= pathPointList.Count)
-                GeneratePath(player_Summons_Base.cloestTarget.transform.position);
+                GeneratePath(player_Summons_Base.chaseTarget.transform.position);
         }
     }
     public void GeneratePath(Vector3 target)
@@ -68,7 +68,7 @@ public class Player_Summons_State
         player_Summons_Base.chaseRadius = 0;
         player_Summons_Base.attackRadius = 0;
         player_Summons_Base.cd.enabled = false;
-        player_Summons_Base.attackDetects.Clear();
-        player_Summons_Base.attackDetects.Clear();
+        player_Summons_Base.enemyDetects.Clear();
+        player_Summons_Base.chaseTargets.Clear();
     }
 }

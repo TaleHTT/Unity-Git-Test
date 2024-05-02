@@ -81,7 +81,7 @@ public class EnemyBase : Base
         Two_Handed_Bleed();
         ColdEffect();
     }
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         AttackDetect();
         PlayerDetect();
