@@ -45,9 +45,4 @@ public class Meteorite_Conroller : MonoBehaviour
             }
         }
     }
-    public void OnDrawGizmos()
-    {
-        if (!drawTheBorderOrNot)
-            Gizmos.DrawWireSphere(transform.position, DataManager.instance.caster_Skill_Data.skill_2_explodeRadius);
-    }
 }
