@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 1622599914156980312}
   - component: {fileID: 4426225109606092578}
   m_Layer: 5
-  m_Name: Prist
+  m_Name: Priest
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
