@@ -128,9 +128,9 @@ public class Player_Bloodsucker_Skill_Controller : Bloodsucker_Skill_Controller
             if (hit.GetComponent<EnemyBase>() != null)
             {
                 if (SkillManger.instance.bloodsucker_Skill.isHave_X_Equipment)
-                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage) + hit.GetComponent<EnemyStats>().armor.GetValue() * 0.5f);
+                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage + DataManager.instance.bloodsucker_Skill_Data.skill_1_damageBaseValue, 0.5f);
                 else
-                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * (1 + DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage));
+                    hit.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_1_ExtraAddDamage + DataManager.instance.bloodsucker_Skill_Data.skill_1_damageBaseValue);
             }
         }
         currentBlood -= 5;

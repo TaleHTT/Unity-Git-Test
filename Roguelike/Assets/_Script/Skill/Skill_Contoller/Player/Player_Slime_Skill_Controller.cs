@@ -170,7 +170,7 @@ public class Player_Slime_Skill_Controller : Slime_Skill_Controller
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<EnemyBase>() != null)
-                hit.GetComponent<EnemyStats>().TakeDamage(player_Slime.stats.maxHp.GetValue() * (1 + DataManager.instance.slime_Skill_Data.skill_1_ExtraAddHp));
+                hit.GetComponent<EnemyStats>().TakeDamage(player_Slime.stats.maxHp.GetValue() * DataManager.instance.slime_Skill_Data.skill_1_ExtraAddHp + DataManager.instance.slime_Skill_Data.damageBaseValue);
         }
     }
     public void SlimeDetect()

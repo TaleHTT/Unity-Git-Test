@@ -6,6 +6,7 @@ public class Player_Priest_Skill_Controller : Priest_Skill_Controller
     private Player_Priest player_Priest;
 
     [HideInInspector] public int numberOfTreatments;
+    public List<GameObject> priest;
     protected override void Awake()
     {
         base.Awake();
@@ -23,7 +24,10 @@ public class Player_Priest_Skill_Controller : Priest_Skill_Controller
         for (int i = 0; i < teamMender.Count; i++)
         {
             if (teamMender[i].GetComponent<Player_Priest>() != null)
+            {
                 teamMender.Remove(teamMender[i]);
+                priest.Add(teamMender[i]);
+            }
         }
     }
     protected override void Update()
@@ -31,13 +35,18 @@ public class Player_Priest_Skill_Controller : Priest_Skill_Controller
         base.Update();
         if (SkillManger.instance.priest_Skill.isHave_X_Equipment == true)
         {
+            float sumHp = 0;
+            for(int i = 0; i < priest.Count; i++)
+            {
+                sumHp += priest[i].GetComponent<Player_Priest>().stats.maxHp.GetValue();
+            }
             if (numberOfTreatments >= DataManager.instance.priest_Skill_Data.maxNumberOfTreatments)
             {
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRidus);
                 foreach (var hit in colliders)
                 {
                     if (hit.GetComponent<EnemyBase>() != null)
-                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(DataManager.instance.priest_Skill_Data.authenticDamage);
+                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(DataManager.instance.priest_Skill_Data.extraAddDamage * sumHp + DataManager.instance.priest_Skill_Data.damageBaseValue);
                 }
             }
             numberOfTreatments = 0;
@@ -122,7 +131,7 @@ public class Player_Priest_Skill_Controller : Priest_Skill_Controller
                     continue;
                 }
                 PlayerBase target = treatTarget[i].GetComponent<PlayerBase>();
-                treatTarget[i].GetComponent<PlayerStats>()?.TakeTreat((DataManager.instance.priest_Skill_Data.extraAddHeal + 1) * player_Priest.stats.maxHp.GetValue());
+                treatTarget[i].GetComponent<PlayerStats>()?.TakeTreat(DataManager.instance.priest_Skill_Data.extraAddHeal * player_Priest.stats.maxHp.GetValue() + DataManager.instance.priest_Skill_Data.healBaseValue);
                 Instantiate(GameObjectManager.Instance.treatEffect, treatTarget[i].transform.position, Quaternion.identity, transform);
                 numberOfTreatments++;
                 if (target.negativeEffect.Count > 0)

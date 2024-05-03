@@ -44,7 +44,7 @@ public class Player_ParasitismBatAttack_Controller : ParasitismBatAttack_Control
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker_Skill_Controller.player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddDamage);
+            collision.GetComponent<EnemyStats>().TakeDamage(player_Bloodsucker_Skill_Controller.player_Bloodsucker.stats.maxHp.GetValue() * DataManager.instance.bloodsucker_Skill_Data.skill_2_ExtraAddDamage + DataManager.instance.bloodsucker_Skill_Data.skill_2_damageBaseValue);
             collision.GetComponent<EnemyBase>().isHit = true;
             isBack = true;
         }

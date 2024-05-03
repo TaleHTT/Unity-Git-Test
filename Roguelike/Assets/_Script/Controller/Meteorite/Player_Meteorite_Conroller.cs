@@ -57,7 +57,7 @@ public class Player_Meteorite_Conroller : Meteorite_Conroller
         {
             if (hit.GetComponent<EnemyStats>() != null)
             {
-                hit.GetComponent<EnemyStats>()?.TakeDamage(damage * (1 + DataManager.instance.caster_Skill_Data.skill_2_extraAddExplodeDamage));
+                hit.GetComponent<EnemyStats>()?.TakeDamage(damage * DataManager.instance.caster_Skill_Data.skill_2_extraAddExplodeDamage + DataManager.instance.caster_Skill_Data.meteoriteDamageBaseValue);
                 hit.GetComponent<EnemyBase>().isHit = true;
                 if (SkillManger.instance.caster_Skill.isHave_X_Equipment == true)
                     hit.GetComponent<EnemyBase>().layersOfBurning++;

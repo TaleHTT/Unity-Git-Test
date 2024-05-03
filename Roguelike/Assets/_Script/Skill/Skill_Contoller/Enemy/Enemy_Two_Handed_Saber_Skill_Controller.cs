@@ -31,7 +31,7 @@ public class Enemy_Two_Handed_Saber_Skill_Controller : Two_Handed_Saber_Skill_Co
                     {
                         for (int i = 0; i < DataManager.instance.two_Handed_Saber_Skill_Data.times; i++)
                         {
-                            hit.GetComponent<PlayerStats>().TakeDamage((float)((enemy_TwoHandedSaber.stats.damage.baseValue) * (2 - Math.Truncate(((enemy_TwoHandedSaber.stats.currentHealth / enemy_TwoHandedSaber.stats.maxHp.GetValue()) * 10)) / 10)) * (1 + DataManager.instance.two_Handed_Saber_Skill_Data.extraAddDamage));
+                            hit.GetComponent<PlayerStats>().TakeDamage((float)((enemy_TwoHandedSaber.stats.damage.baseValue) * (2 - Math.Truncate(((enemy_TwoHandedSaber.stats.currentHealth / enemy_TwoHandedSaber.stats.maxHp.GetValue()) * 10)) / 10)) * DataManager.instance.two_Handed_Saber_Skill_Data.extraAddDamage + DataManager.instance.two_Handed_Saber_Skill_Data.damageBaseValue);
                             hit.GetComponent<PlayerBase>().layersOfBleeding_Two_Handed_Saber++;
                             if (SkillManger.instance.two_Handed_Saber_Skill.isHave_X_Equipment)
                                 numOfAttacks++;

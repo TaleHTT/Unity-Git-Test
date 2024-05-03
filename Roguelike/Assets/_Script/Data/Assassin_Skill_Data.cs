@@ -2,6 +2,8 @@
 [CreateAssetMenu(fileName = "Assassin_Skill", menuName = "Skill/Assassin_Skill")]
 public class Assassin_Skill_Data : ScriptableObject
 {
+    public float healBaseValue;
+    public float damageBaseValue;
     [Range(0, 10)] public float extraAddWoundedMultiplier;
     [Range(0, 10)] public float extraAddAttackSpeed;
     [Range(0, 10)] public float extraAddDamage;

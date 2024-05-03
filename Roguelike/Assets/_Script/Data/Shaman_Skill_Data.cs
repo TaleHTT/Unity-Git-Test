@@ -2,6 +2,9 @@
 [CreateAssetMenu(fileName = "Shaman_Skill", menuName = "Skill/Shaman_Skill")]
 public class Shaman_Skill_Data : ScriptableObject
 {
+    public float healBaseValue;
+    public float skill_1_HealBaseValue;
+    public float damageBaseValue;
     [Range(0, 10)] public float skill_1_ExtraAddTreatHp;
     [Range(0, 10)] public float normal_ExtraTreatHp;
     [Range(0, 10)] public float extraAddAttackSpeed;

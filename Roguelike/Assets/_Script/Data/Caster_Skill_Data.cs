@@ -2,6 +2,10 @@
 [CreateAssetMenu(fileName = "Caster_Skill", menuName = "Skill/Caster_Skill")]
 public class Caster_Skill_Data : ScriptableObject
 {
+    public float burningDamageBaseValue;
+    public float meteoriteDamageBaseValue;
+    public float burningRingsDamageBaseValue;
+    public float explodeDamageBaseValue;
     [Range(0, 10)] public float skill_1_extraAddExplodeDamage;
     [Range(0, 10)] public float skill_2_extraAddExplodeDamage;
     [Range(0, 10)] public float extraAddBruningDamage;

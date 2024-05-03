@@ -2,6 +2,7 @@
 [CreateAssetMenu(fileName = "Two_Handed_Saber_Skill", menuName = "Skill/Two_Handed_Saber_Skill")]
 public class Two_Handed_Saber_Skill_Data : ScriptableObject
 {
+    public float damageBaseValue;
     [Range(0, 10)] public float enemy_ExtraAddAttackSpeed;
     [Range(0, 10)] public float num_ExtraAddAttackSpeed;
     [Range(0, 10)] public float extraAddDamage;

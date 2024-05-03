@@ -39,8 +39,7 @@ public class CharacterStats : MonoBehaviour
     {
         currentHealth = maxHp.GetValue();
     }
-
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, float percentage)
     {
         if (isUnconquered)
             return;
@@ -51,7 +50,7 @@ public class CharacterStats : MonoBehaviour
         }
         if (currentHealth <= 1 && isUseSkill)
             return;
-        currentHealth -= ((damage + level - armor.GetValue()) * woundedMultiplier.GetValue());
+        currentHealth -= damage * (1 - armor.GetValue() * percentage / (10 + armor.GetValue() * percentage));   
     }
     public virtual void AuthenticTakeDamage(float damage)
     {

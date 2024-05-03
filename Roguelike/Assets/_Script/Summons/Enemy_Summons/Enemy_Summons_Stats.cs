@@ -4,9 +4,9 @@
     {
         base.Start();
     }
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, float percentage)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, percentage);
     }
     public override void TakeTreat(float damage)
     {

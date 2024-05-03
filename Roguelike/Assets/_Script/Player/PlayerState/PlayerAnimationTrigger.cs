@@ -109,7 +109,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
         {
             player.closetEnemy.GetComponent<EnemyStats>().TakeDamage(player.stats.damage.GetValue());
             player.closetEnemy.GetComponent<EnemyBase>().isHit = true;
-            player_Shaman.treatTarget.GetComponent<PlayerStats>().currentHealth *= (1 + DataManager.instance.shaman_Skill_Data.normal_ExtraTreatHp) * player_Shaman.stats.maxHp.GetValue();
+            player_Shaman.treatTarget.GetComponent<PlayerStats>().currentHealth += (DataManager.instance.shaman_Skill_Data.normal_ExtraTreatHp * player_Shaman.stats.maxHp.GetValue() + DataManager.instance.shaman_Skill_Data.healBaseValue);
         }
     }
     private void TwoHandedSaberAttackTrigger()

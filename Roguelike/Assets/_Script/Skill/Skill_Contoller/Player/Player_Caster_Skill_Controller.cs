@@ -13,7 +13,7 @@ public class Player_Caster_Skill_Controller : Caster_Skill_Controller
     protected override void Start()
     {
         base.Start();
-        player_Caster.orbPerfab.GetComponent<Player_Orb_Controller>().strengthExplosionDamage = player_Caster.orbPerfab.GetComponent<Orb_Controller>().damage * (1 + DataManager.instance.caster_Skill_Data.skill_1_extraAddExplodeDamage);
+        player_Caster.orbPerfab.GetComponent<Player_Orb_Controller>().strengthExplosionDamage = player_Caster.stats.damage.GetValue() * DataManager.instance.caster_Skill_Data.skill_1_extraAddExplodeDamage + DataManager.instance.caster_Skill_Data.explodeDamageBaseValue;
     }
     protected override void Update()
     {

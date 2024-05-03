@@ -2,6 +2,7 @@
 [CreateAssetMenu(fileName = "Slime_Skill", menuName = "Skill/Slime_Skill")]
 public class Slime_Skill_Data : ScriptableObject
 {
+    public float damageBaseValue;
     [Range(0, 10)] public float skill_X_ExtraAddAttackRadius;
     [Range(0, 10)] public float skill_X_ExtraAddAttackSpeed;
     [Range(0, 10)] public float skill_2_ExtraAddAttackSpeed;

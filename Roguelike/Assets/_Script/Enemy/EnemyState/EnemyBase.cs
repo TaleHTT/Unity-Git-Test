@@ -61,7 +61,7 @@ public class EnemyBase : Base
                     if (hit.GetComponent<EnemyBase>() != null)
                     {
                         hit.GetComponent<EnemyBase>().layersOfBurning = layersOfBurning ;
-                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage(stats.damage.GetValue() * (1 + DataManager.instance.caster_Skill_Data.extraAddDamage) * layersOfBurning);
+                        hit.GetComponent<EnemyStats>().AuthenticTakeDamage((stats.damage.GetValue() * DataManager.instance.caster_Skill_Data.extraAddDamage + DataManager.instance.caster_Skill_Data.burningDamageBaseValue) * layersOfBurning);
                     }
                 }
             }

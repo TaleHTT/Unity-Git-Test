@@ -72,8 +72,8 @@ public class Player_Assassin_Skill_Controller : Assassin_Skill_Controller
         objects.GetComponent<Dagger_Controller>().moveDir = objects.transform.position - transform.position;
         objects.GetComponent<Dagger_Controller>().daggerPool = daggerPool;
         objects.GetComponent<Dagger_Controller>().player_Assassin_Skill_Controller = this;
-        objects.GetComponent<Dagger_Controller>().damage = player_Assassin.stats.damage.GetValue() * (1 + DataManager.instance.assassin_Skill_Data.extraAddDamage);
-        objects.GetComponent<Dagger_Controller>().treat = player_Assassin.stats.damage.GetValue() * (1 + DataManager.instance.assassin_Skill_Data.extraAddHp);
+        objects.GetComponent<Dagger_Controller>().damage = player_Assassin.stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddDamage + DataManager.instance.assassin_Skill_Data.damageBaseValue;
+        objects.GetComponent<Dagger_Controller>().treat = player_Assassin.stats.damage.GetValue() * DataManager.instance.assassin_Skill_Data.extraAddHp + DataManager.instance.assassin_Skill_Data.healBaseValue;
         return objects;
     }
     private void ActionOnGet(GameObject objects)

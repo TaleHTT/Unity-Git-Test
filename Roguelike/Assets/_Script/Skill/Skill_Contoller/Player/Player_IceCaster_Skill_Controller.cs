@@ -54,7 +54,7 @@ public class Player_IceCaster_Skill_Controller : IceCaster_Skill_Controller
     {
         for (int i = 0; i < attackDetect.Count; i++)
         {
-            attackDetect[i].GetComponent<EnemyStats>().AuthenticTakeDamage(player_IceCaster.stats.damage.GetValue() * (1 + DataManager.instance.iceCasterSkill_Data.skill_1_ExtraAddDamage));
+            attackDetect[i].GetComponent<EnemyStats>().AuthenticTakeDamage(player_IceCaster.stats.damage.GetValue() * DataManager.instance.iceCasterSkill_Data.skill_1_ExtraAddDamage + DataManager.instance.iceCasterSkill_Data.skill_1_DamageBaseValue);
             attackDetect[i].GetComponent<EnemyBase>().layerOfCold++;
         }
     }
@@ -76,7 +76,7 @@ public class Player_IceCaster_Skill_Controller : IceCaster_Skill_Controller
         {
             if (hit.GetComponent<EnemyBase>() != null)
             {
-                hit.GetComponent<EnemyStats>().AuthenticTakeDamage(player_IceCaster.stats.damage.GetValue() * (1 + DataManager.instance.iceCasterSkill_Data.skill_2_ExtraAddDamage));
+                hit.GetComponent<EnemyStats>().AuthenticTakeDamage(player_IceCaster.stats.damage.GetValue() * DataManager.instance.iceCasterSkill_Data.skill_2_ExtraAddDamage + DataManager.instance.iceCasterSkill_Data.skill_2_DamageBaseValue);
                 hit.GetComponent<EnemyBase>().layerOfCold++;
             }
         }

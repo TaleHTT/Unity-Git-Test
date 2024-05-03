@@ -51,7 +51,7 @@ public class Player_Archer_Skill_Controller : Archer_Skill_Controller
         objects.transform.position = new Vector2(x + transform.position.x, y + transform.position.y);
         objects.GetComponent<Player_MultipleArrow_Controller>().player_Archer = player_Archer;
         objects.GetComponent<Player_MultipleArrow_Controller>().multipleArrowPool = multipleArrowPool;
-        objects.GetComponent<Player_MultipleArrow_Controller>().damage = player_Archer.arrowPerfab.GetComponent<Arrow_Controller>().damage * (1 + DataManager.instance.archer_Skill_Data.extraAddDamage);
+        objects.GetComponent<Player_MultipleArrow_Controller>().damage = player_Archer.stats.damage.GetValue() * DataManager.instance.archer_Skill_Data.extraAddDamage + DataManager.instance.archer_Skill_Data.damageBaseValue;
         return objects;
     }
 }

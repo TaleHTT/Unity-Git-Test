@@ -2,6 +2,8 @@
 [CreateAssetMenu(fileName = "Bloodsucker_Skill", menuName = "Skill/Bloodsucker_Skill")]
 public class Bloodsucker_Skill_Data : ScriptableObject
 {
+    public float skill_1_damageBaseValue;
+    public float skill_2_damageBaseValue;
     [Range(0, 10)] public float normalExtraAddDamage;
     [Range(0, 10)] public float normalExtraAddHp_1;
     [Range(0, 10)] public float normalExtraAddHp_2;

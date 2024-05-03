@@ -24,8 +24,8 @@ public class Player_Shaman_Skill_Controller : Shaman_Skill_Controller
         var _object = Instantiate(deerTotemPrefab, transform.position, Quaternion.identity);
         _object.GetComponent<Player_DeerTotem_Controller>().deerTotemPool = deerTotemPool;
         _object.GetComponent<Player_DeerTotem_Controller>().Hp = player_Shaman.stats.maxHp.GetValue() * DataManager.instance.shaman_Skill_Data.skill_1_AddHp;
-        _object.GetComponent<Player_DeerTotem_Controller>().treat = player_Shaman.stats.maxHp.GetValue() * (1 + DataManager.instance.shaman_Skill_Data.skill_1_ExtraAddTreatHp);
-        _object.GetComponent<Player_DeerTotem_Controller>().damage = player_Shaman.stats.damage.GetValue() * (1 + DataManager.instance.shaman_Skill_Data.extraAddDamage);
+        _object.GetComponent<Player_DeerTotem_Controller>().treat = player_Shaman.stats.maxHp.GetValue() * DataManager.instance.shaman_Skill_Data.skill_1_ExtraAddTreatHp + DataManager.instance.shaman_Skill_Data.healBaseValue;
+        _object.GetComponent<Player_DeerTotem_Controller>().damage = player_Shaman.stats.damage.GetValue() * DataManager.instance.shaman_Skill_Data.extraAddDamage + DataManager.instance.shaman_Skill_Data.damageBaseValue;
         return _object;
     }
     private GameObject CreateRangeAddMoveSpeedFunc()
@@ -33,7 +33,7 @@ public class Player_Shaman_Skill_Controller : Shaman_Skill_Controller
         var _object = Instantiate(birdTotemPrefab, transform.position, Quaternion.identity);
         _object.GetComponent<Player_BirdTotem_Controller>().birdTotemPool = birdTotemPool;
         _object.GetComponent<Player_BirdTotem_Controller>().Hp = player_Shaman.stats.maxHp.GetValue() * DataManager.instance.shaman_Skill_Data.skill_2_AddHp;
-        _object.GetComponent<Player_BirdTotem_Controller>().damage = player_Shaman.stats.damage.GetValue() * (1 + DataManager.instance.shaman_Skill_Data.extraAddDamage);
+        _object.GetComponent<Player_BirdTotem_Controller>().damage = player_Shaman.stats.damage.GetValue() * DataManager.instance.shaman_Skill_Data.extraAddDamage + DataManager.instance.shaman_Skill_Data.damageBaseValue;
         return _object;
     }
 }

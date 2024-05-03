@@ -46,7 +46,7 @@ public class Player_IceCaster : PlayerBase
         {
             if(hit.GetComponent<EnemyBase>() != null)
             {
-                hit.GetComponent<EnemyStats>().TakeDamage(stats.damage.GetValue() * (1 + DataManager.instance.iceCasterSkill_Data.skill_X_ExtraAddDamage));
+                hit.GetComponent<EnemyStats>().TakeDamage(stats.damage.GetValue() * DataManager.instance.iceCasterSkill_Data.skill_X_ExtraAddDamage + DataManager.instance.iceCasterSkill_Data.skill_X_DamageBaseValue);
                 hit.GetComponent<EnemyBase>().layerOfCold++;
             }
         }
