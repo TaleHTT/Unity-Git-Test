@@ -35,12 +35,13 @@ public class Enemy_Caster : EnemyBase
     public override void AnimationCasterAttack()
     {
         base.AnimationCasterAttack();
-        enemy_Caster_Skill_Controller.numberOfAttack++;
+        if(enemy_Caster_Skill_Controller != null)
+            enemy_Caster_Skill_Controller.numberOfAttack++;
         pool.Get();
     }
     private GameObject createFunc()
     {
-        var orb = Instantiate(OrbPerfab, transform.position,Quaternion.identity);
+        var orb = Instantiate(OrbPerfab, transform.position,Quaternion.identity, this.transform);
         orb.GetComponent<Enemy_Orb_Controller>().enemy_Caster_Skill_Controller = enemy_Caster_Skill_Controller;
         orb.GetComponent<Enemy_Orb_Controller>().damage = stats.damage.GetValue();
         orb.GetComponent<Enemy_Orb_Controller>().orbPool = pool;

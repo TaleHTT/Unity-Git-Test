@@ -47,7 +47,7 @@ public class Player_Archer_Skill_Controller : Archer_Skill_Controller
         float x = 1 * Mathf.Cos((eachAngle + (Mathf.Atan2(attackDir.y, attackDir.x) * Mathf.Rad2Deg - 30)) * Mathf.Deg2Rad);
         float y = 1 * Mathf.Sin((eachAngle + (Mathf.Atan2(attackDir.y, attackDir.x) * Mathf.Rad2Deg - 30)) * Mathf.Deg2Rad);
 
-        var objects = Instantiate(multipleArrow);
+        var objects = Instantiate(multipleArrow, this.transform);
         objects.transform.position = new Vector2(x + transform.position.x, y + transform.position.y);
         objects.GetComponent<Player_MultipleArrow_Controller>().player_Archer = player_Archer;
         objects.GetComponent<Player_MultipleArrow_Controller>().multipleArrowPool = multipleArrowPool;

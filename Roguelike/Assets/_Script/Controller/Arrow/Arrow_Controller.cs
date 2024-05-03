@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Arrow_Controller : MonoBehaviour
 {
+    [HideInInspector] public bool isFaceLeft = true;
     public ObjectPool<GameObject> pool;
     [Tooltip("ÒÆ¶¯ËÙ¶È")]
     public float moveSpeed;
@@ -24,6 +26,14 @@ public class Arrow_Controller : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(transform.position.x < 0 && !isFaceLeft)
+        {
+            Filp();
+        }
+        else if(transform.position.x > 0 && isFaceLeft)
+        {
+            Filp();
+        }
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
@@ -44,5 +54,10 @@ public class Arrow_Controller : MonoBehaviour
                 attackTarget = attackDetects[i].transform;
             }
         }
+    }
+    public void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
     }
 }

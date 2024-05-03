@@ -43,7 +43,7 @@ public class Enemy_IceCaster : EnemyBase
     }
     private GameObject CreateFunc()
     {
-        var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
+        var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity, this.transform);
         orb.GetComponent<Enemy_IceOrb_Controller>().orbPool = orbPool;
         orb.GetComponent<Enemy_IceOrb_Controller>().enemy_IceCaster = this;
         orb.GetComponent<Enemy_IceOrb_Controller>().damage = stats.damage.GetValue();
