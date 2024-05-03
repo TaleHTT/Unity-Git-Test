@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a35db927435ff4a9fdffc4b527e35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRadius: 4.06
+  attackRadius: 4.5
   deadTimer: 0
   isDead: 0
   layerOfCold: 0

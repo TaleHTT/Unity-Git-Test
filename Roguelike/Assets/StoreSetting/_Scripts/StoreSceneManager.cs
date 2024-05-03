@@ -52,6 +52,59 @@ public class StoreSceneManager : MonoBehaviour
         public static string casterPrefabName = "PlayerCaster";
         public static string casterImagePreafabPath = "PlayerImage/Caster";
 
+
+        public static string assassinImageGameObjectName = "Assassin(Clone)";
+        public static string assassincasterPrefabPath = "PlayerPrefab/PlayerAssassin";
+
+        public static string assassinPrefabName = "PlayerAssassin";
+        public static string assassinImagePreafabPath = "PlayerImage/Assassin";
+
+
+        public static string bloodSuckerImageGameObjectName = "BloodSucker(Clone)";
+        public static string bloodSuckercasterPrefabPath = "PlayerPrefab/PlayerBloodSucker";
+
+        public static string bloodSuckerPrefabName = "PlayerBloodSucker";
+        public static string bloodSuckerImagePreafabPath = "PlayerImage/BloodSucker";
+        
+        
+        public static string iceCasterImageGameObjectName = "IceCaster(Clone)";
+        public static string iceCastercasterPrefabPath = "PlayerPrefab/PlayerIceCaster";
+
+        public static string iceCasterPrefabName = "PlayerIceCaster";
+        public static string iceCasterImagePreafabPath = "PlayerImage/IceCaster";
+        
+        
+        public static string priestImageGameObjectName = "Priest(Clone)";
+        public static string priestPrefabPath = "PlayerPrefab/PlayerPriest";
+
+        public static string priestPrefabName = "PlayerPriest";
+        public static string priestImagePreafabPath = "PlayerImage/Priest";
+        
+        
+        public static string shamanImageGameObjectName = "Shaman(Clone)";
+        public static string shamanPrefabPath = "PlayerPrefab/PlayerShaman";
+
+        public static string shamanPrefabName = "PlayerShaman";
+        public static string shamanImagePreafabPath = "PlayerImage/Shaman";
+        
+
+        public static string slimeImageGameObjectName = "Slime(Clone)";
+        public static string slimePrefabPath = "PlayerPrefab/PlayerSlime";
+
+        public static string slimePrefabName = "PlayerSlime";
+        public static string slimeImagePreafabPath = "PlayerImage/Slime";
+        
+        
+        public static string towHandedImageGameObjectName = "TowHanded(Clone)";
+        public static string towHandedPrefabPath = "PlayerPrefab/PlayerTowHanded";
+
+        public static string towHandedPrefabName = "PlayerTowHanded";
+        public static string towHandedImagePreafabPath = "PlayerImage/TowHanded";
+
+
+
+
+
         public static Dictionary<string, Object> imageToPlayerPrefab;
         public static Dictionary<string, Object> playerPrefabToImage;
 
@@ -61,15 +114,28 @@ public class StoreSceneManager : MonoBehaviour
             {
                 { saberImageGameObjectName, Resources.Load<GameObject>(saberPrefabPath) },
                 { archerImageGameObjectName, Resources.Load<GameObject>(archerPrefabPath) },
-                { casterImageGameObjectName, Resources.Load<GameObject>(casterPrefabPath) }
+                { casterImageGameObjectName, Resources.Load<GameObject>(casterPrefabPath) },
+                { assassinImageGameObjectName, Resources.Load<GameObject>(assassincasterPrefabPath)},
+                { bloodSuckerImageGameObjectName, Resources.Load<GameObject>(bloodSuckercasterPrefabPath)},
+                { iceCasterImageGameObjectName, Resources.Load<GameObject>(iceCastercasterPrefabPath)},
+                { priestImageGameObjectName, Resources.Load<GameObject>(priestPrefabPath)},
+                { shamanImageGameObjectName, Resources.Load<GameObject>(shamanPrefabPath)},
+                { slimeImageGameObjectName, Resources.Load<GameObject>(slimePrefabPath)},
+                { towHandedImageGameObjectName, Resources.Load<GameObject>(towHandedPrefabPath)},
             };
 
             playerPrefabToImage = new Dictionary<string, Object>
             {
                 { saberPrefabName, Resources.Load<GameObject>(saberImagePreafabPath) },
                 { archerPrefabName, Resources.Load<GameObject>(archerImagePreafabPath) },
-                { casterPrefabName, Resources.Load<GameObject>(casterImagePreafabPath) }
-            };
+                { casterPrefabName, Resources.Load<GameObject>(casterImagePreafabPath) },
+                { assassinPrefabName, Resources.Load<GameObject>(assassinImagePreafabPath) },
+                { bloodSuckerPrefabName, Resources.Load<GameObject>(bloodSuckerImagePreafabPath) },
+                { iceCasterPrefabName, Resources.Load<GameObject>(iceCasterImagePreafabPath) },
+                { priestPrefabName, Resources.Load<GameObject>(priestImagePreafabPath) },
+                { slimePrefabName, Resources.Load<GameObject>(slimeImagePreafabPath) },
+                { towHandedPrefabName, Resources.Load<GameObject>(towHandedImagePreafabPath) },
+        };
 
 
         }
