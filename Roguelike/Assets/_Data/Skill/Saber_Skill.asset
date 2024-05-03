@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38edd5d2ba61564fb59e2ac675a620b, type: 3}
+  m_Name: Saber_Skill
+  m_EditorClassIdentifier: 
+  armorBaseValue: 0
+  counterBaseValue: 20
+  extraAddHp: 0.1
+  extraAddArmor: 0.1
+  extraAddDamage: 0.1
+  moveSpeesDecreased: 0.2
+  extraAddAttackRadius: 2
+  persistentTimer: 3
+  standTimer: 2
+  maxNumOfHit: 5

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Item
+  - Slot
+  - Bloodsucker
+  - PlayerSlot
+  - StoreSlot
   layers:
   - Default
   - TransparentFX
@@ -14,16 +20,16 @@ TagManager:
   - Enemy
   - Ground
   - Wall
-  - Sea
+  - Grid
   - Arrow
-  - TargetCheck
+  - Bat
   - TargetPosition
   - Equipment
   - Orb
-  - 
-  - 
-  - 
-  - 
+  - Totem
+  - Rectangle
+  - Dag
+  - Semicircle
   - 
   - 
   - 
@@ -41,14 +47,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Sea
-    uniqueID: 964701031
-    locked: 0
   - name: Ground
     uniqueID: 92305643
     locked: 0
+  - name: Hold
+    uniqueID: 1223742977
+    locked: 0
   - name: Wall
     uniqueID: 199353729
+    locked: 0
+  - name: Back
+    uniqueID: 1456081035
     locked: 0
   - name: Equipment
     uniqueID: 4223731095
@@ -58,4 +67,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2735968875
+    locked: 0
+  - name: Effect
+    uniqueID: 3109101797
     locked: 0

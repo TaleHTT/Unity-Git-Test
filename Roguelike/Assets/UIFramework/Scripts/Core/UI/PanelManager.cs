@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class PanelManager
 {
+
     /// <summary>
     /// ´æ´¢UIÃæ°åµÄÕ»
     /// </summary>

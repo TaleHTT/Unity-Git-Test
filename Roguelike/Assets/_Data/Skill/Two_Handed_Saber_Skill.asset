@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561e36779de36b94ea05b2a18123636e, type: 3}
+  m_Name: Two_Handed_Saber_Skill
+  m_EditorClassIdentifier: 
+  enemy_ExtraAddAttackSpeed: 0.5
+  num_ExtraAddAttackSpeed: 0.5
+  extraAddDamage: 0.5
+  depleteHp: 0.02
+  recoverHp: 0.05
+  skill_1_DurationTimer: 3
+  skill_2_DurationTimer: 5
+  bleedDamage: 2
+  times: 5
+  CD: 5

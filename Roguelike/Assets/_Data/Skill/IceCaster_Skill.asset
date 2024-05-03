@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394283b9e7ab676438e02ddbe7c1741c, type: 3}
+  m_Name: IceCaster_Skill
+  m_EditorClassIdentifier: 
+  skill_1_ExtraAddDamage: 0.5
+  skill_2_ExtraAddDamage: 0.5
+  skill_X_ExtraAddDamage: 0
+  RemoveMoveSpeed: 0
+  skill_X_Duration: 0
+  skill_1_durationTimer: 0
+  skill_1_radius: 2
+  skill_2_radius: 10
+  skill_X_radius: 0
+  skill_1_CD: 9999
+  skill_2_CD: 3
+  skill_X_CD: 0
+  skill_1_timer: 0
+  skill_X_timer: 0

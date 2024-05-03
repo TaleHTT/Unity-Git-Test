@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f06d6f22714ae41a9efb3e0827f8bc, type: 3}
+  m_Name: Shaman_Skill
+  m_EditorClassIdentifier: 
+  skill_1_ExtraAddTreatHp: 0.5
+  normal_ExtraTreatHp: 0.5
+  extraAddAttackSpeed: 0.5
+  extraAddMoveSpeed: 0.5
+  extraAddDamage: 0.5
+  skill_1_AddHp: 0.5
+  skill_2_AddHp: 0.5
+  skill_1_duration: 10
+  skill_2_duraiton: 10
+  skill_1_radius: 5
+  skill_2_radius: 5
+  skill_1_CD: 99999
+  skill_2_CD: 2

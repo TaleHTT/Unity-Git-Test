@@ -21,21 +21,35 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -7879541775824577086, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+      value: {fileID: 21300000, guid: 627f15846b5f0454fa499605c3dfe547, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 32b61386aed416542aae489400d9f9a0, type: 3}
     - time: 0.16666667
-      value: {fileID: -6442761953431332421, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+      value: {fileID: 21300000, guid: 2e1f9374a547d6c4385eb3b6a7e84d9e, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: babc87ee93b314d44969c1266db2837f, type: 3}
     - time: 0.33333334
-      value: {fileID: -7823500323640422531, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+      value: {fileID: 21300000, guid: 2c9644a3f09569c48944242e89dc697e, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: f5796c38c3c674c4cb66c382133d4c05, type: 3}
     - time: 0.5
-      value: {fileID: 3272844186751121127, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+      value: {fileID: 21300000, guid: 57fdf0b24098204459e445e13e775ce3, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: 8cf2c521f5c155a43911e0bb9d67b266, type: 3}
     - time: 0.6666667
-      value: {fileID: 8629003983396144442, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+      value: {fileID: 21300000, guid: 18e0eeb7d52b2a54eb3444d8580aa4e2, type: 3}
+    - time: 0.75
+      value: {fileID: 21300000, guid: a0cc42fb4ef56004080d2bd6a9ef3401, type: 3}
+    - time: 0.8333333
+      value: {fileID: 21300000, guid: 451adf67a6c6c7d448069d710ba0c152, type: 3}
+    - time: 0.9166667
+      value: {fileID: 21300000, guid: 9328b278ec9903c40b735f90a8a1d7d8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 6
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -52,17 +66,24 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -7879541775824577086, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
-    - {fileID: -6442761953431332421, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
-    - {fileID: -7823500323640422531, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
-    - {fileID: 3272844186751121127, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
-    - {fileID: 8629003983396144442, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
+    - {fileID: 21300000, guid: 627f15846b5f0454fa499605c3dfe547, type: 3}
+    - {fileID: 21300000, guid: 32b61386aed416542aae489400d9f9a0, type: 3}
+    - {fileID: 21300000, guid: 2e1f9374a547d6c4385eb3b6a7e84d9e, type: 3}
+    - {fileID: 21300000, guid: babc87ee93b314d44969c1266db2837f, type: 3}
+    - {fileID: 21300000, guid: 2c9644a3f09569c48944242e89dc697e, type: 3}
+    - {fileID: 21300000, guid: f5796c38c3c674c4cb66c382133d4c05, type: 3}
+    - {fileID: 21300000, guid: 57fdf0b24098204459e445e13e775ce3, type: 3}
+    - {fileID: 21300000, guid: 8cf2c521f5c155a43911e0bb9d67b266, type: 3}
+    - {fileID: 21300000, guid: 18e0eeb7d52b2a54eb3444d8580aa4e2, type: 3}
+    - {fileID: 21300000, guid: a0cc42fb4ef56004080d2bd6a9ef3401, type: 3}
+    - {fileID: 21300000, guid: 451adf67a6c6c7d448069d710ba0c152, type: 3}
+    - {fileID: 21300000, guid: 9328b278ec9903c40b735f90a8a1d7d8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.8333334
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -82,15 +103,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5
+  - time: 0.33333334
     functionName: ArcherAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
-    functionName: ArcherAttackTrigger
+  - time: 0.9166667
+    functionName: AnimationFinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
