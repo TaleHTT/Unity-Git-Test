@@ -25,21 +25,17 @@ public class Authentic_Controller : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (transform.position.x < 0 && !isFaceLeft)
-        {
-            Filp();
-        }
-        else if (transform.position.x > 0 && isFaceLeft)
-        {
-            Filp();
-        }
-        transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, 180 + Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
         {
             coolDownTimer = timer;
             authenticPool.Release(gameObject);
         }
+    }
+    private void FixedUpdate()
+    {
+        transform.position += arrowDir * Time.fixedDeltaTime * moveSpeed;
     }
     public void ArrowDir() => arrowDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
@@ -53,10 +49,5 @@ public class Authentic_Controller : MonoBehaviour
                 attackTarget = attackDetects[i].transform;
             }
         }
-    }
-    public void Filp()
-    {
-        isFaceLeft = !isFaceLeft;
-        transform.Rotate(0, 180, 0);
     }
 }

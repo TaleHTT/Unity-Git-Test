@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class PlayerBase : Base
     [HideInInspector] public Transform closetEnemy;
 
     [HideInInspector] public List<GameObject> enemyDetects;
+    private bool isFaceLeft = true;
 
     [SerializeField] public bool canBreakAwayFromTheTeam { get; set; } = false;
     public PlayerStateMachine stateMachine { get; set; }
@@ -48,6 +50,7 @@ public class PlayerBase : Base
     protected override void Update()
     {
         base.Update();
+        FlipController();
         stateMachine.currentState.Update();
     }
     private void FixedUpdate()
@@ -110,5 +113,27 @@ public class PlayerBase : Base
 
     }
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
+    public void FlipController()
+    {
+        if(closetEnemy != null)
+        {
+            float x = closetEnemy.transform.position.x - transform.position.x;
+            if(x < 0 && !isFaceLeft)
+            {
+                Filp();
+            }
+            else if(x > 0 && isFaceLeft)
+            {
+                Filp();
+            }
+        }
+    }
+
+    private void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
+    }
 }
 

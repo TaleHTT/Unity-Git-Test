@@ -2,10 +2,10 @@
 [CreateAssetMenu(fileName = "IceCaster_Skill", menuName = "Skill/IceCaster_Skill")]
 public class IceCaster_Skill_Data : ScriptableObject
 {
-    [Range(0, 1)] public float skill_1_ExtraAddDamage;
-    [Range(0, 1)] public float skill_2_ExtraAddDamage;
-    [Range(0, 1)] public float skill_X_ExtraAddDamage;
-    [Range(0, 1)] public float RemoveMoveSpeed;
+    [Range(0, 10)] public float skill_1_ExtraAddDamage;
+    [Range(0, 10)] public float skill_2_ExtraAddDamage;
+    [Range(0, 10)] public float skill_X_ExtraAddDamage;
+    [Range(0, 10)] public float RemoveMoveSpeed;
     public float skill_X_Duration;
     public float skill_1_durationTimer;
     public float skill_1_radius;

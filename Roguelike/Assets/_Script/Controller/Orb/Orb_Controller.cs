@@ -43,15 +43,7 @@ public class Orb_Controller : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (transform.position.x < 0 && !isFaceLeft)
-        {
-            Filp();
-        }
-        else if (transform.position.x > 0 && isFaceLeft)
-        {
-            Filp();
-        }
-        transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, 180 + Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
         {
@@ -59,6 +51,10 @@ public class Orb_Controller : MonoBehaviour
             orbPool.Release(gameObject);
             attackDetects.Clear();
         }
+    }
+    private void FixedUpdate()
+    {
+        transform.position += arrowDir * Time.fixedDeltaTime * moveSpeed;
     }
     public void AttackDir() => arrowDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
@@ -90,10 +86,5 @@ public class Orb_Controller : MonoBehaviour
     public void ActionOnDestory(GameObject _object)
     {
         Destroy(_object);
-    }
-    public void Filp()
-    {
-        isFaceLeft = !isFaceLeft;
-        transform.Rotate(0, 180, 0);
     }
 }

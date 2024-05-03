@@ -10,23 +10,11 @@ public class MultipleArrow_Controller : MonoBehaviour
     public ObjectPool<GameObject> multipleArrowPool {  get; set; }
     protected virtual void Update()
     {
-        if (transform.position.x < 0 && !isFaceLeft)
-        {
-            Filp();
-        }
-        else if (transform.position.x > 0 && isFaceLeft)
-        {
-            Filp();
-        }
+
     }
 
     public void Move()
     {
         transform.Translate(moveDir * moveSpeed * Time.deltaTime);
-    }
-    public void Filp()
-    {
-        isFaceLeft = !isFaceLeft;
-        transform.Rotate(0, 180, 0);
     }
 }

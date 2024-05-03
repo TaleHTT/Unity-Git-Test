@@ -39,7 +39,7 @@ public class Player_Priest : PlayerBase
     }
     private GameObject CreateFunc()
     {
-        var orb = Instantiate(authenticPerfab, transform.position, Quaternion.identity, this.transform);
+        var orb = Instantiate(authenticPerfab, transform.position, Quaternion.identity);
         orb.GetComponent<Authentic_Controller>().authenticPool = authenticPool;
         return orb;
     }

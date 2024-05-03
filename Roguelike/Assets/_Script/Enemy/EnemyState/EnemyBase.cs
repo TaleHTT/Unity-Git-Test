@@ -30,6 +30,8 @@ public class EnemyBase : Base
 
     [Tooltip("Ñ²Âßµã")]
     public Transform[] patrolPoints;
+    private bool isFaceLeft = true;
+
     public Transform cloestTarget { get; set; }
     public Seeker seeker { get; private set; }
     public EnemyStateMachine stateMachine { get; set; }
@@ -80,6 +82,7 @@ public class EnemyBase : Base
         Hound_Bleed();
         Two_Handed_Bleed();
         ColdEffect();
+        FlipController();
     }
     public virtual void FixedUpdate()
     {
@@ -152,4 +155,26 @@ public class EnemyBase : Base
     }
 
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
+    public void FlipController()
+    {
+        if (cloestTarget != null)
+        {
+            float x = cloestTarget.transform.position.x - transform.position.x;
+            if (x < 0 && !isFaceLeft)
+            {
+                Filp();
+            }
+            else if (x > 0 && isFaceLeft)
+            {
+                Filp();
+            }
+        }
+    }
+
+    private void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
+    }
 }

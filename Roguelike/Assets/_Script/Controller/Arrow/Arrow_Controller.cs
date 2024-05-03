@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Arrow_Controller : MonoBehaviour
 {
-    [HideInInspector] public bool isFaceLeft = true;
+    public bool isFaceLeft = true;
     public ObjectPool<GameObject> pool;
     [Tooltip("ÒÆ¶¯ËÙ¶È")]
     public float moveSpeed;
@@ -17,7 +17,7 @@ public class Arrow_Controller : MonoBehaviour
     public List<Transform> attackDetects;
     public float attackRadius { get; private set; } = Mathf.Infinity;
     public Transform attackTarget { get; private set; }
-    public Vector3 arrowDir { get; private set; }
+    public Vector3 arrowDir;
     protected virtual void OnEnable()
     {
         List<Transform> attackDetects = new List<Transform>();
@@ -26,21 +26,17 @@ public class Arrow_Controller : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(transform.position.x < 0 && !isFaceLeft)
-        {
-            Filp();
-        }
-        else if(transform.position.x > 0 && isFaceLeft)
-        {
-            Filp();
-        }
-        transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, 180 + Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
         {
             coolDownTimer = timer;
             pool.Release(gameObject);
         }
+    }
+    private void FixedUpdate()
+    {
+        transform.position += arrowDir * Time.fixedDeltaTime * moveSpeed;
     }
     public void ArrowDir() => arrowDir = (attackTarget.position - transform.position).normalized;
     public void AttackLogic()
@@ -54,10 +50,5 @@ public class Arrow_Controller : MonoBehaviour
                 attackTarget = attackDetects[i].transform;
             }
         }
-    }
-    public void Filp()
-    {
-        isFaceLeft = !isFaceLeft;
-        transform.Rotate(0, 180, 0);
     }
 }

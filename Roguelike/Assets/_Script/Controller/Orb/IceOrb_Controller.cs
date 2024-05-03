@@ -20,14 +20,7 @@ public class IceOrb_Controller : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (transform.position.x < 0 && !isFaceLeft)
-        {
-            Filp();
-        }
-        else if (transform.position.x > 0 && isFaceLeft)
-        {
-            Filp();
-        }
+        transform.rotation = Quaternion.Euler(0, 0, 180 + Mathf.Atan2(attckDir.y, attckDir.x) * Mathf.Rad2Deg);
         coolDownTimer -= Time.deltaTime;
         if(coolDownTimer < 0)
         {
@@ -35,6 +28,10 @@ public class IceOrb_Controller : MonoBehaviour
             attackDetect.Clear();
         }
         transform.Translate(attckDir * moveSpeed * Time.deltaTime);
+    }
+    private void FixedUpdate()
+    {
+        transform.position += (Vector3)attckDir * Time.fixedDeltaTime * moveSpeed;
     }
     public void MoveDir() => attckDir = (attackTarget.transform.position - transform.position).normalized;
     public void AttackTarget()
@@ -48,10 +45,5 @@ public class IceOrb_Controller : MonoBehaviour
                 attackTarget = attackDetect[i];
             }
         }
-    }
-    public void Filp()
-    {
-        isFaceLeft = !isFaceLeft;
-        transform.Rotate(0, 180, 0);
     }
 }
