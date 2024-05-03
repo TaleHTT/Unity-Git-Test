@@ -133,6 +133,7 @@ public class StoreSceneManager : MonoBehaviour
                 { bloodSuckerPrefabName, Resources.Load<GameObject>(bloodSuckerImagePreafabPath) },
                 { iceCasterPrefabName, Resources.Load<GameObject>(iceCasterImagePreafabPath) },
                 { priestPrefabName, Resources.Load<GameObject>(priestImagePreafabPath) },
+                { shamanPrefabName, Resources.Load<GameObject>(shamanImagePreafabPath) },
                 { slimePrefabName, Resources.Load<GameObject>(slimeImagePreafabPath) },
                 { towHandedPrefabName, Resources.Load<GameObject>(towHandedImagePreafabPath) },
         };

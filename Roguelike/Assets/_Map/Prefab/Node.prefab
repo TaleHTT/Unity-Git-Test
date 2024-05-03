@@ -99,7 +99,7 @@ MonoBehaviour:
   lineUIs: []
   IsSeleced: 0
   IsActive: 0
-  level: 0
+  battleType: 0
 --- !u!1 &8206540973307709727
 GameObject:
   m_ObjectHideFlags: 0
