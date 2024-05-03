@@ -26,7 +26,7 @@ public class PlayerAssassinGroundState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(player_Assassin.isStealth == true)
+        if (player_Assassin.isStealth == true)
         {
             player_Assassin.durationTimer -= Time.deltaTime;
             if (player_Assassin.durationTimer <= 0)

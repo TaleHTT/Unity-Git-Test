@@ -42,4 +42,8 @@ public class PlayerState
         player.isDead = true;
         PlayerTeamManager.Instance.currentPlayerNum--;
     }
+    public void Heal()
+    {
+        player.stats.currentHealth += 1f;
+    }
 }

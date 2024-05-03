@@ -8,6 +8,7 @@
     public override void Enter()
     {
         base.Enter();
+        stateTimer = 2f;
     }
 
     public override void Exit()
@@ -18,6 +19,11 @@
     public override void Update()
     {
         base.Update();
+        if (stateTimer < 0)
+        {
+            Heal();
+            stateTimer = 1f;
+        }
         if (player_Slime.enemyDetects.Count > 0)
             stateMachine.ChangeState(player_Slime.slimeAttackState);
     }
