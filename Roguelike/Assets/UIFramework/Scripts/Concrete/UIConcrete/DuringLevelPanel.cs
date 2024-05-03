@@ -23,11 +23,11 @@ public class DuringLevelPanel : BasePanel
                 GameRoot.Instance.panelManager.Push(new WinPanel());
                 return;
             }
-            GameRoot.Progress.currentLevel++;
-            //GameRoot.Progress.SaveData();
+            EntityEventSystem.instance.Traget_SuccessPassPart();
+            /*GameRoot.Progress.currentLevel++;
             MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.SaveData();
-            GameRoot.Instance.panelManager.Push(new DropPanel());
+            GameRoot.Instance.panelManager.Push(new DropPanel());*/
         });
     }
 

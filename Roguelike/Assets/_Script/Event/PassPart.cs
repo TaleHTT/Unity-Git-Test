@@ -23,11 +23,12 @@ public class PassPart : MonoBehaviour
     {
         //³¡¾°×ª»»
         Debug.Log("Success");
+        GameRoot.Progress.currentCoin += MapGenerator.currentNode.value;
         GameRoot.Progress.currentLevel++;
         MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
-        GameRoot.Progress.currentCoin += 3;
+        //GameRoot.Progress.currentCoin += 3;
         GameRoot.SaveData();
-
+        
         GameRoot.Instance.panelManager.Push(new DropPanel());
         //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
     }

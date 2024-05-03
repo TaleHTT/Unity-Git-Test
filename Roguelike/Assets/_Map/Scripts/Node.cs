@@ -26,7 +26,15 @@ public enum E_NodeType
 
 public class Node : MonoBehaviour
 {
-    
+    /// <summary>
+    /// 通关该节点关卡获得的金币数量
+    /// </summary>
+    public int value = 0;
+
+    /// <summary>
+    /// 是否为普通关卡（每一个战斗关卡都分Normal和Expert）
+    /// </summary>
+    public bool isNormalLevel = true;
 
     public Vector3 position;
     public E_NodeType type = E_NodeType.Battle;

@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc7af25a3fcd7c4d81a776b63392da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
+  isNormalLevel: 1
   position: {x: 0, y: 0, z: 0}
   type: 0
   uiImage: {fileID: 0}

@@ -19,6 +19,32 @@ public class CoinSetting : ScriptableObject
     }
 
     public List<CoinAssignWaySection> coinAssignWaySections;
+
+    /// <summary>
+    /// 对战斗关卡获取值
+    /// </summary>
+    /// <param name="layer"></param>
+    /// <param name="isNormal"></param>
+    public int GetValue(int level, bool isNormal)
+    {
+        CoinAssignWaySection coinAssignWay = new CoinAssignWaySection();
+        foreach (var setting in coinAssignWaySections)
+        {
+            if(setting.lowerLevel <= level && setting.upperLevel >= level)
+            {
+                coinAssignWay = setting;
+                break;
+            }
+        }
+        if(isNormal)
+        {
+            return coinAssignWay.normalValue;
+        }
+        else
+        {
+            return coinAssignWay.expertValue;
+        }
+    }
 }
 
 
