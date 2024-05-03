@@ -61,7 +61,7 @@ MonoBehaviour:
   TeamCharactersCollectorPrefab: {fileID: 7728169060277978237, guid: 98d39f64d3fb90d45895e4cdfcc2f014, type: 3}
   characterPlacePointPrefab: {fileID: 9050837064803926585, guid: e5000b3de589ac045b9c3b1700e80aa8, type: 3}
   numOfCharacterInTeam: 6
-  radius: 3.5
+  radius: 4
   speed: 3
 --- !u!212 &1714671227590547493
 SpriteRenderer:
