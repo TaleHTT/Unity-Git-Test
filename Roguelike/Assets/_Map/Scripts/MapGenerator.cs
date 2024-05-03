@@ -407,7 +407,18 @@ public class MapGenerator : MonoBehaviour
                     node.type = E_NodeType.Shop;
                 }
             }
+        }
 
+        //根据coinSetting分配每观其金币价值
+        for (int i = 0; i < LAYERS - 1; i++)
+        {
+            foreach (var node in nodes[i])
+            {
+                if (node.IsSeleced && node.type == E_NodeType.Battle)
+                {
+                    node.value = GameRoot.Instance.coinSetting.GetValue(i + 1, node.isNormalLevel);
+                }
+            }
         }
     }
 
