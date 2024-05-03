@@ -12,6 +12,19 @@ using static UnityEditor.Progress;
 
 public class MapGenerator : MonoBehaviour
 {
+
+    /// <summary>
+    /// 地图的层数
+    /// </summary>
+    [Header("地图参数")]
+    private int LAYERS = 20;
+    /// <summary> 实际预制体每层的节点数 </summary>
+    private int LAYER_NODES = 5;
+    /// <summary> 限制每层最多出现的节点数 </summary>
+    const int MAXNODES = 5;
+    /// <summary> 限制每层最少出现的节点数 </summary>
+    const int MINNODES = 3;
+
     public static MapGenerator Instance;
     private bool isMapGenerateCompelete = false;
 
@@ -53,17 +66,6 @@ public class MapGenerator : MonoBehaviour
     const float RANDOMRANGE_ICON = 40;  //Icon
     const float RANDOMRANGE_LINE = 8;   //line
 
-    /// <summary>
-    /// 地图的层数
-    /// </summary>
-    [Header("地图参数")]
-    private int LAYERS = 9;
-    /// <summary> 实际预制体每层的节点数 </summary>
-    private int LAYER_NODES = 5;
-    /// <summary> 限制每层最多出现的节点数 </summary>
-    const int MAXNODES = 5;
-    /// <summary> 限制每层最少出现的节点数 </summary>
-    const int MINNODES = 3;
 
     /// <summary>
     /// 存储地图上节点二维列表

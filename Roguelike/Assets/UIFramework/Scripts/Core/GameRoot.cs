@@ -17,6 +17,8 @@ public class GameRoot : MonoBehaviour
     public PanelManager panelManager { get; private set; }
     public GameObject mapGenerator;
 
+    public CoinSetting coinSetting;
+
     static public void SaveData()
     {
         Progress.SaveData();

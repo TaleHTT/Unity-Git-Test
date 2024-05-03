@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00761c0d773ac1b4195c372fbd81049c, type: 3}
+  m_Name: CoinSettingData
+  m_EditorClassIdentifier: 
+  SumOfLevels: 4
+  coinAssignWaySections:
+  - lowerLevel: 1
+    upperLevel: 10
+    normalValue: 16
+    expertValue: 29
+  - lowerLevel: 11
+    upperLevel: 11
+    normalValue: 39
+    expertValue: 39
+  - lowerLevel: 12
+    upperLevel: 15
+    normalValue: 22
+    expertValue: 33
+  - lowerLevel: 16
+    upperLevel: 19
+    normalValue: 23
+    expertValue: 35
+  - lowerLevel: 20
+    upperLevel: 20
+    normalValue: 0
+    expertValue: 0
