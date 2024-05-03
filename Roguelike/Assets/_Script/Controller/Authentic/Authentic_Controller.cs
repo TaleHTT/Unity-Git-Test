@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class Authentic_Controller : MonoBehaviour
 {
+    [HideInInspector] public bool isFaceLeft = true;
     public ObjectPool<GameObject> authenticPool;
     [Tooltip("移动速度")]
     public float moveSpeed;
@@ -24,6 +25,14 @@ public class Authentic_Controller : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (transform.position.x < 0 && !isFaceLeft)
+        {
+            Filp();
+        }
+        else if (transform.position.x > 0 && isFaceLeft)
+        {
+            Filp();
+        }
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
@@ -44,5 +53,10 @@ public class Authentic_Controller : MonoBehaviour
                 attackTarget = attackDetects[i].transform;
             }
         }
+    }
+    public void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
     }
 }

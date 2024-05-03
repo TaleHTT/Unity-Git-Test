@@ -44,7 +44,7 @@ public class Boss_2 : BossBase
     }
     private GameObject createFunc()
     {
-        var orb = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
+        var orb = Instantiate(arrowPrefab, transform.position, Quaternion.identity, this.transform);
         orb.GetComponent<Arrow_Controller>().damage = stats.damage.GetValue() * (1 + extraAddDamage);
         orb.GetComponent<Arrow_Controller>().pool = pool;
         return orb;

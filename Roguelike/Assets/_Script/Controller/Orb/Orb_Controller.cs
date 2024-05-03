@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class Orb_Controller : MonoBehaviour
 {
+    [HideInInspector] public bool isFaceLeft = true;
     public float num;
     [Tooltip("»º…’»¶‘§÷∆ÃÂ")]
     public GameObject burningRingsPrefab;
@@ -42,6 +43,14 @@ public class Orb_Controller : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (transform.position.x < 0 && !isFaceLeft)
+        {
+            Filp();
+        }
+        else if (transform.position.x > 0 && isFaceLeft)
+        {
+            Filp();
+        }
         transform.Translate(arrowDir * moveSpeed * Time.deltaTime);
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer < 0)
@@ -81,5 +90,10 @@ public class Orb_Controller : MonoBehaviour
     public void ActionOnDestory(GameObject _object)
     {
         Destroy(_object);
+    }
+    public void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
     }
 }

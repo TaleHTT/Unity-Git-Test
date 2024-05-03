@@ -4,6 +4,7 @@ using UnityEngine.Pool;
 
 public class IceOrb_Controller : MonoBehaviour
 {
+    [HideInInspector] public bool isFaceLeft = true;
     public float moveSpeed;
     public ObjectPool<GameObject> orbPool;
     
@@ -19,6 +20,14 @@ public class IceOrb_Controller : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (transform.position.x < 0 && !isFaceLeft)
+        {
+            Filp();
+        }
+        else if (transform.position.x > 0 && isFaceLeft)
+        {
+            Filp();
+        }
         coolDownTimer -= Time.deltaTime;
         if(coolDownTimer < 0)
         {
@@ -39,5 +48,10 @@ public class IceOrb_Controller : MonoBehaviour
                 attackTarget = attackDetect[i];
             }
         }
+    }
+    public void Filp()
+    {
+        isFaceLeft = !isFaceLeft;
+        transform.Rotate(0, 180, 0);
     }
 }

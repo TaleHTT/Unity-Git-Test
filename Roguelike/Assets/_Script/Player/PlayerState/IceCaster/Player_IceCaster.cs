@@ -58,7 +58,7 @@ public class Player_IceCaster : PlayerBase
     }
     private GameObject CreateFunc()
     {
-        var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity);
+        var orb = Instantiate(orbPerfab, transform.position, Quaternion.identity, this.transform);
         orb.GetComponent<Player_IceOrb_Controller>().orbPool = orbPool;
         orb.GetComponent<Player_IceOrb_Controller>().player_IceCaster = this;
         orb.GetComponent<Player_IceOrb_Controller>().damage = stats.damage.GetValue();

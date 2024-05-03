@@ -41,7 +41,7 @@ public class Enemy_Priest : EnemyBase
     }
     private GameObject CreateFunc()
     {
-        var orb = Instantiate(authenticPerfab, transform.position, Quaternion.identity);
+        var orb = Instantiate(authenticPerfab, transform.position, Quaternion.identity, this.transform);
         orb.GetComponent<Authentic_Controller>().authenticPool = authenticPool;
         return orb;
     }
