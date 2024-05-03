@@ -206,6 +206,12 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
+            foreach(Node item in nodes[currentLevelInput-1])
+            {
+                item.IsActive = false;
+                if (item.GetComponentInChildren<Button>() == null) continue;
+                item.GetComponentInChildren<Button>().interactable = false;
+            }
             foreach (Node item in nodes[currentLevelInput])
             {
                 item.IsActive = false;

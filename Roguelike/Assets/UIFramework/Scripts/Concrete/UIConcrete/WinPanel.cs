@@ -15,6 +15,7 @@ public class WinPanel : BasePanel
 
     public override void OnEnter()
     {
+        Time.timeScale = 0f;
         UITool.GetOrAddComponentInChildren<Button>("BackButton").onClick.AddListener(() =>
         {
             GameRoot.Instance.DestroyMyself();
@@ -31,6 +32,7 @@ public class WinPanel : BasePanel
     public override void OnExit()
     {
         base.OnExit();
+        Time.timeScale = 1f;
     }
 
     public override void OnPause()
