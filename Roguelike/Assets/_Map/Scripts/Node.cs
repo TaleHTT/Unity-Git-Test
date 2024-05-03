@@ -37,7 +37,7 @@ public class Node : MonoBehaviour
     public List<Node> lowerNodes;
     public List<GameObject> lineUIs;
     /// <summary>
-    /// 该节点是否被选中
+    /// 该节点是否被选中，作为本次地图显示的节点
     /// </summary>
     public bool IsSeleced = true;
     /// <summary>

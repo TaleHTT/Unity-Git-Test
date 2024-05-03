@@ -56,11 +56,6 @@ public class TeamWheel : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         CharactersMoveToCharactersPoint();
@@ -91,6 +86,7 @@ public class TeamWheel : MonoBehaviour
 
     [Tooltip("队伍中物体靠近对应位置点的速度")]
     public float speed;
+    //public float force = 10f; // 施加的力的大小
     /// <summary>
     /// 使charactersInTeam中的Player向位置点平滑移动
     /// </summary>
@@ -104,9 +100,31 @@ public class TeamWheel : MonoBehaviour
                 continue;
                 //charactersInTeam.RemoveAt(i);
             }
-            Vector3 newPos = Vector3.Lerp(charactersInTeam[i].transform.position,
+            /*Vector3 newPos = Vector3.Lerp(charactersInTeam[i].transform.position,
                 characterPlacePoints[i].transform.position, step);
+            charactersInTeam[i].transform.position = newPos;*/
+
+            /*#region 直接朝向Transform的移动方式
+            Vector3 targetPos = characterPlacePoints[i].transform.position;
+            Vector3 currentPos = charactersInTeam[i].transform.position;
+            Vector3 newPos = Vector3.MoveTowards(currentPos, targetPos, speed * Time.deltaTime);
             charactersInTeam[i].transform.position = newPos;
+            #endregion*/
+
+            #region 利用rigidbody2D的移动方式
+            Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
+            Vector3 targetPos = characterPlacePoints[i].transform.position;
+            Vector3 currentPos = charactersInTeam[i].transform.position;
+            //rb.MovePosition(targetPos);
+            rb.velocity = (targetPos - currentPos) * speed;
+            #endregion
+
+            /*Vector3 targetPos = characterPlacePoints[i].transform.position;
+            Vector3 currentPos = charactersInTeam[i].transform.position;
+            Vector3 direction = targetPos - currentPos;
+            direction.Normalize();
+            Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
+            rb.AddForce(direction * force, ForceMode2D.Force);*/
         }
     }
 
