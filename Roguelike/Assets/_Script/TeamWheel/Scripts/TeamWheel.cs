@@ -104,11 +104,20 @@ public class TeamWheel : MonoBehaviour
                 characterPlacePoints[i].transform.position, step);
             charactersInTeam[i].transform.position = newPos;*/
 
+            /*#region 直接朝向Transform的移动方式
             Vector3 targetPos = characterPlacePoints[i].transform.position;
             Vector3 currentPos = charactersInTeam[i].transform.position;
             Vector3 newPos = Vector3.MoveTowards(currentPos, targetPos, speed * Time.deltaTime);
             charactersInTeam[i].transform.position = newPos;
+            #endregion*/
 
+            #region 利用rigidbody2D的移动方式
+            Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
+            Vector3 targetPos = characterPlacePoints[i].transform.position;
+            Vector3 currentPos = charactersInTeam[i].transform.position;
+            //rb.MovePosition(targetPos);
+            rb.velocity = (targetPos - currentPos) * speed;
+            #endregion
 
             /*Vector3 targetPos = characterPlacePoints[i].transform.position;
             Vector3 currentPos = charactersInTeam[i].transform.position;
