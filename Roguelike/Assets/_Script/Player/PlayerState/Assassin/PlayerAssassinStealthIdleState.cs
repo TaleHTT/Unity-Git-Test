@@ -3,6 +3,7 @@
 public class PlayerAssassinStealthIdleState : PlayerState
 {
     float value;
+    float timer;
     Player_Assassin player_Assassin;
     public PlayerAssassinStealthIdleState(PlayerBase player, PlayerStateMachine stateMachine, string animboolName, Player_Assassin player_Assassin) : base(player, stateMachine, animboolName)
     {
@@ -28,6 +29,12 @@ public class PlayerAssassinStealthIdleState : PlayerState
     public override void Update()
     {
         base.Update();
+        timer -= Time.deltaTime;
+        if(timer < 0)
+        {
+            Heal();
+            timer = 1f;
+        }
         if (Input.GetMouseButton(0) && player_Assassin.isTest == false)
             stateMachine.ChangeState(player_Assassin.assassinMoveState);
         if (player_Assassin.enemyDetects.Count > 0)

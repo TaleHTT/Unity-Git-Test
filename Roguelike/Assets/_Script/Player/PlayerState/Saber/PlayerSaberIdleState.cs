@@ -11,6 +11,7 @@ public class PlayerSaberIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        stateTimer = 2f;
     }
 
     public override void Exit()
@@ -21,6 +22,11 @@ public class PlayerSaberIdleState : PlayerState
     public override void Update()
     {
         base.Update();
+        if (stateTimer < 0)
+        {
+            Heal();
+            stateTimer = 1f;
+        }
         if (player_Saber.enemyDetects.Count > 0)
             stateMachine.ChangeState(player_Saber.saberAttackState);
     }
