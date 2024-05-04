@@ -398,13 +398,13 @@ MonoBehaviour:
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 150
+    baseValue: 50
     modfiers: []
   damage:
-    baseValue: 20
+    baseValue: 8
     modfiers: []
   armor:
-    baseValue: 13
+    baseValue: 3
     modfiers: []
   woundedMultiplier:
     baseValue: 1
@@ -413,7 +413,7 @@ MonoBehaviour:
     baseValue: 0
     modfiers: []
   attackSpeed:
-    baseValue: 0.75
+    baseValue: 0.8
     modfiers: []
   treatRadius:
     baseValue: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5239fce73ddd30f4b8bd622682253e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRadius: 2
+  attackRadius: 3
   deadTimer: 0
   isDead: 0
   layerOfCold: 0

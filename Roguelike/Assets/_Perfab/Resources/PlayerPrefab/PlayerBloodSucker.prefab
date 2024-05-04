@@ -280,16 +280,16 @@ MonoBehaviour:
   experience: 0
   currentHealth: 0
   maxHp:
-    baseValue: 120
+    baseValue: 50
     modfiers: []
   damage:
-    baseValue: 20
+    baseValue: 10
     modfiers: []
   armor:
     baseValue: 10
     modfiers: []
   woundedMultiplier:
-    baseValue: 1
+    baseValue: 0
     modfiers: []
   moveSpeed:
     baseValue: 0
@@ -340,8 +340,8 @@ MonoBehaviour:
   enemyDetects: []
   position: 3
   batPrefab: {fileID: 8424353857034146737, guid: 5fef56d406b63d145a0b02aa55f898ae, type: 3}
-  meleeAttackRadius: 3
-  remoteAttackRadius: 5.5
+  meleeAttackRadius: 4
+  remoteAttackRadius: 6
 --- !u!114 &6177502559783300836
 MonoBehaviour:
   m_ObjectHideFlags: 0
