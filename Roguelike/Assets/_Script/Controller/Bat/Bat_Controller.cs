@@ -10,10 +10,10 @@ public class Bat_Controller : MonoBehaviour
     public float explodeRadius;
     
     private float coolDownTimer;
-    [HideInInspector] public Vector2 attackDir;
+    public Vector2 attackDir;
     [HideInInspector] public GameObject attackTarget;
-    [HideInInspector] public List<GameObject> attackDetects;
-    [HideInInspector] public ObjectPool<GameObject> batPool;
+    public List<GameObject> attackDetects;
+    public ObjectPool<GameObject> batPool;
     protected virtual void OnEnable()
     {
         coolDownTimer = timer;

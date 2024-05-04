@@ -24,10 +24,9 @@ public class Orb_Controller : MonoBehaviour
     public float explosionRadius;
     [Tooltip(" «∑Òœ÷ µ±¨’®∑∂Œß")]
     public bool drawTheBorderOrNot;
-    public List<Transform> attackDetects;
-    public float attackRadius { get; private set; } = Mathf.Infinity;
-    public Transform attackTarget { get; private set; }
-    public Vector3 arrowDir { get; private set; }
+    public List<GameObject> attackDetects;
+    public GameObject attackTarget;
+    public Vector3 arrowDir;
     public float cdDefaultRadius;
     protected virtual void Awake()
     {
@@ -56,7 +55,7 @@ public class Orb_Controller : MonoBehaviour
     {
         transform.position += arrowDir * Time.fixedDeltaTime * moveSpeed;
     }
-    public void AttackDir() => arrowDir = (attackTarget.position - transform.position).normalized;
+    public void AttackDir() => arrowDir = (attackTarget.transform.position - transform.position).normalized;
     public void AttackLogic()
     {
         float distance = Mathf.Infinity;
@@ -65,7 +64,7 @@ public class Orb_Controller : MonoBehaviour
             if (distance > Vector3.Distance(attackDetects[i].transform.position, transform.position))
             {
                 distance = Vector3.Distance(attackDetects[i].transform.position, transform.position);
-                attackTarget = attackDetects[i].transform;
+                attackTarget = attackDetects[i];
             }
         }
     }

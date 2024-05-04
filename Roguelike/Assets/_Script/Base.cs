@@ -190,7 +190,7 @@ public class Base : MonoBehaviour
             timer_Cold -= Time.deltaTime;
             float removeMoveSpeed = defauatMoveSpeed * 0.25f * layerOfCold;
             float removeAttackSpeed = defauatAttaclSpeed * 0.25f * layerOfCold;
-            if (negativeEffect.TryGetValue(0, out NegativeEffectType value))
+            if (negativeEffect.TryGetValue(2, out NegativeEffectType value))
             {
                 value = NegativeEffectType.Cold;
             }

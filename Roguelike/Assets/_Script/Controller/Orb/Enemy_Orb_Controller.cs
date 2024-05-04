@@ -48,13 +48,13 @@ public class Enemy_Orb_Controller : Orb_Controller
     }
     public void AttackTarget()
     {
-        attackDetects = new List<Transform>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
+        attackDetects = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity);
         foreach (var target in colliders)
         {
             if(target.GetComponent<PlayerBase>() != null)
             {
-                attackDetects.Add(target.transform);
+                attackDetects.Add(target.gameObject);
                 AttackLogic();
             }
         }

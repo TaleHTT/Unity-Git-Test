@@ -10,7 +10,7 @@ public class Player_Orb_Controller : Orb_Controller
         base.OnEnable();
         AttackTarget();
         AttackDir();
-        transform.position = Vector3.one;
+        transform.localScale = new Vector3(5, 5, 0);
         isStrengthen = false;
     }
     protected override void Awake()
@@ -28,7 +28,7 @@ public class Player_Orb_Controller : Orb_Controller
         base.Update();
         if(num >= DataManager.instance.caster_Skill_Data.maxNumberOfAttack)
         {
-            transform.localScale = new Vector2(2, 2);
+            transform.localScale *= 2; 
             isStrengthen = true;
             player_Caster_Skill_Controller.numberOfAttack = 0;
             num = player_Caster_Skill_Controller.numberOfAttack;
@@ -50,13 +50,13 @@ public class Player_Orb_Controller : Orb_Controller
     }
     public void AttackTarget()
     {
-        attackDetects = new List<Transform>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRadius);
+        attackDetects = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, Mathf.Infinity);
         foreach (var target in colliders)
         {
             if (target.GetComponent<EnemyBase>() != null)
             {
-                attackDetects.Add(target.transform);
+                attackDetects.Add(target.gameObject);
                 AttackLogic();
             }
         }

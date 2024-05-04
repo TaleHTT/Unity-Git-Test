@@ -4,16 +4,16 @@ using UnityEngine.Pool;
 
 public class IceOrb_Controller : MonoBehaviour
 {
-    [HideInInspector] public bool isFaceLeft = true;
+    public float timer;
     public float moveSpeed;
     public ObjectPool<GameObject> orbPool;
     
-    [HideInInspector] public float timer;
     [HideInInspector] public float damage;
-    [HideInInspector] public Vector2 attckDir;
+    public Vector3 attckDir;
     [HideInInspector] public float coolDownTimer;
+    [HideInInspector] public bool isFaceLeft = true;
     [HideInInspector] public GameObject attackTarget;
-    [HideInInspector] public List<GameObject> attackDetect;
+    public List<GameObject> attackDetect;
     protected virtual void OnEnable()
     {
         coolDownTimer = timer;
@@ -24,14 +24,14 @@ public class IceOrb_Controller : MonoBehaviour
         coolDownTimer -= Time.deltaTime;
         if(coolDownTimer < 0)
         {
+            coolDownTimer = timer;
             orbPool.Release(gameObject);
             attackDetect.Clear();
         }
-        transform.Translate(attckDir * moveSpeed * Time.deltaTime);
     }
     private void FixedUpdate()
     {
-        transform.position += (Vector3)attckDir * Time.fixedDeltaTime * moveSpeed;
+        transform.position += attckDir * Time.fixedDeltaTime * moveSpeed;
     }
     public void MoveDir() => attckDir = (attackTarget.transform.position - transform.position).normalized;
     public void AttackTarget()

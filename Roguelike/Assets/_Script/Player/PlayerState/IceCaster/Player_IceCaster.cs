@@ -66,8 +66,8 @@ public class Player_IceCaster : PlayerBase
     }
     private void ActionOnGet(GameObject orb)
     {
-        orb.SetActive(true);
         orb.transform.position = transform.position;
+        orb.SetActive(true);
     }
     private void ActionOnRelease(GameObject orb)
     {
