@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8109765383903640579}
   - component: {fileID: 9022757447865706155}
   - component: {fileID: 3695440167010926798}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: TeamWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,12 +57,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 2667620413104553451, guid: def1484357be3c541a36a1687ab685bf, type: 3}
+  charactersInTeam: []
   centerPointPrefab: {fileID: 9181942636850224577, guid: 153280da50404cf4fa21c79606500590, type: 3}
   TeamCharactersCollectorPrefab: {fileID: 7728169060277978237, guid: 98d39f64d3fb90d45895e4cdfcc2f014, type: 3}
   characterPlacePointPrefab: {fileID: 9050837064803926585, guid: e5000b3de589ac045b9c3b1700e80aa8, type: 3}
   numOfCharacterInTeam: 6
   radius: 4
   speed: 5
+  springConstant: 10
+  damping: 5
 --- !u!212 &1714671227590547493
 SpriteRenderer:
   m_ObjectHideFlags: 0

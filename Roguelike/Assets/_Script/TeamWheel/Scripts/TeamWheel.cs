@@ -111,12 +111,17 @@ public class TeamWheel : MonoBehaviour
             charactersInTeam[i].transform.position = newPos;
             #endregion*/
 
-            #region 利用rigidbody2D的移动方式
+            /*#region 利用rigidbody2D的移动方式
             Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
             Vector3 targetPos = characterPlacePoints[i].transform.position;
             Vector3 currentPos = charactersInTeam[i].transform.position;
             //rb.MovePosition(targetPos);
             rb.velocity = (targetPos - currentPos) * speed;
+            #endregion*/
+
+            #region 弹簧方式移动
+            Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
+            rb.AddForce(MoveWay(charactersInTeam[i].transform, characterPlacePoints[i].transform, rb), ForceMode2D.Force);
             #endregion
 
             /*Vector3 targetPos = characterPlacePoints[i].transform.position;
@@ -126,6 +131,19 @@ public class TeamWheel : MonoBehaviour
             Rigidbody2D rb = charactersInTeam[i].GetComponent<Rigidbody2D>();
             rb.AddForce(direction * force, ForceMode2D.Force);*/
         }
+    }
+
+    [Tooltip("弹簧常数")]
+    public float springConstant;
+
+    [Tooltip("阻尼系数")]
+    public float damping;
+    Vector2 MoveWay(Transform origin, Transform target, Rigidbody2D rb)
+    {
+        Vector2 displacement = target.position - origin.position;
+        Vector2 springForce = springConstant * displacement;
+        Vector2 dampingForce = damping * rb.velocity;
+        return springForce - dampingForce;
     }
 
     //public void MoveDir()

@@ -139,27 +139,23 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             //检测是否在物品上
             if (item.gameObject.tag == "Item")
             {
-                if (!isInTeam)
-                {
-                    isSolt = false;
-                    break;
-                }
-                //如果在物品上则执行以下代码
-                //---交换位置---//
                 MoveImageItem imageItem = item.gameObject.GetComponent<MoveImageItem>();
-                if (item.gameObject.GetComponent<Image>().name == GetComponent<Image>().name && imageItem.level == level && level <= 3)
+                if (item.gameObject.GetComponent<Image>().name == GetComponent<Image>().name && imageItem.level == level && level <= 3 && imageItem.isInTeam)
                 {
                     imageItem.level++;
                     imageItem.UpdateShowPanel();
                     Destroy(gameObject);
-                    
                 }
-                else 
+                else
                 {
+                    if (!isInTeam)
+                    {
+                        isSolt = false;
+                        break;
+                    }
                     this.rectTransform.position = item.gameObject.transform.position;
                     item.gameObject.transform.position = vector;
                 }
-                
             }
 
             //检测是否在格子上
