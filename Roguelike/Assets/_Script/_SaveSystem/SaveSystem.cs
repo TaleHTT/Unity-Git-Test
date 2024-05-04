@@ -14,6 +14,7 @@ public static class SaveSystem
     {
         //将数据转换成Json形式
         var json = JsonUtility.ToJson(data);
+        //Debug.Log($"{saveFileName}    "+json);
         //定义文件路径，将持久数据文件路径和文件名合并
         var path = Path.Combine(Application.persistentDataPath, saveFileName);
 
@@ -22,13 +23,13 @@ public static class SaveSystem
             //将json形式数据写入文本文件内
             File.WriteAllText(path, json);
 #if UNITY_EDITOR
-            Debug.Log($"{saveFileName}数据存储成功，存储路径为：{path}");
+            //Debug.Log($"{saveFileName}数据存储成功，存储路径为：{path}");
 #endif
         }
         catch (System.Exception exception)
         {
 #if UNITY_EDITOR
-            Debug.LogError($"存储数据失败：{path}。\n{exception}");
+            //Debug.LogError($"存储数据失败：{path}。\n{exception}");
 #endif
 
         }

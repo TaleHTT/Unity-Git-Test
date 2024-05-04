@@ -5,7 +5,7 @@ public class CharacterStats : MonoBehaviour
     public bool isDefens {  get; set; }
     public int defensNum { get; set; }
     public bool isUseSkill {  get; set; }
-    public int level;
+    public int level = 1;
     [Tooltip("经验值")]
     public int experience;
     [Tooltip("当前血量")]
@@ -27,6 +27,7 @@ public class CharacterStats : MonoBehaviour
     public virtual void Start()
     {
         UpdateHp();
+        level = 1;
     }
 
 

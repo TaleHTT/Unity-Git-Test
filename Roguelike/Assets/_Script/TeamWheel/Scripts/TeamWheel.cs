@@ -15,7 +15,7 @@ public class TeamWheel : MonoBehaviour
     /// <summary>
     /// 存储实际游戏场景中的队伍中的角色游戏物体
     /// </summary>
-    private GameObject[] charactersInTeam;
+    public GameObject[] charactersInTeam;
 
     PlayerTeam playerTeam;
 
@@ -194,9 +194,10 @@ public class TeamWheel : MonoBehaviour
             for (int i = 0; i < globalMaxCharacterNum; i++)
             {
                 //PlayerTeam.LoadData();
-                if (PlayerTeam.playerInTeamPrefabs[i] == null) continue;
-                charactersInTeam[i] = Instantiate(PlayerTeam.playerInTeamPrefabs[i], characterPlacePoints[i].transform.position,
+                if (PlayerTeam.playerTeamData.data[i] == null) continue;
+                charactersInTeam[i] = Instantiate(PlayerTeam.playerTeamData.data[i].playerPrefab, characterPlacePoints[i].transform.position,
                     Quaternion.identity, GameObject.Find("TeamCharactersCollector").transform);
+                charactersInTeam[i].GetComponent<PlayerStats>().level = PlayerTeam.playerTeamData.data[i].level;
             }
         }
 

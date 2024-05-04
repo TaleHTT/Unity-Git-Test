@@ -104,10 +104,10 @@ public class DropPanelManager : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            if (PlayerTeam.playerInTeamPrefabs[i] != null)
+            if (PlayerTeam.playerTeamData.data[i].playerPrefab != null)
             {
                 //PlayerTeamSlotDetect.Instance.playerTeamSlots[i] = 
-                GameObject _ = Instantiate(ImagePlayerPrefabTransition.playerPrefabToImage[PlayerTeam.playerInTeamPrefabs[i].name] as GameObject,
+                GameObject _ = Instantiate(ImagePlayerPrefabTransition.playerPrefabToImage[PlayerTeam.playerTeamData.data[i].playerPrefab.name] as GameObject,
                     storePanel.transform);
                 _.transform.position = PlayerTeamSlotDetect.Instance.playerTeamSlots[i].transform.position;
                 PlayerTeamSlotDetect.Instance.playersInTeam[i] = _;

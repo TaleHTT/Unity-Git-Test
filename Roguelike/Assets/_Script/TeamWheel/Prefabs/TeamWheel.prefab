@@ -62,7 +62,7 @@ MonoBehaviour:
   characterPlacePointPrefab: {fileID: 9050837064803926585, guid: e5000b3de589ac045b9c3b1700e80aa8, type: 3}
   numOfCharacterInTeam: 6
   radius: 4
-  speed: 3
+  speed: 5
 --- !u!212 &1714671227590547493
 SpriteRenderer:
   m_ObjectHideFlags: 0

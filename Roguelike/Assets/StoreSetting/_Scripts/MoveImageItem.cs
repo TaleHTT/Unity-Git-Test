@@ -1,6 +1,7 @@
 using System.Collections;
 
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,11 +13,16 @@ using UnityEngine.UI;
 
 public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public int level = 1;
     bool isInItem = false;
     bool costPanelChange = false;
     public bool isInTeam = false;
     bool purchaseState;
     bool isMoving = false;
+
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI costText;
+    public GameObject showPanel;
 
     //记录玩家开始拖拽时的位置
     private Vector3 vector;
@@ -47,6 +53,22 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         
         rectTransform = GetComponent<RectTransform>();
         //canvasGroup = GetComponent<CanvasGroup>();
+        //Debug.Log(1);
+        StartCoroutine(IE_wait());
+    }
+
+    IEnumerator IE_wait()
+    {
+        showPanel.SetActive(true);
+        yield return null;
+        UpdateShowPanel();
+        showPanel.SetActive(false);
+    }
+    
+    public void UpdateShowPanel()
+    {
+        levelText.text = $"等级：{level}";
+        costText.text = $"花费：{3}";
     }
 
     /// <summary>
@@ -108,6 +130,12 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         foreach (var item in list)
         {
             if (item.gameObject == gameObject) continue;
+            if (item.gameObject.tag == "Delete" && isInTeam)
+            {
+                Destroy(this.gameObject);
+            }
+
+            
             //检测是否在物品上
             if (item.gameObject.tag == "Item")
             {
@@ -118,8 +146,20 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
                 //如果在物品上则执行以下代码
                 //---交换位置---//
-                this.rectTransform.position = item.gameObject.transform.position;
-                item.gameObject.transform.position = vector;
+                MoveImageItem imageItem = item.gameObject.GetComponent<MoveImageItem>();
+                if (item.gameObject.GetComponent<Image>().name == GetComponent<Image>().name && imageItem.level == level && level <= 3)
+                {
+                    imageItem.level++;
+                    imageItem.UpdateShowPanel();
+                    Destroy(gameObject);
+                    
+                }
+                else 
+                {
+                    this.rectTransform.position = item.gameObject.transform.position;
+                    item.gameObject.transform.position = vector;
+                }
+                
             }
 
             //检测是否在格子上
@@ -158,6 +198,7 @@ public class MoveImageItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         PlayerTeamSlotDetect.Instance.ItemInSlotDetect();
         //canvasGroup.blocksRaycasts = true;
         //ClearLog();
+        UpdateShowPanel();
     }
 
     /// <summary>
