@@ -28,7 +28,6 @@ public class StartPanel : BasePanel
             GameRoot.LoatData();
             MapGenerator.Instance.NodeLevelSet(GameRoot.Progress.currentLevel);
             GameRoot.Instance.panelManager.Push(new DropPanel());
-            //GameRoot.Instance.sceneSystem.SetScene(new StoreScene());
         });
 
         UITool.GetOrAddComponentInChildren<Button>("ExitButton").onClick.AddListener(() =>

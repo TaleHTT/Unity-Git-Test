@@ -162,7 +162,7 @@ public class StoreSceneManager : MonoBehaviour
         if(!test)
             SetPlayerPrefabInTeam();
         ShowPlayerPrefabInTeam();
-        coinText.text = "½ð±Ò: " + GameRoot.Progress.currentCoin.ToString();
+        coinText.text = GameRoot.Progress.currentCoin.ToString();
     }
 
     /// <summary>

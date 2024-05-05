@@ -12,6 +12,7 @@ using static UnityEditor.Progress;
 
 public class MapGenerator : MonoBehaviour
 {
+    public Button backButton;
 
     /// <summary>
     /// µØÍ¼µÄ²ãÊý
@@ -77,6 +78,7 @@ public class MapGenerator : MonoBehaviour
         Instance = this;
         StartCoroutine(IE_InitMap());
         StartGenerate();
+        backButton.onClick.AddListener(() => gameObject.SetActive(false));
     }
 
     /// <summary>
@@ -818,6 +820,7 @@ public class MapGenerator : MonoBehaviour
 
         nodeUI.GetComponent<Image>().sprite = node.icon;
         nodeUI.GetComponent<Image>().SetNativeSize();
+        nodeUI.transform.position += new Vector3(0, 100, 0);
 
         nodeUI.AddComponent<Button>();
         AssignLevel(node, E_NodeType.Boss);
